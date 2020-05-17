@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 2897626881805928036}
   - component: {fileID: -8807102636543681878}
   - component: {fileID: 6330174535249697747}
+  - component: {fileID: -6851305835771993126}
   m_Layer: 0
   m_Name: RocketShip
   m_TagString: Untagged
@@ -591,7 +592,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6138a811ece7e8c4286c7ed83fb5146d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -689,3 +690,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f4ea8c2a7bd904880f58f7ee37c523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &-6851305835771993126
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897626881805928037}
+  m_Enabled: 1
