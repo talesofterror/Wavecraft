@@ -19,8 +19,9 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RocketControls();
         SoundControl();
+        Thrust();
+        Rotate();
     }
 
     private void SoundControl()
@@ -36,20 +37,17 @@ public class Rocket : MonoBehaviour
 
     }
 
-        private void RocketControls()
+    private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
             rigidBody.AddRelativeForce(Vector3.up);
             // rocketSound.UnPause();    ---- Did not work. 
         }
+    }
 
-        // Side to side movement. transform for the sake of posterity. 
-        //
-        // if (Input.GetKey(KeyCode.LeftArrow))
-        // {
-        //     transform.position += (Vector3.left * Time.deltaTime);
-        // }
+    private void Rotate()
+    {
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -64,4 +62,13 @@ public class Rocket : MonoBehaviour
             // rocketSound.Pause();
         }
     }
+
 }
+
+
+// Side to side movement. transform for the sake of posterity. 
+//
+// if (Input.GetKey(KeyCode.LeftArrow))
+// {
+//     transform.position += (Vector3.left * Time.deltaTime);
+// }
