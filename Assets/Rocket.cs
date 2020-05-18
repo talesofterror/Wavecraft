@@ -11,7 +11,7 @@ public class Rocket : MonoBehaviour
 
     Rigidbody rigidBody;
     AudioSource rocketSound;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +25,20 @@ public class Rocket : MonoBehaviour
         SoundControl();
         Thrust();
         Rotate();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Enemy":
+                print("Stuck by enemy!"); 
+                break;
+            case "Friendly":
+                print("Friendly contact.");
+                break;
+        }
+
     }
 
     private void SoundControl()
@@ -45,9 +59,9 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             float thrustThisFrame = thrustPower * Time.deltaTime;
-            rigidBody.freezeRotation = true;
+ 
             rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
-            rigidBody.freezeRotation = false;
+ 
             // rocketSound.UnPause();    ---- Did not work. 
         }
     }
