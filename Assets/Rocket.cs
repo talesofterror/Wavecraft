@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] float rcsThrust = 100f;
-    [SerializeField] float thrustPower = 100f;
+    [SerializeField] public float rcsThrust = 100f;
+    [SerializeField] public float thrustPower = 100f;
 
     Rigidbody rigidBody;
     AudioSource rocketSound;
@@ -17,6 +17,8 @@ public class Rocket : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         rocketSound = GetComponent<AudioSource>();
+        rigidBody.freezeRotation = true;
+        rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ;
     }
 
     // Update is called once per frame
@@ -36,6 +38,9 @@ public class Rocket : MonoBehaviour
                 break;
             case "Friendly":
                 print("Friendly contact.");
+                break;
+            default:
+                print("Dead.");
                 break;
         }
 
@@ -68,9 +73,8 @@ public class Rocket : MonoBehaviour
 
     private void Rotate()
     {
-
         float rotationThisFrame = rcsThrust * Time.deltaTime;
-        
+
         rigidBody.freezeRotation = true;
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -79,7 +83,6 @@ public class Rocket : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-
             transform.Rotate(Vector3.back * rotationThisFrame);
         }
         else
