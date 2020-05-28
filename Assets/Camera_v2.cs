@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class Camera_v2 : MonoBehaviour
@@ -12,12 +11,12 @@ public class Camera_v2 : MonoBehaviour
     void Start()
     {
         camBody = GetComponent<Rigidbody>();
-        rocketShip = GameObject.Find("RocketShip_v2");
+        rocketShip = GameObject.FindGameObjectWithTag("Player");
         rocketScript = rocketShip.GetComponent<Rocket>();
         camObject = GetComponent<Transform>();
 
-        RocketDebug();
-        DebugListComponents();
+        // RocketDebug();
+        // DebugListComponents();
     }
 
     void DebugListComponents()
@@ -65,6 +64,6 @@ public class Camera_v2 : MonoBehaviour
 
         // ^ none of this shit worked smh
 
-        transform.position = new Vector3(0f, rocketShip.transform.position.y, -10f);
+        transform.position = new Vector3(0f, (rocketShip.transform.position.y + 2), -10f);
     }
 }
