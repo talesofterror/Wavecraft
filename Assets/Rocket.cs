@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEngine.SceneManagement;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Rocket : MonoBehaviour
 {
@@ -6,95 +8,148 @@ public class Rocket : MonoBehaviour
     [SerializeField] public float thrustPower = 100f;
     [SerializeField] public float rcsThrust = 100f;
     [SerializeField] public float lateralThrust = 10f;
+    [SerializeField] public float deathSpiral = 3f;
     [Range(-10f, 2f)] public float gravity;
-    public float shrinkRate = .3f;
-
-    public float touchExplosion = 5000;
+    [SerializeField] AudioClip thrustSound;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] AudioClip goalSound; 
 
     Rigidbody rigidBody;
-    AudioSource rocketSound;
-    Transform rBTransform;
-    GameObject guyObject;
-    Vector3 scaleChange;
-
-
-    // Start is called before the first frame update
-    void Start()
+    AudioSource audioSource;
+   
+    public enum  State
     {
-        rigidBody = GetComponent<Rigidbody>();
-        rocketSound = GetComponent<AudioSource>();
-        rigidBody.freezeRotation = true;
-        rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ;
-        rigidBody.inertiaTensorRotation = Quaternion.identity;
-        rBTransform = GetComponent<Transform>();
-        guyObject = GameObject.Find("Player");
-        Gravity();
+        Existing,
+        Transcending,
+        Ascending
+    };
 
+    public enum  Level
+    {
+        Level0,
+        Level1
+    };
 
-    }
+    State state = State.Existing;
+    Level level;
 
     // Update is called once per frame
     void Update()
     {
-        SoundControl();
-        Thrust();
-        Rotate();
+        if (state == State.Existing)
+        {
+            RespondToThrust();
+            Rotate();
+        }
+
+        if (state == State.Transcending)
+        {
+            transform.Rotate(Vector3.up * (3 * Time.time));
+            rigidBody.AddForce(Vector3.back * (deathSpiral * Time.time));
+        }
     }
+
+    void Start()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+        //rigidBody.freezeRotation = true;
+        rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ; //these are keeping my guy rotating in a stable fashion though I don't know how
+        rigidBody.inertiaTensorRotation = Quaternion.identity; // these are keeping my guy rotating in a stable fashion though I don't know how
+        Gravity();
+
+        int debugSceneNumber = SceneManager.GetActiveScene().buildIndex;
+        print(debugSceneNumber);
+
+
+    }
+
+
 
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (state != State.Existing)
+        {
+            return;
+        }
+
         switch (collision.gameObject.tag)
         {
             case "Enemy":
-                transform.Rotate(Vector3.up * touchExplosion);
+                audioSource.PlayOneShot(deathSound);
+                state = State.Transcending;
                 print("Stuck by enemy!");
+                Invoke("LoadLevel1", 2f);
                 break;
             case "Friendly":
                 print("Friendly contact.");
                 break;
             case "Finish":
+                state = State.Ascending;
+                audioSource.PlayOneShot(goalSound);
+                Invoke("LoadNextLevel", 2f);
+                level = Level.Level1;
                 print("Finish!");
                 break;
             default:
-                print("Dead.");
+                print("8====D~~~");
                 break;
         }
 
+    }
+
+    private void LoadLevel0()
+    {
+        level = Level.Level0;
+        SceneManager.LoadScene(2);
+    }
+
+    private void LoadLevel1()
+    {
+        level = Level.Level1;
+        SceneManager.LoadScene(1); //to do, allow for more levels 
+    }
+
+    private void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextLevel = currentSceneIndex + 1;
+        if (currentSceneIndex == 1)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(nextLevel);
+        }
+        print(currentSceneIndex);
     }
 
     private void Gravity()
     {
         Physics.gravity = new Vector3(0, gravity, 0);
     }
-    private void SoundControl()
+
+    private void RespondToThrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rocketSound.UnPause();
+            ApplyThrust();
         }
         else
         {
-            rocketSound.Pause();
+            audioSource.Stop();
         }
-
     }
 
-    private void Thrust()
+    private void ApplyThrust()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            float thrustThisFrame = thrustPower * Time.deltaTime;
- 
-            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
- 
-            // rocketSound.UnPause();    ---- Did not work. 
-        }
-        else
-        {
+        float thrustThisFrame = thrustPower * Time.deltaTime;
 
-            // rocketSound.Pause();
-        }
+        rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+        audioSource.PlayOneShot(thrustSound);
+        // rocketSound.UnPause();    ---- Did not work. 
     }
 
     private void Rotate()

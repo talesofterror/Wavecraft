@@ -31,14 +31,14 @@ public class GuyRotate : MonoBehaviour
         {
             //transform.Rotate(Vector3.up * yRotate / -7);
             //transform.Rotate(Vector3.up / Mathf.Sin(-yRotate/2));
-            //transform.Rotate(Vector3.up * transform.position.x);
+            transform.Rotate(Vector3.up * (transform.position.x * 2));
 
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             //transform.Rotate(Vector3.down * yRotate / -7);
             //transform.Rotate(Vector3.down / Mathf.Sin(-yRotate/2));
-            //transform.Rotate(Vector3.down * transform.position.x);
+            transform.Rotate(Vector3.down * (transform.position.x * 2));
 
         }
     }

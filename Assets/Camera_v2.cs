@@ -64,6 +64,6 @@ public class Camera_v2 : MonoBehaviour
 
         // ^ none of this shit worked smh
 
-        transform.position = new Vector3(0f, (rocketShip.transform.position.y + 2), -10f);
+        transform.position = new Vector3(0f, (rocketShip.transform.position.y), -35f);
     }
 }
