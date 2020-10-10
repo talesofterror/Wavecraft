@@ -1,18 +1,22 @@
 ﻿using System.Reflection;
 using UnityEngine;
 
+[ExecuteInEditMode]
+
 public class Camera_v2 : MonoBehaviour
 {
     Rigidbody camBody;
-    GameObject rocketShip;
+    GameObject playerPos;
     Rocket rocketScript;
     Transform camObject;
+
+    public float camDist = -45f;
 
     void Start()
     {
         camBody = GetComponent<Rigidbody>();
-        rocketShip = GameObject.FindGameObjectWithTag("Player");
-        rocketScript = rocketShip.GetComponent<Rocket>();
+        playerPos = GameObject.FindGameObjectWithTag("Player");
+        rocketScript = playerPos.GetComponent<Rocket>();
         camObject = GetComponent<Transform>();
 
         // RocketDebug();
@@ -21,10 +25,10 @@ public class Camera_v2 : MonoBehaviour
 
     void DebugListComponents()
     {
-        Component[] cs = rocketShip.GetComponents<Component>();
+        Component[] cs = playerPos.GetComponents<Component>();
         foreach (Component c in cs)
         {
-            Debug.Log("@@ " + rocketShip.name + "\t[" + c.name + "] " + "\t" + c.GetType() + "\t" + c.GetType().BaseType);
+            Debug.Log("@@ " + playerPos.name + "\t[" + c.name + "] " + "\t" + c.GetType() + "\t" + c.GetType().BaseType);
             foreach(FieldInfo fi in c.GetType().GetFields())
             {
                 System.Object obj = (System.Object)c;
@@ -64,6 +68,6 @@ public class Camera_v2 : MonoBehaviour
 
         // ^ none of this shit worked smh
 
-        transform.position = new Vector3(0f, (rocketShip.transform.position.y), -35f);
+        transform.position = new Vector3(-1f, (playerPos.transform.position.y), camDist);
     }
 }

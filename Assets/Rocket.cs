@@ -1,22 +1,23 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] public float horzThrust = 3f;
-    [SerializeField] public float thrustPower = 100f;
-    [SerializeField] public float rcsThrust = 100f;
-    [SerializeField] public float lateralThrust = 10f;
+    [SerializeField] public float horzThrust = 0f;
+    [SerializeField] public float thrustPower = 600f;
+    [SerializeField] public float rcsThrust = 30f;
+    [SerializeField] public float lateralThrust = 50f;
     [SerializeField] public float deathSpiral = 3f;
-    [Range(-10f, 2f)] public float gravity;
+    [Range(-10f, 2f)] public float gravity = 4.3f;
     [SerializeField] AudioClip thrustSound;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip goalSound; 
 
     Rigidbody rigidBody;
     AudioSource audioSource;
-   
+    public GameObject spotlights;
+
+ 
     public enum  State
     {
         Existing,
@@ -40,6 +41,12 @@ public class Rocket : MonoBehaviour
         {
             RespondToThrust();
             Rotate();
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                spotlights.SetActive(false);
+            }
+
         }
 
         if (state == State.Transcending)
@@ -47,6 +54,12 @@ public class Rocket : MonoBehaviour
             transform.Rotate(Vector3.up * (3 * Time.time));
             rigidBody.AddForce(Vector3.back * (deathSpiral * Time.time));
         }
+
+        if (Input.GetKey(KeyCode.N))
+        {
+            LoadNextLevel();
+        }
+
     }
 
     void Start()
@@ -56,10 +69,12 @@ public class Rocket : MonoBehaviour
         //rigidBody.freezeRotation = true;
         rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ; //these are keeping my guy rotating in a stable fashion though I don't know how
         rigidBody.inertiaTensorRotation = Quaternion.identity; // these are keeping my guy rotating in a stable fashion though I don't know how
+
         Gravity();
 
-        int debugSceneNumber = SceneManager.GetActiveScene().buildIndex;
-        print(debugSceneNumber);
+        spotlights.SetActive(true);
+
+        print("Scene Number:" + SceneManager.GetActiveScene().buildIndex);
 
 
     }
@@ -67,7 +82,7 @@ public class Rocket : MonoBehaviour
 
 
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (state != State.Existing)
         {
@@ -80,7 +95,7 @@ public class Rocket : MonoBehaviour
                 audioSource.PlayOneShot(deathSound);
                 state = State.Transcending;
                 print("Stuck by enemy!");
-                Invoke("LoadLevel1", 2f);
+                Invoke("LoadCurrent", 2f);
                 break;
             case "Friendly":
                 print("Friendly contact.");
@@ -99,19 +114,13 @@ public class Rocket : MonoBehaviour
 
     }
 
-    private void LoadLevel0()
+    void LoadCurrent()
     {
-        level = Level.Level0;
-        SceneManager.LoadScene(2);
+        int activeScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(activeScene);
     }
 
-    private void LoadLevel1()
-    {
-        level = Level.Level1;
-        SceneManager.LoadScene(1); //to do, allow for more levels 
-    }
-
-    private void LoadNextLevel()
+    void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextLevel = currentSceneIndex + 1;
@@ -159,21 +168,31 @@ public class Rocket : MonoBehaviour
         float yRotate = lateralThrust * Time.deltaTime;
 
         rigidBody.freezeRotation = true;
+        rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
+
+        // REDUNDANCY! - SEE GUY ROTATE.CS!
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(Vector3.left * horizontalPosition);
-            transform.Rotate(Vector3.forward * rotationThisFrame*2);
-            // transform.Rotate(Vector3.up * yRotate);
-
+            float zRot = transform.rotation.x;
+            Mathf.Clamp(zRot, -33, 0);
+            //transform.Translate(Vector3.left * horizontalPosition);
+            //transform.localRotation = new Quaternion(0f, 0f, zRot * rotationThisFrame, 0f);
+            //transform.Rotate(Vector3.forward * rotationThisFrame*2);
+            transform.Rotate(Vector3.forward * yRotate);
+            //rigidBody.AddRelativeTorque(Vector3.forward)
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(Vector3.right * horizontalPosition);
-            transform.Rotate(Vector3.back * rotationThisFrame*2);
-            // transform.Rotate(Vector3.up * -yRotate);
-
+            float zRot = transform.rotation.x;
+            Mathf.Clamp(zRot, 0, 33);
+            //transform.Translate(Vector3.right * horizontalPosition);
+            //transform.localRotation = new Quaternion(0f, 0f, -(zRot * rotationThisFrame), 0f);
+            //transform.Rotate(Vector3.back * rotationThisFrame*2);
+            transform.Rotate(Vector3.back * yRotate);
         }
+
 
         rigidBody.freezeRotation = false;
 

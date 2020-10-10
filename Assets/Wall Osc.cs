@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WallOsc : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class WallOsc : MonoBehaviour
 
         const float tau = Mathf.PI * 2f; //equal about 6.28
         float rawSinWave = Mathf.Sin(cycles * tau);
-        Mathf.Clamp(period, 0.9f, 5000);
+        Mathf.Clamp(rawSinWave, 0.9f, 5000);
 
         movementFactor = rawSinWave / 2f + 0.5f;
 
