@@ -26,6 +26,7 @@ public class OrbCollisions : MonoBehaviour
             rB.mass = 2f;
             Destroy(this.gameObject, 1f);
             hit = true;
+            
         }
     }
 

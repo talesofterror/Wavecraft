@@ -6,9 +6,13 @@ public class Rocket : MonoBehaviour
     [SerializeField] public float horzThrust = 0f;
     [SerializeField] public float thrustPower = 600f;
     [SerializeField] public float rcsThrust = 30f;
-    [SerializeField] public float lateralThrust = 50f;
+    [SerializeField] public float rotationSpeed = 50f;
     [SerializeField] public float deathSpiral = 3f;
     [Range(-10f, 2f)] public float gravity = 4.3f;
+    public float leftTwistRot = 3f;
+
+    bool twistLeft = false;
+
     [SerializeField] AudioClip thrustSound;
     [SerializeField] AudioClip deathSound;
     [SerializeField] AudioClip goalSound; 
@@ -165,17 +169,17 @@ public class Rocket : MonoBehaviour
     {
         float horizontalPosition = horzThrust * Time.deltaTime;
         float rotationThisFrame = rcsThrust * Time.deltaTime;
-        float yRotate = lateralThrust * Time.deltaTime;
+        float yRotate = rotationSpeed * Time.deltaTime;
 
         rigidBody.freezeRotation = true;
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
+        //rigidBody.constraints = RigidbodyConstraints.FreezePositionZ;
 
         // REDUNDANCY! - SEE GUY ROTATE.CS!
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             float zRot = transform.rotation.x;
-            Mathf.Clamp(zRot, -33, 0);
+            //Mathf.Clamp(zRot, -33, 0);
             //transform.Translate(Vector3.left * horizontalPosition);
             //transform.localRotation = new Quaternion(0f, 0f, zRot * rotationThisFrame, 0f);
             //transform.Rotate(Vector3.forward * rotationThisFrame*2);
@@ -186,7 +190,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             float zRot = transform.rotation.x;
-            Mathf.Clamp(zRot, 0, 33);
+            //Mathf.Clamp(zRot, 0, 33);
             //transform.Translate(Vector3.right * horizontalPosition);
             //transform.localRotation = new Quaternion(0f, 0f, -(zRot * rotationThisFrame), 0f);
             //transform.Rotate(Vector3.back * rotationThisFrame*2);
