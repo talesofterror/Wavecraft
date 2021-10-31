@@ -651,12 +651,17 @@ PrefabInstance:
     - target: {fileID: 1447933265, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
       propertyPath: spikePellet
       value: 
-      objectReference: {fileID: -927199367670048503, guid: e0b6d6f4e3d26974e8ef2ee514ec571c,
+      objectReference: {fileID: 2641453927474187991, guid: 965b2daeb74221247ad67d13fab7eb45,
         type: 3}
     - target: {fileID: 1274461817535836545, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274461817535836547, guid: ee04733e9eb7b3a46807ea558df69867,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
@@ -671,12 +676,12 @@ PrefabInstance:
     - target: {fileID: 1274461817535836574, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8.33
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836574, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.71
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836574, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
@@ -1322,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 4115480096936855157, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8341124
+      value: -8.875887
       objectReference: {fileID: 0}
     - target: {fileID: 4115480096936855157, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
