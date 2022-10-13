@@ -158,12 +158,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117489030356382218}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 180
+  rcsThrust: 0
+  GuyObject: {fileID: 117489030356382218}
 --- !u!1 &135415358791058480
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +415,7 @@ GameObject:
   - component: {fileID: 1274461816553629963}
   - component: {fileID: 828296932}
   - component: {fileID: 828296933}
+  - component: {fileID: 1234272842}
   m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
@@ -428,14 +430,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274461816553629965}
-  m_LocalRotation: {x: -0, y: -0.70199823, z: -0, w: 0.7121787}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.27043283, y: -0.1, z: -1.0468322}
   m_LocalScale: {x: 8.723601, y: 8.723601, z: 8.723601}
   m_Children:
   - {fileID: 4033605128777056281}
   m_Father: {fileID: 1274461817535836574}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -89.175, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &1274461816553629962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -461,7 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  rcsThrust: 1
+  GuyObject: {fileID: 117489030356382218}
 --- !u!111 &828296932
 Animation:
   m_ObjectHideFlags: 0
@@ -497,6 +500,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1234272842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461816553629965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13894b1a5be051b438f214dfbcba733d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoSize: 0.07
+  bulletAngle: 0
+  radius: 1.5
+  offsetX: 0
+  bulletSpeed: 10
+  spawnPoint1: {fileID: 6084967445532780786}
+  CrosshairMesh1: {fileID: 0}
+  CrosshairMesh2: {fileID: 0}
+  crosshairScale: 4.25
+  crosshairSpeed: 2.19
+  bulletLeft: {fileID: 0}
+  bulletRight: {fileID: 0}
 --- !u!1 &1274461816721675986
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +637,7 @@ GameObject:
   - component: {fileID: 1274461817535836547}
   - component: {fileID: 1274461817535836548}
   - component: {fileID: 1447933265}
+  - component: {fileID: 1326411564}
   m_Layer: 9
   m_Name: Guy
   m_TagString: GuyBase
@@ -660,7 +688,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d9cbb416632e5a849b2da9aa855ccfc6, type: 2}
+  - {fileID: 2100000, guid: 8099c39b212a04246b2b59d8ece6bf1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -690,7 +718,7 @@ BoxCollider:
   m_GameObject: {fileID: 1274461817535836549}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -706,13 +734,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.03
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 77
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -803,7 +831,7 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!114 &1274461817535836548
@@ -821,10 +849,9 @@ MonoBehaviour:
   horzThrust: 0
   thrustPower: 600
   rcsThrust: 50
-  rotationSpeed: 50
+  rotationSpeed: 100
   deathSpiral: 3
-  gravity: -5
-  axisRotationFactor: 0
+  axisRotationFactor: 5
   leftTwistRot: -500
   thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
   deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
@@ -842,16 +869,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d258430bd658f1145ad2eb92ef99818b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDash: 3.5
+  xDash: 5
   yDash: 1.5
-  movementVector: {x: 0, y: 0.02, z: 0}
+  movementVector: {x: 0, y: 0.01, z: 0}
   period: 3
   movementFactor: 0
-  aDrag: 3
-  spikeSpeed: 5
+  gravity: -5
+  aDrag: 3.04
+  spikeSpeed: 3
   spikeChargeDuration: 2
   hoverMenu: {fileID: 1274461817850528186}
   spikePellet: {fileID: 0}
+--- !u!114 &1326411564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461817535836549}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rcsThrust: 0
+  GuyObject: {fileID: 1274461817535836549}
 --- !u!1 &1285199365750745073
 GameObject:
   m_ObjectHideFlags: 0

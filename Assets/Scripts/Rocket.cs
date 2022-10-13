@@ -1,6 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
+
 public class Rocket : MonoBehaviour
 {
     [SerializeField] public float horzThrust = 0f;
@@ -24,7 +25,7 @@ public class Rocket : MonoBehaviour
     public GameObject spotlights;
 
  
-    public enum  State
+    public enum  StateOfBeing
     {
         Existing,
         Transcending,
@@ -37,13 +38,15 @@ public class Rocket : MonoBehaviour
         Level1
     };
 
-    State state = State.Existing;
+    StateOfBeing state = StateOfBeing.Existing;
     Level level;
+    
+    
 
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Existing)
+        if (state == StateOfBeing.Existing)
         {
             ThrustControls();
             Rotate();
@@ -55,7 +58,7 @@ public class Rocket : MonoBehaviour
 
         }
 
-        if (state == State.Transcending)
+        if (state == StateOfBeing.Transcending)
         {
             transform.Rotate(Vector3.up * (3 * Time.time));
             rigidBody.AddForce(Vector3.back * (deathSpiral * Time.time));
@@ -67,6 +70,9 @@ public class Rocket : MonoBehaviour
             LoadNextLevel();
         }
 
+        PauseGame();
+
+        
     }
 
     private void FixedUpdate()
@@ -94,7 +100,7 @@ public class Rocket : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Existing)
+        if (state != StateOfBeing.Existing)
         {
             return;
         }
@@ -103,7 +109,7 @@ public class Rocket : MonoBehaviour
         {
             case "Enemy":
                 audioSource.PlayOneShot(deathSound);
-                state = State.Transcending;
+                state = StateOfBeing.Transcending;
                 print("Stuck by enemy!");
                 Invoke("LoadCurrent", 2f);
                 break;
@@ -111,7 +117,7 @@ public class Rocket : MonoBehaviour
                 print("Friendly contact.");
                 break;
             case "Finish":
-                state = State.Ascending;
+                state = StateOfBeing.Ascending;
                 audioSource.PlayOneShot(goalSound);
                 Invoke("LoadNextLevel", 2f);
                 level = Level.Level1;
@@ -186,8 +192,8 @@ public class Rocket : MonoBehaviour
             float zRot = transform.rotation.x;
             //Mathf.Clamp(zRot, -33, 0);
             //transform.Translate(Vector3.left * horizontalPosition);
-            //transform.localRotation = new Quaternion(0f, 0f, zRot * rotationThisFrame, 0f);
-            //transform.Rotate(Vector3.forward * rotationThisFrame*2);
+            // transform.localRotation = new Quaternion(0f, 0f, zRot * rotationThisFrame, 0f);
+            // transform.Rotate(Vector3.forward * rotationThisFrame*2);
             transform.Rotate(Vector3.forward * yRotate);
             //rigidBody.AddRelativeTorque(Vector3.forward)
         }
@@ -226,6 +232,19 @@ public class Rocket : MonoBehaviour
 
         print("Lean = " + leanDueToLeanThrow);
     }
+
+
+    private void PauseGame () { 
+        if(Input.GetKey(KeyCode.RightControl)) {
+            Time.timeScale = 0;
+        }
+
+        else {
+            Time.timeScale = 1;
+        }
+    } //doesn't really work. one enemy builds up projectiles and shoots them all when unpaused
+        // probably need a dedicated time manager, and to possible add pause state
+        // definitions to each class.
 
 
 }

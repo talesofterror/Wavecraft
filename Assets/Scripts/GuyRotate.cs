@@ -35,8 +35,8 @@ public class GuyRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rightRotation = new Vector3(transform.rotation.x, 0, transform.rotation.z);
-        leftRotation = new Vector3(transform.rotation.x, -180, transform.rotation.z);
+        rightRotation = new Vector3(transform.localRotation.x, 0, transform.localRotation.z);
+        leftRotation = new Vector3(transform.localRotation.x, -180, transform.localRotation.z);
 
         print(rightRotation);
 
@@ -113,30 +113,31 @@ private void OldMethod()
 }
 
 
+    //private void OldMethod()
+    //{
+    //    float yRotate = lateralThrust * Time.deltaTime;
+
+    //    if (Input.GetKey(KeyCode.RightArrow))
+    //    {
+    //        //transform.Rotate(Vector3.up * yRotate / -7);
+    //        //transform.Rotate(Vector3.up / Mathf.Sin(-yRotate/2));
+    //        //transform.Rotate(Vector3.up * (transform.position.x * 2));
+    //        transform.Rotate(Vector3.forward * rscThrust);
+
+    //    }
+    //    else if (Input.GetKey(KeyCode.LeftArrow))
+    //    {
+    //        //transform.Rotate(Vector3.down * yRotate / -7);
+    //        //transform.Rotate(Vector3.down / Mathf.Sin(-yRotate/2));
+    //        //transform.Rotate(Vector3.down * (transform.position.x * 2));
+    //        transform.Rotate(Vector3.back * rscThrust);
+    //    }
+    //}
+
 }
 
 
 
-/*
-private void OldMethod()
-{
-    float yRotate = lateralThrust * Time.deltaTime;
 
-    if (Input.GetKey(KeyCode.RightArrow))
-    {
-        //transform.Rotate(Vector3.up * yRotate / -7);
-        //transform.Rotate(Vector3.up / Mathf.Sin(-yRotate/2));
-        //transform.Rotate(Vector3.up * (transform.position.x * 2));
-        transform.Rotate(Vector3.forward * rscThrust);
 
-    }
-    else if (Input.GetKey(KeyCode.LeftArrow))
-    {
-        //transform.Rotate(Vector3.down * yRotate / -7);
-        //transform.Rotate(Vector3.down / Mathf.Sin(-yRotate/2));
-        //transform.Rotate(Vector3.down * (transform.position.x * 2));
-        transform.Rotate(Vector3.back * rscThrust);
-    }
-}
 
-*/

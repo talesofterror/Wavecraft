@@ -42,7 +42,7 @@ public class Hover : MonoBehaviour
         {
             hoverOn = true;
             Hovering();
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.F))
             {
                 hoverMenu.SetActive(true);
             }
