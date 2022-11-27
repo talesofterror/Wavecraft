@@ -1774,11 +1774,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1130549705}
-  - component: {fileID: 1130549700}
   - component: {fileID: 1130549704}
   - component: {fileID: 1130549703}
   - component: {fileID: 1130549702}
   - component: {fileID: 1130549701}
+  - component: {fileID: 1130549700}
   m_Layer: 0
   m_Name: Entry Trigger
   m_TagString: Untagged
