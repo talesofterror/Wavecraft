@@ -19,11 +19,17 @@ public class viewer : MonoBehaviour
     public float yRot = 0f;
     public float zRot = 0f;
 
-    public float caveViewOffset = 6f;
+    public float vertMidOffset = 6f;
 
-    bool initialView = true;
-    bool caveViewLow = false;
-    bool downAnimtrue = false;
+    enum CamState
+    {
+        stageView, 
+        downAnim,
+        vertMiddle, 
+        upAnim
+    }
+
+    CamState state = CamState.stageView;
 
     void Start()
     {
@@ -37,15 +43,12 @@ public class viewer : MonoBehaviour
 
     public void ShiftDown()
     {
-        initialView = false;
-        caveViewLow = true;
-        downAnimtrue = true;
+        state = CamState.downAnim;
     }
 
     public void ShiftUp()
     {
-        initialView = true;
-        caveViewLow = false;
+        state = CamState.upAnim;
     }
 
     public void downAnimPlay()
@@ -53,12 +56,24 @@ public class viewer : MonoBehaviour
         // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + caveViewOffset, distance);
+        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * 2f);
         if (transform.position == endPos)
         {
-            downAnimtrue = false;
+            state = CamState.vertMiddle;
+        }
+    }
+
+    public void upAnimPlay ()
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y + yPosOffset, distance);
+
+        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * 2f);
+        if (transform.position == endPos)
+        {
+            state = CamState.stageView;
         }
     }
 
@@ -87,28 +102,27 @@ public class viewer : MonoBehaviour
 
         
 
-        if (initialView == true)
+        if (state == CamState.stageView)
         {
             transform.position = new Vector3(xPos, playerPos.transform.position.y + yPosOffset, distance);
             transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
 
             Camera.main.fieldOfView = m_fieldOfView;
         }
-        if (caveViewLow == true)
+        if (state == CamState.downAnim)
         {
-            if (downAnimtrue == true)
-            {
                 downAnimPlay();
-            }
+        }
 
-            if (downAnimtrue == false) 
-            {
-                transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + caveViewOffset, distance);
-                transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
-            }
+        if (state == CamState.vertMiddle) 
+        {
+            transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
+            transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
+        }
 
-
-            Camera.main.fieldOfView = m_fieldOfView;
+        if(state == CamState.upAnim)
+        {
+            upAnimPlay();
         }
 
     }
