@@ -32,7 +32,8 @@ public class viewer : MonoBehaviour
         vertMiddle, 
         upAnim,
         leftAnim,
-        horzMiddle
+        horzMiddle,
+        rightAnim
     }
 
     CamState state = CamState.vertMiddle;
@@ -62,6 +63,11 @@ public class viewer : MonoBehaviour
         state = CamState.leftAnim;
     }
 
+    public void ShiftRight()
+    {
+        state = CamState.rightAnim;
+    }
+
     public void downAnimPlay()
     {
         // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
@@ -76,7 +82,7 @@ public class viewer : MonoBehaviour
         }
     }
 
-    public void upAnimPlay ()
+    public void stageAnimPlay ()
     {
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(playerPos.transform.position.y -yPosOffset + horzMidOffset, yPos, distance);
@@ -98,6 +104,21 @@ public class viewer : MonoBehaviour
         if (transform.position == endPos)
         {
             state = CamState.horzMiddle;
+        }
+    }
+
+    public void rightAnimPlay()
+    {
+        print("rightAnimPlay called");
+
+        yPos = 0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
+
+        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+        if (transform.position == endPos)
+        {
+            state = CamState.vertMiddle;
         }
     }
 
@@ -124,12 +145,17 @@ public class viewer : MonoBehaviour
 
         if(state == CamState.upAnim)
         {
-            upAnimPlay();
+            stageAnimPlay();
         }
 
         if(state == CamState.leftAnim)
         {
             leftAnimPlay();
+        }
+
+        if(state == CamState.rightAnim)
+        {
+            rightAnimPlay();
         }
 
         if (state == CamState.horzMiddle)
