@@ -51,7 +51,8 @@ public class ViewShift : MonoBehaviour
         
         if (other.CompareTag("GuyBase"))
         {
-            if (triggerState == TriggerState.initState) {
+            if (triggerState == TriggerState.initState)
+            {
 
                 if (inSetting == TriggerType.downTrigger)
                 {
@@ -59,7 +60,6 @@ public class ViewShift : MonoBehaviour
                     activeView = View.vertView;                         // "View"/"activeView" state may not be needed
                     print("Entry Trigger, ShiftDown");
                 }
-
 
                 else if (inSetting == TriggerType.stageTrigger) // need a way to trigger this if it's in any other state
                 {
@@ -70,13 +70,10 @@ public class ViewShift : MonoBehaviour
 
                 else if (inSetting == TriggerType.leftTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftLeft(); 
+                    viewerCam.GetComponent<viewer>().ShiftLeft();
                     activeView = View.horzView;
                     print("Entry Trigger, ShiftLeft");
                 }
-
-                triggerState = TriggerState.exitState;
-
 
             }
 
@@ -111,13 +108,29 @@ public class ViewShift : MonoBehaviour
                     print("Entry Trigger, ShiftRight");
                 }
 
-                triggerState = TriggerState.initState;
+                // triggerState = TriggerState.initState;
 
             }
+
+            changeState();
 
         }
 
 
+        
+    }
+
+    private void changeState()
+    {
+        if (triggerState == TriggerState.initState)
+        {
+            triggerState = TriggerState.exitState;
+            print("exit state");
+        } else
+        {
+            triggerState = TriggerState.initState;
+            print("init state");
+        }
         
     }
 

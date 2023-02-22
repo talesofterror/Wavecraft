@@ -3,8 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/*
+ * TO DO: 
+ * 
+ * Refactor: Lots of issues
+ * 
+ * Add an object to act as the y position target for eat trigger object
+ * 
+ */
+
+
 public class viewer : MonoBehaviour
 {
+    Vector3 stageVector;
     Rigidbody camBody;
     GameObject playerPos;
     Rocket rocketScript;
@@ -40,12 +51,14 @@ public class viewer : MonoBehaviour
 
     void Start()
     {
+        yPosOffset = 1;
         camBody = GetComponent<Rigidbody>();
         playerPos = GameObject.FindGameObjectWithTag("Player");
         rocketScript = playerPos.GetComponent<Rocket>();
         camObject = GetComponent<Transform>();
 
         transform.position = new Vector3(xPos, playerPos.transform.position.y + yPosOffset, distance);
+        stageVector = transform.position;
     }
 
     public void ShiftDown()
@@ -71,7 +84,7 @@ public class viewer : MonoBehaviour
     public void downAnimPlay()
     {
         // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
-
+        yPosOffset = 5;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
 
@@ -84,14 +97,14 @@ public class viewer : MonoBehaviour
 
     public void stageAnimPlay ()
     {
+        //yPosOffset = 4.51f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerPos.transform.position.y -yPosOffset + horzMidOffset, yPos, distance);
+        Vector3 endPos = stageVector;
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-        if (transform.position == endPos)
-        {
+
             state = CamState.stageView;
-        }
+
     }
 
     public void leftAnimPlay ()
