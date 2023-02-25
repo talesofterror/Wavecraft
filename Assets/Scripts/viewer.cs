@@ -8,8 +8,13 @@ using UnityEngine;
  * 
  * Refactor: Lots of issues
  * 
- * Add an object to act as the y position target for eat trigger object
+ * Add an object to act as the y position target for each trigger object
  * 
+ * VARIABLES THAT DO NOTHING: 
+ * - m_fieldOfView
+ * - yPos
+ * - xPosOffset
+ * - horzMidOffset
  */
 
 
@@ -66,17 +71,17 @@ public class viewer : MonoBehaviour
         state = CamState.downAnim;
     }
 
-    public void ShiftUp()
+    public void ShiftStage()
     {
         state = CamState.upAnim;
     }
 
-    public void ShiftLeft()
+    public void ShiftHorz()
     {
         state = CamState.leftAnim;
     }
 
-    public void ShiftRight()
+    public void ShiftVert()
     {
         state = CamState.rightAnim;
     }
@@ -107,11 +112,11 @@ public class viewer : MonoBehaviour
 
     }
 
-    public void leftAnimPlay ()
+    public void horzAnimPlay ()
     {
         yPos = -40.29f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerPos.transform.position.x - xPosOffset + horzMidOffset, yPos, distance);
+        Vector3 endPos = new Vector3(playerPos.transform.position.x - xPosOffset + horzMidOffset, yPos + yPosOffset, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -120,7 +125,7 @@ public class viewer : MonoBehaviour
         }
     }
 
-    public void rightAnimPlay()
+    public void vertAnimPlay()
     {
         print("rightAnimPlay called");
 
@@ -163,12 +168,12 @@ public class viewer : MonoBehaviour
 
         if(state == CamState.leftAnim)
         {
-            leftAnimPlay();
+            horzAnimPlay();
         }
 
         if(state == CamState.rightAnim)
         {
-            rightAnimPlay();
+            vertAnimPlay();
         }
 
         if (state == CamState.horzMiddle)

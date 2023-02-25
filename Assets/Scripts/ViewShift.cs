@@ -7,17 +7,10 @@ public class ViewShift : MonoBehaviour
 {
     public GameObject viewerCam;
 
-    enum View
-    {
-        vertView, 
-        stageView,
-        horzView
-    };
-
     enum TriggerState
     {
-        initState,
-        exitState
+        inState,
+        outState
     }
 
     public enum TriggerType
@@ -25,90 +18,70 @@ public class ViewShift : MonoBehaviour
         stageTrigger,
         upTrigger,
         downTrigger,
-        leftTrigger,
-        rightTrigger
+        horzTrigger,
+        vertTrigger
     }
 
-    // at this point activeView must be set to stageView if starting at top stage
-    // and vertView if starting somewhere within the cave
-    View activeView = View.vertView;
-
-    TriggerState triggerState = TriggerState.initState;
+    TriggerState triggerState = TriggerState.inState;
     public TriggerType inSetting;
     public TriggerType outSetting; 
 
     private void OnTriggerEnter(Collider other)
     {
-
-        /*
-         * The trigger State isn't changing and I'm not sure why.
-         * 
-         * Maybe it would work if I call the state change from the viewer script, at the end of the animations. 
-         */
-        
-
+       
         print("Entry Collision");
         
         if (other.CompareTag("GuyBase"))
         {
-            if (triggerState == TriggerState.initState)
+            if (triggerState == TriggerState.inState)
             {
 
                 if (inSetting == TriggerType.downTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftDown();
-                    activeView = View.vertView;                         // "View"/"activeView" state may not be needed
                     print("Entry Trigger, ShiftDown");
                 }
 
-                else if (inSetting == TriggerType.stageTrigger) // need a way to trigger this if it's in any other state
+                else if (inSetting == TriggerType.stageTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftUp();
-                    activeView = View.stageView;
+                    viewerCam.GetComponent<viewer>().ShiftStage();
                     print("Entry Trigger, ShiftUp");
                 }
 
-                else if (inSetting == TriggerType.leftTrigger)
+                else if (inSetting == TriggerType.horzTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftLeft();
-                    activeView = View.horzView;
+                    viewerCam.GetComponent<viewer>().ShiftHorz();
                     print("Entry Trigger, ShiftLeft");
                 }
 
             }
 
-            if (triggerState == TriggerState.exitState)
+            if (triggerState == TriggerState.outState)
             {
 
                 if (outSetting == TriggerType.downTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftDown();
-                    activeView = View.vertView;                         // "View" state may not be needed
                     print("Entry Trigger, ShiftDown");
                 }
 
-                else if (outSetting == TriggerType.stageTrigger) // need a way to trigger this if it's in any other state
+                else if (outSetting == TriggerType.stageTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftUp();
-                    activeView = View.stageView;
-                    print("Entry Trigger, ShiftUp");
+                    viewerCam.GetComponent<viewer>().ShiftStage();
+                    print("Entry Trigger, ShiftStage");
                 }
 
-                else if (outSetting == TriggerType.leftTrigger)
+                else if (outSetting == TriggerType.horzTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftLeft();
-                    activeView = View.horzView;
-                    print("Entry Trigger, ShiftLeft");
+                    viewerCam.GetComponent<viewer>().ShiftHorz();
+                    print("Entry Trigger, ShiftHorz");
                 }
 
-                else if (outSetting == TriggerType.rightTrigger)
+                else if (outSetting == TriggerType.vertTrigger)
                 {
-                    viewerCam.GetComponent<viewer>().ShiftRight();
-                    activeView = View.vertView;
-                    print("Entry Trigger, ShiftRight");
+                    viewerCam.GetComponent<viewer>().ShiftVert();
+                    print("Entry Trigger, ShiftVert");
                 }
-
-                // triggerState = TriggerState.initState;
 
             }
 
@@ -122,13 +95,13 @@ public class ViewShift : MonoBehaviour
 
     private void changeState()
     {
-        if (triggerState == TriggerState.initState)
+        if (triggerState == TriggerState.inState)
         {
-            triggerState = TriggerState.exitState;
+            triggerState = TriggerState.outState;
             print("exit state");
         } else
         {
-            triggerState = TriggerState.initState;
+            triggerState = TriggerState.inState;
             print("init state");
         }
         
