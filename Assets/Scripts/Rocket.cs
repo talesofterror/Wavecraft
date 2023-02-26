@@ -9,9 +9,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] public float rcsThrust = 30f;
     [SerializeField] public float rotationSpeed = 50f;
     [SerializeField] public float deathSpiral = 3f;
-    //[Range(-10f, 2f)] public float gravity = 4.3f;
     [SerializeField] public float axisRotationFactor = 0;
-    //[Range(0, 5)] public float drag;
     public float leftTwistRot = 3f;
 
     bool twistLeft = false;
@@ -23,6 +21,7 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody;
     AudioSource audioSource;
     public GameObject spotlights;
+    public GameObject entryAxisTarget;
 
  
     public enum  StateOfBeing
@@ -46,6 +45,7 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (state == StateOfBeing.Existing)
         {
             ThrustControls();
@@ -100,6 +100,7 @@ public class Rocket : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+
         if (state != StateOfBeing.Existing)
         {
             return;
@@ -116,6 +117,12 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 print("Friendly contact.");
                 break;
+            case "EntryTrigger":
+                entryAxisTarget = collision.gameObject;
+                print("Entry Trigger triggered");
+                print(entryAxisTarget);
+                print(collision.gameObject);
+                break;
             case "Finish":
                 state = StateOfBeing.Ascending;
                 audioSource.PlayOneShot(goalSound);
@@ -128,6 +135,19 @@ public class Rocket : MonoBehaviour
                 break;
         }
 
+    }
+
+    void OnTriggerEnter(Collider collision) 
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "EntryTrigger":
+                entryAxisTarget = collision.gameObject;
+                print("Entry Trigger triggered");
+                print(entryAxisTarget);
+                print(collision.gameObject);
+                break;
+        }
     }
 
     void LoadCurrent()

@@ -10,6 +10,7 @@ TagManager:
   - PlayerLights
   - SpikePellet
   - SpawnPoint
+  - EntryTrigger
   layers:
   - Default
   - TransparentFX

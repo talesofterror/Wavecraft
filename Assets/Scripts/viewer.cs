@@ -15,17 +15,19 @@ using UnityEngine;
  * - yPos
  * - xPosOffset
  * - horzMidOffset
+ * 
+ * How do I get the value of the target position from the ViewShift into this script? 
+ * 
+ * Access the collider of playerObject, get the position of the (first?) child of the collision object
+ * 
  */
 
 
 public class viewer : MonoBehaviour
 {
     Vector3 stageVector;
-    Rigidbody camBody;
-    GameObject playerPos;
-    Rocket rocketScript;
-    Transform camObject;
-    OldCamera cam;
+    GameObject playerObject;
+    GameObject entryTriggerTarget;
 
     public float m_fieldOfView = 0f;
     public float distance = -45f;
@@ -46,23 +48,20 @@ public class viewer : MonoBehaviour
         stageView, 
         downAnim,
         vertMiddle, 
-        upAnim,
-        leftAnim,
+        stageAnim,
+        horzAnim,
         horzMiddle,
-        rightAnim
+        vertAnim
     }
 
-    CamState state = CamState.vertMiddle;
+    CamState state = CamState.stageView;
 
     void Start()
     {
-        yPosOffset = 1;
-        camBody = GetComponent<Rigidbody>();
-        playerPos = GameObject.FindGameObjectWithTag("Player");
-        rocketScript = playerPos.GetComponent<Rocket>();
-        camObject = GetComponent<Transform>();
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
 
-        transform.position = new Vector3(xPos, playerPos.transform.position.y + yPosOffset, distance);
+        transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
         stageVector = transform.position;
     }
 
@@ -73,17 +72,17 @@ public class viewer : MonoBehaviour
 
     public void ShiftStage()
     {
-        state = CamState.upAnim;
+        state = CamState.stageAnim;
     }
 
     public void ShiftHorz()
     {
-        state = CamState.leftAnim;
+        state = CamState.horzAnim;
     }
 
     public void ShiftVert()
     {
-        state = CamState.rightAnim;
+        state = CamState.vertAnim;
     }
 
     public void downAnimPlay()
@@ -91,7 +90,7 @@ public class viewer : MonoBehaviour
         // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
         yPosOffset = 5;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
+        Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -114,9 +113,9 @@ public class viewer : MonoBehaviour
 
     public void horzAnimPlay ()
     {
-        yPos = -40.29f;
+
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerPos.transform.position.x - xPosOffset + horzMidOffset, yPos + yPosOffset, distance);
+        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, entryTriggerTarget.transform.position.y, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -131,7 +130,7 @@ public class viewer : MonoBehaviour
 
         yPos = 0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
+        Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -141,11 +140,11 @@ public class viewer : MonoBehaviour
     }
 
     void Update()
-    {
-    
+    {        
+
         if (state == CamState.stageView)
         {
-            transform.position = new Vector3(xPos, playerPos.transform.position.y + yPosOffset, distance);
+            transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
             transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
 
             Camera.main.fieldOfView = m_fieldOfView;
@@ -157,28 +156,28 @@ public class viewer : MonoBehaviour
 
         if (state == CamState.vertMiddle) 
         {
-            transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + vertMidOffset, distance);
+            transform.position = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
             transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
         }
 
-        if(state == CamState.upAnim)
+        if(state == CamState.stageAnim)
         {
             stageAnimPlay();
         }
 
-        if(state == CamState.leftAnim)
+        if(state == CamState.horzAnim)
         {
             horzAnimPlay();
         }
 
-        if(state == CamState.rightAnim)
+        if(state == CamState.vertAnim)
         {
             vertAnimPlay();
         }
 
         if (state == CamState.horzMiddle)
         {
-            transform.position = new Vector3(playerPos.transform.position.x - xPosOffset + vertMidOffset, yPos, distance);
+            transform.position = new Vector3(playerObject.transform.position.x - xPosOffset + vertMidOffset, yPos, distance);
             transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
         }
 

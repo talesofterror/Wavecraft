@@ -6,6 +6,9 @@ using UnityEngine;
 public class ViewShift : MonoBehaviour
 {
     public GameObject viewerCam;
+    public GameObject axisTarget;
+    public float axisTargetX;
+    public float axisTargetY;
 
     enum TriggerState
     {
@@ -110,6 +113,7 @@ public class ViewShift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        axisTargetX = axisTarget.transform.position.x;
+        axisTargetY = axisTarget.transform.position.y;
     }
 }
