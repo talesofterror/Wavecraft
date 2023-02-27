@@ -127,6 +127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cave Island - Short
       objectReference: {fileID: 0}
+    - target: {fileID: -456523507968941818, guid: eb6b6bde225d07b44938ced28920cddd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 88ff955713f7af548a3b39b028378ca9, type: 2}
     - target: {fileID: 6299913345643735477, guid: eb6b6bde225d07b44938ced28920cddd,
         type: 3}
       propertyPath: m_LocalPosition.x

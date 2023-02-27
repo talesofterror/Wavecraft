@@ -18,7 +18,9 @@ using UnityEngine;
  * 
  * How do I get the value of the target position from the ViewShift into this script? 
  * 
- * Access the collider of playerObject, get the position of the (first?) child of the collision object
+ * Instead of getting the target location from the Rocket script I should try getting it from
+ * the trigger object itself. Send a message from ViewShift to Viewer (which is already happening)
+ * to specify the y location
  * 
  */
 

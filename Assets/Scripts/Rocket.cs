@@ -117,12 +117,6 @@ public class Rocket : MonoBehaviour
             case "Friendly":
                 print("Friendly contact.");
                 break;
-            case "EntryTrigger":
-                entryAxisTarget = collision.gameObject;
-                print("Entry Trigger triggered");
-                print(entryAxisTarget);
-                print(collision.gameObject);
-                break;
             case "Finish":
                 state = StateOfBeing.Ascending;
                 audioSource.PlayOneShot(goalSound);
@@ -137,7 +131,7 @@ public class Rocket : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider collision) 
+    public void OnTriggerEnter(Collider collision) 
     {
         switch (collision.gameObject.tag)
         {
@@ -146,6 +140,7 @@ public class Rocket : MonoBehaviour
                 print("Entry Trigger triggered");
                 print(entryAxisTarget);
                 print(collision.gameObject);
+                print(entryAxisTarget);
                 break;
         }
     }
