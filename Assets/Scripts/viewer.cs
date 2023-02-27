@@ -29,7 +29,7 @@ public class viewer : MonoBehaviour
 {
     Vector3 stageVector;
     GameObject playerObject;
-    GameObject entryTriggerTarget;
+    public Vector3 entryTriggerTarget;
 
     public float m_fieldOfView = 0f;
     public float distance = -45f;
@@ -61,7 +61,7 @@ public class viewer : MonoBehaviour
     void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
+        //entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
 
         transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
         stageVector = transform.position;
@@ -117,7 +117,7 @@ public class viewer : MonoBehaviour
     {
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, entryTriggerTarget.transform.position.y, distance);
+        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, entryTriggerTarget.y, distance);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)

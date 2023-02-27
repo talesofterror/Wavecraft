@@ -54,6 +54,7 @@ public class ViewShift : MonoBehaviour
                 else if (inSetting == TriggerType.horzTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftHorz();
+                    viewerCam.GetComponent<viewer>().entryTriggerTarget = transform.position;                     ;
                     print("Entry Trigger, ShiftLeft");
                 }
 
