@@ -2255,9 +2255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewerCam: {fileID: 1036151041}
-  axisTarget: {fileID: 0}
-  axisTargetX: 0
-  axisTargetY: 0
+  targetTransform: {fileID: 0}
   inSetting: 2
   outSetting: 0
 --- !u!54 &1130549701
@@ -2941,6 +2939,11 @@ PrefabInstance:
       propertyPath: viewerCam
       value: 
       objectReference: {fileID: 1036151041}
+    - target: {fileID: 8057297557086274575, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.111
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30610ea80de8d6a47ace8cd9e4c13a4a, type: 3}
 --- !u!1 &1759165841
@@ -3191,6 +3194,95 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1862454353
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 456359769797590317, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Cave Small Island (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 456359769797590317, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -66.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877220308310085660, guid: 696a4f744596fc2458dbd019c7d361b1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 696a4f744596fc2458dbd019c7d361b1, type: 3}
 --- !u!1 &1864745143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2641453927474187991, guid: 965b2daeb74221247ad67d13fab7eb45,
@@ -3791,6 +3883,26 @@ PrefabInstance:
       propertyPath: m_FOVAxisMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.045523323
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.5853337
+      objectReference: {fileID: 0}
     - target: {fileID: 4115480096936855157, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4064,6 +4176,16 @@ PrefabInstance:
       propertyPath: viewerCam
       value: 
       objectReference: {fileID: 1036151041}
+    - target: {fileID: 8057297557086274575, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057297557086274575, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30610ea80de8d6a47ace8cd9e4c13a4a, type: 3}
 --- !u!1001 &6818955234504129738

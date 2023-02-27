@@ -6,9 +6,7 @@ using UnityEngine;
 public class ViewShift : MonoBehaviour
 {
     public GameObject viewerCam;
-    public GameObject axisTarget;
-    public float axisTargetX;
-    public float axisTargetY;
+    public Transform targetTransform;
 
     enum TriggerState
     {
@@ -23,6 +21,11 @@ public class ViewShift : MonoBehaviour
         downTrigger,
         horzTrigger,
         vertTrigger
+    }
+
+    private void Start ()
+    {
+        
     }
 
     TriggerState triggerState = TriggerState.inState;
@@ -54,7 +57,7 @@ public class ViewShift : MonoBehaviour
                 else if (inSetting == TriggerType.horzTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftHorz();
-                    viewerCam.GetComponent<viewer>().entryTriggerTarget = transform.position;                     ;
+                    viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
                     print("Entry Trigger, ShiftLeft");
                 }
 
@@ -114,7 +117,6 @@ public class ViewShift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        axisTargetX = axisTarget.transform.position.x;
-        axisTargetY = axisTarget.transform.position.y;
+        targetTransform = transform.GetChild(0);
     }
 }

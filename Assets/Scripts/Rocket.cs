@@ -136,11 +136,8 @@ public class Rocket : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "EntryTrigger":
-                entryAxisTarget = collision.gameObject;
+
                 print("Entry Trigger triggered");
-                print(entryAxisTarget);
-                print(collision.gameObject);
-                print(entryAxisTarget);
                 break;
         }
     }

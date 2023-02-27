@@ -28,6 +28,7 @@ using UnityEngine;
 public class viewer : MonoBehaviour
 {
     Vector3 stageVector;
+    Transform swivelTarget;
     GameObject playerObject;
     public Vector3 entryTriggerTarget;
 
@@ -93,12 +94,19 @@ public class viewer : MonoBehaviour
         yPosOffset = 5;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+        Swivel();
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
         {
             state = CamState.vertMiddle;
         }
+    }
+
+    private void Swivel()
+    {
+        swivelTarget = playerObject.transform;
+        transform.LookAt(swivelTarget);
     }
 
     public void stageAnimPlay ()
@@ -118,6 +126,8 @@ public class viewer : MonoBehaviour
 
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, entryTriggerTarget.y, distance);
+        swivelTarget = playerObject.transform;
+        transform.LookAt(swivelTarget);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -133,6 +143,8 @@ public class viewer : MonoBehaviour
         yPos = 0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+        swivelTarget = playerObject.transform;
+        transform.LookAt(swivelTarget);
 
         transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
         if (transform.position == endPos)
@@ -142,7 +154,9 @@ public class viewer : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
+
+
 
         if (state == CamState.stageView)
         {
