@@ -32,7 +32,6 @@ public class Hover : MonoBehaviour
     {
         rB = GetComponent<Rigidbody>();
         Instantiate(hoverMenu);
-
     }
 
     // Update is called once per frame
@@ -62,31 +61,17 @@ public class Hover : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                //rB.isKinematic = true;
-
-                //blinkDirection = transform.position + new Vector3(100f, 0f,0f);
-                //rB.transform.position = (Vector3.Lerp(transform.localPosition, blinkDirection, Time.deltaTime));
                 rB.velocity = new Vector3(xDash, yDash, 0f);
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                //rB.isKinematic = true;
-
-                //blinkDirection = transform.position + new Vector3(-100f, 0f, 0f);
-                //transform.position = Vector3.Lerp(transform.localPosition, blinkDirection, Time.deltaTime);
-
-                rB.velocity = new Vector3(-xDash, 1.5f, 0f);
+                rB.velocity = new Vector3(-xDash, yDash, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.S))
             {
-                //rB.AddRelativeForce(Vector3.up);
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-
+                rB.velocity = new Vector3(0f, -xDash, 0f);
             }
 
             if (Input.GetKey(KeyCode.Space))
@@ -107,8 +92,8 @@ public class Hover : MonoBehaviour
                     //rB.drag = 0;
                     scooting = true;
                     //print("Drag = " + rB.drag);
-
                 }
+
                 else
                 {
                     scooting = false;

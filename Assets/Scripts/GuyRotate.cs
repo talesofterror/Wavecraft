@@ -4,135 +4,132 @@ using UnityEngine;
 
 public class GuyRotate : MonoBehaviour
 {
-    public enum Direction
+  public enum Direction
+  {
+    TurningLeft,
+    TurningRight,
+    FacingLeft,
+    FacingRight
+  };
+
+  public float rcsThrust;
+
+  Vector3 leftRotation;
+  Vector3 rightRotation;
+
+  Direction direction = Direction.FacingRight;
+
+
+  void Start()
+  {
+    rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
+    leftRotation = new Vector3(transform.rotation.x, 75, transform.rotation.z);
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.A))
     {
-        TurningLeft,
-        TurningRight,
-        FacingLeft,
-        FacingRight
-    };
-
-    public float rcsThrust;
-
-    public GameObject GuyObject;
-    Rigidbody rB;
-
-    Vector3 leftRotation;
-    Vector3 rightRotation;
-
-    Direction direction = Direction.TurningRight;
-
-
-    void Start()
-    {
-        rB = GuyObject.GetComponent<Rigidbody>();
-
-        
-
-
+      if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
+      {
+        return;
+      }
+      else
+      {
+        StopAllCoroutines();
+        StartCoroutine(applyrotationLeft());
+        direction = Direction.TurningLeft;
+      }
     }
 
-    // Update is called once per frame
-    void Update()
+    if (Input.GetKeyDown(KeyCode.D))
     {
-        rightRotation = new Vector3(transform.localRotation.x, 0, transform.localRotation.z);
-        leftRotation = new Vector3(transform.localRotation.x, -180, transform.localRotation.z);
-
-        print(rightRotation);
-
-        //print(Time.deltaTime * speed);
-        //OldMethod();
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-
-            direction = Direction.TurningLeft;
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            direction = Direction.TurningRight;
-
-        }
-
-
-
-        if (direction == Direction.TurningLeft)
-        {
-            StartCoroutine(TurnLeft());
-        }
-        if (direction == Direction.TurningRight)
-        {
-            StartCoroutine(TurnRight());
-        }
-
-
-    }
-
-    IEnumerator TurnRight()
-    {
-        //rB.freezeRotation = true;
-        transform.eulerAngles = rightRotation;
-        //rightRotation.x = transform.eulerAngles.x;
-        direction = Direction.FacingRight;
-        //rB.freezeRotation = false;
-
-        yield return null;
-    }
-
-    IEnumerator TurnLeft()
-    {
-        //rB.freezeRotation = true;
-        transform.eulerAngles = leftRotation;
-        //leftRotation.x = transform.eulerAngles.x;
-        direction = Direction.FacingLeft;
-        //rB.freezeRotation = false;
-
-        yield return null;
+      if (direction == Direction.FacingRight | direction == Direction.TurningRight)
+      {
+        return;
+      }
+      else
+      {
+        StopAllCoroutines();
+        StartCoroutine(applyrotationRight());
+        direction = Direction.TurningRight;
+      }
     }
 
 
+    //     if (direction == Direction.TurningLeft)
+    //     {
+    //       if (transform.eulerAngles != leftRotation)
+    //       {
+    //         return;
+    //       }
+    //       else
+    //       {
+    //         direction = Direction.FacingLeft;
+    //       }
+    //     }
+    //     if (direction == Direction.TurningRight)
+    // {
+    //   if (transform.eulerAngles != rightRotation)
+    //   {
+    //     return;
+    //   }
+    //   else
+    //   {
+    //     direction = Direction.FacingRight;
+    //   }
+    // }
 
+    // if (direction == Direction.FacingLeft)
+    // {
+    //   transform.eulerAngles = leftRotation;
+    // }
+    // if (direction == Direction.FacingRight)
+    // {
+    //   transform.eulerAngles = rightRotation;
+    // }
 
+  }
 
-private void OldMethod()
-{
+  IEnumerator applyrotationLeft()
+  {
+    float i;
+    Vector3 currentRotation = transform.eulerAngles;
+    for (i = 0; i <= 1; i += 1 * Time.deltaTime)
+    {
+      transform.eulerAngles = Vector3.Lerp(currentRotation, leftRotation, i);
+      print("rotation left: " + i);
+      yield return null;
+    }
+  }
+
+  IEnumerator applyrotationRight()
+  {
+    float i;
+    Vector3 currentRotation = transform.eulerAngles;
+    for (i = 0; i <= 1; i += 1 * Time.deltaTime)
+    {
+      transform.eulerAngles = Vector3.Lerp(currentRotation, rightRotation, i);
+      yield return null;
+    }
+  }
+
+  private void OldMethod()
+  {
 
     if (Input.GetKey(KeyCode.RightArrow))
     {
 
-        transform.Rotate(Vector3.forward * rcsThrust);
+      transform.Rotate(Vector3.forward * rcsThrust);
 
     }
     else if (Input.GetKey(KeyCode.LeftArrow))
     {
 
-        transform.Rotate(Vector3.back * rcsThrust);
+      transform.Rotate(Vector3.back * rcsThrust);
     }
-}
-
-
-    //private void OldMethod()
-    //{
-    //    float yRotate = lateralThrust * Time.deltaTime;
-
-    //    if (Input.GetKey(KeyCode.RightArrow))
-    //    {
-    //        //transform.Rotate(Vector3.up * yRotate / -7);
-    //        //transform.Rotate(Vector3.up / Mathf.Sin(-yRotate/2));
-    //        //transform.Rotate(Vector3.up * (transform.position.x * 2));
-    //        transform.Rotate(Vector3.forward * rscThrust);
-
-    //    }
-    //    else if (Input.GetKey(KeyCode.LeftArrow))
-    //    {
-    //        //transform.Rotate(Vector3.down * yRotate / -7);
-    //        //transform.Rotate(Vector3.down / Mathf.Sin(-yRotate/2));
-    //        //transform.Rotate(Vector3.down * (transform.position.x * 2));
-    //        transform.Rotate(Vector3.back * rscThrust);
-    //    }
-    //}
+  }
 
 }
 
