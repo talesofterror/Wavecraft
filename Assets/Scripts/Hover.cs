@@ -10,13 +10,10 @@ public class Hover : MonoBehaviour
     [Range (0,1)] public float movementFactor;
     [Range(-10f, 2f)] public float gravity = -5f;
     [Range(0, 5)] public float aDrag;
+
     public float spikeSpeed;
     public int spikeChargeDuration;
 
-
-    Vector3 blinkDirection;
-
-    //public Transform hoverMenu;
     public GameObject hoverMenu;
     public GameObject spikePellet;
     GameObject spikeObject;
@@ -59,27 +56,27 @@ public class Hover : MonoBehaviour
             // SPIKE SHOOTER
             // spikeArc = SpikeShooter(spikeArc);
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
             {
                 rB.velocity = new Vector3(xDash, yDash, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
             {
                 rB.velocity = new Vector3(-xDash, yDash, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.50f)
             {
                 rB.velocity = new Vector3(0f, -xDash, 0f);
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1"))
             {
                 scooting = false;
             }
 
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetButton("Circle") || Input.GetButton("Fire2") )
             {
                 rB.drag = aDrag - Time.deltaTime;
                 Mathf.Clamp(rB.drag, 0, aDrag);

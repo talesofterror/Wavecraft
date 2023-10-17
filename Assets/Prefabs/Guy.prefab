@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rcsThrust: 0
+  direction: 3
 --- !u!1 &135415358791058480
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rcsThrust: 1
+  direction: 3
 --- !u!111 &828296932
 Animation:
   m_ObjectHideFlags: 0
@@ -851,6 +853,7 @@ MonoBehaviour:
   deathSpiral: 3
   axisRotationFactor: 5
   leftTwistRot: -500
+  enemyCollissionsOn: 1
   thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
   deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
   goalSound: {fileID: 8300000, guid: 9914686e0766d8144bff8e39894b4c52, type: 3}
@@ -892,6 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rcsThrust: 0
+  direction: 3
 --- !u!1 &1285199365750745073
 GameObject:
   m_ObjectHideFlags: 0

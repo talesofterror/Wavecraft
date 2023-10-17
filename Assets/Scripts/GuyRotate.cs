@@ -17,7 +17,7 @@ public class GuyRotate : MonoBehaviour
   Vector3 leftRotation;
   Vector3 rightRotation;
 
-  Direction direction = Direction.FacingRight;
+  public Direction direction = Direction.FacingRight;
 
 
   void Start()
@@ -29,7 +29,7 @@ public class GuyRotate : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.A))
+    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
     {
       if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
       {
@@ -43,7 +43,7 @@ public class GuyRotate : MonoBehaviour
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.D))
+    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
     {
       if (direction == Direction.FacingRight | direction == Direction.TurningRight)
       {
