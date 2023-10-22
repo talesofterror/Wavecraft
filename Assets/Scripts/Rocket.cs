@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-  [SerializeField] public float horzThrust = 0f;
   [SerializeField] public float thrustPower = 600f;
-  [SerializeField] public float rcsThrust = 30f;
   [SerializeField] public float rotationSpeed = 50f;
   [SerializeField] public float deathSpiral = 3f;
   [SerializeField] public float axisRotationFactor = 0;
@@ -20,7 +18,6 @@ public class Rocket : MonoBehaviour
 
   Rigidbody rigidBody;
   AudioSource audioSource;
-  public GameObject spotlights;
   public GameObject entryAxisTarget;
 
 
@@ -52,11 +49,6 @@ public class Rocket : MonoBehaviour
       Rotate();
       RotateJoystick();
 
-      if (Input.GetKeyDown(KeyCode.T))
-      {
-        spotlights.SetActive(false);
-      }
-
     }
 
     if (state == StateOfBeing.Transcending)
@@ -86,7 +78,7 @@ public class Rocket : MonoBehaviour
     rigidBody = GetComponent<Rigidbody>();
     audioSource = GetComponent<AudioSource>();
     //rigidBody.freezeRotation = true;
-    rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ; //these are keeping my guy rotating in a stable fashion though I don't know how
+    // rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ; //these are keeping my guy rotating in a stable fashion though I don't know how
     rigidBody.inertiaTensorRotation = Quaternion.identity; // these are keeping my guy rotating in a stable fashion though I don't know how
 
     //Gravity();
@@ -189,36 +181,34 @@ public class Rocket : MonoBehaviour
 
   private void Rotate()
   {
-    float horizontalPosition = horzThrust * Time.deltaTime;
-    float rotationThisFrame = rcsThrust * Time.deltaTime;
     float yRotate = rotationSpeed * Time.deltaTime;
 
     rigidBody.freezeRotation = true;
 
-    if (Input.GetKey(KeyCode.LeftArrow))
+    if (Input.GetKey(KeyCode.A))
     {
       transform.Rotate(Vector3.forward * yRotate);
     }
 
-    if (Input.GetKey(KeyCode.RightArrow))
+    if (Input.GetKey(KeyCode.D))
     {
       transform.Rotate(Vector3.back * yRotate);
     }
 
-    if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.LeftShift))
-    {
-      rotationSpeed = rotationSpeed + 10;
-    }
+    // if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.LeftShift))
+    // {
+    //   rotationSpeed = rotationSpeed + 10;
+    // }
 
-    if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.LeftShift))
-    {
-      rotationSpeed = rotationSpeed + 10;
-    }
+    // if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.LeftShift))
+    // {
+    //   rotationSpeed = rotationSpeed + 10;
+    // }
 
-    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetAxis("DPad-Horizontal") != 0)
-    {
-      transform.eulerAngles = new Vector3(0, 0, 0);
-    }
+    // if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetAxis("DPad-Horizontal") != 0)
+    // {
+    //   transform.eulerAngles = new Vector3(0, 0, 0);
+    // }
 
 
     rigidBody.freezeRotation = false;

@@ -3911,10 +3911,19 @@ PrefabInstance:
       propertyPath: bulletRight
       value: 
       objectReference: {fileID: 1759165841}
+    - target: {fileID: 1234272842, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447933265, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
       propertyPath: spikePellet
       value: 
       objectReference: {fileID: 1864745143}
+    - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
+        type: 3}
+      propertyPath: enemyCollissionsOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_Name

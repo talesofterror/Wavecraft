@@ -16,21 +16,33 @@ public class GuyRotate : MonoBehaviour
 
   Vector3 leftRotation;
   Vector3 rightRotation;
+  Vector3 currentRotation;
 
   public Direction direction = Direction.FacingRight;
 
 
   void Start()
   {
-    rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
-    leftRotation = new Vector3(transform.rotation.x, 75, transform.rotation.z);
+    // rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
+    // leftRotation = new Vector3(transform.rotation.x, 75, transform.rotation.z);
+
+    // rightRotation = new Vector3(0, -75, 0);
+    // leftRotation = new Vector3(0, 75, 0);
+
+ 
   }
 
-  // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
+    rightRotation = new Vector3(transform.parent.transform.rotation.x, -75, transform.parent.transform.rotation.z);
+    leftRotation = new Vector3(transform.parent.transform.rotation.x, 75, transform.parent.transform.rotation.z);
+    Vector3 currentRotationParent = transform.parent.transform.eulerAngles;
+    Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, 0);
+    Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, 0);
+
+    if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("DPad-Horizontal") < 0)
     {
+
       if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
       {
         return;
@@ -38,12 +50,12 @@ public class GuyRotate : MonoBehaviour
       else
       {
         StopAllCoroutines();
-        StartCoroutine(applyrotationLeft());
+        StartCoroutine(applyrotationLeft(currentRotationParent, leftRotationParent));
         direction = Direction.TurningLeft;
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
+    if (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("DPad-Horizontal") > 0)
     {
       if (direction == Direction.FacingRight | direction == Direction.TurningRight)
       {
@@ -52,82 +64,49 @@ public class GuyRotate : MonoBehaviour
       else
       {
         StopAllCoroutines();
-        StartCoroutine(applyrotationRight());
+        StartCoroutine(applyrotationRight(currentRotationParent, rightRotationParent));
         direction = Direction.TurningRight;
       }
     }
 
-
-    //     if (direction == Direction.TurningLeft)
-    //     {
-    //       if (transform.eulerAngles != leftRotation)
-    //       {
-    //         return;
-    //       }
-    //       else
-    //       {
-    //         direction = Direction.FacingLeft;
-    //       }
-    //     }
-    //     if (direction == Direction.TurningRight)
-    // {
-    //   if (transform.eulerAngles != rightRotation)
-    //   {
-    //     return;
-    //   }
-    //   else
-    //   {
-    //     direction = Direction.FacingRight;
-    //   }
-    // }
-
-    // if (direction == Direction.FacingLeft)
-    // {
-    //   transform.eulerAngles = leftRotation;
-    // }
-    // if (direction == Direction.FacingRight)
-    // {
-    //   transform.eulerAngles = rightRotation;
-    // }
+    if (Input.GetKeyDown(KeyCode.T) || Input.GetAxis("DPad-Horizontal") > 0)
+    {
+      print(this.transform.parent.transform.eulerAngles.z);
+    }
 
   }
 
-  IEnumerator applyrotationLeft()
+  IEnumerator applyrotationLeft(Vector3 currentRotationParent, Vector3 leftRotationParent)
   {
+    print(leftRotation);
     float i;
-    Vector3 currentRotation = transform.eulerAngles;
+    currentRotation = transform.eulerAngles;
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)
     {
+      if (i >= 1)
+      {
+        direction = Direction.FacingLeft;
+      }
       transform.eulerAngles = Vector3.Lerp(currentRotation, leftRotation, i);
-      print("rotation left: " + i);
+      transform.parent.transform.eulerAngles = Vector3.Lerp(currentRotationParent, leftRotationParent, i);
       yield return null;
     }
   }
 
-  IEnumerator applyrotationRight()
+  IEnumerator applyrotationRight(Vector3 currentRotationParent, Vector3 rightRotationParent)
   {
+    print(rightRotation);
     float i;
     Vector3 currentRotation = transform.eulerAngles;
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)
     {
+      if (i >= 1)
+      {
+        direction = Direction.FacingRight;
+      }
       transform.eulerAngles = Vector3.Lerp(currentRotation, rightRotation, i);
+            transform.parent.transform.eulerAngles = Vector3.Lerp(currentRotationParent, rightRotationParent, i);
       yield return null;
-    }
-  }
-
-  private void OldMethod()
-  {
-
-    if (Input.GetKey(KeyCode.RightArrow))
-    {
-
-      transform.Rotate(Vector3.forward * rcsThrust);
-
-    }
-    else if (Input.GetKey(KeyCode.LeftArrow))
-    {
-
-      transform.Rotate(Vector3.back * rcsThrust);
     }
   }
 

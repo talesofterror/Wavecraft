@@ -34,6 +34,9 @@ public class Hover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      SpikeShooter(10);
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             hoverOn = true;
@@ -56,17 +59,17 @@ public class Hover : MonoBehaviour
             // SPIKE SHOOTER
             // spikeArc = SpikeShooter(spikeArc);
 
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("DPad-Horizontal") > 0)
             {
                 rB.velocity = new Vector3(xDash, yDash, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("DPad-Horizontal") < 0)
             {
                 rB.velocity = new Vector3(-xDash, yDash, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.50f)
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.25f || Input.GetAxis("DPad-Vertical") < -0.50f)
             {
                 rB.velocity = new Vector3(0f, -xDash, 0f);
             }
@@ -120,7 +123,7 @@ public class Hover : MonoBehaviour
 
     private float SpikeShooter(float spikeArc)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(1))
         {
             for (int i = 0; i <= spikeChargeDuration; i++, spikeArc++)
             {
@@ -140,7 +143,7 @@ public class Hover : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetMouseButtonDown(0))
         {
             for (int i = 0; i <= spikeChargeDuration; i++, spikeArc++)
             {
