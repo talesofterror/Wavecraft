@@ -34,11 +34,11 @@ public class GuyRotate : MonoBehaviour
 
   void Update()
   {
-    rightRotation = new Vector3(transform.parent.transform.rotation.x, -75, transform.parent.transform.rotation.z);
-    leftRotation = new Vector3(transform.parent.transform.rotation.x, 75, transform.parent.transform.rotation.z);
+    rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
+    leftRotation = new Vector3(transform.rotation.x, 75, transform.rotation.z);
     Vector3 currentRotationParent = transform.parent.transform.eulerAngles;
-    Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, 0);
-    Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, 0);
+    Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
+    Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
 
     if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("DPad-Horizontal") < 0)
     {
