@@ -221,7 +221,6 @@ public class Rocket : MonoBehaviour
 
     transform.Rotate(Vector3.back * joystickX);
 
-    print("Joystick Horizontal Value = " + joystickX);
   }
 
 

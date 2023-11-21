@@ -27,13 +27,14 @@ using UnityEngine;
 
 public class viewer : MonoBehaviour
 {
+    Camera cam;
     Vector3 stageVector;
     Transform swivelTarget;
     GameObject playerObject;
     public Vector3 entryTriggerTarget;
 
-    public float m_fieldOfView = 0f;
-    public float distance = -45f;
+    public float m_fieldOfView = 28f;
+    public float distance = -26.8f;
     public float xPos = 0f;
     public float yPos = 0f;
     public float xPosOffset = 0f;
@@ -61,6 +62,7 @@ public class viewer : MonoBehaviour
 
     void Start()
     {
+        cam = GetComponent<Camera>();
         playerObject = GameObject.FindGameObjectWithTag("Player");
         //entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
 
@@ -86,6 +88,11 @@ public class viewer : MonoBehaviour
     public void ShiftVert()
     {
         state = CamState.vertAnim;
+    }
+
+    private Vector3 target;
+    public void getShiftTargetVector(Vector3 v){
+      target = v;
     }
 
     public void downAnimPlay()
@@ -125,7 +132,7 @@ public class viewer : MonoBehaviour
     {
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, entryTriggerTarget.y, distance);
+        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, target.y, distance);
         swivelTarget = playerObject.transform;
         transform.LookAt(swivelTarget);
 
@@ -138,11 +145,9 @@ public class viewer : MonoBehaviour
 
     public void vertAnimPlay()
     {
-        print("rightAnimPlay called");
-
         yPos = 0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+        Vector3 endPos = new Vector3(target.x, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
         swivelTarget = playerObject.transform;
         transform.LookAt(swivelTarget);
 
@@ -155,15 +160,12 @@ public class viewer : MonoBehaviour
 
     void Update()
     {
-
-
+        cam.fieldOfView = m_fieldOfView;
 
         if (state == CamState.stageView)
         {
             transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
             transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
-
-            Camera.main.fieldOfView = m_fieldOfView;
         }
         if (state == CamState.downAnim)
         {

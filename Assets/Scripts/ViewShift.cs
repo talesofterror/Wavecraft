@@ -7,6 +7,8 @@ public class ViewShift : MonoBehaviour
 {
     public GameObject viewerCam;
     public Transform targetTransform;
+    public float horzizontalYShift;
+    public float verticalXShift;
 
     enum TriggerState
     {
@@ -25,7 +27,11 @@ public class ViewShift : MonoBehaviour
 
     private void Start ()
     {
-        
+    }
+
+    void Update()
+    {
+        targetTransform = transform.GetChild(0);
     }
 
     TriggerState triggerState = TriggerState.inState;
@@ -35,7 +41,11 @@ public class ViewShift : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
        
-        print("Entry Collision");
+      print("Entry Collision");
+
+      Vector3 horizontalTarget = targetTransform.position + new Vector3(0, horzizontalYShift, 0);
+      Vector3 verticalTarget = targetTransform.position + new Vector3(verticalXShift, 0, 0);
+
         
         if (other.CompareTag("GuyBase"))
         {
@@ -45,20 +55,29 @@ public class ViewShift : MonoBehaviour
                 if (inSetting == TriggerType.downTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftDown();
-                    print("Entry Trigger, ShiftDown");
+                    print("Entry Trigger, Camera Shift Down");
                 }
 
                 else if (inSetting == TriggerType.stageTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftStage();
-                    print("Entry Trigger, ShiftUp");
+                    print("Entry Trigger, Stage");
                 }
 
                 else if (inSetting == TriggerType.horzTrigger)
                 {
+                    viewerCam.GetComponent<viewer>().getShiftTargetVector(horizontalTarget);
                     viewerCam.GetComponent<viewer>().ShiftHorz();
                     viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
-                    print("Entry Trigger, ShiftLeft");
+                    print("Entry Trigger, Horizontal");
+                }
+
+                else if (inSetting == TriggerType.vertTrigger)
+                {
+                    viewerCam.GetComponent<viewer>().getShiftTargetVector(verticalTarget);
+                    viewerCam.GetComponent<viewer>().ShiftVert();
+                    viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
+                    print("Entry Trigger, Vertical");
                 }
 
             }
@@ -80,14 +99,18 @@ public class ViewShift : MonoBehaviour
 
                 else if (outSetting == TriggerType.horzTrigger)
                 {
+                    viewerCam.GetComponent<viewer>().getShiftTargetVector(horizontalTarget);
                     viewerCam.GetComponent<viewer>().ShiftHorz();
-                    print("Entry Trigger, ShiftHorz");
+                    viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
+                    print("Entry Trigger, Horizontal");
                 }
 
                 else if (outSetting == TriggerType.vertTrigger)
                 {
+                    viewerCam.GetComponent<viewer>().getShiftTargetVector(verticalTarget);
                     viewerCam.GetComponent<viewer>().ShiftVert();
-                    print("Entry Trigger, ShiftVert");
+                    viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
+                    print("Entry Trigger, Vertical");
                 }
 
             }
@@ -112,11 +135,5 @@ public class ViewShift : MonoBehaviour
             print("init state");
         }
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        targetTransform = transform.GetChild(0);
     }
 }
