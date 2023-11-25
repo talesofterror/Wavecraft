@@ -27,177 +27,182 @@ using UnityEngine;
 
 public class viewer : MonoBehaviour
 {
-    Camera cam;
-    Vector3 stageVector;
-    Transform swivelTarget;
-    GameObject playerObject;
-    public Vector3 entryTriggerTarget;
+  Camera cam;
+  Vector3 stageVector;
+  Transform swivelTarget;
+  GameObject playerObject;
+  public Vector3 entryTriggerTarget;
 
-    public float m_fieldOfView = 28f;
-    public float distance = -26.8f;
-    public float xPos = 0f;
-    public float yPos = 0f;
-    public float xPosOffset = 0f;
-    public float yPosOffset = 0f;
-    public float xRot = 0f;
-    public float yRot = 0f;
-    public float zRot = 0f;
-    public float panSpeed = 2f;
+  public float m_fieldOfView = 28f;
+  public float distance = -26.8f;
+  public float xPos = 0f;
+  public float yPos = 0f;
+  public float xPosOffset = 0f;
+  public float yPosOffset = 0f;
+  public float xRot = 0f;
+  public float yRot = 0f;
+  public float zRot = 0f;
+  public float panSpeed = 2f;
 
-    public float vertMidOffset = 6f;
-    public float horzMidOffset = 6f;
+  public float vertMidOffset = 6f;
+  public float horzMidOffset = 6f;
 
-    enum CamState
+  enum CamState
+  {
+    stageView,
+    downAnim,
+    vertMiddle,
+    stageAnim,
+    horzAnim,
+    horzMiddle,
+    vertAnim
+  }
+
+  CamState state = CamState.stageView;
+
+  void Start()
+  {
+    cam = GetComponent<Camera>();
+    playerObject = GameObject.FindGameObjectWithTag("Player");
+    //entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
+
+    transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
+    stageVector = transform.position;
+  }
+
+  public void ShiftDown()
+  {
+    state = CamState.downAnim;
+    cam.fieldOfView = 44f;
+    distance = -22f;
+  }
+
+  public void ShiftStage()
+  {
+    state = CamState.stageAnim;
+    cam.fieldOfView = 28f;
+    distance = -26.8f;
+  }
+
+  public void ShiftHorz()
+  {
+    state = CamState.horzAnim;
+  }
+
+  public void ShiftVert()
+  {
+    state = CamState.vertAnim;
+  }
+
+  private Vector3 target;
+  public void getShiftTargetVector(Vector3 v)
+  {
+    target = v;
+  }
+
+  public void downAnimPlay()
+  {
+    // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
+    yPosOffset = 5;
+    Vector3 startPos = transform.position;
+    Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+    Swivel();
+
+    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+    if (transform.position == endPos)
     {
-        stageView, 
-        downAnim,
-        vertMiddle, 
-        stageAnim,
-        horzAnim,
-        horzMiddle,
-        vertAnim
+      state = CamState.vertMiddle;
     }
+  }
 
-    CamState state = CamState.stageView;
+  private void Swivel()
+  {
+    swivelTarget = playerObject.transform;
+    transform.LookAt(swivelTarget);
+  }
 
-    void Start()
+  public void stageAnimPlay()
+  {
+    //yPosOffset = 4.51f;
+    Vector3 startPos = transform.position;
+    Vector3 endPos = stageVector;
+
+    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+
+    state = CamState.stageView;
+
+  }
+
+  public void horzAnimPlay()
+  {
+
+    Vector3 startPos = transform.position;
+    Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, target.y, distance);
+    swivelTarget = playerObject.transform;
+    transform.LookAt(swivelTarget);
+
+    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+    if (transform.position == endPos)
     {
-        cam = GetComponent<Camera>();
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        //entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
-
-        transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
-        stageVector = transform.position;
+      state = CamState.horzMiddle;
     }
+  }
 
-    public void ShiftDown()
+  public void vertAnimPlay()
+  {
+    yPos = 0f;
+    Vector3 startPos = transform.position;
+    Vector3 endPos = new Vector3(target.x, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+    swivelTarget = playerObject.transform;
+    transform.LookAt(swivelTarget);
+
+    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+    if (transform.position == endPos)
     {
-        state = CamState.downAnim;
+      state = CamState.vertMiddle;
     }
+  }
 
-    public void ShiftStage()
+  void Update()
+  {
+    
+
+    if (state == CamState.stageView)
     {
-        state = CamState.stageAnim;
+      transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
+      transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
     }
-
-    public void ShiftHorz()
+    if (state == CamState.downAnim)
     {
-        state = CamState.horzAnim;
+      downAnimPlay();
     }
 
-    public void ShiftVert()
+    if (state == CamState.vertMiddle)
     {
-        state = CamState.vertAnim;
+      transform.position = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+      transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
     }
 
-    private Vector3 target;
-    public void getShiftTargetVector(Vector3 v){
-      target = v;
-    }
-
-    public void downAnimPlay()
+    if (state == CamState.stageAnim)
     {
-        // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
-        yPosOffset = 5;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
-        Swivel();
-
-        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-        if (transform.position == endPos)
-        {
-            state = CamState.vertMiddle;
-        }
+      stageAnimPlay();
     }
 
-    private void Swivel()
+    if (state == CamState.horzAnim)
     {
-        swivelTarget = playerObject.transform;
-        transform.LookAt(swivelTarget);
+      horzAnimPlay();
     }
 
-    public void stageAnimPlay ()
+    if (state == CamState.vertAnim)
     {
-        //yPosOffset = 4.51f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = stageVector;
-
-        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-
-            state = CamState.stageView;
-
+      vertAnimPlay();
     }
 
-    public void horzAnimPlay ()
+    if (state == CamState.horzMiddle)
     {
-
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, target.y, distance);
-        swivelTarget = playerObject.transform;
-        transform.LookAt(swivelTarget);
-
-        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-        if (transform.position == endPos)
-        {
-            state = CamState.horzMiddle;
-        }
+      transform.position = new Vector3(playerObject.transform.position.x - xPosOffset + vertMidOffset, yPos, distance);
+      transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
     }
 
-    public void vertAnimPlay()
-    {
-        yPos = 0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(target.x, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
-        swivelTarget = playerObject.transform;
-        transform.LookAt(swivelTarget);
-
-        transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-        if (transform.position == endPos)
-        {
-            state = CamState.vertMiddle;
-        }
-    }
-
-    void Update()
-    {
-        cam.fieldOfView = m_fieldOfView;
-
-        if (state == CamState.stageView)
-        {
-            transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
-            transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
-        }
-        if (state == CamState.downAnim)
-        {
-                downAnimPlay();
-        }
-
-        if (state == CamState.vertMiddle) 
-        {
-            transform.position = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
-            transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
-        }
-
-        if(state == CamState.stageAnim)
-        {
-            stageAnimPlay();
-        }
-
-        if(state == CamState.horzAnim)
-        {
-            horzAnimPlay();
-        }
-
-        if(state == CamState.vertAnim)
-        {
-            vertAnimPlay();
-        }
-
-        if (state == CamState.horzMiddle)
-        {
-            transform.position = new Vector3(playerObject.transform.position.x - xPosOffset + vertMidOffset, yPos, distance);
-            transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
-        }
-
-    }
+  }
 }
