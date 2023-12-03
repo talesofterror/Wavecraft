@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -165,6 +165,19 @@ public class viewer : MonoBehaviour
 
   void Update()
   {
+
+    Vector3 position = new Vector3(200, 200, 0);
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+    Debug.DrawRay(ray.origin, ray.direction * 100, Color.magenta);
+
+    RaycastHit rayhit;
+    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity)){
+      if (rayhit.collider.gameObject.tag == "ScreenSpaceSurface") {
+      }
+        print("screen space hit");
+        print("x = " + rayhit.point.x + ", y = " + rayhit.point.y);
+    }
     
 
     if (state == CamState.stageView)

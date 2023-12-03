@@ -70,6 +70,13 @@ public class Rocket : MonoBehaviour
 
   private void FixedUpdate()
   {
+    if (state == StateOfBeing.Existing)
+    {
+      ThrustControls();
+      Rotate();
+      RotateJoystick();
+
+    }
 
   }
 
@@ -102,12 +109,15 @@ public class Rocket : MonoBehaviour
     switch (collision.gameObject.tag)
     {
       case "Enemy":
-        if (enemyCollissionsOn) {
-        audioSource.PlayOneShot(deathSound);
-        state = StateOfBeing.Transcending;
-        print("Stuck by enemy!");
-        Invoke("LoadCurrent", 2f);
-        break;} else {return;};
+        if (enemyCollissionsOn)
+        {
+          audioSource.PlayOneShot(deathSound);
+          state = StateOfBeing.Transcending;
+          print("Stuck by enemy!");
+          Invoke("LoadCurrent", 2f);
+          break;
+        }
+        else { return; };
       case "Friendly":
         print("Friendly contact.");
         break;
