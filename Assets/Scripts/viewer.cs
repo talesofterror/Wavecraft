@@ -31,6 +31,11 @@ public class viewer : MonoBehaviour
   Vector3 stageVector;
   Transform swivelTarget;
   GameObject playerObject;
+
+  GameObject debugSphere;
+
+  LayerMask sensorLayer;
+
   public Vector3 entryTriggerTarget;
 
   public float m_fieldOfView = 28f;
@@ -59,6 +64,15 @@ public class viewer : MonoBehaviour
   }
 
   CamState state = CamState.stageView;
+
+  void Awake()
+  {
+    debugSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    debugSphere.name = "****** debugSphere!";
+    debugSphere.GetComponent<Collider>().enabled = false;
+
+    sensorLayer = 1 << 6;
+  }
 
   void Start()
   {
@@ -163,6 +177,7 @@ public class viewer : MonoBehaviour
     }
   }
 
+
   void Update()
   {
 
@@ -172,13 +187,22 @@ public class viewer : MonoBehaviour
     Debug.DrawRay(ray.origin, ray.direction * 100, Color.magenta);
 
     RaycastHit rayhit;
-    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity)){
-      if (rayhit.collider.gameObject.tag == "ScreenSpaceSurface") {
+    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
+    {
+      if (rayhit.collider.gameObject.tag == "ScreenSpaceSurface")
+      {
+      print("screen space hit");
+      print("x = " + rayhit.point.x + ", y = " + rayhit.point.y);
       }
-        print("screen space hit");
-        print("x = " + rayhit.point.x + ", y = " + rayhit.point.y);
     }
-    
+
+    // for the rotational cursor I want to find a point
+    // - at the same z distance as the player from the camera
+
+      debugSphere.transform.position = new Vector3(
+      rayhit.point.x,
+      rayhit.point.y,
+      rayhit.point.z);
 
     if (state == CamState.stageView)
     {
