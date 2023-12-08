@@ -180,29 +180,16 @@ public class viewer : MonoBehaviour
 
   void Update()
   {
-
-    Vector3 position = new Vector3(200, 200, 0);
     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-    Debug.DrawRay(ray.origin, ray.direction * 100, Color.magenta);
-
     RaycastHit rayhit;
-    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
-    {
-      if (rayhit.collider.gameObject.tag == "ScreenSpaceSurface")
-      {
-      print("screen space hit");
-      print("x = " + rayhit.point.x + ", y = " + rayhit.point.y);
-      }
+    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity)){
+      Debug.DrawRay(ray.origin, ray.direction*100, Color.red);
+      Vector3 screenRayDirection = rayhit.point - transform.position;
+      Vector3 projection = Vector3.Project(screenRayDirection, ray.direction);
+
+      debugSphere.transform.position = projection;
     }
 
-    // for the rotational cursor I want to find a point
-    // - at the same z distance as the player from the camera
-
-      debugSphere.transform.position = new Vector3(
-      rayhit.point.x,
-      rayhit.point.y,
-      rayhit.point.z);
 
     if (state == CamState.stageView)
     {
