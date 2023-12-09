@@ -32,7 +32,7 @@ public class viewer : MonoBehaviour
   Transform swivelTarget;
   GameObject playerObject;
 
-  GameObject debugSphere;
+  public GameObject debugSphere;
 
   LayerMask sensorLayer;
 
@@ -67,9 +67,15 @@ public class viewer : MonoBehaviour
 
   void Awake()
   {
+
     debugSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     debugSphere.name = "****** debugSphere!";
     debugSphere.GetComponent<Collider>().enabled = false;
+
+    if (transform.name != "Main Camera")
+    {
+      Destroy(this.debugSphere);
+    }
 
     sensorLayer = 1 << 6;
   }
@@ -177,19 +183,30 @@ public class viewer : MonoBehaviour
     }
   }
 
-
+  public RaycastHit rayhit;
   void Update()
   {
-    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-    RaycastHit rayhit;
-    if (Physics.Raycast(ray.origin, ray.direction * 100, out rayhit, Mathf.Infinity)){
-      Debug.DrawRay(ray.origin, ray.direction*100, Color.red);
-      Vector3 screenRayDirection = rayhit.point - transform.position;
-      Vector3 projection = Vector3.Project(screenRayDirection, ray.direction);
+    if (transform.name == "Main Camera")
+    {
+      Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
 
-      debugSphere.transform.position = projection;
+      // Ray Projection Attempt -- not working //
+      // Ray projectionRay = new Ray(playerObject.transform.position - transform.position, transform.position);
+      // Vector3 projectionPlayerPoint = projectionRay.GetPoint(Vector3.Distance(transform.position, playerObject.transform.position));
+      // Vector3 projectionSensorPoint = rayForSensor.GetPoint(playerObject.transform.position.z);
+      // Vector3 projection = Vector3.Project(projectionSensorPoint, projectionPlayerPoint);
+      // debugSphere.transform.position = projection;
+
+      if (Physics.Raycast(rayForSensor.origin, rayForSensor.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
+      {
+
+        Debug.DrawRay(rayForSensor.origin, rayForSensor.direction * 100, Color.red);
+        if (transform.name == "Main Camera")
+        {
+          this.debugSphere.transform.position = rayhit.point;
+        }
+      }
     }
-
 
     if (state == CamState.stageView)
     {
