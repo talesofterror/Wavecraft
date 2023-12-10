@@ -28,13 +28,13 @@ using UnityEngine;
 public class viewer : MonoBehaviour
 {
   Camera cam;
+  Camera overlayCam;
   Vector3 stageVector;
   Transform swivelTarget;
-  GameObject playerObject;
-
-  public GameObject debugSphere;
+  public GameObject playerObject;
 
   LayerMask sensorLayer;
+  public RaycastHit rayhit;
 
   public Vector3 entryTriggerTarget;
 
@@ -67,25 +67,14 @@ public class viewer : MonoBehaviour
 
   void Awake()
   {
-
-    debugSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    debugSphere.name = "****** debugSphere!";
-    debugSphere.GetComponent<Collider>().enabled = false;
-
-    if (transform.name != "Main Camera")
-    {
-      Destroy(this.debugSphere);
-    }
-
+    playerObject = GameObject.FindGameObjectWithTag("Player");
+    cam = GetComponent<Camera>();
+    overlayCam = GetComponentInChildren<Camera>();
     sensorLayer = 1 << 6;
   }
 
   void Start()
   {
-    cam = GetComponent<Camera>();
-    playerObject = GameObject.FindGameObjectWithTag("Player");
-    //entryTriggerTarget = playerObject.GetComponent<Collider>().gameObject;
-
     transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
     stageVector = transform.position;
   }
@@ -94,6 +83,7 @@ public class viewer : MonoBehaviour
   {
     state = CamState.downAnim;
     cam.fieldOfView = 44f;
+    overlayCam.fieldOfView = 44f;
     distance = -22f;
   }
 
@@ -101,6 +91,7 @@ public class viewer : MonoBehaviour
   {
     state = CamState.stageAnim;
     cam.fieldOfView = 28f;
+    overlayCam.fieldOfView = 28f;
     distance = -26.8f;
   }
 
@@ -122,8 +113,8 @@ public class viewer : MonoBehaviour
 
   public void downAnimPlay()
   {
-    // transform.position = new Vector3(xPos, playerPos.transform.position.y - yPosOffset + viewShiftAnim, distance);
     yPosOffset = 5;
+    
     Vector3 startPos = transform.position;
     Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
     Swivel();
@@ -183,31 +174,8 @@ public class viewer : MonoBehaviour
     }
   }
 
-  public RaycastHit rayhit;
   void Update()
   {
-    if (transform.name == "Main Camera")
-    {
-      Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
-
-      // Ray Projection Attempt -- not working //
-      // Ray projectionRay = new Ray(playerObject.transform.position - transform.position, transform.position);
-      // Vector3 projectionPlayerPoint = projectionRay.GetPoint(Vector3.Distance(transform.position, playerObject.transform.position));
-      // Vector3 projectionSensorPoint = rayForSensor.GetPoint(playerObject.transform.position.z);
-      // Vector3 projection = Vector3.Project(projectionSensorPoint, projectionPlayerPoint);
-      // debugSphere.transform.position = projection;
-
-      if (Physics.Raycast(rayForSensor.origin, rayForSensor.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
-      {
-
-        Debug.DrawRay(rayForSensor.origin, rayForSensor.direction * 100, Color.red);
-        if (transform.name == "Main Camera")
-        {
-          this.debugSphere.transform.position = rayhit.point;
-        }
-      }
-    }
-
     if (state == CamState.stageView)
     {
       transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);

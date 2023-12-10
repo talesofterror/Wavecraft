@@ -9,7 +9,7 @@ public class Hover : MonoBehaviour
     public float period = 2f;
     [Range (0,1)] public float movementFactor;
     [Range(-10f, 2f)] public float gravity = -5f;
-    [Range(0, 5)] public float aDrag;
+    public float drag;
 
     public float spikeSpeed;
     public int spikeChargeDuration;
@@ -39,16 +39,16 @@ public class Hover : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            hoverOn = true;
-            Hovering();
-            if (Input.GetKey(KeyCode.F))
-            {
-                hoverMenu.SetActive(true);
-            }
-            else
-            {
-                hoverMenu.SetActive(false);
-            }
+            // hoverOn = true;
+            // Hovering();
+            // if (Input.GetKey(KeyCode.F))
+            // {
+            //     hoverMenu.SetActive(true);
+            // }
+            // else
+            // {
+            //     hoverMenu.SetActive(false);
+            // }
         }
         else
         {
@@ -81,8 +81,8 @@ public class Hover : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) || Input.GetButton("Circle") || Input.GetButton("Fire2") )
             {
-                rB.drag = aDrag - Time.deltaTime;
-                Mathf.Clamp(rB.drag, 0, aDrag);
+                rB.drag = drag - Time.deltaTime;
+                Mathf.Clamp(rB.drag, 0, drag);
                 //scooting = false;
                 //rB.isKinematic = false;
                 //print("Drag = " + rB.drag);
@@ -110,13 +110,6 @@ public class Hover : MonoBehaviour
                 Physics.gravity = new Vector3(0, 0, 0);
                 //print("Gravity = " + Physics.gravity);
             }
-
-            else
-            {
-                scooting = false;
-                return;
-            }
-
         }
 
     }

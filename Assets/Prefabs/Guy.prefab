@@ -874,16 +874,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f4ea8c2a7bd904880f58f7ee37c523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 600
+  controlScheme: 0
+  thrustPower: 500
   rotationSpeed: 100
-  deathSpiral: 3
   axisRotationFactor: 5
-  leftTwistRot: -500
-  enemyCollissionsOn: 1
   thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
   deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
   goalSound: {fileID: 8300000, guid: 9914686e0766d8144bff8e39894b4c52, type: 3}
+  navCursor: {fileID: 4308535374317104206}
   entryAxisTarget: {fileID: 0}
+  deathSpiral: 3
+  enemyCollissionsOn: 1
 --- !u!114 &1447933265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3115,6 +3116,36 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cabfa0c08f558fe41af97479813469ad, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6289082294908753958, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -1253996098385199550, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
         type: 3}
       propertyPath: m_Name
@@ -3125,6 +3156,36 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 956645257184365457, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.23999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 956645257184365457, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.23999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 956645257184365457, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.23999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 956645257184365457, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300264252759386080, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959485241953879065, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8099c39b212a04246b2b59d8ece6bf1d, type: 2}
     - target: {fileID: 9013638940889411661, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
         type: 3}
       propertyPath: m_Layer
@@ -3158,8 +3219,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   publicTarget: {fileID: 0}
-  cam: {fileID: 0}
+  sensor: {fileID: 0}
   targetMode: 1
+--- !u!1 &4308535374317104206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6289082294908753958, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401269162887859092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7859866817055380684
 PrefabInstance:
   m_ObjectHideFlags: 0

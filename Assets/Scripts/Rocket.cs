@@ -1,56 +1,71 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+using Unity.Burst;
 
 
 public class Rocket : MonoBehaviour
 {
-  [SerializeField] public float thrustPower = 600f;
-  [SerializeField] public float rotationSpeed = 50f;
-  [SerializeField] public float deathSpiral = 3f;
-  [SerializeField] public float axisRotationFactor = 0;
-  public float leftTwistRot = 3f;
-
-  public bool enemyCollissionsOn = true;
-
-  [SerializeField] AudioClip thrustSound;
-  [SerializeField] AudioClip deathSound;
-  [SerializeField] AudioClip goalSound;
-
-  Rigidbody rigidBody;
-  AudioSource audioSource;
-  public GameObject entryAxisTarget;
-
-
   public enum StateOfBeing
   {
     Existing,
     Transcending,
     Ascending
   };
-
   public enum Level
   {
     Level0,
     Level1
   };
-
+  public enum ControlScheme
+  {
+    oldControls,
+    newControls
+  };
   StateOfBeing state = StateOfBeing.Existing;
   Level level;
 
+  [Header("Controls")]
+  public ControlScheme controlScheme = ControlScheme.oldControls;
+
+  [Header("Player Control")]
+  [SerializeField] public float thrustPower = 600f;
+  [SerializeField] public float rotationSpeed = 50f;
+  [SerializeField] public float axisRotationFactor = 0;
+  Rigidbody rigidBody;
+
+  [Header("Sound")]
+  [SerializeField] AudioClip thrustSound;
+  [SerializeField] AudioClip deathSound;
+  [SerializeField] AudioClip goalSound;
+  AudioSource audioSource;
+
+  [Header("Navigation")]
+  public GameObject navCursor;
+  public GameObject entryAxisTarget;
+
+  [Header("Death")]
+  [SerializeField] public float deathSpiral = 3f;
+  public bool enemyCollissionsOn = true;
 
 
-  // Update is called once per frame
-  void Update()
+
+  private void FixedUpdate()
   {
-
     if (state == StateOfBeing.Existing)
     {
-      ThrustControls();
-      Rotate();
-      RotateJoystick();
-
+      if (controlScheme == ControlScheme.oldControls)
+      {
+        controlsOLD();
+      }
+      if (controlScheme == ControlScheme.newControls)
+      {
+        controlsNEW();
+      }
     }
+  }
 
+  void Update()
+  {
     if (state == StateOfBeing.Transcending)
     {
       transform.Rotate(Vector3.up * (3 * Time.time));
@@ -64,39 +79,18 @@ public class Rocket : MonoBehaviour
     }
 
     PauseGame();
-
-
-  }
-
-  private void FixedUpdate()
-  {
-    if (state == StateOfBeing.Existing)
-    {
-      ThrustControls();
-      Rotate();
-      RotateJoystick();
-
-    }
-
   }
 
   void Start()
   {
     rigidBody = GetComponent<Rigidbody>();
     audioSource = GetComponent<AudioSource>();
-    //rigidBody.freezeRotation = true;
-    // rigidBody.constraints = RigidbodyConstraints.FreezeRotationZ; //these are keeping my guy rotating in a stable fashion though I don't know how
-    rigidBody.inertiaTensorRotation = Quaternion.identity; // these are keeping my guy rotating in a stable fashion though I don't know how
 
-    //Gravity();
+    rigidBody.inertiaTensorRotation = Quaternion.identity;
+    // this is keeping my guy rotating in a stable fashion though I don't know how
 
     print("Scene Number:" + SceneManager.GetActiveScene().buildIndex);
-
-
   }
-
-
-
 
   void OnCollisionEnter(Collision collision)
   {
@@ -132,7 +126,6 @@ public class Rocket : MonoBehaviour
         print("8====D~~~");
         break;
     }
-
   }
 
   public void OnTriggerEnter(Collider collision)
@@ -167,7 +160,51 @@ public class Rocket : MonoBehaviour
     print(currentSceneIndex);
   }
 
-  private void ThrustControls()
+  void controlsNEW()
+  {
+
+    Vector3 navPointer = navCursor.transform.position;
+    Physics.gravity = Vector3.zero;
+    rigidBody.drag = 0.1f;
+    rigidBody.angularDrag = 0.0f;
+
+    if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
+    {
+      Vector3 navDirection = navPointer - transform.position;
+      Vector3 navMinusZ = new Vector3(
+        navDirection.x,
+        navDirection.y,
+        0);
+      float thrustThisFrame = thrustPower * Time.deltaTime;
+      print("navDirection = " + navDirection);
+      print("navMinusZ = " + navMinusZ);
+      print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustThisFrame));
+
+      rigidBody.AddForce(navMinusZ.normalized * thrustThisFrame);
+    }
+    else
+    {
+      audioSource.Stop();
+      rigidBody.drag = 4f;
+    }
+
+    float yRotate = rotationSpeed * Time.deltaTime;
+    rigidBody.freezeRotation = true;
+    if (Input.GetKey(KeyCode.A))
+    {
+      transform.Rotate(Vector3.forward * yRotate);
+    }
+    if (Input.GetKey(KeyCode.D))
+    {
+      transform.Rotate(Vector3.back * yRotate);
+    }
+    rigidBody.freezeRotation = false;
+
+    float joystickX = Input.GetAxis("Horizontal");
+    transform.Rotate(Vector3.back * joystickX);
+  }
+
+  void controlsOLD()
   {
     if (Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1"))
     {
@@ -178,7 +215,20 @@ public class Rocket : MonoBehaviour
       audioSource.Stop();
     }
 
+    float yRotate = rotationSpeed * Time.deltaTime;
+    rigidBody.freezeRotation = true;
+    if (Input.GetKey(KeyCode.A))
+    {
+      transform.Rotate(Vector3.forward * yRotate);
+    }
+    if (Input.GetKey(KeyCode.D))
+    {
+      transform.Rotate(Vector3.back * yRotate);
+    }
+    rigidBody.freezeRotation = false;
 
+    float joystickX = Input.GetAxis("Horizontal");
+    transform.Rotate(Vector3.back * joystickX);
   }
 
   private void ApplyThrust()
@@ -188,51 +238,6 @@ public class Rocket : MonoBehaviour
     rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
     audioSource.PlayOneShot(thrustSound);
   }
-
-  private void Rotate()
-  {
-    float yRotate = rotationSpeed * Time.deltaTime;
-
-    rigidBody.freezeRotation = true;
-
-    if (Input.GetKey(KeyCode.A))
-    {
-      transform.Rotate(Vector3.forward * yRotate);
-    }
-
-    if (Input.GetKey(KeyCode.D))
-    {
-      transform.Rotate(Vector3.back * yRotate);
-    }
-
-    // if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.LeftShift))
-    // {
-    //   rotationSpeed = rotationSpeed + 10;
-    // }
-
-    // if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.LeftShift))
-    // {
-    //   rotationSpeed = rotationSpeed + 10;
-    // }
-
-    // if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetAxis("DPad-Horizontal") != 0)
-    // {
-    //   transform.eulerAngles = new Vector3(0, 0, 0);
-    // }
-
-
-    rigidBody.freezeRotation = false;
-
-  }
-
-  private void RotateJoystick()
-  {
-    float joystickX = Input.GetAxis("Horizontal");
-
-    transform.Rotate(Vector3.back * joystickX);
-
-  }
-
 
   private void PauseGame()
   {
@@ -251,13 +256,3 @@ public class Rocket : MonoBehaviour
 
 
 }
-
-
-
-
-// Side to side movement. transform for the sake of posterity. 
-//
-// if (Input.GetKey(KeyCode.LeftArrow))
-// {
-//     transform.position += (Vector3.left * Time.deltaTime);
-// }
