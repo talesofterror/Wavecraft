@@ -2,40 +2,29 @@
 
 public class Hover : MonoBehaviour
 {
+    Rigidbody rB;
     public float xDash = 3.5f;
     public float yDash = 1.5f;
-    Vector3 startingPos;
-    [SerializeField] Vector3 movementVector = new Vector3(0, .9f, 0); //direction of movement
-    public float period = 2f;
-    [Range (0,1)] public float movementFactor;
-    [Range(-10f, 2f)] public float gravity = -5f;
     public float drag;
-
-    public float spikeSpeed;
-    public int spikeChargeDuration;
 
     public GameObject hoverMenu;
     public GameObject spikePellet;
-    GameObject spikeObject;
-    Rigidbody rB;
-    Rigidbody rBSpike;
 
-    bool hoverOn;
-    bool spikeCharging;
     bool scooting = false;
+    [Range(-10f, 2f)] public float gravity = -5f;
 
-    // Start is called before the first frame update
     void Start()
     {
         rB = GetComponent<Rigidbody>();
         Instantiate(hoverMenu);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-      SpikeShooter(10);
+        if (Input.GetMouseButton(0)){
+          
+        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -54,10 +43,6 @@ public class Hover : MonoBehaviour
         {
             rB.isKinematic = false;
             rB.drag = 0f;
-            float spikeArc = -1 + 0.7f;
-
-            // SPIKE SHOOTER
-            // spikeArc = SpikeShooter(spikeArc);
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("DPad-Horizontal") > 0)
             {
@@ -83,15 +68,10 @@ public class Hover : MonoBehaviour
             {
                 rB.drag = drag - Time.deltaTime;
                 Mathf.Clamp(rB.drag, 0, drag);
-                //scooting = false;
-                //rB.isKinematic = false;
-                //print("Drag = " + rB.drag);
 
                 if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.W))
                 {
-                    //rB.drag = 0;
                     scooting = true;
-                    //print("Drag = " + rB.drag);
                 }
 
                 else
@@ -112,71 +92,5 @@ public class Hover : MonoBehaviour
             }
         }
 
-    }
-
-    private float SpikeShooter(float spikeArc)
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            for (int i = 0; i <= spikeChargeDuration; i++, spikeArc++)
-            {
-                if (i <= spikeChargeDuration)
-                {
-                    GameObject spikeObject = Instantiate(spikePellet, transform.position + new Vector3(1f, spikeArc, 0f), rB.rotation);
-                    rBSpike = spikeObject.GetComponent<Rigidbody>();
-                    float spikeVelY = i + -1f;
-                    float spikeVelX = i + 2.5f;
-                    rBSpike.velocity = new Vector3(spikeVelX, spikeVelY, 0f) * spikeSpeed;
-                    Destroy(spikeObject, 2f);
-                    //print("fire");
-                }
-            }
-
-            print("pewpewpewpewpew");
-
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            for (int i = 0; i <= spikeChargeDuration; i++, spikeArc++)
-            {
-                if (i <= spikeChargeDuration)
-                {
-                    GameObject spikeObject = Instantiate(spikePellet, transform.position + new Vector3(-1f, spikeArc, 0f), rB.rotation);
-                    rBSpike = spikeObject.GetComponent<Rigidbody>();
-                    float spikeVelY = i + -1f;
-                    float spikeVelX = i + 2.5f;
-                    rBSpike.velocity = new Vector3(-spikeVelX, spikeVelY, 0f) * spikeSpeed;
-                    Destroy(spikeObject, 2f);
-                }
-            }
-        }
-
-        return spikeArc;
-    }
-
-    private void Hovering()
-    {
-        float cycle = Time.time / period;
-        float tau = Mathf.PI * 2f;
-        float rawOsc = Mathf.Sin(cycle * tau);
-        movementFactor = rawOsc / 1f + 0f;
-        Vector3 offset = movementFactor * movementVector;
-        startingPos = transform.localPosition;
-
-        transform.position = startingPos + offset;
-        rB.isKinematic = true;
-    }
-
-    private void spikeCharge()
-    {
-        if (spikeCharging == true)
-        {
-            ;
-        }
-        else
-        {
-            return;
-        }
     }
 }
