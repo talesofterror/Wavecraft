@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -71,6 +71,7 @@ public class viewer : MonoBehaviour
     cam = GetComponent<Camera>();
     overlayCam = GetComponentInChildren<Camera>();
     sensorLayer = 1 << 6;
+
   }
 
   void Start()

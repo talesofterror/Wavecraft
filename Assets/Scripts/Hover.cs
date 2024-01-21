@@ -67,7 +67,6 @@ public class Hover : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || Input.GetButton("Circle") || Input.GetButton("Fire2") )
             {
                 rB.drag = drag - Time.deltaTime;
-                Mathf.Clamp(rB.drag, 0, drag);
 
                 if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.W))
                 {

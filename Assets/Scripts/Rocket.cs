@@ -162,7 +162,7 @@ public class Rocket : MonoBehaviour
 
   void controlsNEW()
   {
-
+    float thrustThisFrame = thrustPower * Time.deltaTime;
     Vector3 navPointer = navCursor.transform.position;
     Physics.gravity = Vector3.zero;
     rigidBody.drag = 0.1f;
@@ -175,7 +175,6 @@ public class Rocket : MonoBehaviour
         navDirection.x,
         navDirection.y,
         0);
-      float thrustThisFrame = thrustPower * Time.deltaTime;
       print("navDirection = " + navDirection);
       print("navMinusZ = " + navMinusZ);
       print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustThisFrame));
@@ -192,11 +191,19 @@ public class Rocket : MonoBehaviour
     rigidBody.freezeRotation = true;
     if (Input.GetKey(KeyCode.A))
     {
-      transform.Rotate(Vector3.forward * yRotate);
+      rigidBody.AddForce(Vector3.left * thrustThisFrame);
     }
     if (Input.GetKey(KeyCode.D))
     {
-      transform.Rotate(Vector3.back * yRotate);
+      rigidBody.AddForce(Vector3.right * thrustThisFrame);
+    }
+    if (Input.GetKey(KeyCode.W))
+    {
+      rigidBody.AddForce(Vector3.up * thrustThisFrame);
+    }
+    if (Input.GetKey(KeyCode.S))
+    {
+      rigidBody.AddForce(Vector3.down * thrustThisFrame);
     }
     rigidBody.freezeRotation = false;
 
@@ -225,6 +232,11 @@ public class Rocket : MonoBehaviour
     {
       transform.Rotate(Vector3.back * yRotate);
     }
+    if (Input.GetKey(KeyCode.W))
+    {
+      transform.Rotate(Vector3.up * yRotate);
+    }
+
     rigidBody.freezeRotation = false;
 
     float joystickX = Input.GetAxis("Horizontal");
