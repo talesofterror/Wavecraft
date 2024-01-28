@@ -9,6 +9,8 @@ public class PointerSensorManager : MonoBehaviour
   public RaycastHit rayhit;
   public GameObject cursorTarget;
   public GameObject sensorTarget;
+  private Renderer cursorObjectRenderer;
+  public Material cursorObjectMaterial;
 
   public GameObject player;
 
@@ -19,6 +21,8 @@ public class PointerSensorManager : MonoBehaviour
     cursorTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     cursorTarget.name = "****** Cursor Target!";
     cursorTarget.GetComponent<Collider>().enabled = false;
+    cursorTarget.GetComponent<Renderer>().material = cursorObjectMaterial;
+    print("Cursor Object Material = " + Resources.FindObjectsOfTypeAll(typeof(Material)).Length);
     cursorTarget.layer = 5;
 
     sensorTarget = GameObject.CreatePrimitive(PrimitiveType.Cube);

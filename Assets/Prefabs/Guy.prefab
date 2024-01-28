@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 828296933}
   - component: {fileID: 1234272842}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Player Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rcsThrust: 1
+  rcsThrust: 1.1
   direction: 3
 --- !u!111 &828296932
 Animation:
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274461817535836549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d258430bd658f1145ad2eb92ef99818b, type: 3}
   m_Name: 

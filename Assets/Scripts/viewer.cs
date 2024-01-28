@@ -23,7 +23,16 @@ using UnityEngine;
  * to specify the y location
  * 
  */
-
+  public enum ViewState
+  {
+    stageView,
+    downAnim,
+    vertMiddle,
+    stageAnim,
+    horzAnim,
+    horzMiddle,
+    vertAnim
+  }
 
 public class viewer : MonoBehaviour
 {
@@ -52,18 +61,10 @@ public class viewer : MonoBehaviour
   public float vertMidOffset = 6f;
   public float horzMidOffset = 6f;
 
-  enum CamState
-  {
-    stageView,
-    downAnim,
-    vertMiddle,
-    stageAnim,
-    horzAnim,
-    horzMiddle,
-    vertAnim
-  }
 
-  CamState state = CamState.stageView;
+
+ public  ViewState state = ViewState.stageView;
+  // CamState state = new CamState(CamState.current.stageView);
 
   void Awake()
   {
@@ -82,7 +83,7 @@ public class viewer : MonoBehaviour
 
   public void ShiftDown()
   {
-    state = CamState.downAnim;
+    state = ViewState.downAnim;
     cam.fieldOfView = 44f;
     overlayCam.fieldOfView = 44f;
     distance = -22f;
@@ -90,7 +91,7 @@ public class viewer : MonoBehaviour
 
   public void ShiftStage()
   {
-    state = CamState.stageAnim;
+    state = ViewState.stageAnim;
     cam.fieldOfView = 28f;
     overlayCam.fieldOfView = 28f;
     distance = -26.8f;
@@ -98,12 +99,12 @@ public class viewer : MonoBehaviour
 
   public void ShiftHorz()
   {
-    state = CamState.horzAnim;
+    state = ViewState.horzAnim;
   }
 
   public void ShiftVert()
   {
-    state = CamState.vertAnim;
+    state = ViewState.vertAnim;
   }
 
   private Vector3 target;
@@ -123,7 +124,7 @@ public class viewer : MonoBehaviour
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
     if (transform.position == endPos)
     {
-      state = CamState.vertMiddle;
+      state = ViewState.vertMiddle;
     }
   }
 
@@ -141,7 +142,7 @@ public class viewer : MonoBehaviour
 
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
 
-    state = CamState.stageView;
+    state = ViewState.stageView;
 
   }
 
@@ -156,7 +157,7 @@ public class viewer : MonoBehaviour
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
     if (transform.position == endPos)
     {
-      state = CamState.horzMiddle;
+      state = ViewState.horzMiddle;
     }
   }
 
@@ -171,44 +172,44 @@ public class viewer : MonoBehaviour
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
     if (transform.position == endPos)
     {
-      state = CamState.vertMiddle;
+      state = ViewState.vertMiddle;
     }
   }
 
   void Update()
   {
-    if (state == CamState.stageView)
+    if (state == ViewState.stageView)
     {
       transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
       transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
     }
-    if (state == CamState.downAnim)
+    if (state == ViewState.downAnim)
     {
       downAnimPlay();
     }
 
-    if (state == CamState.vertMiddle)
+    if (state == ViewState.vertMiddle)
     {
       transform.position = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
       transform.rotation = Quaternion.Euler(xRot, yRot, zRot);
     }
 
-    if (state == CamState.stageAnim)
+    if (state == ViewState.stageAnim)
     {
       stageAnimPlay();
     }
 
-    if (state == CamState.horzAnim)
+    if (state == ViewState.horzAnim)
     {
       horzAnimPlay();
     }
 
-    if (state == CamState.vertAnim)
+    if (state == ViewState.vertAnim)
     {
       vertAnimPlay();
     }
 
-    if (state == CamState.horzMiddle)
+    if (state == ViewState.horzMiddle)
     {
       transform.position = new Vector3(playerObject.transform.position.x - xPosOffset + vertMidOffset, yPos, distance);
       transform.rotation = Quaternion.Euler(xRot, yRot, zRot);

@@ -112,9 +112,11 @@ public class Rocket : MonoBehaviour
           break;
         }
         else { return; };
+
       case "Friendly":
         print("Friendly contact.");
         break;
+
       case "Finish":
         state = StateOfBeing.Ascending;
         audioSource.PlayOneShot(goalSound);
@@ -122,6 +124,7 @@ public class Rocket : MonoBehaviour
         level = Level.Level1;
         print("Finish!");
         break;
+
       default:
         print("8====D~~~");
         break;
@@ -162,7 +165,8 @@ public class Rocket : MonoBehaviour
 
   void controlsNEW()
   {
-    float thrustThisFrame = thrustPower * Time.deltaTime;
+    float thrustPower_Keys = thrustPower * Time.deltaTime * 2;
+    float thrustPower_Mouse = thrustPower * Time.deltaTime;
     Vector3 navPointer = navCursor.transform.position;
     Physics.gravity = Vector3.zero;
     rigidBody.drag = 0.1f;
@@ -177,9 +181,9 @@ public class Rocket : MonoBehaviour
         0);
       print("navDirection = " + navDirection);
       print("navMinusZ = " + navMinusZ);
-      print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustThisFrame));
+      print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustPower_Keys));
 
-      rigidBody.AddForce(navMinusZ.normalized * thrustThisFrame);
+      rigidBody.AddForce(navMinusZ.normalized * thrustPower_Mouse);
     }
     else
     {
@@ -191,19 +195,19 @@ public class Rocket : MonoBehaviour
     rigidBody.freezeRotation = true;
     if (Input.GetKey(KeyCode.A))
     {
-      rigidBody.AddForce(Vector3.left * thrustThisFrame);
+      rigidBody.AddForce(Vector3.left * thrustPower_Keys);
     }
     if (Input.GetKey(KeyCode.D))
     {
-      rigidBody.AddForce(Vector3.right * thrustThisFrame);
+      rigidBody.AddForce(Vector3.right * thrustPower_Keys);
     }
     if (Input.GetKey(KeyCode.W))
     {
-      rigidBody.AddForce(Vector3.up * thrustThisFrame);
+      rigidBody.AddForce(Vector3.up * thrustPower_Keys);
     }
     if (Input.GetKey(KeyCode.S))
     {
-      rigidBody.AddForce(Vector3.down * thrustThisFrame);
+      rigidBody.AddForce(Vector3.down * thrustPower_Keys);
     }
     rigidBody.freezeRotation = false;
 

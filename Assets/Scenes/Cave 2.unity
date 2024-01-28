@@ -1089,6 +1089,19 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 620344067}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &89717473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89717466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307d0539afee2cc4ba96377c19db8deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamObject: {fileID: 1036151041}
 --- !u!1 &96737888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,7 +2618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &353382712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,7 +3877,7 @@ PrefabInstance:
     - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
@@ -3935,6 +3948,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 89717468}
+    - targetCorrespondingSourceObject: {fileID: 4115480096936855152, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 89717473}
   m_SourcePrefab: {fileID: 100100000, guid: 5434f59f2cc3ac048a27208bf03b7d4f, type: 3}
 --- !u!1 &648889996
 GameObject:
@@ -6925,7 +6942,7 @@ Transform:
   m_GameObject: {fileID: 1422731383}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7181263, y: 0, z: 0, w: 0.69591284}
-  m_LocalPosition: {x: 0, y: 0.22, z: 27.86}
+  m_LocalPosition: {x: 0, y: -12.4, z: 28.2}
   m_LocalScale: {x: 23.842999, y: 11.3, z: 11.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7057,6 +7074,8 @@ MonoBehaviour:
   cam: {fileID: 1030360162}
   cursorTarget: {fileID: 0}
   sensorTarget: {fileID: 0}
+  cursorObjectMaterial: {fileID: 2100000, guid: 8099c39b212a04246b2b59d8ece6bf1d,
+    type: 2}
   player: {fileID: 1697974337}
 --- !u!4 &1432038847 stripped
 Transform:
@@ -9291,42 +9310,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 117153979}
     - target: {fileID: 1447933265, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1447933265, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
       propertyPath: spikePellet
       value: 
       objectReference: {fileID: 1864745143}
-    - target: {fileID: 569366266425015572, guid: ee04733e9eb7b3a46807ea558df69867,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274461816553629963, guid: ee04733e9eb7b3a46807ea558df69867,
-        type: 3}
-      propertyPath: rcsThrust
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274461816553629965, guid: ee04733e9eb7b3a46807ea558df69867,
-        type: 3}
-      propertyPath: m_Name
-      value: Player Transform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
-        type: 3}
-      propertyPath: controlScheme
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_Name
       value: '* PLAYER - Guy'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836574, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
