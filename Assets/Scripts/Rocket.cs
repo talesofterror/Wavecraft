@@ -1,6 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
-using Unity.Burst;
 
 
 public class Rocket : MonoBehaviour
@@ -162,34 +161,55 @@ public class Rocket : MonoBehaviour
     }
     print(currentSceneIndex);
   }
-
+  public float boost = 3;
+  float boost_Live
+   = 4;
   void controlsNEW()
   {
-    float thrustPower_Keys = thrustPower * Time.deltaTime * 2;
-    float thrustPower_Mouse = thrustPower * Time.deltaTime;
-    Vector3 navPointer = navCursor.transform.position;
-    Physics.gravity = Vector3.zero;
-    rigidBody.drag = 0.1f;
-    rigidBody.angularDrag = 0.0f;
-
-    if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
+    
+    if (Input.GetKey(KeyCode.LeftShift))
     {
-      Vector3 navDirection = navPointer - transform.position;
-      Vector3 navMinusZ = new Vector3(
-        navDirection.x,
-        navDirection.y,
-        0);
-      print("navDirection = " + navDirection);
-      print("navMinusZ = " + navMinusZ);
-      print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustPower_Keys));
-
-      rigidBody.AddForce(navMinusZ.normalized * thrustPower_Mouse);
+      boost_Live = 7;
     }
     else
     {
-      audioSource.Stop();
-      rigidBody.drag = 4f;
+      boost_Live = boost;
     }
+
+    float thrustPower_Keys = thrustPower * Time.deltaTime * boost_Live;
+    float thrustPower_Mouse = thrustPower * Time.deltaTime;
+    Vector3 navPointer = navCursor.transform.position;
+    Physics.gravity = Vector3.zero;
+    rigidBody.drag = 4f;
+    rigidBody.angularDrag = 0.0f;
+
+    if (Input.GetKey(KeyCode.LeftShift))
+    {
+      boost_Live = 7;
+    }
+    if (!Input.GetKey(KeyCode.LeftShift))
+    {
+      boost = boost_Live;
+    }
+
+    if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
+    {
+      // Vector3 navDirection = navPointer - transform.position;
+      // Vector3 navMinusZ = new Vector3(
+      //   navDirection.x,
+      //   navDirection.y,
+      //   0);
+      // print("navDirection = " + navDirection);
+      // print("navMinusZ = " + navMinusZ);
+      // print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustPower_Keys));
+
+      // rigidBody.AddForce(navMinusZ.normalized * thrustPower_Mouse);
+    }
+    // else
+    // {
+    //   audioSource.Stop();
+    //   rigidBody.drag = 4f;
+    // }
 
     float yRotate = rotationSpeed * Time.deltaTime;
     rigidBody.freezeRotation = true;
@@ -209,6 +229,7 @@ public class Rocket : MonoBehaviour
     {
       rigidBody.AddForce(Vector3.down * thrustPower_Keys);
     }
+
     rigidBody.freezeRotation = false;
 
     float joystickX = Input.GetAxis("Horizontal");

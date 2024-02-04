@@ -140,7 +140,6 @@ Transform:
   - {fileID: 5588896246303286750}
   - {fileID: 1677617069973037542}
   - {fileID: 301894942587276102}
-  - {fileID: 1274461816721676014}
   m_Father: {fileID: 1274461816553629964}
   m_LocalEulerAnglesHint: {x: 0, y: 255.44199, z: 0}
 --- !u!65 &117489030356382217
@@ -461,6 +460,7 @@ Transform:
   m_LocalScale: {x: 8.723601, y: 8.723601, z: 8.723601}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1274461816721676014}
   - {fileID: 5037773468501693362}
   - {fileID: 4033605128777056281}
   m_Father: {fileID: 1274461817535836574}
@@ -588,17 +588,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274461816721675986}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08478195, y: -0.7220539, z: -0.0065618167, w: -0.68659115}
-  m_LocalPosition: {x: 0.7, y: -0.14, z: -0.05}
-  m_LocalScale: {x: 0.35037503, y: 0.5161379, z: 0.31131133}
+  m_LocalRotation: {x: -0.00041412748, y: 0.09822294, z: 0.0574949, w: -0.99350214}
+  m_LocalPosition: {x: 0.23463167, y: -0.37484553, z: 0.29913872}
+  m_LocalScale: {x: 0.22401713, y: 0.33000004, z: 0.19904128}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1285199366624332344}
   - {fileID: 1285199367198387440}
   - {fileID: 1285199365750745075}
   - {fileID: 1285199366155135089}
-  m_Father: {fileID: 4033605128777056281}
-  m_LocalEulerAnglesHint: {x: -7.2330003, y: 93.3, z: -6.5650005}
+  m_Father: {fileID: 1274461816553629964}
+  m_LocalEulerAnglesHint: {x: -0.6, y: 258.742, z: -6.565}
 --- !u!33 &1274461816721676015
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5eb90abefeef214cadfcc3516914abc, type: 2}
+  - {fileID: 2100000, guid: 62bd2d7b9a839ee4992a13dbefa89ada, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -930,6 +930,7 @@ MonoBehaviour:
   entryAxisTarget: {fileID: 0}
   deathSpiral: 3
   enemyCollissionsOn: 1
+  boost: 3
 --- !u!114 &1447933265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,7 +3464,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e4d3f435780f5404992558ff97b2f7cb, type: 2}
+      objectReference: {fileID: 2100000, guid: 62bd2d7b9a839ee4992a13dbefa89ada, type: 2}
     - target: {fileID: 7698737470836088508, guid: 1428a5006b90b1b4096890833a91d8e9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

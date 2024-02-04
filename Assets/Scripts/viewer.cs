@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 
 
@@ -23,16 +21,16 @@ using UnityEngine;
  * to specify the y location
  * 
  */
-  public enum ViewState
-  {
-    stageView,
-    downAnim,
-    vertMiddle,
-    stageAnim,
-    horzAnim,
-    horzMiddle,
-    vertAnim
-  }
+public enum ViewState
+{
+  stageView,
+  downAnim,
+  vertMiddle,
+  stageAnim,
+  horzAnim,
+  horzMiddle,
+  vertAnim
+}
 
 public class viewer : MonoBehaviour
 {
@@ -40,13 +38,17 @@ public class viewer : MonoBehaviour
   Camera overlayCam;
   Vector3 stageVector;
   Transform swivelTarget;
+
+  [Header("Target")]
   public GameObject playerObject;
 
   LayerMask sensorLayer;
   public RaycastHit rayhit;
 
+  [Header("Entry Trigger Target")]
   public Vector3 entryTriggerTarget;
 
+  [Header("Camera Settings")]
   public float m_fieldOfView = 28f;
   public float distance = -26.8f;
   public float xPos = 0f;
@@ -57,14 +59,13 @@ public class viewer : MonoBehaviour
   public float yRot = 0f;
   public float zRot = 0f;
   public float panSpeed = 2f;
-
   public float vertMidOffset = 6f;
   public float horzMidOffset = 6f;
 
-
-
- public  ViewState state = ViewState.stageView;
+  [Header("View State")]
+  public ViewState state = ViewState.stageView;
   // CamState state = new CamState(CamState.current.stageView);
+  public bool swivelOn = true;
 
   void Awake()
   {
@@ -72,13 +73,16 @@ public class viewer : MonoBehaviour
     cam = GetComponent<Camera>();
     overlayCam = GetComponentInChildren<Camera>();
     sensorLayer = 1 << 6;
+    Cursor.visible = false;
 
   }
 
+  private Quaternion initialRotation;
   void Start()
   {
     transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);
     stageVector = transform.position;
+    initialRotation = transform.rotation;
   }
 
   public void ShiftDown()
@@ -100,11 +104,13 @@ public class viewer : MonoBehaviour
   public void ShiftHorz()
   {
     state = ViewState.horzAnim;
+    cam.fieldOfView = 44f;
   }
 
   public void ShiftVert()
   {
     state = ViewState.vertAnim;
+    cam.fieldOfView = 44f;
   }
 
   private Vector3 target;
@@ -113,25 +119,31 @@ public class viewer : MonoBehaviour
     target = v;
   }
 
-  public void downAnimPlay()
+  private void SwivelToggle()
   {
-    yPosOffset = 5;
-    
-    Vector3 startPos = transform.position;
-    Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
-    Swivel();
-
-    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-    if (transform.position == endPos)
+    if (swivelOn == true)
     {
-      state = ViewState.vertMiddle;
+      swivelOn = false;
+    }
+    else
+    {
+      swivelOn = true;
     }
   }
 
-  private void Swivel()
+  public void downAnimPlay()
   {
-    swivelTarget = playerObject.transform;
-    transform.LookAt(swivelTarget);
+    yPosOffset = 5;
+
+    Vector3 startPos = transform.position;
+    Vector3 endPos = new Vector3(xPos, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
+    // SwivelToggle();
+
+    transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
+    // if (transform.position == endPos)
+    // {
+    //   state = ViewState.vertMiddle;
+    // }
   }
 
   public void stageAnimPlay()
@@ -152,13 +164,13 @@ public class viewer : MonoBehaviour
     Vector3 startPos = transform.position;
     Vector3 endPos = new Vector3(playerObject.transform.position.x - xPosOffset + horzMidOffset, target.y, distance);
     swivelTarget = playerObject.transform;
-    transform.LookAt(swivelTarget);
+    // transform.LookAt(swivelTarget);
 
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-    if (transform.position == endPos)
-    {
-      state = ViewState.horzMiddle;
-    }
+    // if (transform.position == endPos)
+    // {
+    //   state = ViewState.horzMiddle;
+    // }
   }
 
   public void vertAnimPlay()
@@ -167,17 +179,30 @@ public class viewer : MonoBehaviour
     Vector3 startPos = transform.position;
     Vector3 endPos = new Vector3(target.x, playerObject.transform.position.y - yPosOffset + vertMidOffset, distance);
     swivelTarget = playerObject.transform;
-    transform.LookAt(swivelTarget);
+    // transform.LookAt(swivelTarget);
 
     transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * panSpeed);
-    if (transform.position == endPos)
-    {
-      state = ViewState.vertMiddle;
-    }
+    // if (transform.position == endPos)
+    // {
+    //   state = ViewState.vertMiddle;
+    // }
   }
 
   void Update()
   {
+    if (Input.GetKeyDown(KeyCode.C))
+    {
+      SwivelToggle();
+    }
+    if (swivelOn == true)
+    {
+      swivelTarget = playerObject.transform;
+      transform.LookAt(swivelTarget);
+    }
+    if (swivelOn == false) {
+      transform.rotation = initialRotation;
+    }
+
     if (state == ViewState.stageView)
     {
       transform.position = new Vector3(xPos, playerObject.transform.position.y + yPosOffset, distance);

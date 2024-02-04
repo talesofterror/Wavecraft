@@ -19,7 +19,6 @@ public class ViewShift : MonoBehaviour
     public enum TriggerType
     {
         stageTrigger,
-        upTrigger,
         downTrigger,
         horzTrigger,
         vertTrigger
