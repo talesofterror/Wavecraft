@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,19 +50,11 @@ public class ViewShift : MonoBehaviour
         {
             if (triggerState == TriggerState.inState)
             {
-
-                if (inSetting == TriggerType.downTrigger)
-                {
-                    viewerCam.GetComponent<viewer>().ShiftDown();
-                    print("Entry Trigger, Camera Shift Down");
-                }
-
-                else if (inSetting == TriggerType.stageTrigger)
+                if (inSetting == TriggerType.stageTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftStage();
                     print("Entry Trigger, Stage");
                 }
-
                 else if (inSetting == TriggerType.horzTrigger)
                 {
                     viewerCam.GetComponent<viewer>().getShiftTargetVector(horizontalTarget);
@@ -70,7 +62,6 @@ public class ViewShift : MonoBehaviour
                     viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
                     print("Entry Trigger, Horizontal");
                 }
-
                 else if (inSetting == TriggerType.vertTrigger)
                 {
                     viewerCam.GetComponent<viewer>().getShiftTargetVector(verticalTarget);
@@ -78,24 +69,15 @@ public class ViewShift : MonoBehaviour
                     viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
                     print("Entry Trigger, Vertical");
                 }
-
             }
 
             if (triggerState == TriggerState.outState)
             {
-
-                if (outSetting == TriggerType.downTrigger)
-                {
-                    viewerCam.GetComponent<viewer>().ShiftDown();
-                    print("Entry Trigger, ShiftDown");
-                }
-
-                else if (outSetting == TriggerType.stageTrigger)
+                if (outSetting == TriggerType.stageTrigger)
                 {
                     viewerCam.GetComponent<viewer>().ShiftStage();
                     print("Entry Trigger, ShiftStage");
                 }
-
                 else if (outSetting == TriggerType.horzTrigger)
                 {
                     viewerCam.GetComponent<viewer>().getShiftTargetVector(horizontalTarget);
@@ -103,7 +85,6 @@ public class ViewShift : MonoBehaviour
                     viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
                     print("Entry Trigger, Horizontal");
                 }
-
                 else if (outSetting == TriggerType.vertTrigger)
                 {
                     viewerCam.GetComponent<viewer>().getShiftTargetVector(verticalTarget);
@@ -111,11 +92,8 @@ public class ViewShift : MonoBehaviour
                     viewerCam.GetComponent<viewer>().entryTriggerTarget = this.targetTransform.position;
                     print("Entry Trigger, Vertical");
                 }
-
             }
-
             changeState();
-
         }
 
 
@@ -133,6 +111,5 @@ public class ViewShift : MonoBehaviour
             triggerState = TriggerState.inState;
             print("init state");
         }
-        
     }
 }

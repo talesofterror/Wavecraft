@@ -7,11 +7,11 @@ TagManager:
   - Friendly
   - Enemy
   - GuyBase
-  - PlayerLights
   - SpikePellet
   - SpawnPoint
   - EntryTrigger
   - Fawn
+  - Pointer
   layers:
   - Default
   - TransparentFX
