@@ -38,7 +38,7 @@ public class SporeManager : MonoBehaviour
 
   void hpZero()
   {
-    transform.localScale -= shrinkSize;
+    // transform.localScale -= shrinkSize;
     print("hpZero Called");
     StartCoroutine(shrinkIE(transform.localScale, shrinkSize));
   }

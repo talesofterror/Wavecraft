@@ -6,15 +6,17 @@ public class AmmoCollisions : MonoBehaviour
   public EnemyStats targetStats;
   public float damage = 10;
   public int dustAmount = 3;
+  public float dustDuration = 0.5f;
   Rigidbody rB;
   Rigidbody rBDust;
-  Vector3 ammoLoc;
   MeshRenderer mrenderer;
+  Collider mcollider;
 
   // Start is called before the first frame update
   void Awake()
   {
     mrenderer = GetComponent<MeshRenderer>();
+    mcollider = GetComponent<Collider>();
     rB = this.gameObject.GetComponent<Rigidbody>();
   }
 
@@ -27,6 +29,8 @@ public class AmmoCollisions : MonoBehaviour
   private void OnCollisionEnter(Collision collision)
   {
     mrenderer.enabled = false;
+
+    mcollider.enabled = false;
 
     targetStats = collision.gameObject.GetComponent<EnemyStats>();
 
@@ -48,12 +52,12 @@ public class AmmoCollisions : MonoBehaviour
     {
       // float dustLoc = Mathf.Sin(0.5f + i);
       // ammoLoc = transform.position + new Vector3(0.5f, dustLoc, 0f);
-      GameObject dustObject = Instantiate(dustBall, ammoLoc, rB.rotation);
+      GameObject dustObject = Instantiate(dustBall, transform.position, rB.rotation);
       rBDust = dustObject.GetComponent<Rigidbody>();
       float dustVelX = Mathf.Sin(i + 1);
       float dustVelY = Mathf.Sin(i + 1);
       rBDust.velocity = new Vector3(dustVelX, dustVelY, 0);
-      Destroy(dustObject, 0.2f);
+      Destroy(dustObject, dustDuration);
     }
   }
 }

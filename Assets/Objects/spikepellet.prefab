@@ -148,3 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dustBall: {fileID: 5541173529659213361, guid: 1e3eebeee6102f04eb8b866d8b6bb072,
     type: 3}
+  targetStats: {fileID: 0}
+  damage: 10
+  dustAmount: 3

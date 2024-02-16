@@ -15,6 +15,7 @@ public class PLAYERAttack : MonoBehaviour
   public int ammoPoolSize = 10;
   private GameObject[] ammoPool;
   private MeshRenderer[] ammoRenderers;
+  private Collider[] ammoColliders;
   private Rigidbody[] ammoRB;
   private int ammoIndex = 0;
   public GameObject projectile;
@@ -26,6 +27,7 @@ public class PLAYERAttack : MonoBehaviour
   {
     ammoPool = new GameObject[ammoPoolSize];
     ammoRenderers = new MeshRenderer[ammoPoolSize];
+    ammoColliders = new Collider[ammoPoolSize];
     ammoRB = new Rigidbody[ammoPoolSize];
     pointerTransform = GameObject.FindGameObjectWithTag("Pointer").transform;
 
@@ -34,7 +36,9 @@ public class PLAYERAttack : MonoBehaviour
       ammoPool[i] = GameObject.Instantiate(projectile, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
       ammoRenderers[i] = ammoPool[i].GetComponent<MeshRenderer>();
       ammoRB[i] = ammoPool[i].GetComponent<Rigidbody>();
+      ammoColliders[i] = ammoPool[i].GetComponent<Collider>();
       ammoRenderers[i].enabled = false;
+      ammoColliders[i].enabled = false;
       ammoPool[i].name = "SpikePellet " + i;
     }
 
@@ -65,21 +69,23 @@ public class PLAYERAttack : MonoBehaviour
     // print("Fire pellet " + ammoIndex);
     ammoPool[ammoIndex].transform.position = pointerTransform.position;
     ammoRenderers[ammoIndex].enabled = true;
+    ammoColliders[ammoIndex].enabled = true;
     ammoRB[ammoIndex].velocity = projectileMovement;
     ammoIndex++;
   }
 
-  IEnumerator fireProjectileEnumerator()
-  {
-    int i;
-    for (i = 0; i < 10; i++)
-    {
-      ammoPool[i].transform.position = pointerTransform.position;
-      ammoRenderers[i].enabled = true;
-      print("Fire pellet " + i);
-      ammoRB[i].AddForce(projectileMovement);
-      yield return null;
-    }
-    yield return null;
-  }
+  // IEnumerator fireProjectileEnumerator()
+  // {
+  //   int i;
+  //   for (i = 0; i < 10; i++)
+  //   {
+  //     ammoPool[i].transform.position = pointerTransform.position;
+  //     ammoRenderers[i].enabled = true;
+  //     ammoColliders[i].enabled = true;
+  //     print("Fire pellet " + i);
+  //     ammoRB[i].AddForce(projectileMovement);
+  //     yield return null;
+  //   }
+  //   yield return null;
+  // }
 }

@@ -7197,6 +7197,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935525544}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &937106853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5345067115241868972, guid: 788504b66d6aa6b49a2c18b4de0c901d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4110822389473508749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &937106854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937106853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a8a45abaddd65469bff90528002c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicTarget: {fileID: 1697974337}
+  sensor: {fileID: 0}
+  targetMode: 0
 --- !u!1001 &970000541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11086,7 +11107,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599340104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0a8a45abaddd65469bff90528002c89, type: 3}
   m_Name: 
@@ -12424,6 +12445,7 @@ MonoBehaviour:
   targetStats: {fileID: 0}
   damage: 0
   dustAmount: 3
+  dustDuration: 0.5
 --- !u!114 &1759165848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14581,6 +14603,11 @@ PrefabInstance:
       propertyPath: spikePellet
       value: 
       objectReference: {fileID: 1864745143}
+    - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
+        type: 3}
+      propertyPath: enemyCollissionsOn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: m_Name
@@ -15105,6 +15132,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1263194666}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5345067115241868972, guid: 788504b66d6aa6b49a2c18b4de0c901d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 937106854}
     - targetCorrespondingSourceObject: {fileID: 2716341277943721727, guid: 788504b66d6aa6b49a2c18b4de0c901d,
         type: 3}
       insertIndex: -1
