@@ -1369,10 +1369,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tentacle Spore Object Variant (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 588515702971579706, guid: e733b3c11dde03841bd29df4753d70f0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4451883871483199672, guid: e733b3c11dde03841bd29df4753d70f0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 511705378}
   m_SourcePrefab: {fileID: 100100000, guid: e733b3c11dde03841bd29df4753d70f0, type: 3}
 --- !u!1 &155229879
 GameObject:
@@ -3675,6 +3680,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f22b3950c0905ec4c8913d135977a8ec, type: 3}
+--- !u!1 &346869665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4451883871483199672, guid: e733b3c11dde03841bd29df4753d70f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 154681849}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &353382711
 GameObject:
   m_ObjectHideFlags: 0
@@ -4736,6 +4747,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 154681849}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &511705378
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346869665}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &521703883
 GameObject:
   m_ObjectHideFlags: 0

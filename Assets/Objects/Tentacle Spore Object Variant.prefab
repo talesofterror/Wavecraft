@@ -1279,8 +1279,9 @@ GameObject:
   - component: {fileID: 8082823834629325767}
   - component: {fileID: 4842807644892511324}
   - component: {fileID: 1732711438}
-  - component: {fileID: 6747523016210187003}
   - component: {fileID: 588515702971579706}
+  - component: {fileID: 8809914233129600129}
+  - component: {fileID: 108842639391981452}
   m_Layer: 0
   m_Name: Tentacle Spore Object Variant
   m_TagString: Enemy
@@ -1363,7 +1364,21 @@ MonoBehaviour:
   movementVector: {x: 0, y: 10, z: 0}
   period: 10
   on: 0
---- !u!114 &6747523016210187003
+--- !u!114 &588515702971579706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4451883871483199672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cad15f23017cc442aa9aa446eb1438b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrinkSize: {x: 0, y: 0, z: 0}
+  lerpSmallTime: 1.38
+--- !u!114 &8809914233129600129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1377,8 +1392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHP: 30
   enemyAP: 100
-  damager: {fileID: 0}
---- !u!114 &588515702971579706
+--- !u!114 &108842639391981452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1387,9 +1401,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4451883871483199672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cad15f23017cc442aa9aa446eb1438b, type: 3}
+  m_Script: {fileID: 11500000, guid: b59f1bd179881424481339cbe2be2540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSequence: 0
+  shrinkTimer: 30
 --- !u!1 &4505661618328905549
 GameObject:
   m_ObjectHideFlags: 0

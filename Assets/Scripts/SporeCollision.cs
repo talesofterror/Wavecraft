@@ -77,16 +77,7 @@ public class SporeCollision : MonoBehaviour
         {
             lerpBigTime = 0f;
         }
-
-
-        Debug();
-        
-
-        // modulo ticks like a clock. 
     }
-
-
-
 
     IEnumerator IEShrinker(Vector3 a, Vector3 b)
     {
@@ -107,7 +98,6 @@ public class SporeCollision : MonoBehaviour
             yield return null;
         }
     }
-
 
     IEnumerator ShrunkTimer()
     {
@@ -147,20 +137,5 @@ public class SporeCollision : MonoBehaviour
             yield return null;
         }
     }
-
-
-    void Debug()
-    {
-
-
-        //print("Time = " + (int)Time.time);
-        //print("Unscaled Time = " + (int)Time.unscaledTime);
-        //print("Fixed Time = " + (int)Time.fixedTime);
-        //print("Time Scale = " + (int)Time.timeScale);
-        //print("Unscaled Time / 2.5f % 2) = " + (int)(Time.unscaledTime / 2.5f % 3.1));
-        //print("Unscaled Time / 2.5f = " + (int)(Time.unscaledTime / 1.5f));
-        //print("Collider Enabled? = " + colliderToggle.enabled);
-    }
-
 
 }

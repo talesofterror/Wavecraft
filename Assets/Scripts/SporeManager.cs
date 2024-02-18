@@ -11,7 +11,7 @@ public class SporeManager : MonoBehaviour
   private Vector3 fullScale;
   float shrinkSizeValue = 0.01f;
 
-  public float lerpSmallTime = 1f;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -40,12 +40,13 @@ public class SporeManager : MonoBehaviour
   {
     // transform.localScale -= shrinkSize;
     print("hpZero Called");
-    StartCoroutine(shrinkIE(transform.localScale, shrinkSize));
+    StartCoroutine(shrinkIE(shrinkSize, transform.localScale));
   }
 
+  public float lerpSmallTime = 1f;
   IEnumerator shrinkIE(Vector3 targetScale, Vector3 startingScale)
   {
-
+    
     if (lerpSmallTime >= 1)
     {
       lerpSmallTime -= 0.1f; 

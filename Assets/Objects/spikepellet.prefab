@@ -151,3 +151,4 @@ MonoBehaviour:
   targetStats: {fileID: 0}
   damage: 10
   dustAmount: 3
+  dustDuration: 0.5

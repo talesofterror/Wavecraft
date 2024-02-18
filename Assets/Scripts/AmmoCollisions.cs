@@ -36,8 +36,8 @@ public class AmmoCollisions : MonoBehaviour
 
     if (collision.gameObject.tag == "Enemy")
     {
-      print(transform.name + ": " + targetStats.enemyHP);
       targetStats.enemyHP -= damage;
+      print(collision.gameObject.name + ": " + targetStats.enemyHP + "HP -- took " + damage + " damage");
     }
 
     for (int i = 1; i <= dustAmount; ++i)
