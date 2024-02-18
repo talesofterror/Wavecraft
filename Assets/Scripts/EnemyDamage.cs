@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
+  Collider _collider;
   EnemyStats enemyStats;
-  Collider enemyCollider;
-  float damageIncoming;
   Vector3 shrinkSize;
   Vector3 initScale;
+  NavMeshAttack navMeshAttack;
 
   bool dead = false;
 
@@ -20,23 +20,23 @@ public class EnemyDamage : MonoBehaviour
 
   void Awake()
   {
+    _collider = GetComponent<Collider>();
     enemyStats = GetComponent<EnemyStats>();
-    enemyCollider = GetComponent<Collider>();
+    if (GetComponent<NavMeshAttack>()){
+      navMeshAttack = GetComponent<NavMeshAttack>();
+    }
     shrinkState = ShrinkState.normal;
-  }
-
-  void Start()
-  {
     shrinkSize = transform.localScale * 0.5f;
     initScale = transform.localScale;
   }
 
   void Update()
   {
-    if (enemyStats.enemyHP <= 0)
+
+    if (enemyStats.hP <= 0)
     {
       dead = true;
-      enemyStats.enemyHP = 0;
+      enemyStats.hP = 0;
       StartCoroutine(hpZero());
     }
     else
@@ -44,17 +44,24 @@ public class EnemyDamage : MonoBehaviour
       dead = false;
       StopCoroutine(hpZero());
     }
+
+    if (dead == true) {
+      _collider.enabled = false;
+    }
+    if (dead == false) {
+      _collider.enabled = true;
+    }
   }
 
-IEnumerator hpZero()
+  IEnumerator hpZero()
   {
     if (dead == true)
     {
       print("hpZero Called");
 
-// DEATH ANIMATIONS
+      // ? DEATH ANIMATIONS
 
-// Shrink and Grow
+      // ? Shrink and Grow
 
       if (deathSequence == DeathSequence.ShrinkAndGrow)
       {
@@ -70,9 +77,9 @@ IEnumerator hpZero()
       }
     }
 
-    if (dead == false){
+    if (dead == false)
+    {
       StopAllCoroutines();
-      ;
     }
 
     yield return null;
@@ -96,7 +103,6 @@ IEnumerator hpZero()
     {
       shrinkState = ShrinkState.shrinking;
       shrinkLerpState += 2f * Time.deltaTime;
-      print(shrinkLerpState);
       transform.localScale = Vector3.Lerp(initScale, shrinkSize, shrinkLerpState);
       if (shrinkLerpState > 1f)
       {
@@ -111,30 +117,15 @@ IEnumerator hpZero()
     if (shrinkState == ShrinkState.growing)
     {
       shrinkLerpState += 2f * Time.deltaTime;
-      print(shrinkLerpState);
       transform.localScale = Vector3.Lerp(shrinkSize, initScale, shrinkLerpState);
       if (shrinkLerpState > 1f)
       {
         shrinkState = ShrinkState.normal;
         shrinkLerpState = 0;
-        enemyStats.enemyHP = 30;
+        enemyStats.hP = enemyStats.baseHP;
         dead = false;
       }
       yield return null;
     }
   }
-
-  void growTriggerFunction()
-  {
-    StopAllCoroutines();
-    StartCoroutine(growIE());
-  }
-
-  IEnumerator growIE()
-  {
-    shrinkLerpState += 2f;
-    transform.localScale = Vector3.Lerp(shrinkSize, initScale, shrinkLerpState);
-    yield return null;
-  }
-
 }

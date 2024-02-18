@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5854456387364606920}
   - component: {fileID: 6860977638399308530}
   - component: {fileID: 847588775875412609}
-  - component: {fileID: 6543565976033539292}
   - component: {fileID: 8066714222592955181}
   - component: {fileID: 8213503195035809256}
+  - component: {fileID: 1736898596125523390}
   m_Layer: 10
   m_Name: _ NAVMESHAGENT - Cube
   m_TagString: Enemy
@@ -107,7 +107,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -148,19 +148,6 @@ MonoBehaviour:
   movementVector: {x: 5, y: 0, z: 0}
   period: 2
   on: 1
---- !u!114 &6543565976033539292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368549319719786615}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b347991369ebc24a85ec86564359679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hit: 0
 --- !u!114 &8066714222592955181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8543c329e6c3b42862d35fd2dad008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceThreshold: 8.9
+  distanceThreshold: 7.99
 --- !u!114 &8213503195035809256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,8 +173,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4f1674bb8bda14f8f76c96d0cd5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 100
-  enemyAP: 100
+  hP: 30
+  baseHP: 0
+  aP: 100
+  baseAP: 0
+--- !u!114 &1736898596125523390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368549319719786615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59f1bd179881424481339cbe2be2540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathSequence: 0
 --- !u!1001 &4540993733288387541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,6 +203,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 66d2cac1fd9e7ec4d93cab5fb08b3f75, type: 2}
+    - target: {fileID: 1450559428979547727, guid: 3f1cca8876ec8ad478365e6995716e66,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2805130301028842114, guid: 3f1cca8876ec8ad478365e6995716e66,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

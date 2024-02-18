@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6307776489558671672}
   m_Layer: 8
   m_Name: spikepellet
-  m_TagString: SpikePellet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dustBall: {fileID: 5541173529659213361, guid: 1e3eebeee6102f04eb8b866d8b6bb072,
     type: 3}
-  targetStats: {fileID: 0}
+  enemyStats: {fileID: 0}
   damage: 10
   dustAmount: 3
   dustDuration: 0.5

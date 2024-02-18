@@ -3,7 +3,7 @@
 public class AmmoCollisions : MonoBehaviour
 {
   public GameObject dustBall;
-  public EnemyStats targetStats;
+  public EnemyStats enemyStats;
   public float damage = 10;
   public int dustAmount = 3;
   public float dustDuration = 0.5f;
@@ -28,16 +28,16 @@ public class AmmoCollisions : MonoBehaviour
 
   private void OnCollisionEnter(Collision collision)
   {
-    mrenderer.enabled = false;
 
-    mcollider.enabled = false;
-
-    targetStats = collision.gameObject.GetComponent<EnemyStats>();
 
     if (collision.gameObject.tag == "Enemy")
     {
-      targetStats.enemyHP -= damage;
-      print(collision.gameObject.name + ": " + targetStats.enemyHP + "HP -- took " + damage + " damage");
+      mrenderer.enabled = false;
+
+      mcollider.enabled = false;
+      enemyStats = collision.gameObject.GetComponent<EnemyStats>();
+      enemyStats.hP -= damage;
+      print(collision.gameObject.name + ": " + enemyStats.hP + "HP -- took " + damage + " damage");
     }
 
     for (int i = 1; i <= dustAmount; ++i)

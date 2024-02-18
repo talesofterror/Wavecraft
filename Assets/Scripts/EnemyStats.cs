@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    public float enemyHP = 100;
-    public float enemyAP = 100;
+    public float hP = 100;
+    public float baseHP;
+    public float aP = 100;
+    public float baseAP;
 
     void Start () {
-      
+      baseHP = hP;
+      baseAP = aP;
     }
 }

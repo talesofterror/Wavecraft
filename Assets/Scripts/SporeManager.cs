@@ -23,14 +23,14 @@ public class SporeManager : MonoBehaviour
   void OnCollisionEnter()
   {
     damagerDamage = GetComponent<AmmoCollisions>().damage;
-    eStats.enemyHP -= damagerDamage;
+    eStats.hP -= damagerDamage;
   }
 
   // Update is called once per frame
   void Update()
   {
 
-    if (eStats.enemyHP <= 0)
+    if (eStats.hP <= 0)
     {
       hpZero();
     }
