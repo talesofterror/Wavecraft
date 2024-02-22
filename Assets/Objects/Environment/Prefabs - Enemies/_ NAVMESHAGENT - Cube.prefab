@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.02, y: 1, z: 2.05}
+  m_Center: {x: 0.03, y: 0, z: 0.53}
 --- !u!195 &6860977638399308530
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -204,6 +204,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 66d2cac1fd9e7ec4d93cab5fb08b3f75, type: 2}
     - target: {fileID: 1450559428979547727, guid: 3f1cca8876ec8ad478365e6995716e66,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495326934163253103, guid: 3f1cca8876ec8ad478365e6995716e66,
         type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -7,6 +7,7 @@ public class EnemyDamage : MonoBehaviour
   Collider _collider;
   EnemyStats enemyStats;
   Vector3 shrinkSize;
+  public float shrinkFactor = 0.5f;
   Vector3 initScale;
   NavMeshAttack navMeshAttack;
 
@@ -14,7 +15,11 @@ public class EnemyDamage : MonoBehaviour
 
   public enum DeathSequence
   {
-    ShrinkAndGrow
+    ShrinkAndGrow, 
+    Fall, 
+    Explode, 
+    Freeze,
+    
   }
   public DeathSequence deathSequence = new DeathSequence();
 
@@ -26,7 +31,7 @@ public class EnemyDamage : MonoBehaviour
       navMeshAttack = GetComponent<NavMeshAttack>();
     }
     shrinkState = ShrinkState.normal;
-    shrinkSize = transform.localScale * 0.5f;
+    shrinkSize = transform.localScale * shrinkFactor;
     initScale = transform.localScale;
   }
 
