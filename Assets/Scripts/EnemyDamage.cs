@@ -15,11 +15,11 @@ public class EnemyDamage : MonoBehaviour
 
   public enum DeathSequence
   {
-    ShrinkAndGrow, 
-    Fall, 
-    Explode, 
+    ShrinkAndGrow,
+    Fall,
+    Explode,
     Freeze,
-    
+
   }
   public DeathSequence deathSequence = new DeathSequence();
 
@@ -27,7 +27,8 @@ public class EnemyDamage : MonoBehaviour
   {
     _collider = GetComponent<Collider>();
     enemyStats = GetComponent<EnemyStats>();
-    if (GetComponent<NavMeshAttack>()){
+    if (GetComponent<NavMeshAttack>())
+    {
       navMeshAttack = GetComponent<NavMeshAttack>();
     }
     shrinkState = ShrinkState.normal;
@@ -50,23 +51,26 @@ public class EnemyDamage : MonoBehaviour
       StopCoroutine(hpZero());
     }
 
-    if (dead == true) {
+    if (dead == true)
+    {
       _collider.enabled = false;
     }
-    if (dead == false) {
+    if (dead == false)
+    {
       _collider.enabled = true;
     }
   }
 
+  // ~ hpZero ()
   IEnumerator hpZero()
   {
     if (dead == true)
     {
       print("hpZero Called");
 
-      // ? DEATH ANIMATIONS
+      // ~ DEATH ANIMATIONS
 
-      // ? Shrink and Grow
+      // ! Shrink and Grow
 
       if (deathSequence == DeathSequence.ShrinkAndGrow)
       {
@@ -80,8 +84,26 @@ public class EnemyDamage : MonoBehaviour
           StartCoroutine(shrinkAndGrowIE());
         }
       }
-    }
 
+      // ! Fall 
+
+      if (deathSequence == DeathSequence.Fall) {
+        
+      }
+
+      // ! Explode 
+
+      if (deathSequence == DeathSequence.Explode) {
+
+      }
+
+      // ! Freeze 
+
+      if (deathSequence == DeathSequence.Freeze) {
+
+      }
+
+    }
     if (dead == false)
     {
       StopAllCoroutines();
