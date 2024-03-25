@@ -4,6 +4,8 @@ public class Overlayer : MonoBehaviour
 {
   private Camera cam;
   public GameObject mainCamObject;
+  private Transform mainCamDefaulPosition;
+
   private viewer mainCamViewer;
   private ViewState currentState;
 
@@ -14,7 +16,7 @@ public class Overlayer : MonoBehaviour
   {
     cam = GetComponent<Camera>();
     mainCamViewer = mainCamObject.GetComponent<viewer>();
-
+    mainCamDefaulPosition = mainCamObject.transform;
   }
 
   // Update is called once per frame
@@ -29,17 +31,10 @@ public class Overlayer : MonoBehaviour
     }
     else
     {
-      if (Input.GetKeyDown(KeyCode.C)) {
-        if (swivel == true){
-          swivel = false;
-        } else {
-          swivel = true;
-        }
-      }
-      if (swivel == true) {
+      if (mainCamViewer.swivelOn == true) {
         cam.orthographic = true;
       }
-      if (swivel == false) {
+      if (mainCamViewer.swivelOn == false) {
         cam.orthographic = false;
         cam.fieldOfView = 44f;
       }

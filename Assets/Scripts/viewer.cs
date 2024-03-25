@@ -34,7 +34,7 @@ public enum ViewState
 
 public class viewer : MonoBehaviour
 {
-  Camera cam;
+  Camera mainCam;
   Camera overlayCam;
   Vector3 stageVector;
   Transform swivelTarget;
@@ -70,7 +70,7 @@ public class viewer : MonoBehaviour
   void Awake()
   {
     playerObject = GameObject.FindGameObjectWithTag("Player");
-    cam = GetComponent<Camera>();
+    mainCam = GetComponent<Camera>();
     overlayCam = GetComponentInChildren<Camera>();
     sensorLayer = 1 << 6;
     Cursor.visible = false;
@@ -88,7 +88,7 @@ public class viewer : MonoBehaviour
   public void ShiftDown()
   {
     state = ViewState.downAnim;
-    cam.fieldOfView = 44f;
+    mainCam.fieldOfView = 44f;
     overlayCam.fieldOfView = 44f;
     distance = -22f;
   }
@@ -96,7 +96,7 @@ public class viewer : MonoBehaviour
   public void ShiftStage()
   {
     state = ViewState.stageAnim;
-    cam.fieldOfView = 28f;
+    mainCam.fieldOfView = 28f;
     overlayCam.fieldOfView = 28f;
     distance = -26.8f;
   }
@@ -104,13 +104,13 @@ public class viewer : MonoBehaviour
   public void ShiftHorz()
   {
     state = ViewState.horzAnim;
-    cam.fieldOfView = 44f;
+    mainCam.fieldOfView = 44f;
   }
 
   public void ShiftVert()
   {
     state = ViewState.vertAnim;
-    cam.fieldOfView = 44f;
+    mainCam.fieldOfView = 44f;
   }
 
   private Vector3 target;
