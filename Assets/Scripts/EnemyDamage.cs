@@ -7,8 +7,9 @@ public class EnemyDamage : MonoBehaviour
   Collider _collider;
   EnemyStats enemyStats;
   Vector3 shrinkSize;
+  bool falling;
   public float shrinkFactor = 0.5f;
-  Vector3 initScale;
+  Vector3 fullScale;
   NavMeshAttack navMeshAttack;
 
   bool dead = false;
@@ -33,7 +34,7 @@ public class EnemyDamage : MonoBehaviour
     }
     shrinkState = ShrinkState.normal;
     shrinkSize = transform.localScale * shrinkFactor;
-    initScale = transform.localScale;
+    fullScale = transform.localScale;
   }
 
   void Update()
@@ -42,22 +43,30 @@ public class EnemyDamage : MonoBehaviour
     if (enemyStats.hP <= 0)
     {
       dead = true;
-      enemyStats.hP = 0;
-      StartCoroutine(hpZero());
     }
     else
     {
       dead = false;
-      StopCoroutine(hpZero());
     }
 
     if (dead == true)
     {
       _collider.enabled = false;
+      enemyStats.hP = 0;
+      if (navMeshAttack)
+      {
+        navMeshAttack.NavMeshAgent.speed = 0;
+      }
+      StartCoroutine(hpZero());
     }
     if (dead == false)
     {
       _collider.enabled = true;
+      if (navMeshAttack)
+      {
+        navMeshAttack.NavMeshAgent.speed = 3.5f;
+      }
+      StopCoroutine(hpZero());
     }
   }
 
@@ -87,19 +96,22 @@ public class EnemyDamage : MonoBehaviour
 
       // ! Fall 
 
-      if (deathSequence == DeathSequence.Fall) {
-        
+      if (deathSequence == DeathSequence.Fall)
+      {
+        StartCoroutine(fallIE());
       }
 
       // ! Explode 
 
-      if (deathSequence == DeathSequence.Explode) {
+      if (deathSequence == DeathSequence.Explode)
+      {
 
       }
 
       // ! Freeze 
 
-      if (deathSequence == DeathSequence.Freeze) {
+      if (deathSequence == DeathSequence.Freeze)
+      {
 
       }
 
@@ -126,11 +138,11 @@ public class EnemyDamage : MonoBehaviour
   IEnumerator shrinkAndGrowIE()
   {
     print("shrinkAndGrowIE called");
-    if (shrinkState == ShrinkState.normal | shrinkState == ShrinkState.shrinking | shrinkState == ShrinkState.shrunk)
+    if (shrinkState != ShrinkState.growing)
     {
       shrinkState = ShrinkState.shrinking;
       shrinkLerpState += 2f * Time.deltaTime;
-      transform.localScale = Vector3.Lerp(initScale, shrinkSize, shrinkLerpState);
+      transform.localScale = Vector3.Lerp(fullScale, shrinkSize, shrinkLerpState);
       if (shrinkLerpState > 1f)
       {
         shrinkState = ShrinkState.shrunk;
@@ -144,7 +156,7 @@ public class EnemyDamage : MonoBehaviour
     if (shrinkState == ShrinkState.growing)
     {
       shrinkLerpState += 2f * Time.deltaTime;
-      transform.localScale = Vector3.Lerp(shrinkSize, initScale, shrinkLerpState);
+      transform.localScale = Vector3.Lerp(shrinkSize, fullScale, shrinkLerpState);
       if (shrinkLerpState > 1f)
       {
         shrinkState = ShrinkState.normal;
@@ -155,4 +167,12 @@ public class EnemyDamage : MonoBehaviour
       yield return null;
     }
   }
+
+  IEnumerator fallIE()
+  {
+    yield return null;
+  }
+
+
 }
+

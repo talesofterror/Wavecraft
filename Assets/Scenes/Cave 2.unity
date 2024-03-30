@@ -1610,12 +1610,12 @@ PrefabInstance:
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.28
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -42.56
+      value: 25.1
       objectReference: {fileID: 0}
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
@@ -7378,6 +7378,11 @@ PrefabInstance:
     - target: {fileID: 6181548334817277852, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181548334817277855, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
+        type: 3}
+      propertyPath: fov
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6181548334817277855, guid: 30610ea80de8d6a47ace8cd9e4c13a4a,
@@ -17332,7 +17337,7 @@ PrefabInstance:
     - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: enemyCollissionsOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}

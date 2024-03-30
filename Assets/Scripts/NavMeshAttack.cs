@@ -1,40 +1,94 @@
+using System.Collections;
+using System.Threading;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NavMeshAttack : MonoBehaviour
 {
-
+  Vector3 defaultPosition;
   GameObject player;
-  NavMeshAgent NavMeshAgent;
+  [HideInInspector]
+  public NavMeshAgent NavMeshAgent;
+  EnemyDamage enemyDamage;
+  [HideInInspector]
+  public Vector3 destination;
 
-  public float distanceThreshold;
+  public float sightThreshold;
+  public float forgetThreshold;
 
+  enum SenseStatus
+  {
+    sighted,
+    unsighted
+  }
+
+  SenseStatus senseStatus = SenseStatus.unsighted;
 
   void Start()
   {
+    defaultPosition = transform.position;
+
     player = GameObject.FindGameObjectWithTag("Player");
     NavMeshAgent = GetComponent<NavMeshAgent>();
+    enemyDamage = GetComponent<EnemyDamage>();
   }
 
-  public bool playerSighted(Vector3 playerPosition, Vector3 selfPosition, float threshhold)
+  public bool playerSensed(Vector3 playerPosition, Vector3 selfPosition, float threshhold)
   {
     float currentDistance = Vector3.Distance(selfPosition, playerPosition);
     if (currentDistance < threshhold) return true;
     else return false;
   }
 
+
   void Update()
   {
-    if (playerSighted(player.transform.position, transform.position, distanceThreshold))
+    NavMeshAgent.destination = destination;
+
+    if (playerSensed(player.transform.position, transform.position, sightThreshold))
     {
-      Vector3 destination = player.transform.position;
-      NavMeshAgent.destination = destination;
-    };
+      senseStatus = SenseStatus.sighted;
+      print("player within sight threshhold");
+    }
+
+    if(senseStatus == SenseStatus.sighted){
+      StartCoroutine(triggerFollow());
+    }
+    else
+    {
+      destination = defaultPosition;
+    }
   }
 
-  void OnDrawGizmosSelected() {
+  float timer = 0.0f;
+  public float sensedTimer = 2;
+  IEnumerator triggerFollow()
+  {
+    print("trigger follow coroutine");
+    if (timer < sensedTimer)
+    {
+      destination = player.transform.position;
+      timer += 1f * Time.deltaTime;
+      yield return null;
+    }
+    if (timer >= sensedTimer)
+    {
+      if (!playerSensed(player.transform.position, transform.position, forgetThreshold))
+      {
+        timer = 0;
+        senseStatus = SenseStatus.unsighted;
+        StopCoroutine(triggerFollow());
+      }
+    }
+  }
+
+  void OnDrawGizmosSelected()
+  {
     Gizmos.color = Color.yellow;
-    Gizmos.DrawWireSphere(transform.position, distanceThreshold);
+    Gizmos.DrawWireSphere(transform.position, sightThreshold);
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(transform.position, forgetThreshold);
   }
 
 }

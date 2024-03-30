@@ -160,7 +160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8543c329e6c3b42862d35fd2dad008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceThreshold: 7.99
+  NavMeshAgent: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  sightThreshold: 6.27
+  forgetThreshold: 3.78
 --- !u!114 &8213503195035809256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59f1bd179881424481339cbe2be2540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shrinkFactor: 0.5
   deathSequence: 0
 --- !u!1001 &4540993733288387541
 PrefabInstance:
