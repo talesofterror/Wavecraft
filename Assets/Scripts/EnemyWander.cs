@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 // [ExecuteAlways]
 public class EnemyWander : MonoBehaviour
@@ -40,19 +41,43 @@ public class EnemyWander : MonoBehaviour
     if (moving)
     {
       StartCoroutine(MovementIE());
-    } else {
+    }
+    else
+    {
       StopCoroutine(MovementIE());
     }
   }
 
+  float lerpSpeed = 2f;
+  float lerpState = 0;
+  int toggleStateDriver = 0;
   private IEnumerator MovementIE()
   {
-    print("coroutine called");
-    for (int wp = 0; wp < waypointArray.Length; wp++)
+
+
+    if (lerpState <= 1)
     {
-      
+      for (lerpState = 0; lerpState <= 1; lerpState += lerpSpeed * Time.deltaTime)
+      {
+        print("lerp state = " + lerpState);
+        yield return null;
+      }
     }
-    yield return null;
+    else
+    {
+      lerpState = 0;
+      yield return new WaitForSeconds(1f);
+      print("list target index = " + toggleTarget());
+      yield return null;
+    }
+  }
+
+  Vector3 destination = new Vector3();
+  Vector3 toggleTarget()
+  {
+    toggleStateDriver++;
+    destination = wayPointVectorList[toggleStateDriver % wayPointVectorList.Count];
+    return destination;
   }
 
   private void CreatePrimitive(int i)
