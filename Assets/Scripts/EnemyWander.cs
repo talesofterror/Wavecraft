@@ -58,12 +58,12 @@ public class EnemyWander : MonoBehaviour
     print("lerp modulo = " + lerpModulo);
     lerpDriver += lerpSpeed * Time.deltaTime;
     // transform.position = Vector3.Lerp(wayPointVectorList[0], wayPointVectorList[1], lerpDriver);
-    transform.position = Lerpinate(lerpModulo);
+    transform.position = Lerpinate();
     yield return null;
 
   }
 
-  Vector3 Lerpinate(int modulo)
+  Vector3 Lerpinate()
   {
     if (lerpDriver >= 1)
     {
@@ -74,9 +74,9 @@ public class EnemyWander : MonoBehaviour
       lerpState = 0;
     }
     // int nextWaypoint = lerpState < wayPointVectorList.Count ? modulo + 1 : 0;
-    int nextWaypoint = modulo < wayPointVectorList.Count - 1 ? modulo + 1: 0;
+    int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1: 0;
     print("next waypoint = " + nextWaypoint);
-    return Vector3.Lerp(wayPointVectorList[modulo], wayPointVectorList[nextWaypoint], lerpDriver);
+    return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
   }
 
   private void CreatePrimitive(int i)

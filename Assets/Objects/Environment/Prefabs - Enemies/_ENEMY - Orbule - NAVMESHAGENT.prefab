@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8213503195035809256}
   - component: {fileID: 1736898596125523390}
   m_Layer: 10
-  m_Name: _ NAVMESHAGENT - Cube
+  m_Name: _ENEMY - Orbule - NAVMESHAGENT
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,14 +32,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5368549319719786615}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
   m_LocalPosition: {x: 11.35, y: -13.19, z: 1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7996032598854769266}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!33 &6081214358571886950
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   sightThreshold: 6.27
   forgetThreshold: 3.78
+  sensedTimer: 2
 --- !u!114 &8213503195035809256
 MonoBehaviour:
   m_ObjectHideFlags: 0
