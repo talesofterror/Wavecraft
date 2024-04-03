@@ -11,13 +11,14 @@ public class EnemyWander : MonoBehaviour
   public GameObject[] waypointArray;
   List<Vector3> wayPointVectorList;
 
-  Transform parent;
+  EnemyDamage enemyDamage;
 
   bool moving = true;
 
-  // Start is called before the first frame update
   void Start()
   {
+    enemyDamage = GetComponent<EnemyDamage>();
+
     wayPointVectorList = new List<Vector3>(numberOfWaypoints);
 
     for (int wp = 0; wp < waypointArray.Length; wp++)
@@ -26,18 +27,21 @@ public class EnemyWander : MonoBehaviour
       wayPointVectorList.Add(waypointArray[wp].transform.position);
     }
 
-
     transform.position = waypointArray[0].transform.position;
-
-    if (Application.isPlaying)
-    {
-      print("In player or playmode");
-    }
 
   }
 
   void Update()
   {
+    if (enemyDamage.dead == true)
+    {
+      moving = false;
+    }
+    else
+    {
+      moving = true;
+    }
+
     if (moving)
     {
       StartCoroutine(MovementIE());
@@ -48,16 +52,13 @@ public class EnemyWander : MonoBehaviour
     }
   }
 
-  public float lerpSpeed = 0.05f;
+  public float lerpSpeed = 0.5f;
   float lerpDriver = 0;
   int lerpState = 0;
   private IEnumerator MovementIE()
   {
 
-    int lerpModulo = lerpState % wayPointVectorList.Count;
-    print("lerp modulo = " + lerpModulo);
     lerpDriver += lerpSpeed * Time.deltaTime;
-    // transform.position = Vector3.Lerp(wayPointVectorList[0], wayPointVectorList[1], lerpDriver);
     transform.position = Lerpinate();
     yield return null;
 
@@ -70,11 +71,11 @@ public class EnemyWander : MonoBehaviour
       lerpState++;
       lerpDriver = 0;
     }
-    if (lerpState > wayPointVectorList.Count - 1) {
+    if (lerpState > wayPointVectorList.Count - 1)
+    {
       lerpState = 0;
     }
-    // int nextWaypoint = lerpState < wayPointVectorList.Count ? modulo + 1 : 0;
-    int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1: 0;
+    int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1 : 0;
     print("next waypoint = " + nextWaypoint);
     return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
   }
@@ -87,8 +88,5 @@ public class EnemyWander : MonoBehaviour
     waypointArray[i].transform.name = "Way Point " + (i + 1);
 
   }
-
-  // Update is called once per frame
-
 
 }

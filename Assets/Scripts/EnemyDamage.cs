@@ -12,7 +12,7 @@ public class EnemyDamage : MonoBehaviour
   Vector3 fullScale;
   NavMeshAttack navMeshAttack;
 
-  bool dead = false;
+  public bool dead = false;
 
   public enum DeathSequence
   {
