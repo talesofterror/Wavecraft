@@ -18,7 +18,7 @@ public class EnemyWander : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    wayPointVectorList = new List<Vector3>();
+    wayPointVectorList = new List<Vector3>(numberOfWaypoints);
 
     for (int wp = 0; wp < waypointArray.Length; wp++)
     {
@@ -48,25 +48,35 @@ public class EnemyWander : MonoBehaviour
     }
   }
 
-  float lerpSpeed = 0.05f;
-  float lerpState = 0;
-  int toggleStateDriver = 0;
+  public float lerpSpeed = 0.05f;
+  float lerpDriver = 0;
+  int lerpState = 0;
   private IEnumerator MovementIE()
   {
-    print("lerp state = " + lerpState);
-    lerpState += lerpSpeed * Time.deltaTime;
-    transform.position = Vector3.Lerp(wayPointVectorList[0], wayPointVectorList[1], lerpState);
+
+    int lerpModulo = lerpState % wayPointVectorList.Count;
+    print("lerp modulo = " + lerpModulo);
+    lerpDriver += lerpSpeed * Time.deltaTime;
+    // transform.position = Vector3.Lerp(wayPointVectorList[0], wayPointVectorList[1], lerpDriver);
+    transform.position = Lerpinate(lerpModulo);
     yield return null;
+
   }
 
-  // & List and Queue together?
-
-  Vector3 destination = new Vector3();
-  Vector3 toggleTarget()
+  Vector3 Lerpinate(int modulo)
   {
-    toggleStateDriver++;
-    destination = wayPointVectorList[toggleStateDriver % wayPointVectorList.Count];
-    return destination;
+    if (lerpDriver >= 1)
+    {
+      lerpState++;
+      lerpDriver = 0;
+    }
+    if (lerpState > wayPointVectorList.Count - 1) {
+      lerpState = 0;
+    }
+    // int nextWaypoint = lerpState < wayPointVectorList.Count ? modulo + 1 : 0;
+    int nextWaypoint = modulo < wayPointVectorList.Count - 1 ? modulo + 1: 0;
+    print("next waypoint = " + nextWaypoint);
+    return Vector3.Lerp(wayPointVectorList[modulo], wayPointVectorList[nextWaypoint], lerpDriver);
   }
 
   private void CreatePrimitive(int i)
