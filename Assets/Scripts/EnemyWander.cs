@@ -48,29 +48,18 @@ public class EnemyWander : MonoBehaviour
     }
   }
 
-  float lerpSpeed = 2f;
+  float lerpSpeed = 0.05f;
   float lerpState = 0;
   int toggleStateDriver = 0;
   private IEnumerator MovementIE()
   {
-
-
-    if (lerpState <= 1)
-    {
-      for (lerpState = 0; lerpState <= 1; lerpState += lerpSpeed * Time.deltaTime)
-      {
-        print("lerp state = " + lerpState);
-        yield return null;
-      }
-    }
-    else
-    {
-      lerpState = 0;
-      yield return new WaitForSeconds(1f);
-      print("list target index = " + toggleTarget());
-      yield return null;
-    }
+    print("lerp state = " + lerpState);
+    lerpState += lerpSpeed * Time.deltaTime;
+    transform.position = Vector3.Lerp(wayPointVectorList[0], wayPointVectorList[1], lerpState);
+    yield return null;
   }
+
+  // & List and Queue together?
 
   Vector3 destination = new Vector3();
   Vector3 toggleTarget()
