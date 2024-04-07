@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-// [ExecuteAlways]
 public class EnemyWander : MonoBehaviour
 {
   public int numberOfWaypoints;
@@ -76,7 +75,6 @@ public class EnemyWander : MonoBehaviour
       lerpState = 0;
     }
     int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1 : 0;
-    print("next waypoint = " + nextWaypoint);
     return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
   }
 

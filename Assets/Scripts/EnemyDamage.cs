@@ -12,6 +12,7 @@ public class EnemyDamage : MonoBehaviour
   Vector3 fullScale;
   NavMeshAttack navMeshAttack;
 
+  [HideInInspector]
   public bool dead = false;
 
   public enum DeathSequence

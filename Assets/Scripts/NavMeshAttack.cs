@@ -25,6 +25,12 @@ public class NavMeshAttack : MonoBehaviour
 
   SenseStatus senseStatus = SenseStatus.unsighted;
 
+
+  // & convert to collisions based system
+  
+  // & player position currently points to an area well below the mesh and 
+  // & needs to not. 
+
   void Start()
   {
     defaultPosition = transform.position;
@@ -52,12 +58,14 @@ public class NavMeshAttack : MonoBehaviour
       print("player within sight threshhold");
     }
 
-    if(senseStatus == SenseStatus.sighted){
+    if (senseStatus == SenseStatus.sighted)
+    {
       StartCoroutine(triggerFollow());
     }
     else
     {
       destination = defaultPosition;
+      StopCoroutine(triggerFollow());
     }
   }
 
@@ -74,14 +82,12 @@ public class NavMeshAttack : MonoBehaviour
     }
     if (timer >= sensedTimer)
     {
-      if (!playerSensed(player.transform.position, transform.position, forgetThreshold))
-      {
-        timer = 0;
-        senseStatus = SenseStatus.unsighted;
-        StopCoroutine(triggerFollow());
-      }
+      timer = 0;
+      senseStatus = SenseStatus.unsighted;
+      StopCoroutine(triggerFollow());
     }
   }
+
 
   void OnDrawGizmosSelected()
   {
@@ -89,6 +95,6 @@ public class NavMeshAttack : MonoBehaviour
     Gizmos.DrawWireSphere(transform.position, sightThreshold);
     Gizmos.color = Color.red;
     Gizmos.DrawWireSphere(transform.position, forgetThreshold);
-  }
 
+  }
 }

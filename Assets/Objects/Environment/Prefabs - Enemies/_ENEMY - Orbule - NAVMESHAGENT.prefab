@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4f1674bb8bda14f8f76c96d0cd5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hP: 30
+  hP: 100
   baseHP: 0
   aP: 100
   baseAP: 0
@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shrinkFactor: 0.5
+  dead: 0
   deathSequence: 0
 --- !u!1001 &4540993733288387541
 PrefabInstance:
