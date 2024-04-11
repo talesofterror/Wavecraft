@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4595887005413500000}
   m_Layer: 8
   m_Name: dustball
-  m_TagString: SpikePellet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

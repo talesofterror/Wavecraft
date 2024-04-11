@@ -8,10 +8,10 @@ TagManager:
   - Enemy
   - GuyBase
   - SpikePellet
-  - SpawnPoint
   - EntryTrigger
   - Fawn
   - Pointer
+  - PlayerDamage
   layers:
   - Default
   - TransparentFX

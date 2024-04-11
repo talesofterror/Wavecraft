@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Flesh
+  m_Name: Flesh 2
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -117,9 +117,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.58314055, b: 0.28490567, a: 1}
-    - _Color: {r: 1, g: 0.58314055, b: 0.28490567, a: 1}
-    - _EmissionColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
+    - _BaseColor: {r: 1, g: 0.58431375, b: 0.28627452, a: 1}
+    - _Color: {r: 1, g: 0.58431375, b: 0.28627452, a: 1}
+    - _EmissionColor: {r: 0.23921569, g: 0.12115559, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3085855810410545315
