@@ -1,0 +1,28 @@
+{
+  "Wavecraft": {
+    "Enemies": {
+      "Spore": {
+        "Description": "",
+        "HP": 0,
+        "AP": 0
+      }
+    },
+    "Player": {
+      "Biography" : "",
+      "HP": 0,
+      "AP": 0,
+      "Abilities": {
+        "DataCollector": {
+          "Description": "",
+          "Damage": 0
+        }
+      }
+    },
+    "UI": {
+
+    },
+    "NPC": {
+
+    }
+  }
+}
