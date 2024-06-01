@@ -24,5 +24,15 @@
     "NPC": {
 
     }
+  },
+
+  "Scripts": {
+    "Ideas": {
+      "MeshTrigger": "Create a Mesh that defines the bounds of a meshcollider",
+      "Camera-Revamp": {
+        "Concept": "Redo the camera system. Create a debug mode that can be toggled on and off. With Debug enabled you can move the camera in x/y with the arrowkeys or WASD. Save the position of the camera before debug was toggled on so that the camera returns to that position when Debug is toggled back off. Create variables for points in the z axis that correspond to the player/enemy coord and coords needed to compensate for FOV. Create a mechanism for creating transform points for cinematic viewpoints, and set up scene gizmos for that. Create a mechanism for creating teleportation points which both the camera and player can be moved to a specific location for easy iteration"
+      },
+      "Camera shift": "Redo in tandem with Camera-Revamp. Create triggers that shift the camera to a specific transform at a specific angle. Set the axis in which the camera will follow the player. Return the camera to a specific location and rotation when triggered from the other side."
+    }
   }
 }

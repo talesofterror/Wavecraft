@@ -9180,17 +9180,17 @@ PrefabInstance:
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.78
+      value: -17.36
       objectReference: {fileID: 0}
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.22
+      value: -49.13
       objectReference: {fileID: 0}
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0509644
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 5676666899852732809, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
@@ -9231,6 +9231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066714222592955181, guid: 82103c04e143eb440bea2793d9258d6d,
+        type: 3}
+      propertyPath: sightThreshold
+      value: 12.77
       objectReference: {fileID: 0}
     - target: {fileID: 8066714222592955181, guid: 82103c04e143eb440bea2793d9258d6d,
         type: 3}
