@@ -1,20 +1,20 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class PointerSensorManager : MonoBehaviour
 {
-  public Camera cam;
+  private Camera cam;
   LayerMask sensorLayer;
   public RaycastHit rayhit;
   public GameObject cursorTarget;
   public GameObject sensorTarget;
-  private Renderer cursorObjectRenderer;
   public Material cursorObjectMaterial;
 
   public GameObject player;
 
   void Awake()
   {
-
+    cam = Camera.main;
     Cursor.visible = false;
     cursorTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     cursorTarget.name = "****** Cursor Target!";

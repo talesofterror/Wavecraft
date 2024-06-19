@@ -4,19 +4,17 @@ public class Overlayer : MonoBehaviour
 {
   private Camera cam;
   public GameObject mainCamObject;
-  private Transform mainCamDefaulPosition;
-
   private viewer mainCamViewer;
   private ViewState currentState;
 
-  private bool swivel = true;
+  private bool swivel = false;
 
   // Start is called before the first frame update
   void Start()
   {
     cam = GetComponent<Camera>();
+    mainCamObject = Camera.main.gameObject;
     mainCamViewer = mainCamObject.GetComponent<viewer>();
-    mainCamDefaulPosition = mainCamObject.transform;
   }
 
   // Update is called once per frame

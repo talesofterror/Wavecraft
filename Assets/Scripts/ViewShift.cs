@@ -6,7 +6,6 @@ using UnityEngine.VFX;
 
 public class ViewShift : MonoBehaviour
 {
-  public GameObject viewerCam;
   private viewer vCam;
   public Transform targetTransform;
   public float horzizontalYShift;
@@ -40,7 +39,7 @@ public class ViewShift : MonoBehaviour
 
   private void Start()
   {
-    vCam = viewerCam.GetComponent<viewer>();
+    vCam = Camera.main.GetComponent<viewer>();
   }
 
   void Update()
