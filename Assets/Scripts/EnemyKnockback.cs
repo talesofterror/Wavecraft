@@ -9,7 +9,7 @@ public class EnemyKnockback : MonoBehaviour
 
   void OnCollisionEnter(Collision collission)
   {
-    if (collission.gameObject.tag == "PlayerDamage")
+    if (collission.gameObject.tag == "Enemy")
     {
       Vector3 contactPoint = collission.GetContact(0).point;
       Vector3 collisionVector = collission.gameObject.transform.position;

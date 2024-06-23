@@ -1,7 +1,30 @@
 {
   "Wavecraft": {
+    "Concept": {
+      "Story": {
+
+      },
+      "Gameplay": {
+        "Basis": "The player attacked enemies with Right Click, collects data with Left Click. Data is abundant and must be collected completely before progressing to the next area. The player must mostly avoid enemies, since ammo will be scarce and for tactical use only. Mazes kill upon contact with the walls, enemies throughout.",
+        "Collectors":  {
+          "Lazer Collector": "Straight line that collects all data in its path",
+          "Bomb Collector": "Grenade that bounces off surfaces and eventually explodes on contact with a data module or after a certain amount of time",
+          "AOE Collector": "Radiates a collection sphere around the player that collects data on contact"
+        },
+        "Weapons": {
+          "Spike Pellet": "A bullet that hits the target. Common",
+          "Arc Lazer": "A lazer that remains active while Right Click is pressed. Cursor must be on enemy",
+          "Whip": "Hits in an arc, a wedge of damage with a close radius"
+        }
+      }
+    },
     "Enemies": {
       "Spore": {
+        "Description": "",
+        "HP": 0,
+        "AP": 0
+      },
+      "Squid": {
         "Description": "",
         "HP": 0,
         "AP": 0

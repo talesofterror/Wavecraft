@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class NavMeshAttack : MonoBehaviour
 {
   Vector3 defaultPosition;
+  Vector3 defaultRotation;
   GameObject player;
   [HideInInspector]
   public NavMeshAgent NavMeshAgent;
@@ -34,6 +35,7 @@ public class NavMeshAttack : MonoBehaviour
   void Start()
   {
     defaultPosition = transform.position;
+    defaultRotation = transform.eulerAngles;
 
     player = GameObject.FindGameObjectWithTag("Player");
     NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -51,6 +53,7 @@ public class NavMeshAttack : MonoBehaviour
   void Update()
   {
     NavMeshAgent.destination = destination;
+    transform.eulerAngles = defaultRotation;
 
     if (playerSensed(player.transform.position, transform.position, sightThreshold))
     {

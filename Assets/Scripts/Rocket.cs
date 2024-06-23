@@ -166,6 +166,10 @@ public class Rocket : MonoBehaviour
    = 4;
   void controlsNEW()
   {
+
+    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.C)) {
+      toggleEnemyCollisions();
+    }
     
     if (Input.GetKey(KeyCode.LeftShift))
     {
@@ -291,5 +295,12 @@ public class Rocket : MonoBehaviour
     // probably need a dedicated time manager, and to possible add pause state
     // definitions to each class.
 
-
+  private void toggleEnemyCollisions () {
+    if (enemyCollissionsOn) {
+      enemyCollissionsOn = false;
+    }
+    else {
+      enemyCollissionsOn = true;
+    }
+  }
 }

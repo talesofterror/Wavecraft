@@ -29,10 +29,10 @@ public class AmmoCollisions : MonoBehaviour
   private void OnCollisionEnter(Collision collision)
   {
 
+    mrenderer.enabled = false;
 
     if (collision.gameObject.tag == "Enemy")
     {
-      mrenderer.enabled = false;
 
       mcollider.enabled = false;
       enemyStats = collision.gameObject.GetComponent<EnemyStats>();

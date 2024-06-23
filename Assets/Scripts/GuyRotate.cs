@@ -40,7 +40,7 @@ public class GuyRotate : MonoBehaviour
     Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
     Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
 
-    if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("DPad-Horizontal") < 0)
+    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
     {
 
       if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
@@ -55,7 +55,7 @@ public class GuyRotate : MonoBehaviour
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("DPad-Horizontal") > 0)
+    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
     {
       if (direction == Direction.FacingRight | direction == Direction.TurningRight)
       {

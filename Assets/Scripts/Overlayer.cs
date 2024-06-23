@@ -3,9 +3,10 @@ using UnityEngine;
 public class Overlayer : MonoBehaviour
 {
   private Camera cam;
-  public GameObject mainCamObject;
+  public GameObject mainCam;
   private viewer mainCamViewer;
   private ViewState currentState;
+  public float overlayFOV = 44f; // & 44f
 
   private bool swivel = false;
 
@@ -13,8 +14,8 @@ public class Overlayer : MonoBehaviour
   void Start()
   {
     cam = GetComponent<Camera>();
-    mainCamObject = Camera.main.gameObject;
-    mainCamViewer = mainCamObject.GetComponent<viewer>();
+    mainCam = Camera.main.gameObject;
+    mainCamViewer = mainCam.GetComponent<viewer>();
   }
 
   // Update is called once per frame
@@ -22,20 +23,17 @@ public class Overlayer : MonoBehaviour
   {
     currentState = mainCamViewer.state;
 
+    // cam.orthographic = false;
+    cam.fieldOfView = overlayFOV;
+
     if (currentState == ViewState.stageView)
     {
       cam.orthographic = false;
-      cam.fieldOfView = 28f;
+      overlayFOV = 28f;
     }
     else
     {
-      if (mainCamViewer.swivelOn == true) {
-        cam.orthographic = true;
-      }
-      if (mainCamViewer.swivelOn == false) {
-        cam.orthographic = false;
-        cam.fieldOfView = 44f;
-      }
+        overlayFOV = 44f;
     }
   }
 }

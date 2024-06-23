@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 8066714222592955181}
   - component: {fileID: 8213503195035809256}
   - component: {fileID: 1736898596125523390}
-  - component: {fileID: 8486300723115404050}
   m_Layer: 10
   m_Name: _ENEMY - Orbule - NAVMESHAGENT
   m_TagString: Enemy
@@ -163,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NavMeshAgent: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
-  sightThreshold: 6.27
+  sightThreshold: 12.77
   forgetThreshold: 4.16
   sensedTimer: 3
 --- !u!114 &8213503195035809256
@@ -197,20 +196,6 @@ MonoBehaviour:
   shrinkFactor: 0.5
   dead: 0
   deathSequence: 0
---- !u!114 &8486300723115404050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368549319719786615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a9638f9441ab0441a025ceea926a27b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackDistance: 5
-  knockbackSpeed: 2
 --- !u!1001 &4540993733288387541
 PrefabInstance:
   m_ObjectHideFlags: 0
