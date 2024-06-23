@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Threading;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 

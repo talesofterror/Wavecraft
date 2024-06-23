@@ -12473,6 +12473,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30610ea80de8d6a47ace8cd9e4c13a4a, type: 3}
+--- !u!1 &1118904404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2951178579754335002, guid: 7e080339ae9335244ab898aaa2d76649,
+    type: 3}
+  m_PrefabInstance: {fileID: 722900297928698638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1123087876
 GameObject:
   m_ObjectHideFlags: 0
@@ -14573,7 +14579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1371725211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23544,6 +23550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5387299291027779369, guid: 7e080339ae9335244ab898aaa2d76649,
         type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1118904404}
+    - target: {fileID: 5387299291027779369, guid: 7e080339ae9335244ab898aaa2d76649,
+        type: 3}
       propertyPath: mainCamObject
       value: 
       objectReference: {fileID: 1036151041}
@@ -24012,7 +24023,7 @@ PrefabInstance:
     - target: {fileID: 4115480096936855152, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4115480096936855154, guid: 5434f59f2cc3ac048a27208bf03b7d4f,
         type: 3}
