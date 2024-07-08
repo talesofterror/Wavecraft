@@ -33,7 +33,6 @@ public class ItemCollect : MonoBehaviour
   {
     for (i = 0; i < 1; i += Time.deltaTime * shrinkSpeed)
     {
-      print("ScaleDown iteration: " + i);
       transform.localScale = Vector3.Lerp(initialScale, targetScaleVector, i);
       yield return null;
     }
