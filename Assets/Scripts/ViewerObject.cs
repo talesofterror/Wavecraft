@@ -1,25 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ViewerObject
 {
-  public Transform transform;
-
-  public float fOV;
-
-  public ViewerObject (Transform t) {
-    transform = t;
+  public Vector3 position;
+  public Quaternion rotation; // & set with Quaternion.Euler(f, f, f)
+  public float fieldOfView;
+  public enum FollowState
+  {
+    Stationary,
+    Horizontal,
+    Vertical,
+    Total
   }
 
-  // Start is called before the first frame update
-  public void UpdateViewer(
-    float xOffset, float yOffset, float zOffset,
-    float xRotation, float yRotation, float zRotation,
-    float fOV
-                          )
-  {
+  public FollowState followState = new FollowState();
 
+  public ViewerObject(
+    Vector3 pos,
+    Quaternion rot,
+    float fov)
+  {
+    position = pos;
+    rotation = rot;
+    fieldOfView = fov;
+  }
+
+  public void setFollowState(string state)
+  {
+    if (state == "stationary")
+    {
+      followState = FollowState.Stationary;
+    }
+    if (state == "vertical")
+    {
+      followState = FollowState.Vertical;
+    }
+    if (state == "horizontal")
+    {
+      followState = FollowState.Horizontal;
+    }
+    if (state == "total")
+    {
+      followState = FollowState.Total;
+    }
   }
 
 }
