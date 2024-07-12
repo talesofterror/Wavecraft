@@ -79,11 +79,12 @@ public class Rocket : MonoBehaviour
 
     PauseGame();
 
-    
-    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.C)) {
+
+    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.C))
+    {
       toggleEnemyCollisions();
     }
-    
+
   }
 
   void Start()
@@ -172,50 +173,22 @@ public class Rocket : MonoBehaviour
    = 4;
   void controlsNEW()
   {
-    
-    if (Input.GetKey(KeyCode.LeftShift))
-    {
-      boost_Live = 7;
-    }
-    else
-    {
-      boost_Live = boost;
-    }
-
     float thrustPower_Keys = thrustPower * Time.deltaTime * boost_Live;
     float thrustPower_Mouse = thrustPower * Time.deltaTime;
     Vector3 navPointer = navCursor.transform.position;
     Physics.gravity = Vector3.zero;
-    rigidBody.drag = 4f;
+    rigidBody.drag = 2f;
     rigidBody.angularDrag = 0.0f;
 
     if (Input.GetKey(KeyCode.LeftShift))
     {
       boost_Live = 7;
+      rigidBody.drag = 2f;
     }
-    if (!Input.GetKey(KeyCode.LeftShift))
+    else
     {
-      boost = boost_Live;
+      boost_Live = boost;
     }
-
-    if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
-    {
-      // Vector3 navDirection = navPointer - transform.position;
-      // Vector3 navMinusZ = new Vector3(
-      //   navDirection.x,
-      //   navDirection.y,
-      //   0);
-      // print("navDirection = " + navDirection);
-      // print("navMinusZ = " + navMinusZ);
-      // print("navMinusZ * thrustThisFrame = " + (navMinusZ * thrustPower_Keys));
-
-      // rigidBody.AddForce(navMinusZ.normalized * thrustPower_Mouse);
-    }
-    // else
-    // {
-    //   audioSource.Stop();
-    //   rigidBody.drag = 4f;
-    // }
 
     float yRotate = rotationSpeed * Time.deltaTime;
     rigidBody.freezeRotation = true;
@@ -297,11 +270,14 @@ public class Rocket : MonoBehaviour
     // probably need a dedicated time manager, and to possible add pause state
     // definitions to each class.
 
-  private void toggleEnemyCollisions () {
-    if (enemyCollissionsOn) {
+  private void toggleEnemyCollisions()
+  {
+    if (enemyCollissionsOn)
+    {
       enemyCollissionsOn = false;
     }
-    else {
+    else
+    {
       enemyCollissionsOn = true;
     }
   }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ViewShift : MonoBehaviour
+public class ViewShiftOld : MonoBehaviour
 {
   private viewer vCam;
   public Transform targetTransform;

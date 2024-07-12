@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/*
+/* 
 ! outline
 
 Needs flexible coroutine for transitions
@@ -33,6 +32,7 @@ Moving player into new area should initiate relevant camera rules for area
 ^ Functions: 
   * SwitchView
   * ViewpointTransition Coroutine (May be the same as SwitchView)
+  * MotionLead (Shift camera in direction of movement)
 
 */
 
@@ -40,19 +40,18 @@ public class ViewerRevised : MonoBehaviour
 {
 
   private GameObject player;
-  private Vector3 origPosition;
   private ViewerObject activeView;
+  private ViewerObject initialView;
 
   // Start is called before the first frame update
   void Start()
   {
-    origPosition = transform.position;
-    activeView = new ViewerObject(origPosition, transform.rotation, 28.7f);
-    activeView.setFollowState("vertical");
+    initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
+    activeView = initialView;
+    activeView.setFollowState(FollowState.Vertical);
     player = GameObject.FindWithTag("GuyBase");
   }
 
-  // Update is called once per frame
   void Update()
   {
     setActiveView(activeView);
@@ -73,33 +72,38 @@ public class ViewerRevised : MonoBehaviour
     Camera.main.fieldOfView = view.fieldOfView;
   }
 
-  void setFollowBehavior(ViewerObject.FollowState state)
+  [HideInInspector]
+  public float followStateXOffset;
+  [HideInInspector]
+  public float followStateYOffset;
+
+  void setFollowBehavior(FollowState state)
   {
-    if (state == ViewerObject.FollowState.Stationary)
+    if (state == FollowState.Stationary)
     {
       return;
     }
-    if (state == ViewerObject.FollowState.Vertical)
+    if (state == FollowState.Vertical)
     {
       activeView.position = new Vector3(
-        activeView.position.x,
+        activeView.position.x + followStateXOffset,
         player.transform.position.y,
         activeView.position.z
         );
     }
-    if (state == ViewerObject.FollowState.Horizontal)
+    if (state == FollowState.Horizontal)
     {
       activeView.position = new Vector3(
         player.transform.position.x,
-        activeView.position.y,
+        activeView.position.y + followStateYOffset,
         activeView.position.z
         );
     }
-    if (state == ViewerObject.FollowState.Total)
+    if (state == FollowState.Total)
     {
       activeView.position = new Vector3(
-        activeView.position.x,
-        player.transform.position.y,
+        activeView.position.x + followStateXOffset,
+        player.transform.position.y + followStateYOffset,
         activeView.position.z
         );
     }
@@ -124,6 +128,5 @@ public class ViewerRevised : MonoBehaviour
       activeView = transitoryView;
       yield return null;
     }
-
   }
 }
