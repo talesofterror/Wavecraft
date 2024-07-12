@@ -4,7 +4,7 @@ public class Overlayer : MonoBehaviour
 {
   private Camera cam;
   public GameObject mainCam;
-  private viewer mainCamViewer;
+  private ViewerOld mainCamViewer;
   private ViewState currentState;
   public float overlayFOV = 44f; // & 44f
 
@@ -15,7 +15,7 @@ public class Overlayer : MonoBehaviour
   {
     cam = GetComponent<Camera>();
     mainCam = Camera.main.gameObject;
-    mainCamViewer = mainCam.GetComponent<viewer>();
+    mainCamViewer = mainCam.GetComponent<ViewerOld>();
   }
 
   // Update is called once per frame

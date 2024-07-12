@@ -40,7 +40,7 @@ public class GuyRotate : MonoBehaviour
     Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
     Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
 
-    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("DPad-Horizontal") < 0)
+    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Horizontal") < -0.25f || Input.GetAxis("DPad-Horizontal") < -0.50f)
     {
 
       if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
@@ -55,7 +55,7 @@ public class GuyRotate : MonoBehaviour
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("DPad-Horizontal") > 0)
+    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Horizontal") > 0.25f || Input.GetAxis("DPad-Horizontal") > 0.50f)
     {
       if (direction == Direction.FacingRight | direction == Direction.TurningRight)
       {
@@ -69,10 +69,10 @@ public class GuyRotate : MonoBehaviour
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.T) || Input.GetAxis("DPad-Horizontal") > 0)
-    {
-      print(this.transform.parent.transform.eulerAngles.z);
-    }
+    // if (Input.GetKeyDown(KeyCode.T) || Input.GetAxis("DPad-Horizontal") > 0)
+    // {
+    //   print(this.transform.parent.transform.eulerAngles.z);
+    // }
 
   }
 

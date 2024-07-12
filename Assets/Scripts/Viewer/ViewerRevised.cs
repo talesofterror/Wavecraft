@@ -42,21 +42,28 @@ public class ViewerRevised : MonoBehaviour
   private GameObject player;
   private ViewerObject activeView;
   private ViewerObject initialView;
+  public FollowState followState;
 
   // Start is called before the first frame update
-  void Start()
+  void Awake()
   {
-    initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
-    activeView = initialView;
-    activeView.setFollowState(FollowState.Vertical);
     player = GameObject.FindWithTag("GuyBase");
+    initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
+    initialView.setOffsets(0.0f, 3.76f, 0.02f);
+    initialView.setFollowState(FollowState.Vertical);
+    followState = initialView.followState;
+    activeView = initialView;
   }
 
   void Update()
   {
     setActiveView(activeView);
-    setFollowBehavior(activeView.followState);
+    setFollowBehavior(followState);
     debug();
+  }
+
+  void FixedUpdate()
+  {
   }
 
   void debug()
@@ -67,15 +74,10 @@ public class ViewerRevised : MonoBehaviour
 
   void setActiveView(ViewerObject view)
   {
-    transform.position = view.position;
+    transform.position = view.position + view.offsets;
     transform.rotation = view.rotation;
     Camera.main.fieldOfView = view.fieldOfView;
   }
-
-  [HideInInspector]
-  public float followStateXOffset;
-  [HideInInspector]
-  public float followStateYOffset;
 
   void setFollowBehavior(FollowState state)
   {
@@ -86,7 +88,7 @@ public class ViewerRevised : MonoBehaviour
     if (state == FollowState.Vertical)
     {
       activeView.position = new Vector3(
-        activeView.position.x + followStateXOffset,
+        activeView.position.x,
         player.transform.position.y,
         activeView.position.z
         );
@@ -95,15 +97,15 @@ public class ViewerRevised : MonoBehaviour
     {
       activeView.position = new Vector3(
         player.transform.position.x,
-        activeView.position.y + followStateYOffset,
+        activeView.position.y,
         activeView.position.z
         );
     }
     if (state == FollowState.Total)
     {
       activeView.position = new Vector3(
-        activeView.position.x + followStateXOffset,
-        player.transform.position.y + followStateYOffset,
+        player.transform.position.x,
+        player.transform.position.y,
         activeView.position.z
         );
     }

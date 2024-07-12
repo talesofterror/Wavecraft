@@ -183,7 +183,7 @@ public class Rocket : MonoBehaviour
     if (Input.GetKey(KeyCode.LeftShift))
     {
       boost_Live = 7;
-      rigidBody.drag = 2f;
+      rigidBody.drag = 1f;
     }
     else
     {
@@ -192,27 +192,39 @@ public class Rocket : MonoBehaviour
 
     float yRotate = rotationSpeed * Time.deltaTime;
     rigidBody.freezeRotation = true;
-    if (Input.GetKey(KeyCode.A))
+    if (Input.GetKey(KeyCode.A)
+      || Input.GetAxis("Horizontal") < -0.25f
+      || Input.GetAxis("DPad-Horizontal") < -0.50f
+      )
     {
       rigidBody.AddForce(Vector3.left * thrustPower_Keys);
     }
-    if (Input.GetKey(KeyCode.D))
+    if (Input.GetKey(KeyCode.D)
+      || Input.GetAxis("Horizontal") > 0.25f
+      || Input.GetAxis("DPad-Horizontal") > 0.50f
+      )
     {
       rigidBody.AddForce(Vector3.right * thrustPower_Keys);
     }
-    if (Input.GetKey(KeyCode.W))
+    if (Input.GetKey(KeyCode.W)
+      || Input.GetAxis("Vertical") > 0.25f
+      || Input.GetAxis("DPad-Vertical") > 0.50f
+      )
     {
       rigidBody.AddForce(Vector3.up * thrustPower_Keys);
     }
-    if (Input.GetKey(KeyCode.S))
+    if (Input.GetKey(KeyCode.S)
+      || Input.GetAxis("Vertical") < -0.25f
+      || Input.GetAxis("DPad-Vertical") < -0.50f
+      )
     {
       rigidBody.AddForce(Vector3.down * thrustPower_Keys);
     }
 
     rigidBody.freezeRotation = false;
 
-    float joystickX = Input.GetAxis("Horizontal");
-    transform.Rotate(Vector3.back * joystickX);
+    // float joystickX = Input.GetAxis("Horizontal");
+    // transform.Rotate(Vector3.back * joystickX);
   }
 
   void controlsOLD()

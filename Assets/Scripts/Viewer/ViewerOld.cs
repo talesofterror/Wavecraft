@@ -32,7 +32,7 @@ public enum ViewState
   vertAnim
 }
 
-public class viewer : MonoBehaviour
+public class ViewerOld : MonoBehaviour
 {
   Camera mainCam;
   Camera overlayCam;
