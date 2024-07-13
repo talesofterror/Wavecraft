@@ -18,19 +18,21 @@ public class ViewShiftNew : MonoBehaviour
   public Vector3 targetPosition;
   public Quaternion targetRotation;
   public float targetFieldOfView;
+  public Vector3 offsets;
   public FollowState targetFollowState;
   public bool targetLookAt;
-  private ViewerObject targetView;
+  private ViewerObject shiftView;
   private ViewerObject initView;
   private bool toggle = false;
   public bool editMode;
   void Awake()
   {
-    targetView = new ViewerObject(targetPosition, targetRotation, targetFieldOfView);
+    shiftView = new ViewerObject(targetPosition, targetRotation, targetFieldOfView);
+    shiftView.setOffsets(offsets.x, offsets.y, offsets.z);
   }
   void Start()
   {
-    targetView.followState = targetFollowState;
+    shiftView.followState = targetFollowState;
   }
 
   private void OnTriggerEnter(Collider collider)
@@ -39,13 +41,13 @@ public class ViewShiftNew : MonoBehaviour
     {
       if (!toggle)
       {
-        targetView.position = targetPosition;
-        targetView.rotation = targetRotation;
-        targetView.fieldOfView = targetFieldOfView;
-        targetView.followState = targetFollowState;
+        // shiftView.position = targetPosition;
+        // shiftView.rotation = targetRotation;
+        // shiftView.fieldOfView = targetFieldOfView;
+        // shiftView.followState = targetFollowState;
         initView = Camera.main.gameObject.GetComponent<ViewerRevised>().activeView;
         print("Entry Trigger follow state: " + targetFollowState);
-        Camera.main.gameObject.GetComponent<ViewerRevised>().activeView = targetView;
+        Camera.main.gameObject.GetComponent<ViewerRevised>().activeView = shiftView;
         toggle = true;
       }
       else
@@ -59,11 +61,13 @@ public class ViewShiftNew : MonoBehaviour
   void Update()
   {
     if (editMode)
+    // & Edit mode should integrate ViewerObject.offsets
     {
-      targetView.position = targetPosition;
-      targetView.rotation = targetRotation;
-      targetView.fieldOfView = targetFieldOfView;
-      targetView.followState = targetFollowState;
+      shiftView.position = targetPosition;
+      shiftView.rotation = targetRotation;
+      shiftView.fieldOfView = targetFieldOfView;
+      shiftView.followState = targetFollowState;
+      shiftView.offsets = offsets;
     }
   }
 }
