@@ -40,7 +40,7 @@ public class ViewerRevised : MonoBehaviour
 {
 
   private GameObject player;
-  private ViewerObject activeView;
+  public ViewerObject activeView;
   private ViewerObject initialView;
   public FollowState followState;
 
@@ -49,17 +49,16 @@ public class ViewerRevised : MonoBehaviour
   {
     player = GameObject.FindWithTag("GuyBase");
     initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
-    initialView.setOffsets(0.0f, 3.76f, 0.02f);
-    initialView.setFollowState(FollowState.Vertical);
-    followState = initialView.followState;
+    initialView.setOffsets(0.0f, 3.7f, 0.02f);
+    initialView.setFollowState(followState);
     activeView = initialView;
   }
 
   void Update()
   {
     setActiveView(activeView);
-    setFollowBehavior(followState);
-    debug();
+    setFollowBehavior(activeView.followState);
+    // debug();
   }
 
   void FixedUpdate()
@@ -74,16 +73,25 @@ public class ViewerRevised : MonoBehaviour
 
   void setActiveView(ViewerObject view)
   {
+    if (followState == FollowState.Stationary)
+    {
+      activeView.setOffsets(0, 0, 0);
+    }
     transform.position = view.position + view.offsets;
     transform.rotation = view.rotation;
     Camera.main.fieldOfView = view.fieldOfView;
   }
 
-  void setFollowBehavior(FollowState state)
+  public void setFollowBehavior(FollowState state)
   {
     if (state == FollowState.Stationary)
     {
-      return;
+      activeView.position = new Vector3(
+        activeView.position.x,
+        activeView.position.y,
+        activeView.position.z
+        );
+      Debug.Log("follow state set stationary");
     }
     if (state == FollowState.Vertical)
     {

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6181548334817277827}
   - component: {fileID: 6181548334817277824}
   - component: {fileID: 6181548334817277825}
-  - component: {fileID: 6181548334817277855}
+  - component: {fileID: 5241419067235176408}
   m_Layer: 0
   m_Name: Entry Trigger
   m_TagString: EntryTrigger
@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -10.88, y: -42.28, z: 0.6}
-  m_LocalScale: {x: 20.561703, y: 0.33, z: 8.02}
+  m_LocalScale: {x: 8.683824, y: 0.73330665, z: 8.02}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8057297557086274575}
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,7 +138,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6181548334817277855
+--- !u!114 &5241419067235176408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,13 +147,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6181548334817277852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217c4905dd9ec1a44bd20b5607f4876f, type: 3}
+  m_Script: {fileID: 11500000, guid: 044e51d264325ed43b68af87468ae98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewerCam: {fileID: 0}
-  targetTransform: {fileID: 0}
-  horzizontalYShift: 0
-  verticalXShift: 0
-  inSetting: 3
-  outSetting: 4
-  fov: 0
+  targetPosition: {x: -0.39, y: 0, z: -67.1}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetFieldOfView: 18.8
+  targetFollowState: 2
+  targetLookAt: 0
+  editMode: 0

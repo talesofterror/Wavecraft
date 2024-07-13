@@ -8,7 +8,7 @@ public class ViewerObject
   public Quaternion rotation; // ? set with Quaternion.Euler(f, f, f)
   public float fieldOfView;
   public Vector3 offsets;
-  public FollowState followState = new FollowState();
+  public FollowState followState;
   public bool lookAt = false;
 
   public ViewerObject(
