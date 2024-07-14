@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 /* 
 ! outline
@@ -57,7 +58,7 @@ public class ViewerRevised : MonoBehaviour
   void Update()
   {
     setActiveView(activeView);
-    setFollowBehavior(activeView.followState);
+    setFollowBehavior(followState);
     // debug();
   }
 
@@ -73,13 +74,14 @@ public class ViewerRevised : MonoBehaviour
 
   void setActiveView(ViewerObject view)
   {
-    if (followState == FollowState.Stationary)
+    if (view.followState == FollowState.Stationary)
     {
       activeView.setOffsets(0, 0, 0);
     }
     transform.position = view.position + view.offsets;
     transform.rotation = view.rotation;
     Camera.main.fieldOfView = view.fieldOfView;
+    followState = activeView.followState;
   }
 
   public void setFollowBehavior(FollowState state)
@@ -119,24 +121,48 @@ public class ViewerRevised : MonoBehaviour
     }
   }
 
+  public void callViewTransition(ViewerObject start, ViewerObject target, float speed)
+  {
+    // StopAllCoroutines();
+    StartCoroutine(ViewTransition(start, target, speed));
+  }
+
   IEnumerator ViewTransition(
     ViewerObject start, ViewerObject target,
-    float transitionLength, float transitionSpeed)
+    float transitionSpeed)
   {
     Vector3 transitoryPosition;
     Quaternion transitoryRotation;
     float transitoryFieldOfView;
 
-    ViewerObject transitoryView = new ViewerObject(
-      start.position, start.rotation,
-      start.fieldOfView
-    );
+    ViewerObject transitoryView = new ViewerObject(Vector3.zero, Quaternion.Euler(0,0,0), 0);
 
     float i;
-    for (i = 0; i < transitionLength; i += transitionSpeed / 1 * Time.deltaTime)
+    float rotX, rotY, rotZ;
+
+    rotX = start.rotation.eulerAngles.x;
+    rotY = start.rotation.eulerAngles.y;
+    rotZ = start.rotation.eulerAngles.z;
+
+    // activeView.followState = start.followState;
+
+    for (i = 0; i < 1; i += 1 / transitionSpeed * Time.deltaTime)
     {
+      rotX = Mathf.Lerp(rotX, target.rotation.x, i);
+      rotY = Mathf.Lerp(rotY, target.rotation.y, i);
+      rotZ = Mathf.Lerp(rotZ, target.rotation.z, i);
+
+      transitoryPosition = Vector3.Lerp(start.position, target.position, i);
+      transitoryRotation = Quaternion.Euler(rotX, rotY, rotZ);
+      transitoryFieldOfView = Mathf.Lerp(start.fieldOfView, target.fieldOfView, i);
+
+      transitoryView.position = transitoryPosition;
+      transitoryView.rotation = transitoryRotation;
+      transitoryView.fieldOfView = transitoryFieldOfView;
+
       activeView = transitoryView;
       yield return null;
     }
+    // StopAllCoroutines();
   }
 }
