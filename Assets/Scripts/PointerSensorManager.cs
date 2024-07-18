@@ -7,7 +7,7 @@ public class PointerSensorManager : MonoBehaviour
   LayerMask sensorLayer;
   public RaycastHit rayhit;
   public GameObject cursorTarget; // & remove instantiating code when mesh crafted
-  // public GameObject sensorTarget;
+
   public Material cursorObjectMaterial;
 
   public GameObject player;
@@ -16,7 +16,6 @@ public class PointerSensorManager : MonoBehaviour
   {
     cam = Camera.main;
     Cursor.visible = false;
-    // Cursor.lockState = CursorLockMode.Confined;
     cursorTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     cursorTarget.name = "****** Cursor Target!";
     cursorTarget.GetComponent<Collider>().enabled = false;
@@ -24,17 +23,12 @@ public class PointerSensorManager : MonoBehaviour
     print("Cursor Object Material = " + Resources.FindObjectsOfTypeAll(typeof(Material)).Length);
     cursorTarget.layer = 5;
 
-    // sensorTarget = GameObject.CreatePrimitive(PrimitiveType.Cube);
-    // sensorTarget.name = "****** Sensor Target!";
-    // sensorTarget.GetComponent<Collider>().enabled = false;
-    // sensorTarget.layer = 5;
-
     sensorLayer = 1 << 6;
   }
 
   void Update()
   {
-    Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
+    Ray rayForSensor = cam.ViewportPointToRay(Input.mousePosition);
 
     if (Physics.Raycast(rayForSensor.origin, rayForSensor.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
     {

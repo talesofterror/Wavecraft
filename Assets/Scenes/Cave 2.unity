@@ -8751,8 +8751,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cursorTarget
       value: 
-      objectReference: {fileID: 1006691186284086458, guid: 7123a294723f51b4b8ba7d6c0f5990d5,
-        type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

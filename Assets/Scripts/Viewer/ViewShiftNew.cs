@@ -34,6 +34,7 @@ public class ViewShiftNew : MonoBehaviour
     shiftView.setOffsets(offsets.x, offsets.y, offsets.z);
     shiftView.setFollowState(targetFollowState);
     mainCamViewerRevised = Camera.main.gameObject.GetComponent<ViewerRevised>();
+    editMode = false;
   }
   void Start()
   {
@@ -55,8 +56,8 @@ public class ViewShiftNew : MonoBehaviour
         }
         else
         {
-        initView = mainCamViewerRevised.activeView;
-        mainCamViewerRevised.activeView = shiftView;
+          initView = mainCamViewerRevised.activeView;
+          mainCamViewerRevised.activeView = shiftView;
         }
         triggeredAlready = true;
       }
@@ -70,7 +71,7 @@ public class ViewShiftNew : MonoBehaviour
         }
         else
         {
-        Camera.main.gameObject.GetComponent<ViewerRevised>().activeView = initView;
+          mainCamViewerRevised.activeView = initView;
         }
         triggeredAlready = false;
       }
@@ -81,11 +82,48 @@ public class ViewShiftNew : MonoBehaviour
   {
     if (editMode)
     {
-      shiftView.position = targetPosition;
-      shiftView.rotation = targetRotation;
-      shiftView.fieldOfView = targetFieldOfView;
-      shiftView.followState = targetFollowState;
-      shiftView.offsets = offsets;
+      Vector3 calculatedTarget(FollowState state)
+      {
+        if (state == FollowState.Stationary)
+        {
+          return targetPosition;
+        }
+        if (state == FollowState.Vertical)
+        {
+          return new Vector3(
+            targetPosition.x, 
+            mainCamViewerRevised.player.transform.position.y, 
+            targetPosition.z
+            );
+        }
+        if (state == FollowState.Horizontal)
+        {
+          return new Vector3(
+            mainCamViewerRevised.player.transform.position.x, 
+            targetPosition.y, 
+            targetPosition.z
+            );
+        }
+        if (state == FollowState.Total)
+        {
+          return new Vector3(
+            mainCamViewerRevised.player.transform.position.x, 
+            mainCamViewerRevised.player.transform.position.y, 
+            targetPosition.z
+            );
+        }
+        else
+        {
+          Debug.Log("No valid FollowState");
+          return Vector3.zero;
+        }
+      }
+
+      mainCamViewerRevised.activeView.position = calculatedTarget(mainCamViewerRevised.followState);
+      mainCamViewerRevised.activeView.rotation = targetRotation;
+      mainCamViewerRevised.activeView.fieldOfView = targetFieldOfView;
+      mainCamViewerRevised.activeView.followState = targetFollowState;
+      mainCamViewerRevised.activeView.offsets = offsets;
     }
   }
 }

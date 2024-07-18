@@ -40,7 +40,7 @@ Moving player into new area should initiate relevant camera rules for area
 public class ViewerRevised : MonoBehaviour
 {
 
-  private GameObject player;
+  public GameObject player;
   public ViewerObject activeView;
   private ViewerObject initialView;
   public FollowState followState;
