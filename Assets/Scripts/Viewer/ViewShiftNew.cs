@@ -25,7 +25,7 @@ public class ViewShiftNew : MonoBehaviour
   private ViewerRevised mainCamViewerRevised;
   private ViewerObject shiftView;
   private ViewerObject initView;
-  private bool toggle = false;
+  private bool triggeredAlready = false;
   public bool editMode;
   public bool enableTransition = true;
   void Awake()
@@ -44,7 +44,7 @@ public class ViewShiftNew : MonoBehaviour
   {
     if (collider.gameObject.CompareTag("GuyBase"))
     {
-      if (!toggle)
+      if (!triggeredAlready)
       {
         if (enableTransition)
         {
@@ -58,21 +58,21 @@ public class ViewShiftNew : MonoBehaviour
         initView = mainCamViewerRevised.activeView;
         mainCamViewerRevised.activeView = shiftView;
         }
-        toggle = true;
+        triggeredAlready = true;
       }
       else
       {
         if (enableTransition)
         {
+          mainCamViewerRevised.activeView.offsets = initView.offsets;
           mainCamViewerRevised.callViewTransition(mainCamViewerRevised.activeView, initView, 1.5f);
           mainCamViewerRevised.activeView.followState = initView.followState;
-          mainCamViewerRevised.activeView.offsets = initView.offsets;
         }
         else
         {
         Camera.main.gameObject.GetComponent<ViewerRevised>().activeView = initView;
         }
-        toggle = false;
+        triggeredAlready = false;
       }
     }
 

@@ -45,7 +45,6 @@ public class ViewerRevised : MonoBehaviour
   private ViewerObject initialView;
   public FollowState followState;
 
-  // Start is called before the first frame update
   void Awake()
   {
     player = GameObject.FindWithTag("GuyBase");
@@ -123,7 +122,6 @@ public class ViewerRevised : MonoBehaviour
 
   public void callViewTransition(ViewerObject start, ViewerObject target, float speed)
   {
-    // StopAllCoroutines();
     StartCoroutine(ViewTransition(start, target, speed));
   }
 
@@ -135,7 +133,7 @@ public class ViewerRevised : MonoBehaviour
     Quaternion transitoryRotation;
     float transitoryFieldOfView;
 
-    ViewerObject transitoryView = new ViewerObject(Vector3.zero, Quaternion.Euler(0,0,0), 0);
+    ViewerObject transitoryView = new ViewerObject(Vector3.zero, Quaternion.Euler(0, 0, 0), 0);
 
     float i;
     float rotX, rotY, rotZ;
@@ -144,7 +142,30 @@ public class ViewerRevised : MonoBehaviour
     rotY = start.rotation.eulerAngles.y;
     rotZ = start.rotation.eulerAngles.z;
 
-    // activeView.followState = start.followState;
+    Vector3 calculatedTarget(FollowState state)
+    {
+      if (state == FollowState.Stationary)
+      {
+        return target.position;
+      }
+      if (state == FollowState.Vertical)
+      {
+        return new Vector3(target.position.x, player.transform.position.y, target.position.z);
+      }
+      if (state == FollowState.Horizontal)
+      {
+        return new Vector3(player.transform.position.x, target.position.y, target.position.z);
+      }
+      if (state == FollowState.Total)
+      {
+        return new Vector3(player.transform.position.x, player.transform.position.y, target.position.z);
+      }
+      else
+      {
+        Debug.Log("No valid FollowState");
+        return Vector3.zero;
+      }
+    }
 
     for (i = 0; i < 1; i += 1 / transitionSpeed * Time.deltaTime)
     {
@@ -152,7 +173,7 @@ public class ViewerRevised : MonoBehaviour
       rotY = Mathf.Lerp(rotY, target.rotation.y, i);
       rotZ = Mathf.Lerp(rotZ, target.rotation.z, i);
 
-      transitoryPosition = Vector3.Lerp(start.position, target.position, i);
+      transitoryPosition = Vector3.Lerp(start.position, calculatedTarget(followState), i);
       transitoryRotation = Quaternion.Euler(rotX, rotY, rotZ);
       transitoryFieldOfView = Mathf.Lerp(start.fieldOfView, target.fieldOfView, i);
 
@@ -163,6 +184,5 @@ public class ViewerRevised : MonoBehaviour
       activeView = transitoryView;
       yield return null;
     }
-    // StopAllCoroutines();
   }
 }
