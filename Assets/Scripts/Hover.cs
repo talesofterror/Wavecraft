@@ -82,12 +82,10 @@ public class Hover : MonoBehaviour
             if (scooting == false)
             {
                 Physics.gravity = new Vector3(0, gravity, 0);
-                //print("Gravity = " + Physics.gravity);
             }
             if (scooting == true)
             {
                 Physics.gravity = new Vector3(0, 0, 0);
-                //print("Gravity = " + Physics.gravity);
             }
         }
 

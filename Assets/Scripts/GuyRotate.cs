@@ -20,18 +20,6 @@ public class GuyRotate : MonoBehaviour
 
   public Direction direction = Direction.FacingRight;
 
-
-  void Start()
-  {
-    // rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
-    // leftRotation = new Vector3(transform.rotation.x, 75, transform.rotation.z);
-
-    // rightRotation = new Vector3(0, -75, 0);
-    // leftRotation = new Vector3(0, 75, 0);
-
- 
-  }
-
   void Update()
   {
     rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
@@ -69,16 +57,10 @@ public class GuyRotate : MonoBehaviour
       }
     }
 
-    // if (Input.GetKeyDown(KeyCode.T) || Input.GetAxis("DPad-Horizontal") > 0)
-    // {
-    //   print(this.transform.parent.transform.eulerAngles.z);
-    // }
-
   }
 
   IEnumerator applyrotationLeft(Vector3 currentRotationParent, Vector3 leftRotationParent)
   {
-    print(leftRotation);
     float i;
     currentRotation = transform.eulerAngles;
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)
@@ -95,7 +77,6 @@ public class GuyRotate : MonoBehaviour
 
   IEnumerator applyrotationRight(Vector3 currentRotationParent, Vector3 rightRotationParent)
   {
-    print(rightRotation);
     float i;
     Vector3 currentRotation = transform.eulerAngles;
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)

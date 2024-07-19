@@ -7,15 +7,13 @@ public class PointerSensorManager : MonoBehaviour
   LayerMask sensorLayer;
   public RaycastHit rayhit;
   public GameObject cursorTarget; // & remove instantiating code when mesh crafted
-
   public Material cursorObjectMaterial;
-
   public GameObject player;
 
   void Awake()
   {
+    player = GameObject.FindWithTag("GuyBase");
     cam = Camera.main;
-    Cursor.visible = false;
     cursorTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     cursorTarget.name = "****** Cursor Target!";
     cursorTarget.GetComponent<Collider>().enabled = false;
@@ -26,9 +24,49 @@ public class PointerSensorManager : MonoBehaviour
     sensorLayer = 1 << 6;
   }
 
+
+  Vector3 sensorPosition;
   void Update()
   {
-    Ray rayForSensor = cam.ViewportPointToRay(Input.mousePosition);
+    sensorPosition = new Vector3(
+      Camera.main.gameObject.transform.position.x,
+      Camera.main.gameObject.transform.position.y,
+      player.transform.position.z
+      );
+
+    transform.position = sensorPosition;
+    
+    newManager();
+    // OldManager();
+  }
+
+
+
+  private void newManager()
+  {
+    // Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
+    Vector3 mousePosPlusDepth = new Vector3(Input.mousePosition.x, Input.mousePosition.y, player.transform.position.z);
+    Vector3 screenPoint = cam.ScreenToWorldPoint(mousePosPlusDepth);
+    Vector3 screenPointHeading = screenPoint - cam.gameObject.transform.position;
+    float screenPointDistance = screenPointHeading.magnitude;
+    Vector3 screenPointDirection = screenPointHeading / screenPointDistance;
+
+    RaycastHit rayhit;
+
+
+    if (Physics.Raycast(cam.gameObject.transform.position, screenPointDirection * 100, out rayhit, Mathf.Infinity, sensorLayer))
+    {
+      Debug.DrawRay(cam.gameObject.transform.position, screenPointDirection * 100, Color.red);
+
+      Vector3 rayhitMinusZ = new Vector3(rayhit.point.x, rayhit.point.y, rayhit.point.z);
+
+      cursorTarget.transform.position = rayhitMinusZ;
+    }
+  }
+
+  private void OldManager()
+  {
+    Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
 
     if (Physics.Raycast(rayForSensor.origin, rayForSensor.direction * 100, out rayhit, Mathf.Infinity, sensorLayer))
     {
@@ -38,7 +76,6 @@ public class PointerSensorManager : MonoBehaviour
 
       cursorTarget.transform.position = rayhitMinusZ;
     }
-
   }
 }
 

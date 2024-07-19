@@ -81,12 +81,10 @@ public class BulletArc : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
         {
             bulletAngle -= 0.07f;
-            print(bulletAngle);
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
             bulletAngle += 0.07f;
-            print(bulletAngle);
         }
 
 
@@ -111,7 +109,6 @@ public class BulletArc : MonoBehaviour
             Destroy(bR, 0.3f);
         }
 
-        //print(spawnPoint.position);
     }
 
     void OnDrawGizmos()

@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Overlayer : MonoBehaviour
 {
-  private Camera cam;
-  public GameObject mainCam;
-  private ViewerOld mainCamViewer;
+  private Camera overlayCam;
+  public GameObject mainCamObject;
+  private Camera mainCamCamera;
+  private ViewerRevised mainCamViewer;
   private ViewState currentState;
   public float overlayFOV = 44f; // & 44f
 
@@ -13,27 +15,18 @@ public class Overlayer : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    cam = GetComponent<Camera>();
-    mainCam = Camera.main.gameObject;
-    mainCamViewer = mainCam.GetComponent<ViewerOld>();
+    overlayCam = gameObject.GetComponent<Camera>();
+    mainCamViewer = mainCamObject.GetComponent<ViewerRevised>();
+    mainCamCamera = mainCamObject.GetComponent<Camera>();
   }
 
   // Update is called once per frame
   void Update()
   {
-    currentState = mainCamViewer.state;
 
-    // cam.orthographic = false;
-    cam.fieldOfView = overlayFOV;
+    overlayCam.transform.position = mainCamObject.transform.position;
+    overlayCam.transform.rotation = mainCamObject.transform.rotation;
+    overlayCam.fieldOfView = mainCamCamera.fieldOfView;
 
-    if (currentState == ViewState.stageView)
-    {
-      cam.orthographic = false;
-      overlayFOV = 28f;
-    }
-    else
-    {
-        overlayFOV = 44f;
-    }
   }
 }

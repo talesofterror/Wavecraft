@@ -61,7 +61,6 @@ public class PLAYERAttack : MonoBehaviour
     {
       ammoIndex = 0;
     }
-    // print("Fire pellet " + ammoIndex);
     ammoPool[ammoIndex].transform.position = pointerTransform.position;
     ammoRenderers[ammoIndex].enabled = true;
     ammoColliders[ammoIndex].enabled = true;
