@@ -71,7 +71,7 @@ public class ViewerRevised : MonoBehaviour
     print("active view rotation: " + activeView.rotation);
   }
 
-  void setActiveView(ViewerObject view)
+  private void setActiveView(ViewerObject view)
   {
     if (view.followState == FollowState.Stationary)
     {
@@ -83,7 +83,7 @@ public class ViewerRevised : MonoBehaviour
     followState = activeView.followState;
   }
 
-  public void setFollowBehavior(FollowState state)
+  private void setFollowBehavior(FollowState state)
   {
     if (state == FollowState.Stationary)
     {
@@ -92,7 +92,6 @@ public class ViewerRevised : MonoBehaviour
         activeView.position.y,
         activeView.position.z
         );
-      Debug.Log("follow state set stationary");
     }
     if (state == FollowState.Vertical)
     {

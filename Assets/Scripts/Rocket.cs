@@ -174,8 +174,8 @@ public class Rocket : MonoBehaviour
   void controlsNEW()
   {
     float thrustPower_Keys = thrustPower * Time.deltaTime * boost_Live;
-    float thrustPower_Mouse = thrustPower * Time.deltaTime;
-    Vector3 navPointer = navCursor.transform.position;
+    // float thrustPower_Mouse = thrustPower * Time.deltaTime;
+    // Vector3 navPointer = navCursor.transform.position;
     Physics.gravity = Vector3.zero;
     rigidBody.drag = 2f;
     rigidBody.angularDrag = 0.0f;
@@ -190,38 +190,41 @@ public class Rocket : MonoBehaviour
       boost_Live = boost;
     }
 
-    float yRotate = rotationSpeed * Time.deltaTime;
+    // float yRotate = rotationSpeed * Time.deltaTime;
     rigidBody.freezeRotation = true;
+
     if (Input.GetKey(KeyCode.A)
-      || Input.GetAxis("Horizontal") < -0.25f
-      || Input.GetAxis("DPad-Horizontal") < -0.50f
+    || Input.GetAxis("Horizontal") < -0.25f
+    || Input.GetAxis("DPad-Horizontal") < -0.50f
       )
     {
+      // print(rigidBody.velocity);
       rigidBody.AddForce(Vector3.left * thrustPower_Keys);
     }
     if (Input.GetKey(KeyCode.D)
-      || Input.GetAxis("Horizontal") > 0.25f
-      || Input.GetAxis("DPad-Horizontal") > 0.50f
+    || Input.GetAxis("Horizontal") > 0.25f
+    || Input.GetAxis("DPad-Horizontal") > 0.50f
       )
     {
       rigidBody.AddForce(Vector3.right * thrustPower_Keys);
+      // print(rigidBody.velocity);
     }
     if (Input.GetKey(KeyCode.W)
-      || Input.GetAxis("Vertical") > 0.25f
-      || Input.GetAxis("DPad-Vertical") > 0.50f
+    || Input.GetAxis("Vertical") > 0.25f
+    || Input.GetAxis("DPad-Vertical") > 0.50f
       )
     {
       rigidBody.AddForce(Vector3.up * thrustPower_Keys);
     }
     if (Input.GetKey(KeyCode.S)
-      || Input.GetAxis("Vertical") < -0.25f
-      || Input.GetAxis("DPad-Vertical") < -0.50f
+    || Input.GetAxis("Vertical") < -0.25f
+    || Input.GetAxis("DPad-Vertical") < -0.50f
       )
     {
       rigidBody.AddForce(Vector3.down * thrustPower_Keys);
     }
 
-    rigidBody.freezeRotation = false;
+    // rigidBody.freezeRotation = false;
 
     // float joystickX = Input.GetAxis("Horizontal");
     // transform.Rotate(Vector3.back * joystickX);
@@ -240,6 +243,7 @@ public class Rocket : MonoBehaviour
 
     float yRotate = rotationSpeed * Time.deltaTime;
     rigidBody.freezeRotation = true;
+
     if (Input.GetKey(KeyCode.A))
     {
       transform.Rotate(Vector3.forward * yRotate);
