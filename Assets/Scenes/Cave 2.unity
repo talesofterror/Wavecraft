@@ -26356,6 +26356,11 @@ PrefabInstance:
       propertyPath: spikePellet
       value: 
       objectReference: {fileID: 1864745143}
+    - target: {fileID: 1274461816553629963, guid: ee04733e9eb7b3a46807ea558df69867,
+        type: 3}
+      propertyPath: turnDelayThreshhold
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836548, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
       propertyPath: enemyCollissionsOn
