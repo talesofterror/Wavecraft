@@ -20,7 +20,7 @@ public class GuyRotate : MonoBehaviour
 
   public Direction direction = Direction.FacingRight;
 
-  public float turnDelayThreshhold = 5f;
+  public float turnDelayThreshhold = 0.4f;
 
   private Rigidbody parentRigidBody;
 
@@ -30,42 +30,68 @@ public class GuyRotate : MonoBehaviour
   }
   void Update()
   {
+
+    // float turnThrow;
+    // void calculateThrow()
+    // {
+
+    // }
+
     float rBXVelocity = parentRigidBody.velocity.x;
     print("rigidbody x velocity = " + rBXVelocity);
-    print("x velocity less than negative threshhold?" + (parentRigidBody.velocity.x < -turnDelayThreshhold));
+    print("x velocity less than threshhold (-)?" + (rBXVelocity < -turnDelayThreshhold));
+    print("x velocity greater than threshhold (+)?" + (rBXVelocity > turnDelayThreshhold));
+
     rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
     leftRotation = new Vector3(transform.rotation.x, 35, transform.rotation.z);
+
     Vector3 currentRotationParent = transform.parent.transform.eulerAngles;
     Vector3 rightRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
     Vector3 leftRotationParent = new Vector3(transform.parent.rotation.x, transform.parent.rotation.y, transform.parent.rotation.z);
 
-    if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Horizontal") < -0.25f || Input.GetAxis("DPad-Horizontal") < -0.50f && (parentRigidBody.velocity.x > -turnDelayThreshhold) && direction != Direction.TurningLeft)
+    // * left 
+
+    if (rBXVelocity < -turnDelayThreshhold)
     {
-      // check if turned left or already turning left
-      if (direction == Direction.FacingLeft | direction == Direction.TurningLeft)
+      if ((Input.GetKey(KeyCode.A)
+          || Input.GetAxis("Horizontal") < -0.25f
+          || Input.GetAxis("DPad-Horizontal") < -0.50f)
+          && direction != Direction.TurningLeft
+          )
       {
-        return;
-      }
-      else
-      {
-        // StopAllCoroutines();
-        StartCoroutine(applyrotationLeft(currentRotationParent, leftRotationParent));
-        direction = Direction.TurningLeft;
+        if (direction == Direction.FacingLeft)
+        {
+          return;
+        }
+        else
+        {
+          StopAllCoroutines();
+          StartCoroutine(applyrotationLeft(currentRotationParent, leftRotationParent));
+          direction = Direction.TurningLeft;
+        }
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Horizontal") > 0.25f || Input.GetAxis("DPad-Horizontal") > 0.50f && (parentRigidBody.velocity.x < turnDelayThreshhold) && direction != Direction.TurningRight)
+    // * right 
+
+    if (rBXVelocity > turnDelayThreshhold)
     {
-      // check if turned right or already facing right
-      if (direction == Direction.FacingRight | direction == Direction.TurningRight)
+      if ((Input.GetKey(KeyCode.D)
+          || Input.GetAxis("Horizontal") > 0.25f
+          || Input.GetAxis("DPad-Horizontal") > 0.50f)
+          && direction != Direction.TurningRight
+          )
       {
-        return;
-      }
-      else
-      {
-        // StopAllCoroutines();
-        StartCoroutine(applyrotationRight(currentRotationParent, rightRotationParent));
-        direction = Direction.TurningRight;
+        if (direction == Direction.FacingRight)
+        {
+          return;
+        }
+        else
+        {
+          StopAllCoroutines();
+          StartCoroutine(applyrotationRight(currentRotationParent, rightRotationParent));
+          direction = Direction.TurningRight;
+        }
       }
     }
 
@@ -75,13 +101,9 @@ public class GuyRotate : MonoBehaviour
   {
     float i;
     currentRotation = transform.eulerAngles;
+    yield return new WaitForSeconds(0.4f);
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)
     {
-      // if (parentRigidBody.velocity.x > -turnDelayThreshhold)
-      // {
-      //   i = 0;
-      // }
-      // else 
       if (i >= 1)
       {
         direction = Direction.FacingLeft;
@@ -96,13 +118,9 @@ public class GuyRotate : MonoBehaviour
   {
     float i;
     Vector3 currentRotation = transform.eulerAngles;
+    yield return new WaitForSeconds(0.4f);
     for (i = 0; i <= 1; i += 1 * Time.deltaTime)
     {
-      // if (parentRigidBody.velocity.x < turnDelayThreshhold)
-      // {
-      //   i = 0;
-      // }
-      // else 
       if (i >= 1)
       {
         direction = Direction.FacingRight;
