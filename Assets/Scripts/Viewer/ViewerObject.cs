@@ -10,6 +10,7 @@ public class ViewerObject
   public Vector3 offsets;
   public FollowState followState;
   public bool lookAt = false;
+  public bool swivel = false;
 
   public ViewerObject(
     Vector3 pos,

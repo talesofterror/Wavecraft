@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rcsThrust: 0
   direction: 3
+  turnDelayThreshhold: 2
 --- !u!1 &135415358791058480
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63b9bcb99bde4d4395d4ad01338ef8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rcsThrust: 1.1
   direction: 3
+  turnDelayThreshhold: 4
 --- !u!111 &828296932
 Animation:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274461816553629965}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
@@ -524,7 +524,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274461816553629965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -945,7 +945,7 @@ MonoBehaviour:
   ammoPoolSize: 10
   projectile: {fileID: 2641453927474187991, guid: 965b2daeb74221247ad67d13fab7eb45,
     type: 3}
-  projectileSpeed: 10
+  projectileSpeed: 20
 --- !u!1 &1285199365750745073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,6 +3197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pointer
       objectReference: {fileID: 0}
     - target: {fileID: 956645257184365457, guid: 39a6ebce5c2ae0840a193ea60e8add2a,
         type: 3}

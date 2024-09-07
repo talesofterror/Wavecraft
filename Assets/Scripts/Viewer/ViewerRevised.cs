@@ -39,7 +39,7 @@ Moving player into new area should initiate relevant camera rules for area
 
 public class ViewerRevised : MonoBehaviour
 {
-
+  [HideInInspector]
   public GameObject player;
   public ViewerObject activeView;
   private ViewerObject initialView;
@@ -57,7 +57,7 @@ public class ViewerRevised : MonoBehaviour
   void Update()
   {
     setActiveView(activeView);
-    setFollowBehavior(followState);
+    setActiveFollowBehavior(followState);
     // debug();
   }
 
@@ -83,7 +83,7 @@ public class ViewerRevised : MonoBehaviour
     followState = activeView.followState;
   }
 
-  private void setFollowBehavior(FollowState state)
+  private void setActiveFollowBehavior(FollowState state)
   {
     if (state == FollowState.Stationary)
     {
