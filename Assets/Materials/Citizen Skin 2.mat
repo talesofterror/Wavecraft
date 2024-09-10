@@ -84,6 +84,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -121,7 +122,7 @@ Material:
     - _Color: {r: 1, g: 0.23113209, b: 0.7277532, a: 1}
     - _ColorA: {r: 1, g: 0, b: 0.84111834, a: 1}
     - _ColorB: {r: 1, g: 0, b: 0.40558958, a: 1}
-    - _EmissionColor: {r: 0.21698111, g: 0, b: 0.13137053, a: 1}
+    - _EmissionColor: {r: 0.2603773, g: 0.02112493, b: 0.16467644, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1107723396000432123

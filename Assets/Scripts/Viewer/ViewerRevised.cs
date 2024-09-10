@@ -48,10 +48,18 @@ public class ViewerRevised : MonoBehaviour
   void Awake()
   {
     player = GameObject.FindWithTag("GuyBase");
+    Vector3 defaultPlayerPosition = player.transform.position;
     initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
     initialView.setOffsets(0.0f, 3.7f, 0.02f);
-    initialView.setFollowState(followState);
+    if (player.transform.position.y < 4f) {
+      Vector3 nondefaultPlayerPosition = new Vector3(
+        player.transform.position.x, player.transform.position.y, transform.position.z
+      );
+      initialView = new ViewerObject(nondefaultPlayerPosition, transform.rotation, Camera.main.fieldOfView);
+      followState = FollowState.Total;
+    }
     activeView = initialView;
+    initialView.setFollowState(followState);
   }
 
   void Update()
