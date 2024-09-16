@@ -32,6 +32,9 @@ public class Rocket : MonoBehaviour
   [SerializeField] public float axisRotationFactor = 0;
   Rigidbody rigidBody;
 
+  [Header("Physics")]
+  [SerializeField] float gravityY = 0;
+
   [Header("Sound")]
   [SerializeField] AudioClip thrustSound;
   [SerializeField] AudioClip deathSound;
@@ -176,7 +179,7 @@ public class Rocket : MonoBehaviour
     float thrustPower_Keys = thrustPower * Time.deltaTime * boost_Live;
     // float thrustPower_Mouse = thrustPower * Time.deltaTime;
     // Vector3 navPointer = navCursor.transform.position;
-    Physics.gravity = Vector3.zero;
+    Physics.gravity = new Vector3(0, gravityY, 0);
     rigidBody.drag = 2f;
     rigidBody.angularDrag = 0.0f;
 

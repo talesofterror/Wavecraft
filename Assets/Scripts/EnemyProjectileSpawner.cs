@@ -11,7 +11,10 @@ public class EnemyProjectileSpawner : MonoBehaviour
 
   void Start()
   {
-
+    projectilePool = new GameObject[projectilePoolSize];
+    for (int i = 0; i < projectilePool.Length; i++) {
+      projectilePool[i] = GameObject.Instantiate(projectile, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+    }
   }
 
   void Update()
