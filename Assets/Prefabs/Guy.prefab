@@ -482,7 +482,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1.9, z: 1.13}
   m_Center: {x: 0.08, y: -0.13, z: -0.06}
@@ -781,8 +781,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7.2, y: 22.59, z: 7.7}
+  m_Center: {x: -0.48, y: -2.63, z: -0.21}
 --- !u!82 &1274461817535836546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -922,6 +922,7 @@ MonoBehaviour:
   thrustPower: 500
   rotationSpeed: 50
   axisRotationFactor: 5
+  gravityY: -1.5
   thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
   deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
   goalSound: {fileID: 8300000, guid: 9914686e0766d8144bff8e39894b4c52, type: 3}

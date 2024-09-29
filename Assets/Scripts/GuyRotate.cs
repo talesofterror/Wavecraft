@@ -38,9 +38,9 @@ public class GuyRotate : MonoBehaviour
     // }
 
     float rBXVelocity = parentRigidBody.velocity.x;
-    print("rigidbody x velocity = " + rBXVelocity);
-    print("x velocity less than threshhold (-)?" + (rBXVelocity < -turnDelayThreshhold));
-    print("x velocity greater than threshhold (+)?" + (rBXVelocity > turnDelayThreshhold));
+    // print("rigidbody x velocity = " + rBXVelocity);
+    // print("x velocity less than threshhold (-)?" + (rBXVelocity < -turnDelayThreshhold));
+    // print("x velocity greater than threshhold (+)?" + (rBXVelocity > turnDelayThreshhold));
 
     rightRotation = new Vector3(transform.rotation.x, -75, transform.rotation.z);
     leftRotation = new Vector3(transform.rotation.x, 35, transform.rotation.z);
