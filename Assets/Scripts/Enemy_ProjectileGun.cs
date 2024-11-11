@@ -14,7 +14,6 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	{
 			bulletSpawner = new EnemyProjectileSpawner(bullet, gameObject, 10);
 			detector = gameObject.GetComponentInChildren<Enemy_DetectSurroundings>();
-			print(bulletSpawner.projectilePool[1].transform.name);
 	}
 
 	// Update is called once per frame
@@ -22,6 +21,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	{
 		if (detector.detection == Detection.Active)	{
 			bulletSpawner.target = detector.targetGameObject.transform;
+			print("bullet spawner target position: " + bulletSpawner.target.position);
 			StartCoroutine(FireAllWaitSeconds(1)); 
 			detector.detection = Detection.Dormant;
 		}
@@ -32,7 +32,8 @@ public class Enemy_ProjectileGun : MonoBehaviour
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
 			bulletSpawner.projectilePool[i].GetComponent<Collider>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Renderer>().enabled = true;
-			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().velocity = calculateVelocity(bulletSpawner.target, 1.5f);
+			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().velocity = calculateVelocity(bulletSpawner.target, 5f);
+			print(calculateVelocity(bulletSpawner.target, 5f));
 			yield return new WaitForSeconds(seconds);
 			if (i == bulletSpawner.projectilePool.Length+1) {
 				StopCoroutine(FireAllWaitSeconds(0));
@@ -41,7 +42,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	}
 
 	Vector3 calculateVelocity (Transform _target, float _speed) {
-		Vector3 heading = _target.position + transform.position;
+		Vector3 heading = _target.position - gameObject.transform.position;
 		float distance = heading.magnitude;
 		Vector3 direction = heading / distance;
 		return direction * _speed;

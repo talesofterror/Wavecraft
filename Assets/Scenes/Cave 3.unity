@@ -3064,7 +3064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 608834037863528228, guid: ed3156d4628d5e3449e37ad180b7e3d3, type: 3}
-  target: {fileID: 0}
+  targetTransform: {fileID: 0}
 --- !u!4 &237213433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4478346913172982761, guid: bc4902c5b3447a546ad02cf631cf796e,
@@ -8095,6 +8095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 0}
+  targetGameObject: {fileID: 0}
   detection: 0
 --- !u!4 &538819495 stripped
 Transform:
@@ -27498,6 +27499,11 @@ PrefabInstance:
     - target: {fileID: 1234272842, guid: ee04733e9eb7b3a46807ea558df69867, type: 3}
       propertyPath: CrosshairMesh2
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274461816721675985, guid: ee04733e9eb7b3a46807ea558df69867,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1274461817535836549, guid: ee04733e9eb7b3a46807ea558df69867,
         type: 3}
