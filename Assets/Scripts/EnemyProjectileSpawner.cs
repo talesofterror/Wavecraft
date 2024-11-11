@@ -1,24 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectileSpawner : MonoBehaviour
+public class EnemyProjectileSpawner
 {
 
   public GameObject projectile;
-  private GameObject[] projectilePool;
-  public int projectilePoolSize = 10;
+  public GameObject[] projectilePool;
+  public int poolSize = 10;
 
-  void Start()
-  {
-    projectilePool = new GameObject[projectilePoolSize];
+	public Transform target;
+
+	public enum State {
+		Dormant,
+		Active
+	}
+	
+	public State spawnerState = new State();
+
+  public EnemyProjectileSpawner(GameObject _projectile, GameObject parent, int poolSize) {
+		projectile = _projectile;
+    projectilePool = new GameObject[poolSize];
     for (int i = 0; i < projectilePool.Length; i++) {
-      projectilePool[i] = GameObject.Instantiate(projectile, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+      projectilePool[i] = GameObject.Instantiate(projectile, parent.transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+			projectilePool[i].name = parent.transform.name + " Projectile #" + (i + 1);
+			projectilePool[i].GetComponent<Collider>().enabled = false;
+			projectilePool[i].GetComponent<Renderer>().enabled = false;
+			projectilePool[i].transform.parent = parent.transform;
+			spawnerState = State.Dormant;
     }
   }
 
-  void Update()
-  {
-
-  }
 }
