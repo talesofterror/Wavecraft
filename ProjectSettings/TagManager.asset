@@ -25,7 +25,7 @@ TagManager:
   - Projectiles
   - Player
   - Enemy
-  - Enemy2
+  - EnemyProjectile
   - Walkable
   - PlayerDetection
   - 

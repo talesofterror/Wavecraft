@@ -143,11 +143,11 @@ public class ViewerRevised : MonoBehaviour
     ViewerObject transitoryView = new ViewerObject(Vector3.zero, Quaternion.Euler(0, 0, 0), 0);
 
     float i;
-    float rotX, rotY, rotZ;
+    // float rotX, rotY, rotZ;
 
-    rotX = start.rotation.eulerAngles.x;
-    rotY = start.rotation.eulerAngles.y;
-    rotZ = start.rotation.eulerAngles.z;
+    // rotX = start.rotation.eulerAngles.x;
+    // rotY = start.rotation.eulerAngles.y;
+    // rotZ = start.rotation.eulerAngles.z;
 
     Vector3 calculatedTarget(FollowState state)
     {
@@ -176,12 +176,12 @@ public class ViewerRevised : MonoBehaviour
 
     for (i = 0; i < 1; i += 1 / transitionSpeed * Time.deltaTime)
     {
-      rotX = Mathf.Lerp(rotX, target.rotation.x, i);
-      rotY = Mathf.Lerp(rotY, target.rotation.y, i);
-      rotZ = Mathf.Lerp(rotZ, target.rotation.z, i);
+      transitoryView.rotation.x = Mathf.LerpAngle(start.rotation.x, target.rotation.x, i);
+      transitoryView.rotation.y = Mathf.LerpAngle(start.rotation.y, target.rotation.y, i);
+      transitoryView.rotation.z = Mathf.LerpAngle(start.rotation.z, target.rotation.z, i);
 
       transitoryPosition = Vector3.Lerp(start.position, calculatedTarget(followState), i);
-      transitoryRotation = Quaternion.Euler(rotX, rotY, rotZ);
+      transitoryRotation = transitoryView.rotation;
       transitoryFieldOfView = Mathf.Lerp(start.fieldOfView, target.fieldOfView, i);
 
       transitoryView.position = transitoryPosition;

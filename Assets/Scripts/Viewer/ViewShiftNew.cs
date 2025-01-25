@@ -50,7 +50,7 @@ public class ViewShiftNew : MonoBehaviour
         if (enableTransition)
         {
           initView = mainCamViewerRevised.activeView;
-          mainCamViewerRevised.callViewTransition(mainCamViewerRevised.activeView, shiftView, 1.5f);
+          mainCamViewerRevised.callViewTransition(initView, shiftView, 1.5f);
           mainCamViewerRevised.activeView.followState = shiftView.followState;
           mainCamViewerRevised.activeView.offsets = shiftView.offsets;
         }
@@ -82,48 +82,48 @@ public class ViewShiftNew : MonoBehaviour
   {
     if (editMode)
     {
-      Vector3 calculatedTarget(FollowState state)
-      {
-        if (state == FollowState.Stationary)
-        {
-          return targetPosition;
-        }
-        if (state == FollowState.Vertical)
-        {
-          return new Vector3(
-            targetPosition.x, 
-            mainCamViewerRevised.player.transform.position.y, 
-            targetPosition.z
-            );
-        }
-        if (state == FollowState.Horizontal)
-        {
-          return new Vector3(
-            mainCamViewerRevised.player.transform.position.x, 
-            targetPosition.y, 
-            targetPosition.z
-            );
-        }
-        if (state == FollowState.Total)
-        {
-          return new Vector3(
-            mainCamViewerRevised.player.transform.position.x, 
-            mainCamViewerRevised.player.transform.position.y, 
-            targetPosition.z
-            );
-        }
-        else
-        {
-          Debug.Log("No valid FollowState");
-          return Vector3.zero;
-        }
-      }
-
       mainCamViewerRevised.activeView.position = calculatedTarget(mainCamViewerRevised.followState);
       mainCamViewerRevised.activeView.rotation = targetRotation;
       mainCamViewerRevised.activeView.fieldOfView = targetFieldOfView;
       mainCamViewerRevised.activeView.followState = targetFollowState;
       mainCamViewerRevised.activeView.offsets = offsets;
+    }
+  }
+
+  Vector3 calculatedTarget(FollowState state)
+  {
+    if (state == FollowState.Stationary)
+    {
+      return targetPosition;
+    }
+    if (state == FollowState.Vertical)
+    {
+      return new Vector3(
+        targetPosition.x,
+        mainCamViewerRevised.player.transform.position.y,
+        targetPosition.z
+        );
+    }
+    if (state == FollowState.Horizontal)
+    {
+      return new Vector3(
+        mainCamViewerRevised.player.transform.position.x,
+        targetPosition.y,
+        targetPosition.z
+        );
+    }
+    if (state == FollowState.Total)
+    {
+      return new Vector3(
+        mainCamViewerRevised.player.transform.position.x,
+        mainCamViewerRevised.player.transform.position.y,
+        targetPosition.z
+        );
+    }
+    else
+    {
+      Debug.Log("No valid FollowState");
+      return Vector3.zero;
     }
   }
 }

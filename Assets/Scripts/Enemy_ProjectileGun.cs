@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Diagnostics.Tracing;
 
 public class Enemy_ProjectileGun : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	Enemy_DetectSurroundings detector;
 	public GameObject bullet;
 	public Transform targetTransform;
+	public float bulletSpeed = 2f;
+  public bool firing = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -19,10 +22,11 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (detector.detection == Detection.Active)	{
+		if (detector.detection == Detection.Active && !firing)	{
 			bulletSpawner.target = detector.targetGameObject.transform;
-			print("bullet spawner target position: " + bulletSpawner.target.position);
+			// print("bullet spawner target position: " + bulletSpawner.target.position);
 			StartCoroutine(FireAllWaitSeconds(1)); 
+      firing = true;
 			detector.detection = Detection.Dormant;
 		}
 	}
@@ -32,10 +36,12 @@ public class Enemy_ProjectileGun : MonoBehaviour
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
 			bulletSpawner.projectilePool[i].GetComponent<Collider>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Renderer>().enabled = true;
-			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().velocity = calculateVelocity(bulletSpawner.target, 5f);
-			print(calculateVelocity(bulletSpawner.target, 5f));
+			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().velocity = calculateVelocity(bulletSpawner.target, bulletSpeed);
+      bulletSpawner.projectilePool[i].transform.parent = null;
+			// print(calculateVelocity(bulletSpawner.target, bulletSpeed));
 			yield return new WaitForSeconds(seconds);
-			if (i == bulletSpawner.projectilePool.Length+1) {
+			if (i + 1 == bulletSpawner.projectilePool.Length) {
+        firing = false;
 				StopCoroutine(FireAllWaitSeconds(0));
 			}
 		}

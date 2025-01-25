@@ -133,7 +133,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HorizonPosition: 0.8
+    - _HorizonPosition: 1.13
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -146,9 +146,9 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StarDensity: -10.5
-    - _StarScramble: 16.48
-    - _StarSize: 92
+    - _StarDensity: -36.22
+    - _StarScramble: 2.2
+    - _StarSize: 90.15
     - _SunDisk: 2
     - _SunSize: 0.04
     - _SunSizeConvergence: 5
@@ -160,8 +160,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 0, g: 0.9845991, b: 1, a: 1}
-    - _HorizonColor: {r: 1, g: 0, b: 0.719821, a: 0}
-    - _SkyColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HorizonColor: {r: 1, g: 0, b: 0.021283627, a: 0}
+    - _SkyColor: {r: 0.34901962, g: 0, b: 0.23786367, a: 0}
     - _SkyTint: {r: 0.9451704, g: 1, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _StarColor: {r: 0, g: 1, b: 0.46468878, a: 0}
