@@ -1,14 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class EnemyWander : MonoBehaviour
 {
   public int numberOfWaypoints;
   public GameObject[] waypointArray;
   List<Vector3> wayPointVectorList;
+  private float currentLerpDistance;
 
   EnemyDamage enemyDamage;
 
@@ -57,7 +56,7 @@ public class EnemyWander : MonoBehaviour
   private IEnumerator MovementIE()
   {
 
-    lerpDriver += lerpSpeed * Time.deltaTime;
+    lerpDriver += (lerpSpeed * Time.deltaTime);
     transform.position = Lerpinate();
     yield return null;
 
@@ -75,6 +74,9 @@ public class EnemyWander : MonoBehaviour
       lerpState = 0;
     }
     int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1 : 0;
+    currentLerpDistance = Vector3.Distance( wayPointVectorList[nextWaypoint], wayPointVectorList[lerpState]);
+    print("current LErp Distance:" + currentLerpDistance);
+    print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
     return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
   }
 
@@ -84,7 +86,6 @@ public class EnemyWander : MonoBehaviour
     waypointArray[i].transform.position = new Vector3(transform.position.x + i + 1, transform.position.y + i + 1, transform.position.z);
     waypointArray[i].transform.parent = transform;
     waypointArray[i].transform.name = "Way Point " + (i + 1);
-
   }
 
 }

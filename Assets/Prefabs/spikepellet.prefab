@@ -150,5 +150,5 @@ MonoBehaviour:
     type: 3}
   enemyStats: {fileID: 0}
   damage: 10
-  dustAmount: 3
+  dustAmount: 10
   dustDuration: 0.5

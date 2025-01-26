@@ -133,7 +133,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HorizonPosition: 1.13
+    - _HorizonPosition: 0.93
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -146,7 +146,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StarDensity: -36.22
+    - _StarDensity: -27.22
     - _StarScramble: 2.2
     - _StarSize: 90.15
     - _SunDisk: 2
