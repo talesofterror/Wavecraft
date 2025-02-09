@@ -26,7 +26,6 @@ public class EnemyWander : MonoBehaviour
     }
 
     transform.position = waypointArray[0].transform.position;
-
   }
 
   void Update()
@@ -75,8 +74,8 @@ public class EnemyWander : MonoBehaviour
     }
     int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1 : 0;
     currentLerpDistance = Vector3.Distance( wayPointVectorList[nextWaypoint], wayPointVectorList[lerpState]);
-    print("current LErp Distance:" + currentLerpDistance);
-    print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
+    // print("current LErp Distance:" + currentLerpDistance);
+    // print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
     return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
   }
 
