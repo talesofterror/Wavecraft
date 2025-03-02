@@ -33488,6 +33488,11 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7717548408569099604, guid: e5166524e0c01434babd375ec4d6f817,
+        type: 3}
+      propertyPath: m_Name
+      value: HUD
+      objectReference: {fileID: 0}
     - target: {fileID: 8925702340417910550, guid: e5166524e0c01434babd375ec4d6f817,
         type: 3}
       propertyPath: m_RenderShadows

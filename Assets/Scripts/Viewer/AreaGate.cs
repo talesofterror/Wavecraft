@@ -22,7 +22,7 @@ public class AreaGate : MonoBehaviour
     processBounds();
     for (int i = 0; i < boundsArray.Length; i++)
     {
-      if (i == 3)
+      if (i == boundsArray.Length - 1)
       {
         Gizmos.DrawLine(boundsArray[i].transform.position, boundsArray[0].transform.position);
         Handles.Label(boundsArray[i].transform.position, boundsArray[i].name);
