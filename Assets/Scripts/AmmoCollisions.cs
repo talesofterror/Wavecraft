@@ -56,7 +56,7 @@ public class AmmoCollisions : MonoBehaviour
       rBDust = dustObject.GetComponent<Rigidbody>();
       float dustVelX = Mathf.Sin(i + 1);
       float dustVelY = Mathf.Sin(i + 1);
-      rBDust.velocity = new Vector3(dustVelX, dustVelY, 0);
+      rBDust.linearVelocity = new Vector3(dustVelX, dustVelY, 0);
       Destroy(dustObject, dustDuration);
     }
   }

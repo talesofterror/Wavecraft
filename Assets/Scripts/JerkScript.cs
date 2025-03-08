@@ -131,7 +131,7 @@ public class JerkScript : MonoBehaviour
                 pelletObject = Instantiate(jerkPellet, spawnTransform.transform.position, Quaternion.identity);
                 pelletObject.transform.parent = this.transform.parent;
                 rBPellet = pelletObject.GetComponent<Rigidbody>();
-                rBPellet.velocity = new Vector3(pelletVelX, pelletVelY, 0);
+                rBPellet.linearVelocity = new Vector3(pelletVelX, pelletVelY, 0);
                 Destroy(pelletObject, destroyPellet);
             }
             if (transform.position.x > 0)
@@ -139,7 +139,7 @@ public class JerkScript : MonoBehaviour
                 pelletObject = Instantiate(jerkPellet, spawnTransform.transform.position, Quaternion.identity);
                 pelletObject.transform.parent = this.transform.parent;
                 rBPellet = pelletObject.GetComponent<Rigidbody>();
-                rBPellet.velocity = new Vector3(-pelletVelX, pelletVelY, 0);
+                rBPellet.linearVelocity = new Vector3(-pelletVelX, pelletVelY, 0);
                 Destroy(pelletObject, destroyPellet);
             }
         }

@@ -42,21 +42,21 @@ public class Hover : MonoBehaviour
         else
         {
             rB.isKinematic = false;
-            rB.drag = 0f;
+            rB.linearDamping = 0f;
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetAxis("DPad-Horizontal") > 0)
             {
-                rB.velocity = new Vector3(xDash, yDash, 0f);
+                rB.linearVelocity = new Vector3(xDash, yDash, 0f);
             }
 
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetAxis("DPad-Horizontal") < 0)
             {
-                rB.velocity = new Vector3(-xDash, yDash, 0f);
+                rB.linearVelocity = new Vector3(-xDash, yDash, 0f);
             }
 
             if (Input.GetKeyDown(KeyCode.S) || Input.GetAxis("Vertical") < -0.25f || Input.GetAxis("DPad-Vertical") < -0.50f)
             {
-                rB.velocity = new Vector3(0f, -xDash, 0f);
+                rB.linearVelocity = new Vector3(0f, -xDash, 0f);
             }
 
             if (Input.GetKey(KeyCode.Space) || Input.GetButton("Fire1"))
@@ -66,7 +66,7 @@ public class Hover : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) || Input.GetButton("Circle") || Input.GetButton("Fire2") )
             {
-                rB.drag = drag - Time.deltaTime;
+                rB.linearDamping = drag - Time.deltaTime;
 
                 if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.W))
                 {

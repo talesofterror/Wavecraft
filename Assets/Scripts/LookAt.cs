@@ -38,7 +38,7 @@ public class LookAt : MonoBehaviour
     }
     if (targetMode == TargetMode.cursorControl)
     {
-      transform.LookAt(sensorScript.cursorTarget.transform.position);
+      transform.LookAt(sensorScript.cursorGameObject.transform.position);
     }
   }
 }

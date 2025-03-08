@@ -64,7 +64,7 @@ public class PLAYERAttack : MonoBehaviour
     ammoPool[ammoIndex].transform.position = pointerTransform.position;
     ammoRenderers[ammoIndex].enabled = true;
     ammoColliders[ammoIndex].enabled = true;
-    ammoRB[ammoIndex].velocity = projectileMovement;
+    ammoRB[ammoIndex].linearVelocity = projectileMovement;
     ammoIndex++;
   }
 

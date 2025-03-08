@@ -6,7 +6,7 @@ public class PointerSensorManager : MonoBehaviour
   private Camera cam;
   LayerMask sensorLayer;
   public RaycastHit rayhit;
-  public GameObject cursorTarget; // & remove instantiating code when mesh crafted
+  public GameObject cursorGameObject; 
   public Material cursorObjectMaterial;
   public GameObject player;
 
@@ -14,16 +14,15 @@ public class PointerSensorManager : MonoBehaviour
   {
     player = GameObject.FindWithTag("GuyBase");
     cam = Camera.main;
-    cursorTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    cursorTarget.name = "****** Cursor Target!";
-    cursorTarget.GetComponent<Collider>().enabled = false;
-    cursorTarget.GetComponent<Renderer>().material = cursorObjectMaterial;
-    print("Cursor Object Material = " + Resources.FindObjectsOfTypeAll(typeof(Material)).Length);
-    cursorTarget.layer = 5;
+    // cursorGameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    cursorGameObject.name = "****** Cursor!";
+    // cursorGameObject.GetComponent<Collider>().enabled = false;
+    cursorGameObject.transform.GetChild(0).GetComponent<Renderer>().material = cursorObjectMaterial;
+    // print("Cursor Object Material = " + Resources.FindObjectsOfTypeAll(typeof(Material)).Length);
+    cursorGameObject.layer = 5;
 
     sensorLayer = 1 << 6;
   }
-
 
   Vector3 sensorPosition;
   void Update()
@@ -39,8 +38,6 @@ public class PointerSensorManager : MonoBehaviour
     newManager();
     // OldManager();
   }
-
-
 
   private void newManager()
   {
@@ -60,7 +57,7 @@ public class PointerSensorManager : MonoBehaviour
 
       Vector3 rayhitMinusZ = new Vector3(rayhit.point.x, rayhit.point.y, rayhit.point.z);
 
-      cursorTarget.transform.position = rayhitMinusZ;
+      cursorGameObject.transform.position = rayhitMinusZ;
     }
   }
 
@@ -74,7 +71,7 @@ public class PointerSensorManager : MonoBehaviour
 
       Vector3 rayhitMinusZ = new Vector3(rayhit.point.x, rayhit.point.y, player.transform.position.z);
 
-      cursorTarget.transform.position = rayhitMinusZ;
+      cursorGameObject.transform.position = rayhitMinusZ;
     }
   }
 }

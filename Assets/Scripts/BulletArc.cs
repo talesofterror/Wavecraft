@@ -94,7 +94,7 @@ public class BulletArc : MonoBehaviour
             bR.transform.position = angledTransform2;
             bR.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             bRRB = bR.GetComponent<Rigidbody>();
-            bRRB.velocity = (angledTransform2 - transform.position) * bulletSpeed;
+            bRRB.linearVelocity = (angledTransform2 - transform.position) * bulletSpeed;
             bRRB.useGravity = false;
             Destroy(bR, 0.3f);
         }
@@ -104,7 +104,7 @@ public class BulletArc : MonoBehaviour
             bR.transform.position = angledTransform1;
             bR.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             bRRB = bR.GetComponent<Rigidbody>();
-            bRRB.velocity = (angledTransform1 - transform.position) * 10;
+            bRRB.linearVelocity = (angledTransform1 - transform.position) * 10;
             bRRB.useGravity = false;
             Destroy(bR, 0.3f);
         }
