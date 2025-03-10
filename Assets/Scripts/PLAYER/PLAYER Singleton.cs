@@ -11,6 +11,7 @@ public class PLAYERSingleton : MonoBehaviour
   public PLAYERAttack playerAttck;
   public GuyRotate guyRotate;
   public WORLDInteractable worldCursorTarget;
+  public InteractableState_WORLD focusState;
   
   public float interactionZ; 
 
