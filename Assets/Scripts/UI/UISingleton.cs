@@ -15,6 +15,7 @@ public UICursor _cursor;
 public GameObject DataHeader;
 public TextMeshProUGUI DataValue;
 public GameObject DialogueContainer;
+public GameObject ViewportPanel;
 public TextMeshProUGUI NameText;
 public TextMeshProUGUI DialogueText;
 public GameObject IdentifierContainer;
@@ -29,11 +30,17 @@ public TextMeshProUGUI IdentifierText;
     }
   }
 
+  void Start () {
+    ToggleDialogue("off");
+  }
+
   public void ToggleDialogue (String state) {
     if (state == "off") {
       DialogueContainer.SetActive(false);
+      PLAYERSingleton.playerSingleton.PauseToggle("unpaused");
     } else if (state == "on") {
       DialogueContainer.SetActive(true);
+      PLAYERSingleton.playerSingleton.PauseToggle("paused");
     }
   }
 

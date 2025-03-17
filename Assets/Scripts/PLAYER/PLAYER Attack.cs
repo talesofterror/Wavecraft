@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PLAYERAttack : MonoBehaviour
 {
+  [HideInInspector] public bool attackEnabled = true;
   private Vector3 projectileHeading;
   private float projectileDistance;
   private Vector3 projectileDirection;
@@ -49,7 +50,7 @@ public class PLAYERAttack : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetMouseButtonDown(0))
+    if (Input.GetMouseButtonDown(0) && PLAYERSingleton.playerSingleton.attackEnabled)
     {
       fireProjectile();
     }
@@ -68,18 +69,4 @@ public class PLAYERAttack : MonoBehaviour
     ammoIndex++;
   }
 
-  // IEnumerator fireProjectileEnumerator()
-  // {
-  //   int i;
-  //   for (i = 0; i < 10; i++)
-  //   {
-  //     ammoPool[i].transform.position = pointerTransform.position;
-  //     ammoRenderers[i].enabled = true;
-  //     ammoColliders[i].enabled = true;
-  //     print("Fire pellet " + i);
-  //     ammoRB[i].AddForce(projectileMovement);
-  //     yield return null;
-  //   }
-  //   yield return null;
-  // }
 }

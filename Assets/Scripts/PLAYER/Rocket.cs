@@ -15,11 +15,15 @@ public class Rocket : MonoBehaviour
     Level0,
     Level1
   };
+
   public enum ControlScheme
   {
     oldControls,
     newControls
   };
+
+  public bool controlsActive;
+
   StateOfBeing state = StateOfBeing.Existing;
   Level level;
 
@@ -30,7 +34,7 @@ public class Rocket : MonoBehaviour
   [SerializeField] public float thrustPower = 600f;
   [SerializeField] public float rotationSpeed = 50f;
   [SerializeField] public float axisRotationFactor = 0;
-  Rigidbody rigidBody;
+  public Rigidbody rigidBody;
 
   [Header("Physics")]
   [SerializeField] float gravityY = 0;
@@ -53,7 +57,7 @@ public class Rocket : MonoBehaviour
 
   private void FixedUpdate()
   {
-    if (state == StateOfBeing.Existing)
+    if (state == StateOfBeing.Existing && PLAYERSingleton.playerSingleton.controlsActive)
     {
       if (controlScheme == ControlScheme.oldControls)
       {
@@ -90,7 +94,7 @@ public class Rocket : MonoBehaviour
 
   }
 
-  void Start()
+  void Awake()
   {
     rigidBody = GetComponent<Rigidbody>();
     audioSource = GetComponent<AudioSource>();
