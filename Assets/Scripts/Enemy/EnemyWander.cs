@@ -9,8 +9,11 @@ public class EnemyWander : MonoBehaviour
   public GameObject[] waypointArray;
   List<Vector3> wayPointVectorList;
   private float currentLerpDistance;
-
   EnemyDamage enemyDamage;
+
+  // ! new stuff 
+  public WaypointSystem waypointSystem;
+
 
   bool moving = true;
 
@@ -27,6 +30,13 @@ public class EnemyWander : MonoBehaviour
     }
 
     transform.position = wayPointVectorList[0];
+
+    // * new stuff 
+    waypointSystem = new WaypointSystem(gameObject.GetComponentsInChildren<Waypoint>());
+    print("GetComponentsInChildren<>() result: " + gameObject.GetComponentsInChildren<Waypoint>());
+    print("Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
+    print("Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
+    print("Waypoint[1] distance from starting point: " + waypointSystem.waypointGroupArray[1].distanceFromStart);
   }
 
   
@@ -80,14 +90,6 @@ public class EnemyWander : MonoBehaviour
     // print("current LErp Distance:" + currentLerpDistance);
     // print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
     return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
-  }
-
-  private void CreatePrimitive(int i)
-  {
-    waypointArray[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    waypointArray[i].transform.position = new Vector3(transform.position.x + i + 1, transform.position.y + i + 1, transform.position.z);
-    waypointArray[i].transform.parent = transform;
-    waypointArray[i].transform.name = "Way Point " + (i + 1);
   }
 
     void OnDrawGizmosSelected()

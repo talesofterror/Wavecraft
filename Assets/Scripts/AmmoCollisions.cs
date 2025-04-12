@@ -12,7 +12,6 @@ public class AmmoCollisions : MonoBehaviour
   MeshRenderer mrenderer;
   Collider mcollider;
 
-  // Start is called before the first frame update
   void Awake()
   {
     mrenderer = GetComponent<MeshRenderer>();
@@ -20,7 +19,6 @@ public class AmmoCollisions : MonoBehaviour
     rB = this.gameObject.GetComponent<Rigidbody>();
   }
 
-  // Update is called once per frame
   void Update()
   {
 
@@ -37,7 +35,6 @@ public class AmmoCollisions : MonoBehaviour
       mcollider.enabled = false;
       enemyStats = collision.gameObject.GetComponent<EnemyStats>();
       enemyStats.hP -= damage;
-      print(collision.gameObject.name + ": " + enemyStats.hP + "HP -- took " + damage + " damage");
     }
 
     for (int i = 1; i <= dustAmount; ++i)

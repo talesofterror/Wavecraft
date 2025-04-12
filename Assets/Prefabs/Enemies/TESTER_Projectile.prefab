@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4089895522652141929}
+  - component: {fileID: 4152519246524163809}
   m_Layer: 10
   m_Name: Wander Target 1
   m_TagString: Untagged
@@ -31,6 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7006210349665579312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4152519246524163809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669180014263689198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6e01c4bd1289144ade1727da643f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointGroup: []
+  distanceFromStart: 0
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &4364566396867853917
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6898490300946977713}
+  - component: {fileID: 5355748249727592801}
   m_Layer: 10
   m_Name: Wander Target 3
   m_TagString: Untagged
@@ -62,6 +79,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7006210349665579312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5355748249727592801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364566396867853917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6e01c4bd1289144ade1727da643f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointGroup: []
+  distanceFromStart: 0
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &5085199838005784668
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,6 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5587892742509734270}
+  - component: {fileID: 5022492015061319143}
   m_Layer: 10
   m_Name: Wander Target 2
   m_TagString: Untagged
@@ -93,6 +126,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7006210349665579312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5022492015061319143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085199838005784668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6e01c4bd1289144ade1727da643f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointGroup: []
+  distanceFromStart: 0
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &6031354158930837963
 GameObject:
   m_ObjectHideFlags: 0
