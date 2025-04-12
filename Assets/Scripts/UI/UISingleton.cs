@@ -9,7 +9,7 @@ public class UISingleton : MonoBehaviour
 private static UISingleton _uiSingleton;
 public static UISingleton uiSingleton {get {return _uiSingleton;} }
 
-public UICursor _cursor;
+[HideInInspector] public UICursor _cursor;
 [HideInInspector] public WORLDInteractable cursorTarget;
 
 public GameObject DataHeader;
@@ -31,6 +31,7 @@ public TextMeshProUGUI IdentifierText;
   }
 
   void Start () {
+    _cursor = CAMERASingleton.cameraSingleton.uICursor;
     ToggleDialogue("off");
   }
 

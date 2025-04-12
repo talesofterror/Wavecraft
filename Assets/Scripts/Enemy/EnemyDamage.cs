@@ -52,6 +52,7 @@ public class EnemyDamage : MonoBehaviour
 
     if (dead == true)
     {
+      print(transform.name + "died.");
       _collider.enabled = false;
       enemyStats.hP = 0;
       if (navMeshAttack)
@@ -158,12 +159,12 @@ public class EnemyDamage : MonoBehaviour
     {
       shrinkLerpState += 2f * Time.deltaTime;
       transform.localScale = Vector3.Lerp(shrinkSize, fullScale, shrinkLerpState);
+      dead = false;
       if (shrinkLerpState > 1f)
       {
         shrinkState = ShrinkState.normal;
         shrinkLerpState = 0;
         enemyStats.hP = enemyStats.baseHP;
-        dead = false;
       }
       yield return null;
     }

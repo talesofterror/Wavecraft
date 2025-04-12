@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class EnemyWander : MonoBehaviour
 {
@@ -85,6 +86,22 @@ public class EnemyWander : MonoBehaviour
     waypointArray[i].transform.position = new Vector3(transform.position.x + i + 1, transform.position.y + i + 1, transform.position.z);
     waypointArray[i].transform.parent = transform;
     waypointArray[i].transform.name = "Way Point " + (i + 1);
+  }
+
+    void OnDrawGizmosSelected()
+  {
+    for (int i = 0; i < waypointArray.Length; i++)
+    {
+      if (i == waypointArray.Length - 1)
+      {
+        Gizmos.DrawLine(waypointArray[i].transform.position, waypointArray[0].transform.position);
+        Handles.Label(waypointArray[i].transform.position, waypointArray[i].name);
+        return;
+      }
+      Gizmos.color = Color.red;
+      Gizmos.DrawLine(waypointArray[i].transform.position, waypointArray[i + 1].transform.position);
+      Handles.Label(waypointArray[i].transform.position, waypointArray[i].name);
+    }
   }
 
 }

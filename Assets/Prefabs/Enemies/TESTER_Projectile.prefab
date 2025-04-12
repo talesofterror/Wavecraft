@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4089895522652141929}
   m_Layer: 10
-  m_Name: waypoint1
+  m_Name: Wander Target 1
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6898490300946977713}
   m_Layer: 10
-  m_Name: waypoint1 (2)
+  m_Name: Wander Target 3
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5587892742509734270}
   m_Layer: 10
-  m_Name: waypoint1 (1)
+  m_Name: Wander Target 2
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 2906322178842624983}
   - component: {fileID: 7009006488507270853}
   - component: {fileID: 1554050877392056276}
-  - component: {fileID: 5415023248326243643}
   m_Layer: 10
   m_Name: TESTER_Projectile
   m_TagString: Enemy
@@ -230,6 +229,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -314,7 +316,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8226365283950302114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c151015a8873a42438929c23fc062240, type: 3}
   m_Name: 
@@ -324,7 +326,7 @@ MonoBehaviour:
   - {fileID: 669180014263689198}
   - {fileID: 5085199838005784668}
   - {fileID: 4364566396867853917}
-  lerpSpeed: 0.5
+  lerpSpeed: 0.25
 --- !u!114 &1554050877392056276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,19 +343,4 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   bulletSpeed: 10
   firing: 0
---- !u!114 &5415023248326243643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8226365283950302114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a020fdb7e4d0594eac70ed719dbdceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundsArray:
-  - {fileID: 669180014263689198}
-  - {fileID: 5085199838005784668}
-  - {fileID: 4364566396867853917}
+  enemyDamage: {fileID: 2906322178842624983}

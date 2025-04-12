@@ -8,9 +8,11 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	EnemyProjectileSpawner bulletSpawner;
 	Enemy_DetectSurroundings detector;
 	public GameObject bullet;
-	public Transform targetTransform;
+	[HideInInspector] public Transform targetTransform;
 	public float bulletSpeed = 2f;
   public bool firing = false;
+
+  public EnemyDamage enemyDamage;
 
 	// Start is called before the first frame update
 	void Start()
@@ -22,28 +24,29 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (detector.detection == Detection.Active && !firing)	{
-			bulletSpawner.target = detector.targetGameObject.transform;
-			// print("bullet spawner target position: " + bulletSpawner.target.position);
-			StartCoroutine(FireAllWaitSeconds(1)); 
+		if (detector.detection && !enemyDamage.dead)	{
+      bulletSpawner.target = detector.targetGameObject.transform;
       firing = true;
-			detector.detection = Detection.Dormant;
+      StartCoroutine(FireAllWaitSeconds(1));
 		}
+    if (enemyDamage.dead) {
+      StopAllCoroutines();
+    }
 	}
 
 	public IEnumerator FireAllWaitSeconds (float seconds) {
+    print("gun coroutine called");
 		for (int i = 0; i < bulletSpawner.projectilePool.Length; i++) {
+			if (i + 1 == bulletSpawner.projectilePool.Length) {
+        firing = false;
+				StopCoroutine(FireAllWaitSeconds(0));
+			}
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
 			bulletSpawner.projectilePool[i].GetComponent<Collider>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Renderer>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().linearVelocity = calculateVelocity(bulletSpawner.target, bulletSpeed);
       bulletSpawner.projectilePool[i].transform.parent = null;
-			// print(calculateVelocity(bulletSpawner.target, bulletSpeed));
 			yield return new WaitForSeconds(seconds);
-			if (i + 1 == bulletSpawner.projectilePool.Length) {
-        firing = false;
-				StopCoroutine(FireAllWaitSeconds(0));
-			}
 		}
 	}
 

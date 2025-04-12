@@ -7,12 +7,11 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 	public GameObject targetGameObject;
 
 
-	public Detection detection = new Detection();
+	public bool detection = false;
 
 	
 	void Start()
 	{
-		detection = Detection.Dormant;
 		_collider = gameObject.GetComponent<Collider>();
 	}
 
@@ -22,9 +21,12 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 	}
 
 	void OnTriggerEnter (Collider collider) {
-		print(transform.name + "detected something!");
 		targetGameObject = collider.gameObject;
-		detection = Detection.Active; 
+		detection = true; 
+	}
+
+  	void OnTriggerExit (Collider collider) {
+		detection = false;
 	}
 
   void OnDrawGizmos()
@@ -36,7 +38,3 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 
 }
 
-public enum Detection {
-	Active, 
-	Dormant
-}
