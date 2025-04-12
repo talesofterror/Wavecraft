@@ -14,7 +14,6 @@ public class Enemy_ProjectileGun : MonoBehaviour
 
   public EnemyDamage enemyDamage;
 
-	// Start is called before the first frame update
 	void Start()
 	{
 			bulletSpawner = new EnemyProjectileSpawner(bullet, gameObject, 10);
@@ -26,16 +25,18 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	{
 		if (detector.detection && !enemyDamage.dead)	{
       bulletSpawner.target = detector.targetGameObject.transform;
-      firing = true;
-      StartCoroutine(FireAllWaitSeconds(1));
+      if(!firing) {
+        firing = true;
+        StartCoroutine(FireAllWaitSeconds(1));
+      }
 		}
     if (enemyDamage.dead) {
       StopAllCoroutines();
+      firing = false;
     }
 	}
 
 	public IEnumerator FireAllWaitSeconds (float seconds) {
-    print("gun coroutine called");
 		for (int i = 0; i < bulletSpawner.projectilePool.Length; i++) {
 			if (i + 1 == bulletSpawner.projectilePool.Length) {
         firing = false;

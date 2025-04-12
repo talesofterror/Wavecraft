@@ -26,8 +26,10 @@ public class EnemyWander : MonoBehaviour
       wayPointVectorList.Add(waypointArray[wp].transform.position);
     }
 
-    transform.position = waypointArray[0].transform.position;
+    transform.position = wayPointVectorList[0];
   }
+
+  
 
   void Update()
   {

@@ -52,7 +52,6 @@ public class EnemyDamage : MonoBehaviour
 
     if (dead == true)
     {
-      print(transform.name + "died.");
       _collider.enabled = false;
       enemyStats.hP = 0;
       if (navMeshAttack)
@@ -77,7 +76,7 @@ public class EnemyDamage : MonoBehaviour
   {
     if (dead == true)
     {
-      print("hpZero Called");
+      print(transform.name + " died!");
 
       // ~ DEATH ANIMATIONS
 
@@ -139,7 +138,6 @@ public class EnemyDamage : MonoBehaviour
   float shrinkLerpState = 0;
   IEnumerator shrinkAndGrowIE()
   {
-    print("shrinkAndGrowIE called");
     if (shrinkState != ShrinkState.growing)
     {
       shrinkState = ShrinkState.shrinking;
@@ -151,7 +149,6 @@ public class EnemyDamage : MonoBehaviour
         yield return new WaitForSeconds(3);
         shrinkLerpState = 0;
         shrinkState = ShrinkState.growing;
-        // StopCoroutine(shrinkAndGrowIE());
       }
       yield return null;
     }
@@ -174,7 +171,5 @@ public class EnemyDamage : MonoBehaviour
   {
     yield return null;
   }
-
-
 }
 
