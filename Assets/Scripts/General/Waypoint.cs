@@ -6,7 +6,7 @@ public class Waypoint : MonoBehaviour
   [HideInInspector] public float distanceFromStart;
   [HideInInspector] public Vector3 position;
 
-  void Start()
+  void Awake()
   {
     position = transform.position;
   }

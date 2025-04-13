@@ -11,7 +11,7 @@ public class EnemyWander : MonoBehaviour
   private float currentLerpDistance;
   EnemyDamage enemyDamage;
 
-  // ! new stuff 
+  public Waypoint[] waypoints;
   public WaypointSystem waypointSystem;
 
 
@@ -23,20 +23,26 @@ public class EnemyWander : MonoBehaviour
 
     wayPointVectorList = new List<Vector3>(numberOfWaypoints);
 
+    waypoints = new Waypoint[numberOfWaypoints];
+
     for (int wp = 0; wp < waypointArray.Length; wp++)
     {
       waypointArray[wp].transform.parent = null;
       wayPointVectorList.Add(waypointArray[wp].transform.position);
+      // ! new
+      waypoints[wp] = waypointArray[wp].GetComponent<Waypoint>();
     }
 
     transform.position = wayPointVectorList[0];
 
     // * new stuff 
-    waypointSystem = new WaypointSystem(gameObject.GetComponentsInChildren<Waypoint>());
-    print("GetComponentsInChildren<>() result: " + gameObject.GetComponentsInChildren<Waypoint>());
-    print("Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
-    print("Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
-    print("Waypoint[1] distance from starting point: " + waypointSystem.waypointGroupArray[1].distanceFromStart);
+    waypointSystem = new WaypointSystem(waypoints);
+    print(gameObject.name + " Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
+    print(gameObject.name + " Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
+    print(waypointArray[0].name + " Waypoint[0] distance from starting point: " + waypointSystem.waypointGroupArray[0].distanceFromStart);
+    print(waypointArray[1].name + " Waypoint[1] distance from starting point: " + waypointSystem.waypointGroupArray[1].distanceFromStart);
+    print(waypointArray[2].name + " Waypoint[2] distance from starting point: " + waypointSystem.waypointGroupArray[2].distanceFromStart);
+    print(gameObject.name + " distance Waypoint[2] to Waypoint[0]: " + Vector3.Distance(waypoints[2].position, waypoints[0].position));
   }
 
   
@@ -51,7 +57,6 @@ public class EnemyWander : MonoBehaviour
     {
       moving = true;
     }
-
     if (moving)
     {
       StartCoroutine(MovementIE());
@@ -67,11 +72,9 @@ public class EnemyWander : MonoBehaviour
   int lerpState = 0;
   private IEnumerator MovementIE()
   {
-
     lerpDriver += (lerpSpeed * Time.deltaTime);
     transform.position = Lerpinate();
     yield return null;
-
   }
 
   Vector3 Lerpinate()

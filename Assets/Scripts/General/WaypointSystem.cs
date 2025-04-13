@@ -7,32 +7,31 @@ public class WaypointSystem
   public float totalGroupDistance;
 
   public WaypointSystem (Waypoint[] waypointArray) {
-    waypointGroupArray = waypointArray;
+    this.waypointGroupArray = waypointArray;
     for (int i = 0; i < waypointGroupArray.Length; i++) {
-      waypointGroupArray[i].distanceFromStart = calculateDistanceFromStart(i, waypointGroupArray);
+      this.waypointGroupArray[i].distanceFromStart = calcDistanceFromStart(i, this.waypointGroupArray);
     }
-    totalGroupDistance = calcTotalGroupDistance(waypointGroupArray);
+    this.totalGroupDistance = calcTotalGroupDistance(this.waypointGroupArray);
   }
 
-  private float calculateDistanceFromStart (int i, Waypoint[] group) {
+  private float calcDistanceFromStart (int i, Waypoint[] group) {
     float d =0;
-
     for (int w = i; w <= group.Length - 1; w++) {
       if (w == group.Length - 1) {
         d += Vector3.Distance(group[w].position, group[0].position);
-        break;
+        continue;
       }
       d += Vector3.Distance(group[w].position, group[w+1].position);
     }
-
     return d;
   }
 
-  float calcTotalGroupDistance (Waypoint[] group) {
+  private float calcTotalGroupDistance (Waypoint[] group) {
     float d = 0;
-    for (int w = 0; w < group.Length - 1; w++) {
-      if (w == group.Length - 1) {
-        d += Vector3.Distance(group[w].position, group[0].position);
+    for (int w = 0; w <= group.Length-1; w++) {
+      // Debug.Log("processing " + group[w].transform.parent.name + " - " + group[w].name);
+      if (w == group.Length-1) {
+        d+=Vector3.Distance(group[w].position, group[0].position);
         break;
       }
       d += Vector3.Distance(group[w].position, group[w+1].position);
@@ -40,9 +39,10 @@ public class WaypointSystem
     return d;
   }
 
-  private float calculateTimeScaledDistance (Waypoint[] group) {
-    float d =0;
-
+  public float calcDistanceScaledTime (float speed) {
+    float d = 0;
+    float t = Time.timeSinceLevelLoad;
+    d = (t * speed) % totalGroupDistance;
     return d;
   }
 }
