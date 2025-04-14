@@ -42,6 +42,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
         firing = false;
 				StopCoroutine(FireAllWaitSeconds(0));
 			}
+      bulletSpawner.projectilePool[i].gameObject.SetActive(true);
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
 			bulletSpawner.projectilePool[i].GetComponent<Collider>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Renderer>().enabled = true;

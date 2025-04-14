@@ -7,5 +7,6 @@ public class EnemyProjectile : MonoBehaviour
 		if (collider.CompareTag("GuyBase")) {
 			print(transform.name + ": Target hit.");
 		}
+    gameObject.SetActive(false);
 	}
 }

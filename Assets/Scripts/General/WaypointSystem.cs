@@ -14,7 +14,7 @@ public class WaypointSystem
     this.totalGroupDistance = calcTotalGroupDistance(this.waypointGroupArray);
   }
 
-  private float calcDistanceFromStart (int i, Waypoint[] group) {
+  public float calcDistanceFromStart (int i, Waypoint[] group) {
     float d =0;
     for (int w = i; w <= group.Length - 1; w++) {
       if (w == group.Length - 1) {
@@ -41,8 +41,8 @@ public class WaypointSystem
 
   public float calcDistanceScaledTime (float speed) {
     float d = 0;
-    float t = Time.timeSinceLevelLoad;
-    d = (t * speed) % totalGroupDistance;
+    float t = Time.time;
+    d = Mathf.Sin((t * (speed)) % totalGroupDistance);
     return d;
   }
 }
