@@ -8,10 +8,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96543647790346399, guid: 438d7ad0f495ecc4b8e86e324391a932,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1167437325115340470, guid: 438d7ad0f495ecc4b8e86e324391a932,
         type: 3}
       propertyPath: m_Name
       value: WallsN 3Way Left Top Bottom Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234612651363066503, guid: 438d7ad0f495ecc4b8e86e324391a932,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6696650597499081812, guid: 438d7ad0f495ecc4b8e86e324391a932,
         type: 3}
@@ -77,6 +87,7 @@ PrefabInstance:
     - {fileID: 2446022488597751239, guid: 438d7ad0f495ecc4b8e86e324391a932, type: 3}
     - {fileID: 7096239398952513494, guid: 438d7ad0f495ecc4b8e86e324391a932, type: 3}
     - {fileID: 4089086895596073881, guid: 438d7ad0f495ecc4b8e86e324391a932, type: 3}
+    - {fileID: 2234612651363066503, guid: 438d7ad0f495ecc4b8e86e324391a932, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 438d7ad0f495ecc4b8e86e324391a932, type: 3}

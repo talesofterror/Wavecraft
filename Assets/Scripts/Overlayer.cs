@@ -6,7 +6,7 @@ public class Overlayer : MonoBehaviour
   private Camera overlayCam;
   public GameObject mainCamObject;
   private Camera mainCamCamera;
-  private ViewerRevised mainCamViewer;
+  private View mainCamViewer;
   private ViewState currentState;
   public float overlayFOV = 44f; // & 44f
 
@@ -16,7 +16,7 @@ public class Overlayer : MonoBehaviour
   void Start()
   {
     overlayCam = gameObject.GetComponent<Camera>();
-    mainCamViewer = mainCamObject.GetComponent<ViewerRevised>();
+    mainCamViewer = mainCamObject.GetComponent<View>();
     mainCamCamera = mainCamObject.GetComponent<Camera>();
   }
 

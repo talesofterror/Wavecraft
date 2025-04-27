@@ -11,6 +11,7 @@ public class PLAYERSingleton : MonoBehaviour
   public Rocket rocket;
   public PLAYERAttack playerAttack;
   public GuyRotate guyRotate;
+  public Rigidbody rB;
   [HideInInspector] WORLDInteractable worldCursorTarget;
   public InteractableState_WORLD focusState;
   public bool controlsActive = true;

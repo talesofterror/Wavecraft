@@ -87,7 +87,7 @@ public class Rocket : MonoBehaviour
     PauseGame();
 
 
-    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.C))
+    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyUp(KeyCode.C))
     {
       toggleEnemyCollisions();
     }

@@ -7,8 +7,9 @@ public class CAMERASingleton : MonoBehaviour
     public static CAMERASingleton cameraSingleton {get {return _cameraSingleton;} }
 
     public UICursor uICursor;
-    public ViewerRevised viewerScript;
+    public View viewerScript;
     public PointerSensorManager pointerSensor;
+    public LookAtGimbal LookAtGimbal;
 
     void Awake () {
       if (_cameraSingleton != null && _cameraSingleton != this) {

@@ -16,13 +16,13 @@ TODO
 
 public class ViewShiftNew : MonoBehaviour
 {
-  public Vector3 targetPosition;
-  public Quaternion targetRotation;
-  public float targetFieldOfView;
+  public Vector3 position;
+  public Quaternion rotation;
+  public float fieldOfView;
   public Vector3 offsets;
-  public FollowState targetFollowState;
-  public bool targetLookAt;
-  private ViewerRevised mainCamViewerRevised;
+  public FollowState followState;
+  public bool lookAtState;
+  private View mainCamViewerRevised;
   private ViewerObject shiftView;
   private ViewerObject initView;
   private bool triggeredAlready = false;
@@ -30,10 +30,11 @@ public class ViewShiftNew : MonoBehaviour
   public bool enableTransition = true;
   void Awake()
   {
-    shiftView = new ViewerObject(targetPosition, targetRotation, targetFieldOfView);
+    shiftView = new ViewerObject(position, rotation, fieldOfView);
     shiftView.setOffsets(offsets.x, offsets.y, offsets.z);
-    shiftView.setFollowState(targetFollowState);
-    mainCamViewerRevised = Camera.main.gameObject.GetComponent<ViewerRevised>();
+    shiftView.setFollowState(followState);
+    shiftView.setLookAt(lookAtState);
+    mainCamViewerRevised = Camera.main.gameObject.GetComponent<View>();
     editMode = false;
   }
   void Start()
@@ -50,9 +51,10 @@ public class ViewShiftNew : MonoBehaviour
         if (enableTransition)
         {
           initView = mainCamViewerRevised.activeView;
-          mainCamViewerRevised.callViewTransition(initView, shiftView, 1.5f);
+          CAMERASingleton.cameraSingleton.viewerScript.callViewTransition(initView, shiftView, 1.5f);
           mainCamViewerRevised.activeView.followState = shiftView.followState;
           mainCamViewerRevised.activeView.offsets = shiftView.offsets;
+          mainCamViewerRevised.activeView.lookAt = shiftView.lookAt;
         }
         else
         {
@@ -68,6 +70,7 @@ public class ViewShiftNew : MonoBehaviour
           mainCamViewerRevised.activeView.offsets = initView.offsets;
           mainCamViewerRevised.callViewTransition(mainCamViewerRevised.activeView, initView, 1.5f);
           mainCamViewerRevised.activeView.followState = initView.followState;
+          mainCamViewerRevised.activeView.lookAt = initView.lookAt;
         }
         else
         {
@@ -83,9 +86,9 @@ public class ViewShiftNew : MonoBehaviour
     if (editMode)
     {
       mainCamViewerRevised.activeView.position = calculatedTarget(mainCamViewerRevised.followState);
-      mainCamViewerRevised.activeView.rotation = targetRotation;
-      mainCamViewerRevised.activeView.fieldOfView = targetFieldOfView;
-      mainCamViewerRevised.activeView.followState = targetFollowState;
+      mainCamViewerRevised.activeView.rotation = rotation;
+      mainCamViewerRevised.activeView.fieldOfView = fieldOfView;
+      mainCamViewerRevised.activeView.followState = followState;
       mainCamViewerRevised.activeView.offsets = offsets;
     }
   }
@@ -94,22 +97,22 @@ public class ViewShiftNew : MonoBehaviour
   {
     if (state == FollowState.Stationary)
     {
-      return targetPosition;
+      return position;
     }
     if (state == FollowState.Vertical)
     {
       return new Vector3(
-        targetPosition.x,
+        position.x,
         mainCamViewerRevised.player.transform.position.y,
-        targetPosition.z
+        position.z
         );
     }
     if (state == FollowState.Horizontal)
     {
       return new Vector3(
         mainCamViewerRevised.player.transform.position.x,
-        targetPosition.y,
-        targetPosition.z
+        position.y,
+        position.z
         );
     }
     if (state == FollowState.Total)
@@ -117,7 +120,7 @@ public class ViewShiftNew : MonoBehaviour
       return new Vector3(
         mainCamViewerRevised.player.transform.position.x,
         mainCamViewerRevised.player.transform.position.y,
-        targetPosition.z
+        position.z
         );
     }
     else
