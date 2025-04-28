@@ -34,6 +34,7 @@ public class ViewerObject
   public void setOffsets(float x, float y, float z)
   {
     offsets = new Vector3(x, y, z);
+    position +=offsets;
   }
 
 }

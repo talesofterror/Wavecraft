@@ -53,7 +53,7 @@ public class View : MonoBehaviour
     player = GameObject.FindWithTag("GuyBase");
     Vector3 defaultPlayerPosition = player.transform.position;
     initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
-    initialView.setOffsets(0.0f, 3.7f, 0.02f);
+    initialView.setOffsets(0, 0, 0);
     if (player.transform.position.y < 4f) {
       Vector3 nondefaultPlayerPosition = new Vector3(
         player.transform.position.x, player.transform.position.y, transform.position.z
@@ -93,7 +93,7 @@ public class View : MonoBehaviour
     } else if (!view.lookAt) {
       transform.rotation = view.rotation;
     }
-    transform.position = view.position + view.offsets;
+    transform.position = view.position;
     Camera.main.fieldOfView = view.fieldOfView;
     followState = activeView.followState;
   }
@@ -166,15 +166,27 @@ public class View : MonoBehaviour
       }
       if (state == FollowState.Vertical)
       {
-        return new Vector3(target.position.x, player.transform.position.y, target.position.z);
+        return new Vector3(
+          target.position.x, 
+          player.transform.position.y, 
+          target.position.z
+          );
       }
       if (state == FollowState.Horizontal)
       {
-        return new Vector3(player.transform.position.x, target.position.y, target.position.z);
+        return new Vector3(
+          player.transform.position.x, 
+          target.position.y, 
+          target.position.z
+        );
       }
       if (state == FollowState.Total)
       {
-        return new Vector3(player.transform.position.x, player.transform.position.y, target.position.z);
+        return new Vector3(
+          player.transform.position.x, 
+          player.transform.position.y, 
+          target.position.z
+        );
       }
       else
       {
@@ -185,11 +197,15 @@ public class View : MonoBehaviour
 
     for (i = 0; i <= 1; i += 1 / transitionSpeed * Time.deltaTime)
     {
-      if(target.lookAt) {
-        transitoryView.rotation.x = Mathf.LerpAngle(start.rotation.x, gimbalQuaternion.x, i);
-        transitoryView.rotation.y = Mathf.LerpAngle(start.rotation.y, gimbalQuaternion.y, i);
-        transitoryView.rotation.z = Mathf.LerpAngle(start.rotation.z, gimbalQuaternion.z, i);
-      } else if (!target.lookAt) {
+      float transitoryangleX = Mathf.LerpAngle(gimbalQuaternion.x, target.rotation.x, i);
+      float transitoryangleY = Mathf.LerpAngle(gimbalQuaternion.y, target.rotation.y, i);
+      float transitoryangleZ = Mathf.LerpAngle(gimbalQuaternion.z, target.rotation.z, i);
+
+      if(start.lookAt || target.lookAt) {
+        transitoryView.rotation.x = Mathf.LerpAngle(gimbalQuaternion.x, transitoryangleX, i);
+        transitoryView.rotation.y = Mathf.LerpAngle(gimbalQuaternion.y, transitoryangleY, i);
+        transitoryView.rotation.z = Mathf.LerpAngle(gimbalQuaternion.z, transitoryangleZ, i);
+      } else if (!start.lookAt) {
         transitoryView.rotation.x = Mathf.LerpAngle(start.rotation.x, target.rotation.x, i);
         transitoryView.rotation.y = Mathf.LerpAngle(start.rotation.y, target.rotation.y, i);
         transitoryView.rotation.z = Mathf.LerpAngle(start.rotation.z, target.rotation.z, i);
@@ -205,10 +221,10 @@ public class View : MonoBehaviour
 
       activeView = transitoryView;
 
-      if(i > 1) {
-        transitioning = false;
-        StopAllCoroutines();
-      }
+      // if(i > 1) {
+      //   transitioning = false;
+      //   StopAllCoroutines();
+      // }
       yield return null;
     }
   }

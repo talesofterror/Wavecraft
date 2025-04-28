@@ -23,7 +23,7 @@ public class ViewShiftNew : MonoBehaviour
   public FollowState followState;
   public bool lookAtState;
   private View mainCamViewerRevised;
-  private ViewerObject shiftView;
+  [HideInInspector] public ViewerObject shiftView;
   private ViewerObject initView;
   private bool triggeredAlready = false;
   public bool editMode;
