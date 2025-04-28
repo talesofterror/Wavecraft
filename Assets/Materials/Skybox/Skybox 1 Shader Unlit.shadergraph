@@ -1000,7 +1000,7 @@
     },
     "m_DefaultValue": {
         "x": 0.0,
-        "y": 0.0
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -1305,6 +1305,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": false,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -1889,7 +1892,7 @@
     "m_Title": "Stars",
     "m_Position": {
         "x": -1027.9998779296875,
-        "y": 139.20001220703126
+        "y": 139.19992065429688
     }
 }
 
@@ -2270,8 +2273,8 @@
     "m_ObjectId": "68ca14920b09472aaef8ecfd9c965355",
     "m_Title": "Sky Gradient",
     "m_Position": {
-        "x": -1109.60009765625,
-        "y": -321.5999755859375
+        "x": -1010.3999633789063,
+        "y": -321.6000061035156
     }
 }
 
@@ -2865,8 +2868,8 @@
         "y": 2.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -4040,8 +4043,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": -1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }

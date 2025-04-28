@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Vertext Displacement Mat Tesselate
+  m_Name: Blob 1
   m_Shader: {fileID: -6465566751694194690, guid: cdf5b4c0967bd8c419e2f3206b52a607,
     type: 3}
   m_Parent: {fileID: 0}
@@ -92,7 +92,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 1
+    - _Amplitude: 92.95
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -106,17 +106,17 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 2.98
+    - _Scale: 1.4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.8
+    - _Speed: 6.48
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.84492445, g: 0, b: 1, a: 0}
+    - _BaseColor: {r: 1, g: 0, b: 0.10409546, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MovementDirection: {r: 0, g: 0.5, b: 0, a: 0}
+    - _MovementDirection: {r: -0, g: 0.08, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

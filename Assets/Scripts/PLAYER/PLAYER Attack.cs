@@ -29,7 +29,7 @@ public class PLAYERAttack : MonoBehaviour
 
     for (int i = 0; i < ammoPoolSize; i++)
     {
-      ammoPool[i] = GameObject.Instantiate(projectile, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+      ammoPool[i] = GameObject.Instantiate(projectile, transform.position + new Vector3(0, 0, 0), projectile.transform.rotation);
       ammoRenderers[i] = ammoPool[i].GetComponent<MeshRenderer>();
       ammoRB[i] = ammoPool[i].GetComponent<Rigidbody>();
       ammoColliders[i] = ammoPool[i].GetComponent<Collider>();

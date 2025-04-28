@@ -44,8 +44,8 @@ public class Enemy_ProjectileGun : MonoBehaviour
 			}
       bulletSpawner.projectilePool[i].gameObject.SetActive(true);
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
-			bulletSpawner.projectilePool[i].GetComponent<Collider>().enabled = true;
-			bulletSpawner.projectilePool[i].GetComponent<Renderer>().enabled = true;
+			bulletSpawner.projectilePool[i].GetComponent<BoxCollider>().enabled = true;
+			bulletSpawner.projectilePool[i].GetComponent<MeshRenderer>().enabled = true;
 			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().linearVelocity = calculateVelocity(bulletSpawner.target, bulletSpeed);
       bulletSpawner.projectilePool[i].transform.parent = null;
 			yield return new WaitForSeconds(seconds);

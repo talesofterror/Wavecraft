@@ -41,12 +41,12 @@ public class EnemyWander : MonoBehaviour
 
     // * new stuff 
     waypointSystem = new WaypointSystem(waypoints);
-    print(gameObject.name + " Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
-    print(gameObject.name + " Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
-    print(waypointArray[0].name + " Waypoint[0] distance from starting point: " + waypointSystem.waypointGroupArray[0].distanceFromStart);
-    print(waypointArray[1].name + " Waypoint[1] distance from starting point: " + waypointSystem.waypointGroupArray[1].distanceFromStart);
-    print(waypointArray[2].name + " Waypoint[2] distance from starting point: " + waypointSystem.waypointGroupArray[2].distanceFromStart);
-    print(gameObject.name + " distance Waypoint[2] to Waypoint[0]: " + Vector3.Distance(waypoints[2].position, waypoints[0].position));
+    // print(gameObject.name + " Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
+    // print(gameObject.name + " Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
+    // print(waypointArray[0].name + " Waypoint[0] distance from starting point: " + waypointSystem.waypointGroupArray[0].distanceFromStart);
+    // print(waypointArray[1].name + " Waypoint[1] distance from starting point: " + waypointSystem.waypointGroupArray[1].distanceFromStart);
+    // print(waypointArray[2].name + " Waypoint[2] distance from starting point: " + waypointSystem.waypointGroupArray[2].distanceFromStart);
+    // print(gameObject.name + " distance Waypoint[2] to Waypoint[0]: " + Vector3.Distance(waypoints[2].position, waypoints[0].position));
   }
 
   

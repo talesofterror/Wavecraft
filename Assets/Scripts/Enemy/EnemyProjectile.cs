@@ -1,12 +1,38 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
 
-	void OnTriggerEnter (Collider collider) {
-		if (collider.CompareTag("GuyBase")) {
-			print(transform.name + ": Target hit.");
+  MeshRenderer renderer;
+  Collider _collider;
+
+  void Start()
+  {
+    renderer = GetComponent<MeshRenderer>();
+    _collider = GetComponent<BoxCollider>();
+  }
+
+  void OnTriggerEnter (Collider collider) {
+
+    print(transform.name + " triggered");
+    renderer.enabled = false;
+    _collider.enabled = false;
+
+		if (collider.gameObject.CompareTag("GuyBase")) {
+      print(transform.name + " hit the Player.");
 		}
-    gameObject.SetActive(false);
+    if (collider.CompareTag("PlayerDamage")) {
+      print(transform.name + " hit the player projectile.");
+      // gameObject.SetActive(false);
+    }
 	}
+
+  void CollisionEnter(Collision collision)
+  {
+    print(transform.name + " collided");
+
+    if (collision.gameObject.tag == "GuyBase") {
+    }
+  }
 }

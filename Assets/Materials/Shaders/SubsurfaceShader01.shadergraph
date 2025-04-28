@@ -527,6 +527,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -620,8 +623,8 @@
     "m_ObjectId": "054b89e3a9b04c60a0a604406a253eb6",
     "m_Title": "Back Scatter",
     "m_Position": {
-        "x": -1548.800048828125,
-        "y": 311.9999694824219
+        "x": -1548.80029296875,
+        "y": 312.0
     }
 }
 
@@ -2291,8 +2294,8 @@
     "m_ObjectId": "a93eac14957547a38e99f63e49e905fa",
     "m_Title": "Get Main Light from scene",
     "m_Position": {
-        "x": -2226.39990234375,
-        "y": -284.8000183105469
+        "x": -2226.400390625,
+        "y": -284.79998779296877
     }
 }
 
@@ -2616,7 +2619,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -2982,8 +2985,8 @@
     "m_ObjectId": "da544c7eae0c42aaa160fb8c5fd42007",
     "m_Title": "SS Color",
     "m_Position": {
-        "x": -1038.39990234375,
-        "y": 91.19993591308594
+        "x": -1038.400146484375,
+        "y": 91.20008087158203
     }
 }
 

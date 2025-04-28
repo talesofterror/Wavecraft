@@ -31,28 +31,31 @@ public class AmmoCollisions : MonoBehaviour
 
     if (collision.gameObject.tag == "Enemy")
     {
-
-      mcollider.enabled = false;
+      if (collision.gameObject.GetComponent<EnemyProjectile>())
+      {
+        collision.gameObject.SetActive(false);
+      }
       enemyStats = collision.gameObject.GetComponent<EnemyStats>();
       enemyStats.hP -= damage;
     }
 
-    for (int i = 1; i <= dustAmount; ++i)
-    {
-      dustBloom(i);
-    }
+    mcollider.enabled = false;
+
+    DustBloom(collision);
   }
 
-  private void dustBloom(int i)
+  private void DustBloom(Collision collision)
   {
-    if (i <= dustAmount)
+    for (int i = 1; i <= dustAmount; ++i)
     {
       // float dustLoc = Mathf.Sin(0.5f + i);
       // ammoLoc = transform.position + new Vector3(0.5f, dustLoc, 0f);
-      GameObject dustObject = Instantiate(dustBall, transform.position, rB.rotation);
+      GameObject dustObject = Instantiate(dustBall, collision.transform.position, transform.rotation);
       rBDust = dustObject.GetComponent<Rigidbody>();
-      float dustVelX = Mathf.Sin(i + 1);
-      float dustVelY = Mathf.Sin(i + 1);
+      // float dustVelX = Mathf.Sin(i);
+      float dustVelX =  Random.Range(-3, 3);
+      // float dustVelY = Mathf.Sin(i);
+      float dustVelY =  Random.Range(-3, 3);
       rBDust.linearVelocity = new Vector3(dustVelX, dustVelY, 0);
       Destroy(dustObject, dustDuration);
     }

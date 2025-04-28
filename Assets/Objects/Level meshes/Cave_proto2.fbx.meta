@@ -43,7 +43,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Moon
-    second: {fileID: 2100000, guid: 694acbc50eb62d64ebb246ed3c7ffb60, type: 2}
+    second: {fileID: 2100000, guid: fe6ed6fdbf951e7419668fa2c9b175ff, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -53,7 +53,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Red
-    second: {fileID: 2100000, guid: 7013282d62517694ebd3c369cf58a501, type: 2}
+    second: {fileID: 2100000, guid: 35d273fe46cdca74e8b7eb003e28cfb2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -68,12 +68,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tank inside
-    second: {fileID: 2100000, guid: 1c5e68a92a397694e861fd7997927702, type: 2}
+    second: {fileID: 2100000, guid: 9850b5a0d3082244199e50e76f8b0d8a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tank outside
-    second: {fileID: 2100000, guid: 573f20e48b74baf4abc17192f968f3d2, type: 2}
+    second: {fileID: 2100000, guid: 1c5e68a92a397694e861fd7997927702, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[SelectionBase]
+
 public class WORLDInteractable : MonoBehaviour
 {
   public string _tag;
@@ -9,6 +11,7 @@ public class WORLDInteractable : MonoBehaviour
   public bool isInRange;
   [HideInInspector] public float distanceFromTrigger;
   public float distanceToInteract;
+  
 
   void OnDrawGizmosSelected()
   {

@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4f1674bb8bda14f8f76c96d0cd5320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hP: 100
+  hP: 20
   baseHP: 0
   aP: 100
   baseAP: 0
@@ -364,17 +364,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8226365283950302114}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c151015a8873a42438929c23fc062240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfWaypoints: 3
   waypointArray:
   - {fileID: 669180014263689198}
   - {fileID: 5085199838005784668}
   - {fileID: 4364566396867853917}
-  lerpSpeed: 0.25
+  - {fileID: 5085199838005784668}
+  speed: 3
+  waypoints: []
 --- !u!114 &1554050877392056276
 MonoBehaviour:
   m_ObjectHideFlags: 0

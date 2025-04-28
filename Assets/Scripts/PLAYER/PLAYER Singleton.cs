@@ -1,7 +1,9 @@
+using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine;
 
+[SelectionBase]
 public class PLAYERSingleton : MonoBehaviour
 {
 
@@ -17,6 +19,9 @@ public class PLAYERSingleton : MonoBehaviour
   public bool controlsActive = true;
   public bool attackEnabled = true;
   
+  [Header("Materials")]
+  public Material damageIndicatorMaterial;
+
   public float interactionZ; 
 
   void Awake () {
@@ -30,7 +35,14 @@ public class PLAYERSingleton : MonoBehaviour
 
   void Start()
   {
-      
+    Renderer[] _renderers = gameObject.GetComponentsInChildren<Renderer>();
+
+    for (int i = 0; i < _renderers.Length; i++) {
+      Material[] _newMaterials = new Material[2];
+      _newMaterials[0] = _renderers[i].material;
+      _newMaterials[1] = damageIndicatorMaterial;
+      _renderers[i].materials = _newMaterials;
+    }
   }
 
   void Update()
