@@ -981,6 +981,8 @@ MonoBehaviour:
   focusState: 0
   controlsActive: 1
   attackEnabled: 1
+  damageIndicatorMaterial: {fileID: 2100000, guid: 871e94813c864864ea7ce43e8a59943f,
+    type: 2}
   interactionZ: 0
 --- !u!114 &1274461817535836548
 MonoBehaviour:
@@ -2276,7 +2278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3819791867168730356
 Transform:
   m_ObjectHideFlags: 0

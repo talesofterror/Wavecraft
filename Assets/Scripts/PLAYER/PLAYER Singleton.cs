@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine;
@@ -15,14 +16,19 @@ public class PLAYERSingleton : MonoBehaviour
   public GuyRotate guyRotate;
   public Rigidbody rB;
   [HideInInspector] WORLDInteractable worldCursorTarget;
-  public InteractableState_WORLD focusState;
-  public bool controlsActive = true;
-  public bool attackEnabled = true;
+  [HideInInspector] public InteractableState_WORLD focusState;
+  [HideInInspector] public bool controlsActive = true;
+  [HideInInspector] public bool attackEnabled = true;
+  [HideInInspector] public float interactionZ; 
   
   [Header("Materials")]
   public Material damageIndicatorMaterial;
+  Material[] loadedMaterialsArray = new Material[2];
+  Material[] originalMaterialsArray;
+  Renderer[] _renderers;
+  [Header("Taking Damage")]
+  public float damageDisplayDuration = 1;
 
-  public float interactionZ; 
 
   void Awake () {
     if (_playerSingleton != null && _playerSingleton != this) {
@@ -35,15 +41,12 @@ public class PLAYERSingleton : MonoBehaviour
 
   void Start()
   {
-    Renderer[] _renderers = gameObject.GetComponentsInChildren<Renderer>();
+    _renderers = gameObject.GetComponentsInChildren<Renderer>();
+    originalMaterialsArray = new Material[_renderers.Length];
 
-    for (int i = 0; i < _renderers.Length; i++) {
-      Material[] _newMaterials = new Material[2];
-      _newMaterials[0] = _renderers[i].material;
-      _newMaterials[1] = damageIndicatorMaterial;
-      _renderers[i].materials = _newMaterials;
-    }
+    LoadMaterials();
   }
+
 
   void Update()
   {
@@ -62,4 +65,31 @@ public class PLAYERSingleton : MonoBehaviour
     }
 
   }
+
+  public void takeDamage() {
+    StartCoroutine(displayDamage(damageDisplayDuration));
+  }
+
+  IEnumerator displayDamage(float seconds) {
+    for (int i = 0; i < _renderers.Length; i++)
+    {
+      _renderers[i].material = loadedMaterialsArray[0];
+    }
+    yield return new WaitForSeconds(seconds);
+    for (int i = 0; i < _renderers.Length; i++)
+    {
+      _renderers[i].material = originalMaterialsArray[i];
+    }
+    yield break;
+  }
+  
+  private void LoadMaterials()
+  {
+    for (int i = 0; i < _renderers.Length; i++)
+    {
+      originalMaterialsArray[i] = _renderers[i].material;
+    }
+    loadedMaterialsArray[0] = damageIndicatorMaterial;
+  }
 }
+
