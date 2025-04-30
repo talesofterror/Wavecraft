@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 public class CAMERASingleton : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class CAMERASingleton : MonoBehaviour
     public static CAMERASingleton cameraSingleton {get {return _cameraSingleton;} }
 
     public UICursor uICursor;
+    public VirtualMouseInput virtualMouse;
     public View viewerScript;
     public PointerSensorManager pointerSensor;
     public LookAtGimbal LookAtGimbal;

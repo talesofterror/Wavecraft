@@ -56,7 +56,7 @@ public class PLAYERAttack : MonoBehaviour
     }
   }
 
-  void fireProjectile()
+  public void fireProjectile()
   {
     if (ammoIndex == ammoPoolSize)
     {

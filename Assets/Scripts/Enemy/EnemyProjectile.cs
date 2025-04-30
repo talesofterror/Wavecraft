@@ -21,7 +21,7 @@ public class EnemyProjectile : MonoBehaviour
 
   void OnTriggerEnter (Collider collider) {
 
-    print(transform.name + " triggered");
+    // print(transform.name + " triggered");
     renderer.enabled = false;
     _collider.enabled = false;
 

@@ -19,7 +19,8 @@ public class Rocket : MonoBehaviour
   public enum ControlScheme
   {
     oldControls,
-    newControls
+    newControls,
+    inputSystem
   };
 
   public bool controlsActive;
@@ -37,7 +38,7 @@ public class Rocket : MonoBehaviour
   public Rigidbody rigidBody;
 
   [Header("Physics")]
-  [SerializeField] float gravityY = 0;
+  public float gravityY = 0;
 
   [Header("Sound")]
   [SerializeField] AudioClip thrustSound;
@@ -66,6 +67,9 @@ public class Rocket : MonoBehaviour
       if (controlScheme == ControlScheme.newControls)
       {
         controlsNEW();
+      }
+      if (controlScheme == ControlScheme.inputSystem) {
+        print("Using Input System");
       }
     }
   }
