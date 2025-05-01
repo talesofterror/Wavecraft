@@ -51,7 +51,7 @@ public class ViewShiftNew : MonoBehaviour
         if (enableTransition)
         {
           initView = mainCamViewerRevised.activeView;
-          CAMERASingleton.cameraSingleton.viewerScript.callViewTransition(initView, shiftView, 1.5f);
+          CAMERASingleton.i.viewerScript.callViewTransition(initView, shiftView, 1.5f);
           mainCamViewerRevised.activeView.followState = shiftView.followState;
           mainCamViewerRevised.activeView.offsets = shiftView.offsets;
           mainCamViewerRevised.activeView.lookAt = shiftView.lookAt;

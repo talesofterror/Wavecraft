@@ -89,7 +89,7 @@ public class View : MonoBehaviour
       activeView.setOffsets(0, 0, 0);
     }
     if (view.lookAt) {
-      transform.LookAt(PLAYERSingleton.playerSingleton.transform);
+      transform.LookAt(PLAYERSingleton.i.transform);
     } else if (!view.lookAt) {
       transform.rotation = view.rotation;
     }
@@ -144,7 +144,7 @@ public class View : MonoBehaviour
     ViewerObject start, ViewerObject target,
     float transitionSpeed)
   {
-    gimbalQuaternion = CAMERASingleton.cameraSingleton.LookAtGimbal.rotation;
+    gimbalQuaternion = CAMERASingleton.i.LookAtGimbal.rotation;
     Vector3 transitoryPosition;
     Quaternion transitoryRotation;
     float transitoryFieldOfView;

@@ -14,7 +14,6 @@ public class UICursor : MonoBehaviour
 
   public void UpdateAppearance () {
     print("UICursor: UpdateAppearance() called");
-    print("UISingleton cursorTarget = " + UISingleton.uiSingleton.cursorTarget);
   }
 
 }

@@ -12,12 +12,15 @@ public class PLAYERControls : MonoBehaviour
   [HideInInspector] public InputAction lookAction;
   [HideInInspector] public InputAction primaryAttackAction;
   [HideInInspector] public InputAction sprintAction;
+  [HideInInspector] public InputAction interactAction;
 
   Rigidbody rB;
   VirtualMouseInput virtualCursor;
 
   public float moveSpeed = 2f;
   public float sprintSpeed;
+  public Vector3 gravity;
+  [SerializeField] float sprintDamping;
 
   void Start()
   {
@@ -26,9 +29,10 @@ public class PLAYERControls : MonoBehaviour
       lookAction = playerInput.actions.FindAction("Look");
       primaryAttackAction = playerInput.actions.FindAction("Primary Attack");
       sprintAction = playerInput.actions.FindAction("Sprint");
+      interactAction = playerInput.actions.FindAction("Interact");
 
-      rB = PLAYERSingleton.playerSingleton.rB;
-      virtualCursor = CAMERASingleton.cameraSingleton.virtualMouse;
+      rB = PLAYERSingleton.i.rB;
+      virtualCursor = CAMERASingleton.i.virtualMouse;
   }
 
   void Update()
@@ -40,7 +44,7 @@ public class PLAYERControls : MonoBehaviour
 
   private void Attack() {
     if (primaryAttackAction.WasPerformedThisFrame()) {
-      PLAYERSingleton.playerSingleton.playerAttack.fireProjectile();
+      PLAYERSingleton.i.playerAttack.fireProjectile();
     }
   }
 
@@ -62,24 +66,22 @@ public class PLAYERControls : MonoBehaviour
     rB.angularDamping = 0.0f;
     rB.freezeRotation = true;
 
-    float _moveSpeed = moveSpeed * Time.deltaTime;
+    float _moveSpeed = moveSpeed;
 
     if (sprintAction.IsPressed()) {
-      _moveSpeed = moveSpeed + sprintSpeed;
-      // rB.linearDamping = 3f;
-      Debug.Log("Sprint action pressed");
-    } else {
-      _moveSpeed = moveSpeed;
+      _moveSpeed = sprintSpeed;
+      rB.linearDamping = sprintDamping;
+      // Debug.Log("Sprint action pressed");
     }
 
     Vector3 moveForce = new Vector3(
-      moveAction.ReadValue<Vector2>().x * _moveSpeed, 
-      moveAction.ReadValue<Vector2>().y * _moveSpeed, 
+      moveAction.ReadValue<Vector2>().x * ((_moveSpeed * Time.deltaTime) * 100), 
+      moveAction.ReadValue<Vector2>().y * ((_moveSpeed * Time.deltaTime) * 100), 
     0);
 
     rB.AddForce(moveForce);
 
-    Physics.gravity = new Vector3(0, PLAYERSingleton.playerSingleton.rocket.gravityY, 0);
+    Physics.gravity = gravity;
     // Debug.Log("moveAction value: " + moveAction.ReadValue<Vector2>());
   }
 }

@@ -1,16 +1,27 @@
 using UnityEngine;
+using TMPro;
 
 [SelectionBase]
 
 public class WORLDInteractable : MonoBehaviour
 {
-  public string _tag;
   public string _name;
-  public Vector3 position;
-  public InteractableState_WORLD state = InteractableState_WORLD.NotEngaged;
-  public bool isInRange;
+  [HideInInspector] public string _tag;
+  [HideInInspector] public Vector3 position;
+  [HideInInspector] public InteractableState_WORLD state = InteractableState_WORLD.NotEngaged;
+  [HideInInspector] public bool isInRange;
   [HideInInspector] public float distanceFromTrigger;
-  public float distanceToInteract;
+  [SerializeField] public float distanceToInteract;
+
+  public enum Dispo {
+    Friendly,
+    Hostile,
+    Neutral
+  }
+
+  public Dispo dispo = new Dispo();
+
+  public Color displayNameColor;
   
 
   void OnDrawGizmosSelected()
@@ -18,36 +29,33 @@ public class WORLDInteractable : MonoBehaviour
     Gizmos.DrawWireSphere(transform.position, distanceToInteract);
   }
 
+  void Awake () {
+    // interactableObject.transform.localPosition = interactableObject.transform.localPosition
+    //   + new Vector3(0, 0, PLAYERSingleton.playerSingleton.interactionZ);
+  }
 
-  public InteractionReceiver interactionReceiver;
-    void Awake () {
-      // interactableObject.transform.localPosition = interactableObject.transform.localPosition
-      //   + new Vector3(0, 0, PLAYERSingleton.playerSingleton.interactionZ);
+  void Start()
+  {
+      _tag = gameObject.tag;
+      position = gameObject.transform.position;
+      state = InteractableState_WORLD.NotEngaged;
+  }
+  
+  void Update()
+  {
+    if (state == InteractableState_WORLD.Hover) {
+      distanceFromTrigger = calculateDistance();
+      ClickBehavior(); 
     }
+    if (state == InteractableState_WORLD.Focus) {
+      if (Input.GetKeyDown(KeyCode.Escape)) {
 
-    void Start()
-    {
-        _name = gameObject.name;
-        _tag = gameObject.tag;
-        position = gameObject.transform.position;
-    }
-    
-    void Update()
-    {
-
-      if (state == InteractableState_WORLD.Hover) {
-        distanceFromTrigger = calculateDistance();
-        ClickBehavior(); 
-      }
-      if (state == InteractableState_WORLD.Focus) {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-
-        }
       }
     }
+  }
   
   float calculateDistance () {
-    float d = Vector3.Distance(transform.position, PLAYERSingleton.playerSingleton.transform.position);
+    float d = Vector3.Distance(transform.position, PLAYERSingleton.i.transform.position);
     return d;
   }
 
@@ -63,21 +71,31 @@ public class WORLDInteractable : MonoBehaviour
     if (collider.CompareTag("Pointer"))
     {
       state = InteractableState_WORLD.Hover;
-      print(this);
-      UISingleton.uiSingleton.cursorTarget = this;
-      UISingleton.uiSingleton._cursor.UpdateAppearance();
-      UISingleton.uiSingleton.ToggleIdentifierPanel("on");
-      UISingleton.uiSingleton.IdentifierText.text = _name;
-      print("Interactable: " + _name + ".");
+      UISingleton.i.cursorTarget = this;
+      UISingleton.i._cursor.UpdateAppearance();
+      UISingleton.i.ToggleIdentifierPanel("on");
+      UISingleton.i.IdentifierText.text = _name;
+      // if (dispo == Dispo.Hostile) {
+      //   UISingleton.i.IdentifierText.color = Color.red;
+      // }
+      Debug.Log("Interactable: " + _name + " (" + transform.name + ").");
     }
 
   }
 
   private void ClickBehavior () {
-    if (Input.GetMouseButtonDown(0) && distanceFromTrigger < distanceToInteract) {
-      print("Interactable ClickBehavior() called");
-      state = InteractableState_WORLD.Focus;
-      UISingleton.uiSingleton.ToggleDialogue("on");
+    if (PLAYERSingleton.i.playerControls.interactAction.WasPressedThisFrame() && distanceFromTrigger < distanceToInteract) {
+      if (dispo == Dispo.Friendly) {
+        print("Interactable ClickBehavior() called");
+        state = InteractableState_WORLD.Focus;
+        UISingleton.i.ToggleDialogue("on");
+      }
+      if (dispo == Dispo.Hostile) {
+        
+      }
+      if (dispo == Dispo.Hostile) {
+        
+      }
     }
   }
 
@@ -89,8 +107,8 @@ public class WORLDInteractable : MonoBehaviour
   public void NotEngagedBehavior()
   {
     state = InteractableState_WORLD.NotEngaged;
-    UISingleton.uiSingleton.ToggleIdentifierPanel("off");
-    UISingleton.uiSingleton.ToggleDialogue("off");
+    UISingleton.i.ToggleIdentifierPanel("off");
+    UISingleton.i.ToggleDialogue("off");
   }
 }
 

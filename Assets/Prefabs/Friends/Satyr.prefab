@@ -1213,11 +1213,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a233d10f0b70fc45b569c855867a75a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tag: 
   _name: 
+  _tag: 
   position: {x: 0, y: 0, z: 0}
   state: 2
-  interactableObject: {fileID: 5386328432285271705}
+  isInRange: 0
+  distanceFromTrigger: 0
+  distanceToInteract: 0
+  dispo: 0
+  displayNameColor: {r: 0, g: 1, b: 0.0054848194, a: 0}
 --- !u!4 &901804406900761579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3556b2f1c5f307244b88ae93682935e0,

@@ -7,7 +7,7 @@ public class UISingleton : MonoBehaviour
 {
 
 private static UISingleton _uiSingleton;
-public static UISingleton uiSingleton {get {return _uiSingleton;} }
+public static UISingleton i {get {return _uiSingleton;} }
 
 [HideInInspector] public UICursor _cursor;
 [HideInInspector] public WORLDInteractable cursorTarget;
@@ -31,17 +31,17 @@ public TextMeshProUGUI IdentifierText;
   }
 
   void Start () {
-    _cursor = CAMERASingleton.cameraSingleton.uICursor;
+    _cursor = CAMERASingleton.i.uICursor;
     ToggleDialogue("off");
   }
 
   public void ToggleDialogue (String state) {
     if (state == "off") {
       DialogueContainer.SetActive(false);
-      PLAYERSingleton.playerSingleton.PauseToggle("unpaused");
+      PLAYERSingleton.i.PauseToggle("unpaused");
     } else if (state == "on") {
       DialogueContainer.SetActive(true);
-      PLAYERSingleton.playerSingleton.PauseToggle("paused");
+      PLAYERSingleton.i.PauseToggle("paused");
     }
   }
 

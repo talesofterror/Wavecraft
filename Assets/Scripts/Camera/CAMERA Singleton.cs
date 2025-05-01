@@ -5,8 +5,7 @@ public class CAMERASingleton : MonoBehaviour
 {
 
     private static CAMERASingleton _cameraSingleton;
-    public static CAMERASingleton cameraSingleton {get {return _cameraSingleton;} }
-
+    public static CAMERASingleton i {get {return _cameraSingleton;} }
     public UICursor uICursor;
     public VirtualMouseInput virtualMouse;
     public View viewerScript;

@@ -58,7 +58,7 @@ public class Rocket : MonoBehaviour
 
   private void FixedUpdate()
   {
-    if (state == StateOfBeing.Existing && PLAYERSingleton.playerSingleton.controlsActive)
+    if (state == StateOfBeing.Existing && PLAYERSingleton.i.controlsActive)
     {
       if (controlScheme == ControlScheme.oldControls)
       {

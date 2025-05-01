@@ -7,10 +7,10 @@ public class DialogueTrigger : MonoBehaviour
   public Dialogue dialogue;
 
   public void TriggerDialogue () {
-    UISingleton.uiSingleton.ToggleDialogue("on");
+    UISingleton.i.ToggleDialogue("on");
   }
 
   public void EndDialogue() {
-    UISingleton.uiSingleton.ToggleDialogue("off");
+    UISingleton.i.ToggleDialogue("off");
   }
 }

@@ -9,12 +9,14 @@ public class PLAYERSingleton : MonoBehaviour
 {
 
   private static PLAYERSingleton _playerSingleton;
-  public static PLAYERSingleton playerSingleton {get {return _playerSingleton;}}
-
+  public static PLAYERSingleton i {get {return _playerSingleton;}}
+  [Header("Components")]
   public Rocket rocket;
   public PLAYERAttack playerAttack;
   public GuyRotate guyRotate;
   public Rigidbody rB;
+  public PLAYERControls playerControls;
+  
   [HideInInspector] WORLDInteractable worldCursorTarget;
   [HideInInspector] public InteractableState_WORLD focusState;
   [HideInInspector] public bool controlsActive = true;
@@ -23,7 +25,7 @@ public class PLAYERSingleton : MonoBehaviour
   
   [Header("Materials")]
   public Material damageIndicatorMaterial;
-  Material[] loadedMaterialsArray = new Material[2];
+  Material[] loadedMaterialsArray;
   Material[] originalMaterialsArray;
   Renderer[] _renderers;
   [Header("Taking Damage")]
@@ -31,6 +33,9 @@ public class PLAYERSingleton : MonoBehaviour
 
 
   void Awake () {
+
+    loadedMaterialsArray = new Material[2];
+
     if (_playerSingleton != null && _playerSingleton != this) {
       Destroy(this.gameObject);
     } else {

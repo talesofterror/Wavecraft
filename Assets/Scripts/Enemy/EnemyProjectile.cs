@@ -4,13 +4,13 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
 
-  MeshRenderer renderer;
+  MeshRenderer _renderer;
   Collider _collider;
   bool targetHit;
 
   void Start()
   {
-    renderer = GetComponent<MeshRenderer>();
+    _renderer = GetComponent<MeshRenderer>();
     _collider = GetComponent<BoxCollider>();
   }
 
@@ -22,14 +22,14 @@ public class EnemyProjectile : MonoBehaviour
   void OnTriggerEnter (Collider collider) {
 
     // print(transform.name + " triggered");
-    renderer.enabled = false;
+    _renderer.enabled = false;
     _collider.enabled = false;
 
 		if (collider.gameObject.CompareTag("GuyBase")) {
       print(transform.name + " hit the Player.");
-      PLAYERSingleton.playerSingleton.takeDamage();
-      PLAYERSingleton.playerSingleton.rB.linearVelocity = Vector3.zero;
-      PLAYERSingleton.playerSingleton.rB.AddForce(gameObject.GetComponent<Rigidbody>().linearVelocity * 50);
+      PLAYERSingleton.i.takeDamage();
+      PLAYERSingleton.i.rB.linearVelocity = Vector3.zero;
+      PLAYERSingleton.i.rB.AddForce(gameObject.GetComponent<Rigidbody>().linearVelocity * 50);
 		}
     if (collider.CompareTag("PlayerDamage")) {
       print(transform.name + " hit the player projectile.");
