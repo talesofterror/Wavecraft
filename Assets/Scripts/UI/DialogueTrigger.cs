@@ -9,15 +9,19 @@ public class DialogueTrigger : MonoBehaviour
   public DialogueFile dialogueFromFile;
   public Dialogue dialogue;
 
-  void Start () {
+  void Awake()
+  {
     if (jSONDialogue) {
       dialogueFromFile = JsonUtility.FromJson<DialogueFile>(jSONDialogue.text);
+      dialogue.sentences = new string[dialogueFromFile.sentences.Length];
 
       for (int i = 0; i < dialogueFromFile.sentences.Length; i++) {
         dialogue.sentences[i] = dialogueFromFile.sentences[i];
       }
     }
+  }
 
+  void Start () {
     // Debug.Log(dialogueFromFile.sentences[0]);
   }
 
@@ -29,7 +33,7 @@ public class DialogueTrigger : MonoBehaviour
   }
 
   public void EndDialogue() {
-    UISingleton.i.ToggleDialogue("off");
+    UISingleton.i.ToggleDialogue("off"); 
     GAMESingleton.i.engaged_Dialogue = false;
   }
 }

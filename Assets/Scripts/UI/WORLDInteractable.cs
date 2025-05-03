@@ -79,7 +79,7 @@ public class WORLDInteractable : MonoBehaviour
   private void ClickBehavior () {
     Debug.Log("Click Behavior Called");
     if (distanceFromTrigger < distanceToInteract) {
-      PLAYERSingleton.i.playerControls.HandleDialogue();      
+      PLAYERSingleton.i.playerControls.HandleDialogue();
     }
   }
 

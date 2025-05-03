@@ -1,6 +1,8 @@
 {
   "sentences": [
     "This is some test dialogue using JSON. Will it work??",
-    "Time will tell!!"
+    "Time will tell!!",
+    "...",
+    "It works!!!"
   ]
 }
