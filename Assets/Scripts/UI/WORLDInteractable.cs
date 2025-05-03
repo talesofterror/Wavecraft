@@ -11,27 +11,20 @@ public class WORLDInteractable : MonoBehaviour
   [HideInInspector] public InteractableState_WORLD state = InteractableState_WORLD.NotEngaged;
   [HideInInspector] public bool isInRange;
   [HideInInspector] public float distanceFromTrigger;
-  [SerializeField] public float distanceToInteract;
-
-  public enum Dispo {
-    Friendly,
-    Hostile,
-    Neutral
-  }
-
-  public Dispo dispo = new Dispo();
+  public float distanceToInteract;
 
   public Color displayNameColor;
+
+  [HideInInspector] public DialogueTrigger dialogueTrigger;
+
+  public Dispo dispo = new Dispo();
   
 
-  void OnDrawGizmosSelected()
-  {
-    Gizmos.DrawWireSphere(transform.position, distanceToInteract);
-  }
 
   void Awake () {
-    // interactableObject.transform.localPosition = interactableObject.transform.localPosition
-    //   + new Vector3(0, 0, PLAYERSingleton.playerSingleton.interactionZ);
+    if (GetComponent<DialogueTrigger>()) {
+      dialogueTrigger = GetComponent<DialogueTrigger>();
+    }
   }
 
   void Start()
@@ -84,18 +77,9 @@ public class WORLDInteractable : MonoBehaviour
   }
 
   private void ClickBehavior () {
-    if (PLAYERSingleton.i.playerControls.interactAction.WasPressedThisFrame() && distanceFromTrigger < distanceToInteract) {
-      if (dispo == Dispo.Friendly) {
-        print("Interactable ClickBehavior() called");
-        state = InteractableState_WORLD.Focus;
-        UISingleton.i.ToggleDialogue("on");
-      }
-      if (dispo == Dispo.Hostile) {
-        
-      }
-      if (dispo == Dispo.Hostile) {
-        
-      }
+    Debug.Log("Click Behavior Called");
+    if (distanceFromTrigger < distanceToInteract) {
+      PLAYERSingleton.i.playerControls.HandleDialogue();      
     }
   }
 
@@ -107,8 +91,14 @@ public class WORLDInteractable : MonoBehaviour
   public void NotEngagedBehavior()
   {
     state = InteractableState_WORLD.NotEngaged;
+    GAMESingleton.i.engaged_Dialogue = false;
     UISingleton.i.ToggleIdentifierPanel("off");
     UISingleton.i.ToggleDialogue("off");
+  }
+  
+  void OnDrawGizmosSelected()
+  {
+    Gizmos.DrawWireSphere(transform.position, distanceToInteract);
   }
 }
 
@@ -116,4 +106,10 @@ public enum InteractableState_WORLD {
   Hover, 
   Focus,
   NotEngaged
+}
+
+public enum Dispo {
+  Friendly,
+  Hostile,
+  Neutral
 }

@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 
   void Start()
   {
-      
+      sentences = new Queue<string>();
   }
 
   void Update()
@@ -18,16 +18,31 @@ public class DialogueManager : MonoBehaviour
 
   public void StartDialogue (Dialogue dialogue) {
 
-    sentences.Clear();
-
     foreach (string sentence in dialogue.sentences) {
       sentences.Enqueue(sentence);
     }
 
-    
+    UISingleton.i.ToggleDialogue("on");
+
+    DisplayNextSentence();
   }
 
   public void DisplayNextSentence () {
-    
+    if (sentences.Count == 0) {
+      EndDialogue();
+      return;
+    }
+
+    string sentence = sentences.Dequeue();
+    UISingleton.i.NameText.text = UISingleton.i.cursorTarget._name;
+    UISingleton.i.DialogueText.text = sentence;
+
+    Debug.Log(sentence);
+  }
+
+  public void EndDialogue () {
+    sentences.Clear();
+    UISingleton.i.ToggleDialogue("off");
+    GAMESingleton.i.engaged_Dialogue = false;
   }
 }

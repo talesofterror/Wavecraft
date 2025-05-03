@@ -40,6 +40,7 @@ public class PLAYERControls : MonoBehaviour
     Movement();
     Attack();
     CursorMovement();
+
   }
 
   private void Attack() {
@@ -83,5 +84,16 @@ public class PLAYERControls : MonoBehaviour
 
     Physics.gravity = gravity;
     // Debug.Log("moveAction value: " + moveAction.ReadValue<Vector2>());
+  }
+
+  public void HandleDialogue () {
+    Debug.Log("Handle Dialogue called");
+    if (interactAction.WasPressedThisFrame()) {
+      if (!GAMESingleton.i.engaged_Dialogue) {
+        UISingleton.i.cursorTarget.dialogueTrigger.TriggerDialogue();
+      } else {
+        GAMESingleton.i.dialogueManager.DisplayNextSentence();
+      }
+    }
   }
 }
