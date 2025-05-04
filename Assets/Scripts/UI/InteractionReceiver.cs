@@ -5,11 +5,11 @@ public class InteractionReceiver : MonoBehaviour
 {
 
 [HideInInspector] public bool active;
-WORLDInteractable parentInteractable;
+Interactable parentInteractable;
 
 void OnTriggerEnter(Collider collider) {
   if (!parentInteractable) {
-   parentInteractable = GetComponentInParent<WORLDInteractable>();
+   parentInteractable = GetComponentInParent<Interactable>();
   }
   parentInteractable.state = InteractableState_WORLD.Hover;
   parentInteractable.HoverBehavior(collider);

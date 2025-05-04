@@ -1,38 +1,47 @@
+using NUnit.Framework.Constraints;
+using Unity.Mathematics;
 using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
 
-  MeshRenderer _renderer;
+  public MeshRenderer _renderer;
   Collider _collider;
   bool targetHit;
+  public GameObject particleObject;
 
+  Enemy_ProjectileGun sourceGun;
+  
   void Start()
   {
-    _renderer = GetComponent<MeshRenderer>();
+    // _renderer = GetComponentInChildren<MeshRenderer>();
     _collider = GetComponent<BoxCollider>();
+    sourceGun = GetComponentInParent<Enemy_ProjectileGun>();
+    _renderer.enabled = false;
   }
 
   void Update()
   {
-
+    
   }
 
   void OnTriggerEnter (Collider collider) {
 
     // print(transform.name + " triggered");
-    _renderer.enabled = false;
+    GameObject splash = Instantiate(particleObject, transform.position, quaternion.identity);
+    // splash.transform.parent = null;
+    gameObject.SetActive(false);
     _collider.enabled = false;
-
+    
 		if (collider.gameObject.CompareTag("GuyBase")) {
       print(transform.name + " hit the Player.");
-      PLAYERSingleton.i.takeDamage();
+      PLAYERSingleton.i.takeDamage(sourceGun.projectileDamage);
       PLAYERSingleton.i.rB.linearVelocity = Vector3.zero;
       PLAYERSingleton.i.rB.AddForce(gameObject.GetComponent<Rigidbody>().linearVelocity * 50);
 		}
     if (collider.CompareTag("PlayerDamage")) {
-      print(transform.name + " hit the player projectile.");
+      print(transform.parent.name + " hit the player projectile.");
       // gameObject.SetActive(false);
     }
 	}

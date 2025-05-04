@@ -35,7 +35,7 @@ public class NavMeshAttack : MonoBehaviour
     defaultPosition = transform.position;
     defaultRotation = transform.eulerAngles;
 
-    player = GameObject.FindGameObjectWithTag("Player");
+    player = PLAYERSingleton.i.gameObject;
     NavMeshAgent = GetComponent<NavMeshAgent>();
     enemyDamage = GetComponent<EnemyDamage>();
   }

@@ -33,7 +33,8 @@ public class DialogueTrigger : MonoBehaviour
   }
 
   public void EndDialogue() {
-    UISingleton.i.ToggleDialogue("off"); 
-    GAMESingleton.i.engaged_Dialogue = false;
+    GAMESingleton.i.dialogueManager.EndDialogue();
+    // UISingleton.i.ToggleDialogue("off"); 
+    // GAMESingleton.i.engaged_Dialogue = false;
   }
 }

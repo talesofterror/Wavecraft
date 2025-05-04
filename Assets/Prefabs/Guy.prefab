@@ -734,9 +734,9 @@ GameObject:
   - component: {fileID: 1274461817535836546}
   - component: {fileID: 1274461817535836547}
   - component: {fileID: 4097957593148808090}
-  - component: {fileID: 1274461817535836548}
   - component: {fileID: 7993550628175636991}
   - component: {fileID: 2358393379614143141}
+  - component: {fileID: 1274461817535836548}
   m_Layer: 9
   m_Name: Guy
   m_TagString: GuyBase
@@ -978,39 +978,14 @@ MonoBehaviour:
   playerAttack: {fileID: 7993550628175636991}
   guyRotate: {fileID: 1274461816553629963}
   rB: {fileID: 1274461817535836547}
+  playerControls: {fileID: 0}
   focusState: 0
   controlsActive: 1
   attackEnabled: 1
+  interactionZ: 0
   damageIndicatorMaterial: {fileID: 2100000, guid: 871e94813c864864ea7ce43e8a59943f,
     type: 2}
-  interactionZ: 0
---- !u!114 &1274461817535836548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274461817535836549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f4ea8c2a7bd904880f58f7ee37c523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlsActive: 0
-  controlScheme: 1
-  thrustPower: 500
-  rotationSpeed: 50
-  axisRotationFactor: 5
-  rigidBody: {fileID: 0}
-  gravityY: 0
-  thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
-  deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
-  goalSound: {fileID: 8300000, guid: 9914686e0766d8144bff8e39894b4c52, type: 3}
-  navCursor: {fileID: 4308535374317104206}
-  entryAxisTarget: {fileID: 0}
-  deathSpiral: 3
-  enemyCollissionsOn: 0
-  boost: 3
+  damageDisplayDuration: 1
 --- !u!114 &7993550628175636991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,6 +1015,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b14ced1c56a9c44f90ed69acd5da039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1274461817535836548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461817535836549}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f4ea8c2a7bd904880f58f7ee37c523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlsActive: 0
+  controlScheme: 1
+  thrustPower: 500
+  rotationSpeed: 50
+  axisRotationFactor: 5
+  rigidBody: {fileID: 0}
+  gravityY: 0
+  thrustSound: {fileID: 8300000, guid: 3dd910b10006c984bb173c1644a39b95, type: 3}
+  deathSound: {fileID: 8300000, guid: 08aeede44e8df8541adc321a10fa81bf, type: 3}
+  goalSound: {fileID: 8300000, guid: 9914686e0766d8144bff8e39894b4c52, type: 3}
+  navCursor: {fileID: 4308535374317104206}
+  entryAxisTarget: {fileID: 0}
+  deathSpiral: 3
+  enemyCollissionsOn: 0
+  boost: 3
 --- !u!1 &1285199365750745073
 GameObject:
   m_ObjectHideFlags: 0

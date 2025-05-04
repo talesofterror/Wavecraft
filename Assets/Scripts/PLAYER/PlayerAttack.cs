@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PLAYERAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
   [HideInInspector] public bool attackEnabled = true;
   private Vector3 projectileHeading;

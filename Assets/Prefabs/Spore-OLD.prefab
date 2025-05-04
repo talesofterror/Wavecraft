@@ -1282,7 +1282,7 @@ GameObject:
   - component: {fileID: 8809914233129600129}
   - component: {fileID: 108842639391981452}
   m_Layer: 0
-  m_Name: Spore
+  m_Name: Spore-OLD
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

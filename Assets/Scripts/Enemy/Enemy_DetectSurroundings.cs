@@ -3,8 +3,9 @@ using UnityEditor;
 
 public class Enemy_DetectSurroundings : MonoBehaviour
 {
-	public Collider _collider;
-	public GameObject targetGameObject;
+	[SerializeField] GameObject targetGameObject;
+  GameObject player;
+  [HideInInspector] public GameObject target;
 
 
 	public bool detection = false;
@@ -12,7 +13,11 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 	
 	void Start()
 	{
-		_collider = gameObject.GetComponent<Collider>();
+    if (targetGameObject) {
+      target = targetGameObject;
+    } else {
+      target = PLAYERSingleton.i.gameObject;
+    }
 	}
 
 	void Update()
@@ -21,7 +26,7 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 	}
 
 	void OnTriggerEnter (Collider collider) {
-		targetGameObject = collider.gameObject;
+		target = collider.gameObject;
 		detection = true; 
 	}
 

@@ -12,12 +12,13 @@ public class PLAYERSingleton : MonoBehaviour
   public static PLAYERSingleton i {get {return _playerSingleton;}}
   [Header("Components")]
   public Rocket rocket;
-  public PLAYERAttack playerAttack;
+  public PlayerStats playerStats;
+  public PlayerControls playerControls;
+  public PlayerAttack playerAttack;
   public GuyRotate guyRotate;
   public Rigidbody rB;
-  public PLAYERControls playerControls;
   
-  [HideInInspector] WORLDInteractable worldCursorTarget;
+  [HideInInspector] Interactable worldCursorTarget;
   [HideInInspector] public InteractableState_WORLD focusState;
   [HideInInspector] public bool controlsActive = true;
   [HideInInspector] public bool attackEnabled = true;
@@ -30,7 +31,6 @@ public class PLAYERSingleton : MonoBehaviour
   Renderer[] _renderers;
   [Header("Taking Damage")]
   public float damageDisplayDuration = 1;
-
 
   void Awake () {
 
@@ -48,14 +48,14 @@ public class PLAYERSingleton : MonoBehaviour
   {
     _renderers = gameObject.GetComponentsInChildren<Renderer>();
     originalMaterialsArray = new Material[_renderers.Length];
-
+    interactionZ = transform.position.z;
+    UISingleton.i.HealthValue.text = playerStats.health.ToString();
     LoadMaterials();
   }
 
 
   void Update()
   {
-    interactionZ = transform.position.z;
   }
 
   public void PauseToggle (string state) {
@@ -71,8 +71,10 @@ public class PLAYERSingleton : MonoBehaviour
 
   }
 
-  public void takeDamage() {
+  public void takeDamage(float damageAmount) {
     StartCoroutine(displayDamage(damageDisplayDuration));
+    playerStats.health -= damageAmount;
+    UISingleton.i.HealthValue.text = playerStats.health.ToString();
   }
 
   IEnumerator displayDamage(float seconds) {

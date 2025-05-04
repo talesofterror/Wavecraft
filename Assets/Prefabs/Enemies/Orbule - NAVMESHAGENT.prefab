@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8213503195035809256}
   - component: {fileID: 1736898596125523390}
   m_Layer: 10
-  m_Name: _ENEMY - Orbule - NAVMESHAGENT
+  m_Name: Orbule - NAVMESHAGENT
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

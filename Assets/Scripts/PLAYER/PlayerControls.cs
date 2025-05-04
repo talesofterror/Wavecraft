@@ -4,7 +4,7 @@ using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 
-public class PLAYERControls : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
   
   PlayerInput playerInput;

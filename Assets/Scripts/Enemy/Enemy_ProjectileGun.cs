@@ -13,10 +13,12 @@ public class Enemy_ProjectileGun : MonoBehaviour
   public bool firing = false;
 
   public EnemyDamage enemyDamage;
+  public float projectileDamage;
 
 	void Start()
 	{
 			bulletSpawner = new EnemyProjectileSpawner(bullet, gameObject, 10);
+      bulletSpawner.projectileDamage = projectileDamage;
 			detector = gameObject.GetComponentInChildren<Enemy_DetectSurroundings>();
 	}
 
@@ -24,7 +26,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	void Update()
 	{
 		if (detector.detection && !enemyDamage.dead)	{
-      bulletSpawner.target = detector.targetGameObject.transform;
+      bulletSpawner.target = detector.target.transform;
       if(!firing) {
         firing = true;
         StartCoroutine(FireAllWaitSeconds(1));
@@ -37,6 +39,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
 	}
 
 	public IEnumerator FireAllWaitSeconds (float seconds) {
+    Debug.Log("Fire all bullets coroutine called");
 		for (int i = 0; i < bulletSpawner.projectilePool.Length; i++) {
 			if (i + 1 == bulletSpawner.projectilePool.Length) {
         firing = false;
@@ -44,15 +47,17 @@ public class Enemy_ProjectileGun : MonoBehaviour
 			}
       bulletSpawner.projectilePool[i].gameObject.SetActive(true);
 			bulletSpawner.projectilePool[i].transform.position = transform.position;
+			// bulletSpawner.projectilePool[i].transform.LookAt(bulletSpawner.target);
 			bulletSpawner.projectilePool[i].GetComponent<BoxCollider>().enabled = true;
-			bulletSpawner.projectilePool[i].GetComponent<MeshRenderer>().enabled = true;
-			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().linearVelocity = calculateVelocity(bulletSpawner.target, bulletSpeed);
+			bulletSpawner.projectilePool[i].GetComponentInChildren<MeshRenderer>().enabled = true;
+			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().linearVelocity = calculateDirection(bulletSpawner.target, bulletSpeed);
+			bulletSpawner.projectilePool[i].GetComponent<Rigidbody>().angularVelocity = calculateDirection(bulletSpawner.target, bulletSpeed);
       bulletSpawner.projectilePool[i].transform.parent = null;
 			yield return new WaitForSeconds(seconds);
 		}
 	}
 
-	Vector3 calculateVelocity (Transform _target, float _speed) {
+	Vector3 calculateDirection (Transform _target, float _speed) {
 		Vector3 heading = _target.position - gameObject.transform.position;
 		float distance = heading.magnitude;
 		Vector3 direction = heading / distance;

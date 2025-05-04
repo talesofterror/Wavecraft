@@ -3,7 +3,7 @@ using TMPro;
 
 [SelectionBase]
 
-public class WORLDInteractable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
   public string _name;
   [HideInInspector] public string _tag;
@@ -91,9 +91,10 @@ public class WORLDInteractable : MonoBehaviour
   public void NotEngagedBehavior()
   {
     state = InteractableState_WORLD.NotEngaged;
-    GAMESingleton.i.engaged_Dialogue = false;
+    // GAMESingleton.i.engaged_Dialogue = false;
     UISingleton.i.ToggleIdentifierPanel("off");
-    UISingleton.i.ToggleDialogue("off");
+    // UISingleton.i.ToggleDialogue("off");
+    GAMESingleton.i.dialogueManager.EndDialogue();
   }
   
   void OnDrawGizmosSelected()

@@ -10,8 +10,10 @@ private static UISingleton _uiSingleton;
 public static UISingleton i {get {return _uiSingleton;} }
 
 [HideInInspector] public UICursor _cursor;
-[HideInInspector] public WORLDInteractable cursorTarget;
+[HideInInspector] public Interactable cursorTarget;
 
+public GameObject HealthHeader;
+public TextMeshProUGUI HealthValue;
 public GameObject DataHeader;
 public TextMeshProUGUI DataValue;
 public GameObject DialogueContainer;
