@@ -41,9 +41,11 @@ public TextMeshProUGUI IdentifierText;
     if (state == "off") {
       DialogueContainer.SetActive(false);
       PLAYERSingleton.i.PauseToggle("unpaused");
+      // Time.timeScale = 1;
     } else if (state == "on") {
       DialogueContainer.SetActive(true);
       PLAYERSingleton.i.PauseToggle("paused");
+      // Time.timeScale = 0;
     }
   }
 

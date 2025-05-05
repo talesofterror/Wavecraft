@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class DialogueTrigger : MonoBehaviour
 {
   public TextAsset jSONDialogue;
-  public DialogueFile dialogueFromFile;
+  public DialogueFile dialogueFile;
   public Dialogue dialogue;
 
   void Awake()
   {
     if (jSONDialogue) {
-      dialogueFromFile = JsonUtility.FromJson<DialogueFile>(jSONDialogue.text);
-      dialogue.sentences = new string[dialogueFromFile.sentences.Length];
+      dialogueFile = JsonUtility.FromJson<DialogueFile>(jSONDialogue.text);
+      dialogue.sentences = new string[dialogueFile.sentences.Length];
 
-      for (int i = 0; i < dialogueFromFile.sentences.Length; i++) {
-        dialogue.sentences[i] = dialogueFromFile.sentences[i];
+      for (int i = 0; i < dialogueFile.sentences.Length; i++) {
+        dialogue.sentences[i] = dialogueFile.sentences[i];
       }
     }
   }

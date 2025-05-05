@@ -17,16 +17,16 @@ public DialogueManager dialogueManager;
       _gameSingleton = this;
       DontDestroyOnLoad(this);
     }
-  }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-  void Start()
-  {
-    if (!ui.gameObject.activeSelf) {
+
+    if (!ui.gameObject.activeInHierarchy) {
       ui.gameObject.SetActive(true);
     }
   }
 
-  // Update is called once per frame
+  void Start()
+  {
+  }
+
   void Update()
   {
       

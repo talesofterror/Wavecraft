@@ -24,33 +24,33 @@ public class AmmoCollisions : MonoBehaviour
 
   }
 
-  private void OnCollisionEnter(Collision collision)
+  private void OnCollisionEnter(Collision collider)
   {
 
     mrenderer.enabled = false;
 
-    if (collision.gameObject.tag == "Enemy")
+    if (collider.gameObject.tag == "Enemy")
     {
-      if (collision.gameObject.GetComponent<EnemyProjectile>())
-      {
-        collision.gameObject.SetActive(false);
-      }
-      enemyStats = collision.gameObject.GetComponent<EnemyStats>();
+      enemyStats = collider.gameObject.GetComponent<EnemyStats>();
       enemyStats.hP -= damage;
+    }
+    if (collider.gameObject.GetComponent<EnemyProjectile>())
+    {
+      // collision.gameObject.SetActive(false);
     }
 
     mcollider.enabled = false;
 
-    DustBloom(collision);
+    DustBloom(collider);
   }
 
-  private void DustBloom(Collision collision)
+  private void DustBloom(Collision collider)
   {
     for (int i = 1; i <= dustAmount; ++i)
     {
       // float dustLoc = Mathf.Sin(0.5f + i);
       // ammoLoc = transform.position + new Vector3(0.5f, dustLoc, 0f);
-      GameObject dustObject = Instantiate(dustBall, collision.transform.position, transform.rotation);
+      GameObject dustObject = Instantiate(dustBall, collider.transform.position, transform.rotation);
       rBDust = dustObject.GetComponent<Rigidbody>();
       // float dustVelX = Mathf.Sin(i);
       float dustVelX =  Random.Range(-3, 3);

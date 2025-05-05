@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uICursor: {fileID: 2935105112660803517}
+  virtualMouse: {fileID: 0}
   viewerScript: {fileID: 4843802347689385091}
   pointerSensor: {fileID: 3756049714476760630}
   LookAtGimbal: {fileID: 6147612770029043193}
@@ -766,6 +767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: orthographic size
       value: 6.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951178579754335000, guid: 7e080339ae9335244ab898aaa2d76649,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2336
       objectReference: {fileID: 0}
     - target: {fileID: 2951178579754335002, guid: 7e080339ae9335244ab898aaa2d76649,
         type: 3}

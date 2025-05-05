@@ -35,6 +35,7 @@ public class Enemy_ProjectileGun : MonoBehaviour
     if (enemyDamage.dead) {
       StopAllCoroutines();
       firing = false;
+      detector.detection = false;
     }
 	}
 
