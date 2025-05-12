@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1908421692631505766}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: XUpperBound
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6279862872374689216}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: YUpperBound
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4211920627368005687}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: YLowerBound
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8057297557086274575}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: AxisTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 6181548334817277825}
   - component: {fileID: 5241419067235176408}
   - component: {fileID: 4947694445002655931}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Entry Trigger
   m_TagString: EntryTrigger
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -190,6 +190,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -248,13 +251,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044e51d264325ed43b68af87468ae98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: -0.39, y: 0, z: -67.1}
-  targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  targetFieldOfView: 18.8
+  position: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  fieldOfView: 0
   offsets: {x: 0, y: 0, z: 0}
-  targetFollowState: 2
-  targetLookAt: 0
+  followState: 0
+  lookAtState: 0
   editMode: 0
+  enableTransition: 1
 --- !u!114 &4947694445002655931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6507313080306221508}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: XLowerBound
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}

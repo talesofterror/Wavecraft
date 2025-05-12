@@ -41,7 +41,7 @@ public class EnemyProjectile : MonoBehaviour
       PLAYERSingleton.i.rB.AddForce(gameObject.GetComponent<Rigidbody>().linearVelocity * 50);
 		}
     if (collider.CompareTag("PlayerDamage")) {
-      print(transform.parent.name + " hit the player projectile.");
+      print(sourceGun.gameObject.transform.parent.name + " hit the player projectile.");
       // gameObject.SetActive(false);
     }
 	}

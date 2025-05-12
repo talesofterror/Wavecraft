@@ -28,7 +28,7 @@ TagManager:
   - EnemyProjectile
   - Walkable
   - PlayerDetection
-  - 
+  - AreaTrigger
   - 
   - 
   - 
