@@ -12,11 +12,11 @@ public class Enemy_Retractable : MonoBehaviour
     x, y, z
   }
   [SerializeField] private Axis axis = Axis.y;
-  private enum RetractState {
-    extended, 
-    retracted
+  public enum RetractState {
+    retracting, 
+    extending
   }
-  [SerializeField] private RetractState retractState = RetractState.extended;
+  public RetractState retractState = RetractState.retracting;
   
   [SerializeField] private bool delayed = false;
 
@@ -49,21 +49,21 @@ public class Enemy_Retractable : MonoBehaviour
       retractedPosition = new Vector3(initialPosition.x, initialPosition.y, initialPosition.z + depth);
     }
 
-    if (retractState == RetractState.retracted) {
+    if (retractState == RetractState.extending) {
       transform.position = retractedPosition;
-    } else if (retractState == RetractState.extended) {
+    } else if (retractState == RetractState.retracting) {
       transform.position = initialPosition;
     }
   }
 
   void runRetractable() {
-    Debug.Log("runRetractable called");
+    // Debug.Log("runRetractable called");
     StartCoroutine(Movement());
   }
 
   void toggleRetracted () {
-    retractState = retractState == RetractState.extended ? retractState = RetractState.retracted 
-    : retractState = RetractState.extended;
+    retractState = retractState == RetractState.retracting ? retractState = RetractState.extending 
+    : retractState = RetractState.retracting;
     // Debug.Log("Movement coroutine switch");
     StopCoroutine(Movement());
     StartCoroutine(Movement());
@@ -71,14 +71,14 @@ public class Enemy_Retractable : MonoBehaviour
 
   IEnumerator Movement () {
     // Debug.Log("Movement coroutine called");
-    if (retractState == RetractState.retracted) {
+    if (retractState == RetractState.extending) {
       for (float i = 0; transform.position != initialPosition; i += Time.deltaTime * Mathf.Abs(speed)) {
         transform.position = Vector3.Lerp(retractedPosition, initialPosition, i);
         yield return null;
       }
       toggleRetracted();
     }
-    else if (retractState == RetractState.extended) {
+    else if (retractState == RetractState.retracting) {
       for (float i = 0; transform.position != retractedPosition; i += Time.deltaTime * Mathf.Abs(speed)) {
         transform.position = Vector3.Lerp(initialPosition, retractedPosition, i);
         yield return null;

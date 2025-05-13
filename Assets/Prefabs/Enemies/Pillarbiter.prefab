@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4465501854580612497}
   - component: {fileID: 3918275183025551257}
   - component: {fileID: 8121578469178613594}
+  - component: {fileID: 8277268761687426353}
   m_Layer: 10
   m_Name: Pillarbiter
   m_TagString: Enemy
@@ -180,6 +181,19 @@ MonoBehaviour:
   delayed: 0
   retractedTimeDuration: 0
   extendedTimeDuration: 0
+  previewPosition: 0
+--- !u!114 &8277268761687426353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579813035285681816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59c8ca0a1eceaa44bc8469b6117268f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5477831433149136721
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +417,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3046261608188922278, guid: f262c3eefae5a30498e6f98a49c4e937,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3046261608188922278, guid: f262c3eefae5a30498e6f98a49c4e937,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1302
       objectReference: {fileID: 0}
     - target: {fileID: -3025844957455458335, guid: f262c3eefae5a30498e6f98a49c4e937,
         type: 3}

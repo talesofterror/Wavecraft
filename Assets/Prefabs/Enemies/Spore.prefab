@@ -482,7 +482,7 @@ MonoBehaviour:
   bulletSpeed: 10
   firing: 0
   enemyDamage: {fileID: 2906322178842624983}
-  projectileDamage: 5
+  projectileDamage: 10
 --- !u!1 &8996352387345200612
 GameObject:
   m_ObjectHideFlags: 0
