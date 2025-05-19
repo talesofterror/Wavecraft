@@ -1,0 +1,22 @@
+{
+  "_default": [
+    "This is the default dialogue for this character",
+    "Not very interesting!!",
+    "...",
+    "Does it work?"
+  ],
+  "dataThreshhold": [
+    [
+      "Allegedly, this dialogue is only delivered when the contional string is accessed.",
+      "Is it true??",
+      "...",
+      "Who knows?"
+    ],
+    [
+      "This is a second conditional keyword",
+      "Will we even get this far?",
+      "...",
+      "Time will tell!!!!"
+    ]
+  ]
+}

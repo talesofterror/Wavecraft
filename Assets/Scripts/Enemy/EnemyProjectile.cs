@@ -28,7 +28,10 @@ public class EnemyProjectile : MonoBehaviour
 
   void OnTriggerEnter (Collider collider) {
 
-    // print(transform.name + " triggered");
+    if (collider.CompareTag("Data")) {
+      return;
+    }
+
     GameObject splash = Instantiate(particleObject, transform.position, quaternion.identity);
     // splash.transform.parent = null;
     gameObject.SetActive(false);
@@ -43,6 +46,9 @@ public class EnemyProjectile : MonoBehaviour
     if (collider.CompareTag("PlayerDamage")) {
       print(sourceGun.gameObject.transform.parent.name + " hit the player projectile.");
       // gameObject.SetActive(false);
+    }
+    else {
+      return;
     }
 	}
 

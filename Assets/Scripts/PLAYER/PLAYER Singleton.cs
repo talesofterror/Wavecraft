@@ -42,13 +42,13 @@ public class PLAYERSingleton : MonoBehaviour
       _playerSingleton = this;
       DontDestroyOnLoad(this);
     }
+    interactionZ = transform.position.z;
   }
 
   void Start()
   {
     _renderers = gameObject.GetComponentsInChildren<Renderer>();
     originalMaterialsArray = new Material[_renderers.Length];
-    interactionZ = transform.position.z;
     UISingleton.i.HealthValue.text = playerStats.health.ToString();
     LoadMaterials();
   }
@@ -68,13 +68,18 @@ public class PLAYERSingleton : MonoBehaviour
       attackEnabled = true;
       rocket.rigidBody.isKinematic = false;
     }
-
   }
 
   public void takeDamage(float damageAmount) {
     StartCoroutine(displayDamage(damageDisplayDuration));
     playerStats.health -= damageAmount;
     UISingleton.i.HealthValue.text = playerStats.health.ToString();
+  }
+
+  public void collectData () {
+    playerStats.data++;
+    Debug.Log("Player data value: " + playerStats.data);
+    UISingleton.i.DataValue.text = playerStats.data.ToString();
   }
 
   IEnumerator displayDamage(float seconds) {

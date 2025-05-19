@@ -1,0 +1,27 @@
+{
+  "dialogueSets": [
+    {
+      "keyword": "intro",
+      "dialogue":
+      [
+      "This is some dialogue",
+      "This is yet more dialogue",
+      "And here we have, again ... more dialogue."
+      ]
+    },
+    {
+      "keyword": "gettingComfy",
+      "dialogue":
+      [
+      "This is some dialogue",
+      "This is yet more dialogue",
+      "And here we have, again ... more dialogue."
+      ]
+    }
+  ],
+  "defaultDialogue": [
+    "cdff33c10a0678cd1a9ae", 
+    "5|5|5|5|5|5|5|5|5|5|5|5|5| |*"
+  ],
+  "dataThreshhold": 5
+}

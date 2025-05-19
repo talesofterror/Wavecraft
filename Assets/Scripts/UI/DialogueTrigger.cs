@@ -7,16 +7,21 @@ public class DialogueTrigger : MonoBehaviour
 {
   public TextAsset jSONDialogue;
   public DialogueFile dialogueFile;
-  public Dialogue dialogue;
+  public Dialogue activeDialogue;
+  public string[] defaultDialogue;
+  public DialogueSet[] dialogueSets;
+
+  // ! JSON with comments..... 
 
   void Awake()
   {
-    if (jSONDialogue) {
+    if (jSONDialogue)
+    {
       dialogueFile = JsonUtility.FromJson<DialogueFile>(jSONDialogue.text);
-      dialogue.sentences = new string[dialogueFile.sentences.Length];
-
-      for (int i = 0; i < dialogueFile.sentences.Length; i++) {
-        dialogue.sentences[i] = dialogueFile.sentences[i];
+      dialogueSets = new DialogueSet[dialogueFile.dialogueSets.Length];
+      for (int i = 0; i < dialogueFile.dialogueSets.Length; i++)
+      {
+        dialogueSets[i] = dialogueFile.dialogueSets[i];
       }
     }
   }
@@ -26,8 +31,20 @@ public class DialogueTrigger : MonoBehaviour
   }
 
   public void TriggerDialogue () {
-    if (UISingleton.i.cursorTarget.distanceFromTrigger < UISingleton.i.cursorTarget.distanceToInteract){
-      GAMESingleton.i.dialogueManager.StartDialogue(dialogue);
+    if (PLAYERSingleton.i.playerStats.data >= dialogueFile.dataThreshhold)
+    {
+      activeDialogue.sentenceArray = dialogueSets[0].loadDialogue(activeDialogue);
+      GAMESingleton.i.dialogueManager.StartDialogue(activeDialogue);
+      GAMESingleton.i.engaged_Dialogue = true;
+    }
+    else
+    {
+      activeDialogue.sentenceArray = dialogueFile.loadDefaultDialogue();
+      for (int i = 0; i < dialogueFile.defaultDialogue.Length; i++)
+      {
+        activeDialogue.sentenceArray[i] = dialogueFile.defaultDialogue[i];
+      }
+      GAMESingleton.i.dialogueManager.StartDialogue(activeDialogue);
       GAMESingleton.i.engaged_Dialogue = true;
     }
   }

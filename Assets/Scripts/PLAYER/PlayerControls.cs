@@ -86,8 +86,7 @@ public class PlayerControls : MonoBehaviour
     // Debug.Log("moveAction value: " + moveAction.ReadValue<Vector2>());
   }
 
-  public void HandleDialogue () {
-    Debug.Log("Handle Dialogue called");
+  public void interactionListener () {
     if (interactAction.WasPressedThisFrame()) {
       if (!GAMESingleton.i.engaged_Dialogue) {
         UISingleton.i.cursorTarget.dialogueTrigger.TriggerDialogue();

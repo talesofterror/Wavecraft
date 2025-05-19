@@ -78,7 +78,7 @@ public class Interactable : MonoBehaviour
 
   private void ClickBehavior () {
     if (distanceFromTrigger < distanceToInteract) {
-      PLAYERSingleton.i.playerControls.HandleDialogue();
+      PLAYERSingleton.i.playerControls.interactionListener();
     }
   }
 

@@ -6,14 +6,8 @@ public class PlayerStats : MonoBehaviour
   public float health;
   public float sprint;
   [HideInInspector] public float data;
-  
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        
-    }
+  public void incrementData () {
+    data++;
+  }
 }
