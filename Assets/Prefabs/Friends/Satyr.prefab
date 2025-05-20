@@ -1120,6 +1120,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4828406446213492929}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3556b2f1c5f307244b88ae93682935e0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2213858382045110945}
     - targetCorrespondingSourceObject: {fileID: 452495634265375607, guid: 3556b2f1c5f307244b88ae93682935e0,
         type: 3}
       insertIndex: -1
@@ -1220,8 +1224,26 @@ MonoBehaviour:
   isInRange: 0
   distanceFromTrigger: 0
   distanceToInteract: 0
-  dispo: 0
   displayNameColor: {r: 0, g: 1, b: 0.0054848194, a: 0}
+  dialogueTrigger: {fileID: 0}
+  dispo: 0
+--- !u!114 &2213858382045110945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560710214287096145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb666f99b3a3384ab2c465c9ed7c562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tokens:
+  - name: intro
+    tokenActivated: 0
+  - name: gettingComfy
+    tokenActivated: 0
 --- !u!4 &901804406900761579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3556b2f1c5f307244b88ae93682935e0,

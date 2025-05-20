@@ -9,9 +9,14 @@ public class DialogueFile
   public string[] defaultDialogue;
   public int dataThreshhold;
 
-  public string[] loadDefaultDialogue()
+  public string[] LoadDefaultDialogue()
   {
     return this.defaultDialogue;
+  }
+
+  public DialogueSet[] LoadDialogueSets()
+  {
+    return this.dialogueSets;
   }
 }
 
@@ -22,7 +27,7 @@ public class DialogueSet
   public string keyword;
   public string[] dialogue;
 
-  public string[] loadDialogue(Dialogue dialogue) {
+  public string[] LoadDialogue(Dialogue dialogue) {
     return this.dialogue;
   }
 }

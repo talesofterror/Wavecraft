@@ -10,40 +10,47 @@ public class DialogueTrigger : MonoBehaviour
   public Dialogue activeDialogue;
   public string[] defaultDialogue;
   public DialogueSet[] dialogueSets;
+  public int dataThreshhold;
 
-  // ! JSON with comments..... 
+  public ProgressTokenCase tokenCase;
 
   void Awake()
   {
     if (jSONDialogue)
     {
       dialogueFile = JsonUtility.FromJson<DialogueFile>(jSONDialogue.text);
-      dialogueSets = new DialogueSet[dialogueFile.dialogueSets.Length];
-      for (int i = 0; i < dialogueFile.dialogueSets.Length; i++)
-      {
-        dialogueSets[i] = dialogueFile.dialogueSets[i];
-      }
+      dialogueSets = dialogueFile.LoadDialogueSets();
+      dataThreshhold = dialogueFile.dataThreshhold;
     }
-  }
 
-  void Start () {
-    // Debug.Log(dialogueFromFile.sentences[0]);
+    try
+    {
+      tokenCase = GetComponent<ProgressTokenCase>();
+    }
+    catch (Exception e)
+    {
+      return;
+    }
+
   }
 
   public void TriggerDialogue () {
-    if (PLAYERSingleton.i.playerStats.data >= dialogueFile.dataThreshhold)
+    if (PLAYERSingleton.i.playerStats.data >= dataThreshhold)
     {
-      activeDialogue.sentenceArray = dialogueSets[0].loadDialogue(activeDialogue);
+      if (tokenCase.areAnyTokensActive())
+      {
+        if (tokenCase.activeToken.complete)
+        {
+          tokenCase.advanceDialogue();
+        }
+      }
+      activeDialogue.sentenceArray = dialogueSets[tokenCase.dialogueIndexState].LoadDialogue(activeDialogue);
       GAMESingleton.i.dialogueManager.StartDialogue(activeDialogue);
       GAMESingleton.i.engaged_Dialogue = true;
     }
     else
     {
-      activeDialogue.sentenceArray = dialogueFile.loadDefaultDialogue();
-      for (int i = 0; i < dialogueFile.defaultDialogue.Length; i++)
-      {
-        activeDialogue.sentenceArray[i] = dialogueFile.defaultDialogue[i];
-      }
+      activeDialogue.sentenceArray = dialogueFile.LoadDefaultDialogue();
       GAMESingleton.i.dialogueManager.StartDialogue(activeDialogue);
       GAMESingleton.i.engaged_Dialogue = true;
     }
@@ -51,7 +58,5 @@ public class DialogueTrigger : MonoBehaviour
 
   public void EndDialogue() {
     GAMESingleton.i.dialogueManager.EndDialogue();
-    // UISingleton.i.ToggleDialogue("off"); 
-    // GAMESingleton.i.engaged_Dialogue = false;
   }
 }
