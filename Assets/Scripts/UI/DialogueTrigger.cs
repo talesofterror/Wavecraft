@@ -37,13 +37,12 @@ public class DialogueTrigger : MonoBehaviour
   public void TriggerDialogue () {
     if (PLAYERSingleton.i.playerStats.data >= dataThreshhold)
     {
-      if (tokenCase.areAnyTokensActive())
+      if (!tokenCase.activeToken.complete && tokenCase.evaluateToken(tokenCase.activeToken))
       {
-        if (tokenCase.activeToken.complete)
-        {
-          tokenCase.advanceDialogue();
-        }
+        tokenCase.advanceDialogue();
       }
+      Debug.Log("Active Token name: " + tokenCase.activeToken.name);
+      Debug.Log("Active Token reference object: " + tokenCase.activeToken.referenceObject);
       activeDialogue.sentenceArray = dialogueSets[tokenCase.dialogueIndexState].LoadDialogue(activeDialogue);
       GAMESingleton.i.dialogueManager.StartDialogue(activeDialogue);
       GAMESingleton.i.engaged_Dialogue = true;

@@ -5,19 +5,18 @@ public class ProgressToken
 {
   public string name;
   public ProgressTokenType tokenType;
-  public GameObject reference;
+  public GameObject referenceObject;
   public int referenceNumber;
   [HideInInspector] public EnemyDamage enemy;
   [HideInInspector] public EnemyDamage[] enemyArray;
-  public int dialogueIndex;
   public bool activated = false;
   public bool complete = false;
 
-    public void setTokenType(ProgressTokenType type)
+    public void setTokenType()
     {
       if (this.tokenType == ProgressTokenType.Enemy)
       {
-        enemy = reference.GetComponent<EnemyDamage>();
+        enemy = referenceObject.GetComponent<EnemyDamage>();
       }
     }
     
@@ -25,7 +24,11 @@ public class ProgressToken
     {
       if (this.tokenType == ProgressTokenType.Enemy)
       {
-        return enemy.dead;
+        if (enemy.dead)
+        {
+          return true;
+        }
+        else return false;
       }
       else if (this.tokenType == ProgressTokenType.EnemyGroup)
       {
@@ -39,7 +42,7 @@ public class ProgressToken
       }
       else if (this.tokenType == ProgressTokenType.numberThreshhold)
       {
-        if (PLAYERSingleton.i.playerStats.data == referenceNumber)
+        if (PLAYERSingleton.i.playerStats.data >= referenceNumber)
         {
           return true;
         }

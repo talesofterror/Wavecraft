@@ -6,7 +6,8 @@
       [
       "This is some dialogue",
       "This is yet more dialogue",
-      "And here we have, again ... more dialogue."
+      "And here we have, again ... more dialogue.",
+      "Maybe get some more data to advance??"
       ]
     },
     {
@@ -14,8 +15,17 @@
       "dialogue":
       [
       "This is also dialogue, but different",
-      "It should activate when you kill the spore above",
+      "It should advance when you kill the spore above",
       "Let's see what happens."
+      ]
+    },
+    {
+      "keyword": "success",
+      "dialogue":
+      [
+      "You defeated the spore!",
+      "Great job bro.",
+      "... what now?"
       ]
     }
   ],

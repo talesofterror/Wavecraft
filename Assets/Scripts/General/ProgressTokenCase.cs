@@ -7,16 +7,18 @@ public class ProgressTokenCase : MonoBehaviour
   public ProgressToken[] tokens;
   [HideInInspector] public int dialogueIndexState;
   [HideInInspector] public ProgressToken activeToken;
+  [HideInInspector] public bool tokensDepleted { get; private set; }
 
   void Awake()
   {
     activeToken = tokens[dialogueIndexState];
     activeToken.activated = true;
+    activeToken.setTokenType();
   }
 
-  public void evaluateToken(ProgressToken token)
+  public bool evaluateToken(ProgressToken token)
   {
-    token.getTokenStatus();
+    return token.getTokenStatus();
   }
 
   public bool areAnyTokensActive()
@@ -35,7 +37,17 @@ public class ProgressTokenCase : MonoBehaviour
     activeToken.activated = false;
     activeToken.complete = true;
     dialogueIndexState++;
-    activeToken = tokens[dialogueIndexState];
+    if (activeToken == tokens[tokens.Length - 1])
+    {
+      tokensDepleted = true;
+    }
+    else
+    {
+      activeToken = tokens[dialogueIndexState];
+    }
+    activeToken.activated = true;
+    activeToken.setTokenType();
+    Debug.Log(transform.name + " called advanceDialogue(). dialogueIndexState = " + dialogueIndexState);
   }
 
 }
