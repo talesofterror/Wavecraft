@@ -67,6 +67,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Steel 2
+    second: {fileID: 2100000, guid: 7256a1b34fd669148a63b4b317f826a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Tank inside
     second: {fileID: 2100000, guid: 9850b5a0d3082244199e50e76f8b0d8a, type: 2}
   - first:
@@ -88,7 +93,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tree
-    second: {fileID: 2100000, guid: 0bb93dd25ac919540aa9e1b5ef09d6f0, type: 2}
+    second: {fileID: 2100000, guid: 96d712e3bd3dad04e9f96d4a5f3c878b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

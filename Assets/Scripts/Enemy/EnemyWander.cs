@@ -16,6 +16,9 @@ public class EnemyWander : MonoBehaviour
   public Waypoint[] waypoints;
   public WaypointSystem waypointSystem;
 
+  int initPoint = 0;
+  public int startPointOffset = 0;
+
 
   bool moving = true;
 
@@ -38,9 +41,10 @@ public class EnemyWander : MonoBehaviour
     transform.position = wayPointVectorList[0];
 
     lerpSpeed = speed / 10;
-
+    initPoint = waypointArray.Length % startPointOffset;
     // * new stuff 
     waypointSystem = new WaypointSystem(waypoints);
+    
     // print(gameObject.name + " Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
     // print(gameObject.name + " Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
     // print(waypointArray[0].name + " Waypoint[0] distance from starting point: " + waypointSystem.waypointGroupArray[0].distanceFromStart);
@@ -72,7 +76,7 @@ public class EnemyWander : MonoBehaviour
   }
 
   float lerpDriver = 0;
-  int lerpState = 0;
+  
   private IEnumerator MovementIE()
   {
 
@@ -85,37 +89,19 @@ public class EnemyWander : MonoBehaviour
   {
     if (lerpDriver >= 1)
     {
-      lerpState++;
+      initPoint++;
       lerpDriver = 0;
     }
-    if (lerpState > wayPointVectorList.Count - 1)
+    if (initPoint > wayPointVectorList.Count - 1)
     {
-      lerpState = 0;
+      initPoint = 0;
     }
-    int nextWaypoint = lerpState < wayPointVectorList.Count - 1 ? lerpState + 1 : 0;
-    currentLerpDistance = Vector3.Distance( wayPointVectorList[nextWaypoint], wayPointVectorList[lerpState]);
+    int nextWaypoint = initPoint < wayPointVectorList.Count - 1 ? initPoint + 1 : 0;
+    currentLerpDistance = Vector3.Distance( wayPointVectorList[nextWaypoint], wayPointVectorList[initPoint]);
     // print("current LErp Distance:" + currentLerpDistance);
     // print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
 
-    // Vector3 position;
-
-    // for(int i = 0; i < waypoints.Length; i++) {
-    //   if (waypointSystem.calcDistanceScaledTime(lerpSpeed) < waypoints[i].distanceFromStart) {
-    //     Vector3 wFrom = waypoints[i^1].position;
-    //     Vector3 wTo = waypoints[i].position;
-    //     float f = (waypointSystem.calcDistanceScaledTime(lerpSpeed) - waypoints[i^1].distanceFromStart) / (waypoints[i].distanceFromStart - waypoints[i^1].distanceFromStart);
-    //     float x = wFrom.x + (wTo.x - wFrom.x) * f;
-    //     float y = wFrom.y + (wTo.y - wFrom.y) * f;
-    //     // Vector3 position = new Vector3(transform.position.x - x, transform.position.y - y, 0);
-    //     position = new Vector3(x, y, PLAYERSingleton.playerSingleton.interactionZ);
-    //     transform.position = position;
-    //     print(gameObject.name + " wFrom index: " + waypoints[i^1]);
-    //     print(gameObject.name + " wTo index: " + waypoints[i]);
-    //   }
-    // }
-    // return position;
-
-    return Vector3.Lerp(wayPointVectorList[lerpState], wayPointVectorList[nextWaypoint], lerpDriver);
+    return Vector3.Lerp(wayPointVectorList[initPoint], wayPointVectorList[nextWaypoint], lerpDriver);
     
   }
 

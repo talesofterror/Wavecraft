@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: flesh
-    second: {fileID: 2100000, guid: 66d2cac1fd9e7ec4d93cab5fb08b3f75, type: 2}
+    second: {fileID: 2100000, guid: 7013282d62517694ebd3c369cf58a501, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

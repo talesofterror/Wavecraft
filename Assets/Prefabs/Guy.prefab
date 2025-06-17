@@ -734,8 +734,11 @@ GameObject:
   - component: {fileID: 1274461817535836546}
   - component: {fileID: 1274461817535836547}
   - component: {fileID: 4097957593148808090}
+  - component: {fileID: 3377448895941601642}
+  - component: {fileID: 786051745560488437}
   - component: {fileID: 7993550628175636991}
   - component: {fileID: 2358393379614143141}
+  - component: {fileID: 856644525500708999}
   - component: {fileID: 1274461817535836548}
   m_Layer: 9
   m_Name: Guy
@@ -975,10 +978,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rocket: {fileID: 1274461817535836548}
+  playerStats: {fileID: 786051745560488437}
+  playerControls: {fileID: 3377448895941601642}
   playerAttack: {fileID: 7993550628175636991}
   guyRotate: {fileID: 1274461816553629963}
   rB: {fileID: 1274461817535836547}
-  playerControls: {fileID: 0}
   focusState: 0
   controlsActive: 1
   attackEnabled: 1
@@ -986,6 +990,82 @@ MonoBehaviour:
   damageIndicatorMaterial: {fileID: 2100000, guid: 871e94813c864864ea7ce43e8a59943f,
     type: 2}
   damageDisplayDuration: 1
+--- !u!114 &3377448895941601642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461817535836549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a56d03f182fde41bc14e5bce1605be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 1
+  lookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 6b444451-8a00-4d00-a97e-f47457f736a8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 1
+  primaryAttackAction:
+    m_Name: Primary Attack
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 10c52212-20d3-4504-ad1f-b78002863ea6
+    m_Processors: 
+    m_Interactions: Press(behavior=1)
+    m_SingletonActionBindings: []
+    m_Flags: 1
+  sprintAction:
+    m_Name: Sprint
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 641cd816-40e6-41b4-8c3d-04687c349290
+    m_Processors: 
+    m_Interactions: Hold
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  interactAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e77f4823-7194-4e0d-9bea-e376c8d29f06
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  moveSpeed: 10
+  sprintSpeed: 50
+  gravity: {x: 0, y: 0, z: 0}
+  sprintDamping: 6
+--- !u!114 &786051745560488437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461817535836549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427b15d5568dbf040a523d90abe0458c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  sprint: 100
+  data: 0
 --- !u!114 &7993550628175636991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1095,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b14ced1c56a9c44f90ed69acd5da039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &856644525500708999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274461817535836549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 80fece3ac62cf51459c3fb581127f66f,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &1274461817535836548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,7 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlsActive: 0
-  controlScheme: 1
+  controlScheme: 2
   thrustPower: 500
   rotationSpeed: 50
   axisRotationFactor: 5
@@ -2272,8 +2383,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3819791867168730356}
   - component: {fileID: 8216530430597721016}
-  - component: {fileID: 1399721352766652158}
   - component: {fileID: 3709792099498917836}
+  - component: {fileID: 1083400481629648938}
   m_Layer: 0
   m_Name: Area Light
   m_TagString: Untagged
@@ -2313,7 +2424,7 @@ Light:
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2344,8 +2455,8 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 3
+    m_Bits: 512
+  m_RenderingLayerMask: 2
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1.4718653, y: 2.9995556}
@@ -2361,29 +2472,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &1399721352766652158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6049989518644304960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 3
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!114 &3709792099498917836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,6 +2487,29 @@ MonoBehaviour:
   publicTarget: {fileID: 1274461816553629965}
   sensor: {fileID: 0}
   targetMode: 0
+--- !u!114 &1083400481629648938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049989518644304960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 2
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &6084967445532780786
 GameObject:
   m_ObjectHideFlags: 0
