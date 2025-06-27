@@ -97,6 +97,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Walls Brick
+    second: {fileID: 2100000, guid: 4a53f5075a4a7e14aa45e38d523f317c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: WallsN Material
     second: {fileID: 2100000, guid: f080b455f3fffb74f839e9a2bc605752, type: 2}
   - first:

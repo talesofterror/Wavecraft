@@ -482,6 +482,8 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   bulletSpeed: 10
   firing: 0
+  fireOnlyWhenRendered: 1
+  _renderer: {fileID: 7581565725635650912}
   enemyDamage: {fileID: 2906322178842624983}
   projectileDamage: 10
 --- !u!1 &8996352387345200612

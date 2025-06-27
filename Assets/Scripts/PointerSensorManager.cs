@@ -7,18 +7,13 @@ public class PointerSensorManager : MonoBehaviour
   LayerMask sensorLayer;
   public RaycastHit rayhit;
   public GameObject cursorGameObject; 
-  public Material cursorObjectMaterial;
   public GameObject player;
 
   void Awake()
   {
-    player = GameObject.FindWithTag("GuyBase");
+    player = PLAYERSingleton.i.gameObject;
     cam = Camera.main;
-    // cursorGameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     cursorGameObject.name = "****** Cursor!";
-    // cursorGameObject.GetComponent<Collider>().enabled = false;
-    cursorGameObject.transform.GetChild(0).GetComponent<Renderer>().material = cursorObjectMaterial;
-    // print("Cursor Object Material = " + Resources.FindObjectsOfTypeAll(typeof(Material)).Length);
     cursorGameObject.layer = 5;
 
     sensorLayer = 1 << 6;
@@ -41,7 +36,6 @@ public class PointerSensorManager : MonoBehaviour
 
   private void newManager()
   {
-    // Ray rayForSensor = cam.ScreenPointToRay(Input.mousePosition);
     Vector3 mousePosPlusDepth = new Vector3(Input.mousePosition.x, Input.mousePosition.y, player.transform.position.z);
     Vector3 screenPoint = cam.ScreenToWorldPoint(mousePosPlusDepth);
     Vector3 screenPointHeading = screenPoint - cam.gameObject.transform.position;
