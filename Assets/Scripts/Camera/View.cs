@@ -20,13 +20,11 @@ public class View : MonoBehaviour
 
     foreach (AreaDefiner definer in CAMERASingleton.i.areasArray)
     {
-      Debug.Log("Area Definer iteration: " + definer.name);
-      Debug.Log("Player is within bounds: " + definer.PlayerIsWithinBounds());
       if (definer.PlayerIsWithinBounds())
       {
-        Debug.Log("Playr is within: " + definer.name);
+        Debug.Log("Player is within: " + definer.name);
         activeView = definer.viewComponent.view;
-        return;
+        // return;
       }
       else
       {
@@ -34,9 +32,9 @@ public class View : MonoBehaviour
       }
     }
 
-    initialView = new ViewerObject(CAMERASingleton.i.transform.position, CAMERASingleton.i.transform.rotation, Camera.main.fieldOfView);
-    initialView.followState = FollowState.Stationary;
-    activeView = initialView;
+    // initialView = new ViewerObject(CAMERASingleton.i.transform.position, CAMERASingleton.i.transform.rotation, Camera.main.fieldOfView);
+    // initialView.followState = FollowState.Stationary;
+    // activeView = initialView;
   }
 
   void Update()
