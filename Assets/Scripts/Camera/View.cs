@@ -2,41 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-/* 
-! outline
-
-Needs flexible coroutine for transitions
-Moving player into new area should initiate relevant camera rules for area
-
-^ Private variables
-
-
-^ Public variables to be set by triggers and other code:
-(Should be set within each state)
-  ? State
-  ? X Offset from player
-  ? Y Position
-  ? X Rotation
-  ? Y Rotation
-  ? Z Rotation
-  ? FOV
-  * Combine into class?
-    (instantiate object instance, set into variable within Update
-
-^ States: 
-(Each takes their offsets and FOV from public variables)
-  * Follow Player: 
-    ? Vertical
-    ? Horizontal
-  * Stationary
-
-^ Functions: 
-  * SwitchView
-  * ViewpointTransition Coroutine (May be the same as SwitchView)
-  * MotionLead (Shift camera in direction of movement)
-
-*/
-
 public class View : MonoBehaviour
 {
   [HideInInspector]
@@ -50,19 +15,17 @@ public class View : MonoBehaviour
 
   void Awake()
   {
-    player = GameObject.FindWithTag("GuyBase");
-    Vector3 defaultPlayerPosition = player.transform.position;
-    initialView = new ViewerObject(transform.position, transform.rotation, Camera.main.fieldOfView);
-    initialView.setOffsets(0, 0, 0);
-    if (player.transform.position.y < 4f) {
-      Vector3 nondefaultPlayerPosition = new Vector3(
-        player.transform.position.x, player.transform.position.y, transform.position.z
-      );
-      initialView = new ViewerObject(nondefaultPlayerPosition, transform.rotation, Camera.main.fieldOfView);
-      followState = FollowState.Total;
+    player = PLAYERSingleton.i.gameObject;
+
+    foreach (AreaDefiner definer in CAMERASingleton.i.areasArray)
+    {
+      Debug.Log("Area Definer iteration: " + definer.name);
+      if (definer.PlayerIsWithinBounds())
+      {
+        Debug.Log(definer.name);
+        activeView = definer.viewComponent.view;
+      }
     }
-    activeView = initialView;
-    initialView.setFollowState(followState);
   }
 
   void Update()
@@ -150,6 +113,8 @@ public class View : MonoBehaviour
     float transitoryFieldOfView;
 
     ViewerObject transitoryView = new ViewerObject(Vector3.zero, Quaternion.Euler(0, 0, 0), 0);
+    transitoryView.followState = target.followState;
+    transitoryView.lookAt = target.lookAt;
 
     float i;
     // float rotX, rotY, rotZ;

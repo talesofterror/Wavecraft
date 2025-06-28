@@ -6,13 +6,15 @@ using UnityEngine.Rendering;
 
 public class PlayerControls : MonoBehaviour
 {
-  
+
   PlayerInput playerInput;
   [HideInInspector] public InputAction moveAction;
   [HideInInspector] public InputAction lookAction;
   [HideInInspector] public InputAction primaryAttackAction;
   [HideInInspector] public InputAction sprintAction;
   [HideInInspector] public InputAction interactAction;
+  
+  [HideInInspector] public bool sprinting;
 
   Rigidbody rB;
   VirtualMouseInput virtualCursor;
@@ -24,32 +26,42 @@ public class PlayerControls : MonoBehaviour
 
   void Start()
   {
-      playerInput = GetComponent<PlayerInput>();
-      moveAction = playerInput.actions.FindAction("Move");
-      lookAction = playerInput.actions.FindAction("Look");
-      primaryAttackAction = playerInput.actions.FindAction("Primary Attack");
-      sprintAction = playerInput.actions.FindAction("Sprint");
-      interactAction = playerInput.actions.FindAction("Interact");
+    playerInput = GetComponent<PlayerInput>();
+    moveAction = playerInput.actions.FindAction("Move");
+    lookAction = playerInput.actions.FindAction("Look");
+    primaryAttackAction = playerInput.actions.FindAction("Primary Attack");
+    sprintAction = playerInput.actions.FindAction("Sprint");
+    interactAction = playerInput.actions.FindAction("Interact");
 
-      rB = PLAYERSingleton.i.rB;
-      virtualCursor = CAMERASingleton.i.virtualMouse;
+    rB = PLAYERSingleton.i.rB;
+    virtualCursor = CAMERASingleton.i.virtualMouse;
   }
 
   void Update()
   {
-    Movement();
-    Attack();
-    CursorMovement();
+    if (PLAYERSingleton.i.controlsActive == true)
+    {
+      Movement();
+      Attack();
+    }
+    else
+    {
+      return;
+    }
 
+    CursorMovement();
   }
 
-  private void Attack() {
-    if (primaryAttackAction.WasPerformedThisFrame()) {
+  private void Attack()
+  {
+    if (primaryAttackAction.WasPerformedThisFrame())
+    {
       PLAYERSingleton.i.playerAttack.fireProjectile();
     }
   }
 
-  private void CursorMovement() {
+  private void CursorMovement()
+  {
     Cursor.lockState = CursorLockMode.Confined;
 
     Vector2 currentPosition = virtualCursor.virtualMouse.position.ReadValue();
@@ -69,15 +81,21 @@ public class PlayerControls : MonoBehaviour
 
     float _moveSpeed = moveSpeed;
 
-    if (sprintAction.IsPressed()) {
+    if (sprintAction.IsPressed())
+    {
+      sprinting = true;
       _moveSpeed = sprintSpeed;
       rB.linearDamping = sprintDamping;
       // Debug.Log("Sprint action pressed");
     }
+    else
+    {
+      sprinting = false;
+    }
 
     Vector3 moveForce = new Vector3(
-      moveAction.ReadValue<Vector2>().x * ((_moveSpeed * Time.deltaTime) * 100), 
-      moveAction.ReadValue<Vector2>().y * ((_moveSpeed * Time.deltaTime) * 100), 
+      moveAction.ReadValue<Vector2>().x * ((_moveSpeed * Time.deltaTime) * 100),
+      moveAction.ReadValue<Vector2>().y * ((_moveSpeed * Time.deltaTime) * 100),
     0);
 
     rB.AddForce(moveForce);
@@ -86,11 +104,16 @@ public class PlayerControls : MonoBehaviour
     // Debug.Log("moveAction value: " + moveAction.ReadValue<Vector2>());
   }
 
-  public void interactionListener () {
-    if (interactAction.WasPressedThisFrame()) {
-      if (!GAMESingleton.i.engaged_Dialogue) {
+  public void interactionListener()
+  {
+    if (interactAction.WasPressedThisFrame())
+    {
+      if (!GAMESingleton.i.engaged_Dialogue)
+      {
         UISingleton.i.cursorTarget.dialogueTrigger.TriggerDialogue();
-      } else {
+      }
+      else
+      {
         GAMESingleton.i.dialogueManager.DisplayNextSentence();
       }
     }

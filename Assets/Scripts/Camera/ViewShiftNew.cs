@@ -25,7 +25,7 @@ public class ViewShiftNew : MonoBehaviour
   private View mainCamViewerRevised;
   [HideInInspector] public ViewerObject shiftView;
   private ViewerObject initView;
-  private bool triggeredAlready = false;
+  [HideInInspector] public bool triggeredAlready = false;
   public bool editMode;
   public bool enableTransition = true;
   void Awake()
@@ -36,10 +36,6 @@ public class ViewShiftNew : MonoBehaviour
     shiftView.setLookAt(lookAtState);
     mainCamViewerRevised = Camera.main.gameObject.GetComponent<View>();
     editMode = false;
-  }
-  void Start()
-  {
-    print("shiftView follow state: " + shiftView.followState);
   }
 
   private void OnTriggerEnter(Collider collider)
@@ -52,9 +48,6 @@ public class ViewShiftNew : MonoBehaviour
         {
           initView = mainCamViewerRevised.activeView;
           CAMERASingleton.i.viewerScript.callViewTransition(initView, shiftView, 1.5f);
-          mainCamViewerRevised.activeView.followState = shiftView.followState;
-          mainCamViewerRevised.activeView.offsets = shiftView.offsets;
-          mainCamViewerRevised.activeView.lookAt = shiftView.lookAt;
         }
         else
         {
@@ -67,10 +60,7 @@ public class ViewShiftNew : MonoBehaviour
       {
         if (enableTransition)
         {
-          mainCamViewerRevised.activeView.offsets = initView.offsets;
           mainCamViewerRevised.callViewTransition(mainCamViewerRevised.activeView, initView, 1.5f);
-          mainCamViewerRevised.activeView.followState = initView.followState;
-          mainCamViewerRevised.activeView.lookAt = initView.lookAt;
         }
         else
         {
@@ -78,6 +68,7 @@ public class ViewShiftNew : MonoBehaviour
         }
         triggeredAlready = false;
       }
+
     }
 
   }
@@ -85,7 +76,8 @@ public class ViewShiftNew : MonoBehaviour
   {
     if (editMode)
     {
-      mainCamViewerRevised.activeView.position = calculatedTarget(mainCamViewerRevised.followState);
+      // mainCamViewerRevised.activeView.position = calculatedTarget(mainCamViewerRevised.followState);
+      mainCamViewerRevised.activeView.position = position;
       mainCamViewerRevised.activeView.rotation = rotation;
       mainCamViewerRevised.activeView.fieldOfView = fieldOfView;
       mainCamViewerRevised.activeView.followState = followState;

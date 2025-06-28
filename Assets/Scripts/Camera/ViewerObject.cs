@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // & contains ViewObject + FollowState Enum
-
+[System.Serializable]
 public class ViewerObject
 {
   public Vector3 position;

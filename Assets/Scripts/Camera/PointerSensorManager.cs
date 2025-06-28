@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal.Internal;
 
 public class PointerSensorManager : MonoBehaviour
 {
@@ -7,16 +6,22 @@ public class PointerSensorManager : MonoBehaviour
   LayerMask sensorLayer;
   public RaycastHit rayhit;
   public GameObject cursorGameObject; 
-  public GameObject player;
+  GameObject player;
 
   void Awake()
   {
-    player = PLAYERSingleton.i.gameObject;
+    // Debug.Log(GameObject.FindWithTag("GuyBase").name);
+    // Debug.Log(PLAYERSingleton.i.transform.position);
     cam = Camera.main;
     cursorGameObject.name = "****** Cursor!";
     cursorGameObject.layer = 5;
 
     sensorLayer = 1 << 6;
+  }
+
+  void Start()
+  {
+    player = PLAYERSingleton.i.gameObject;
   }
 
   Vector3 sensorPosition;
