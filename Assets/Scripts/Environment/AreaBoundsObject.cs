@@ -34,7 +34,7 @@ public class AreaBoundsObject
       {
         yUpperBound = array[i].transform.position.y;
       }
-      else if (array[i].name == "XLowerBound")
+      else if (array[i].name == "YLowerBound")
       {
         yLowerBound = array[i].transform.position.y;
       }

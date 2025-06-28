@@ -6,32 +6,29 @@ using UnityEngine.Rendering;
 public class AreaDefiner : MonoBehaviour
 {
 
-  public ViewComponent viewComponent; 
+  public ViewComponent viewComponent;
 
   [SerializeField] GameObject[] boundVertices;
 
   AreaBoundsObject bounds;
 
-  void Start()
+  void Awake()
   {
     bounds = new AreaBoundsObject(boundVertices);
   }
 
   public bool PlayerIsWithinBounds()
   {
-    bool yes = PLAYERSingleton.i.transform.position.x < this.bounds.xLowerBound
-            && PLAYERSingleton.i.transform.position.x < this.bounds.yLowerBound
-            && PLAYERSingleton.i.transform.position.x < this.bounds.xUpperBound
-            && PLAYERSingleton.i.transform.position.x < this.bounds.yUpperBound;
-
-    if (yes)
+    Debug.Log("Player y position: " + PLAYERSingleton.i.transform.position.y);
+    Debug.Log(this.transform.name + " yLowerBound: " + this.bounds.yLowerBound);
+    if (PLAYERSingleton.i.transform.position.x > this.bounds.xLowerBound
+      && PLAYERSingleton.i.transform.position.y > this.bounds.yLowerBound
+      && PLAYERSingleton.i.transform.position.x < this.bounds.xUpperBound
+      && PLAYERSingleton.i.transform.position.y < this.bounds.yUpperBound)
     {
       return true;
     }
-    else
-    {
-      return false;
-    }
+    else { return false; }
   }
 
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -13,19 +14,29 @@ public class View : MonoBehaviour
   Quaternion gimbalQuaternion;
   bool transitioning = false;
 
-  void Awake()
+  void Start()
   {
     player = PLAYERSingleton.i.gameObject;
 
     foreach (AreaDefiner definer in CAMERASingleton.i.areasArray)
     {
       Debug.Log("Area Definer iteration: " + definer.name);
+      Debug.Log("Player is within bounds: " + definer.PlayerIsWithinBounds());
       if (definer.PlayerIsWithinBounds())
       {
-        Debug.Log(definer.name);
+        Debug.Log("Playr is within: " + definer.name);
         activeView = definer.viewComponent.view;
+        return;
+      }
+      else
+      {
+        continue;
       }
     }
+
+    initialView = new ViewerObject(CAMERASingleton.i.transform.position, CAMERASingleton.i.transform.rotation, Camera.main.fieldOfView);
+    initialView.followState = FollowState.Stationary;
+    activeView = initialView;
   }
 
   void Update()
