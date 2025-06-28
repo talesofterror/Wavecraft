@@ -4,9 +4,11 @@ using UnityEngine;
 public class ViewShiftv2 : MonoBehaviour
 {
   public GameObject trigger1;
+  public ViewComponent trigger1ViewComponent;
   ViewerObject trigger1ViewObject;
   Collider trigger1Collider;
   public GameObject trigger2;
+  public ViewComponent trigger2ViewComponent;
   ViewerObject trigger2ViewObject;
   Collider trigger2Collider;
   [SerializeField] float nudgeForce = 10f;
@@ -24,9 +26,24 @@ public class ViewShiftv2 : MonoBehaviour
 
   void Start()
   {
-    trigger1ViewObject = trigger1.GetComponent<ViewComponent>().view;
+    if (trigger1ViewComponent)
+    {
+      trigger1ViewObject = trigger1ViewComponent.view;
+    }
+    else
+    {
+      trigger1ViewObject = trigger1.GetComponent<ViewComponent>().view;
+    }
+    if (trigger2ViewComponent)
+    {
+      trigger2ViewObject = trigger2ViewComponent.view;
+    }
+    else
+    {
+      trigger2ViewObject = trigger2.GetComponent<ViewComponent>().view;
+    }
+
     trigger1Collider = trigger1.GetComponent<Collider>();
-    trigger2ViewObject = trigger2.GetComponent<ViewComponent>().view;
     trigger2Collider = trigger2.GetComponent<Collider>();
 
     editMode = false;
@@ -88,13 +105,12 @@ public class ViewShiftv2 : MonoBehaviour
     trigger1Collider.enabled = false;
     trigger2Collider.enabled = false;
     PLAYERSingleton.i.controlsActive = false;
-    PLAYERSingleton.i.playerControls.sprinting = false;
     nudgePlayer();
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(0.5f);
+    PLAYERSingleton.i.rB.linearVelocity = Vector3.zero;
     trigger1Collider.enabled = true;
     trigger2Collider.enabled = true;
     PLAYERSingleton.i.controlsActive = true;
-    PLAYERSingleton.i.playerControls.sprinting = false;
   }
 
   void nudgePlayer()
@@ -111,41 +127,7 @@ public class ViewShiftv2 : MonoBehaviour
       PLAYERSingleton.i.rB.linearVelocity += UTILITY.getDirectionVector3(
         trigger2.transform.position, trigger1.transform.position
         ) * nudgeForce;
-
     }
   }
 
-  // private void OnTriggerEnter(Collider collider)
-  // {
-  //   if (collider.gameObject.CompareTag("GuyBase"))
-  //   {
-  //     if (!triggeredAlready)
-  //     {
-  //       if (enableTransition)
-  //       {
-  //         initView = mainCamViewerRevised.activeView;
-  //         CAMERASingleton.i.viewerScript.callViewTransition(initView, shiftView, 1.5f);
-  //       }
-  //       else
-  //       {
-  //         initView = mainCamViewerRevised.activeView;
-  //         mainCamViewerRevised.activeView = shiftView;
-  //       }
-  //       triggeredAlready = true;
-  //     }
-  //     else
-  //     {
-  //       if (enableTransition)
-  //       {
-  //         mainCamViewerRevised.callViewTransition(mainCamViewerRevised.activeView, initView, 1.5f);
-  //       }
-  //       else
-  //       {
-  //         mainCamViewerRevised.activeView = initView;
-  //       }
-  //       triggeredAlready = false;
-  //     }
-  //   }
-
-  // }
 }

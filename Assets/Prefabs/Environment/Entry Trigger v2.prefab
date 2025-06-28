@@ -221,8 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger1: {fileID: 3297938983305124000}
+  trigger1ViewComponent: {fileID: 0}
   trigger2: {fileID: 3134671494047772775}
-  nudgeForce: 10
+  trigger2ViewComponent: {fileID: 0}
+  nudgeForce: 7
   enableTransition: 1
   editMode: 0
   activeTrigger: 0

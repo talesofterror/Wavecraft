@@ -19,8 +19,6 @@ public class AreaDefiner : MonoBehaviour
 
   public bool PlayerIsWithinBounds()
   {
-    // Debug.Log("Player y position: " + PLAYERSingleton.i.transform.position.y);
-    // Debug.Log(this.transform.name + " yLowerBound: " + this.bounds.yLowerBound);
     if (PLAYERSingleton.i.transform.position.x > this.bounds.xLowerBound
       && PLAYERSingleton.i.transform.position.y > this.bounds.yLowerBound
       && PLAYERSingleton.i.transform.position.x < this.bounds.xUpperBound
