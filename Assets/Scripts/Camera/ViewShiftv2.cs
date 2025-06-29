@@ -12,6 +12,7 @@ public class ViewShiftv2 : MonoBehaviour
   ViewerObject trigger2ViewObject;
   Collider trigger2Collider;
   [SerializeField] float nudgeForce = 10f;
+  float transitionSpeed = 1.5f;
 
   public bool enableTransition = true;
   public bool editMode;
@@ -75,7 +76,7 @@ public class ViewShiftv2 : MonoBehaviour
       Debug.Log(transform.name + " " + trigger);
       if (enableTransition)
       {
-        CAMERASingleton.i.viewerScript.callViewTransition(activeView, trigger1ViewObject, 1.5f);
+        CAMERASingleton.i.viewerScript.callViewTransition(activeView, trigger1ViewObject, transitionSpeed);
       }
       else
       {
@@ -88,7 +89,7 @@ public class ViewShiftv2 : MonoBehaviour
       Debug.Log(transform.name + " " + trigger);
       if (enableTransition)
       {
-        CAMERASingleton.i.viewerScript.callViewTransition(activeView, trigger2ViewObject, 1.5f);
+        CAMERASingleton.i.viewerScript.callViewTransition(activeView, trigger2ViewObject, transitionSpeed);
       }
       else
       {
@@ -105,12 +106,14 @@ public class ViewShiftv2 : MonoBehaviour
     trigger1Collider.enabled = false;
     trigger2Collider.enabled = false;
     PLAYERSingleton.i.controlsActive = false;
+    PLAYERSingleton.i.areaTransition = true;
     nudgePlayer();
-    yield return new WaitForSeconds(0.5f);
-    PLAYERSingleton.i.rB.linearVelocity = Vector3.zero;
+    yield return new WaitForSeconds(transitionSpeed);
+    PLAYERSingleton.i.rB.linearVelocity *= 0.5f;
     trigger1Collider.enabled = true;
     trigger2Collider.enabled = true;
     PLAYERSingleton.i.controlsActive = true;
+    PLAYERSingleton.i.areaTransition = false;
   }
 
   void nudgePlayer()

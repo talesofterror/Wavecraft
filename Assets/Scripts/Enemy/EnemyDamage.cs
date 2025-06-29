@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
@@ -12,8 +11,9 @@ public class EnemyDamage : MonoBehaviour
   Vector3 fullScale;
   NavMeshAttack navMeshAttack;
 
-  [HideInInspector]
-  public bool dead = false;
+  [HideInInspector] public bool dead = false;
+
+  public bool disableColliderOnDeath = false;
 
   public enum DeathSequence
   {
@@ -52,7 +52,10 @@ public class EnemyDamage : MonoBehaviour
 
     if (dead == true)
     {
-      _collider.enabled = false;
+      if (disableColliderOnDeath)
+      {
+        _collider.enabled = false;
+      }
       enemyStats.hP = 0;
       if (navMeshAttack)
       {

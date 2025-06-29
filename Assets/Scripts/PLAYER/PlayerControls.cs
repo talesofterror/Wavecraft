@@ -13,7 +13,8 @@ public class PlayerControls : MonoBehaviour
   [HideInInspector] public InputAction primaryAttackAction;
   [HideInInspector] public InputAction sprintAction;
   [HideInInspector] public InputAction interactAction;
-  
+  [HideInInspector] public InputAction pauseAction;
+
   [HideInInspector] public bool sprinting;
 
   Rigidbody rB;
@@ -32,6 +33,7 @@ public class PlayerControls : MonoBehaviour
     primaryAttackAction = playerInput.actions.FindAction("Primary Attack");
     sprintAction = playerInput.actions.FindAction("Sprint");
     interactAction = playerInput.actions.FindAction("Interact");
+    pauseAction = playerInput.actions.FindAction("Pause");
 
     rB = PLAYERSingleton.i.rB;
     virtualCursor = CAMERASingleton.i.virtualMouse;
@@ -44,12 +46,9 @@ public class PlayerControls : MonoBehaviour
       Movement();
       Attack();
     }
-    else
-    {
-      return;
-    }
 
     CursorMovement();
+    PauseListener();
   }
 
   private void Attack()
@@ -116,6 +115,21 @@ public class PlayerControls : MonoBehaviour
       {
         GAMESingleton.i.dialogueManager.DisplayNextSentence();
       }
+    }
+  }
+  
+  
+  public void PauseListener()
+  {
+    if (pauseAction.WasPressedThisFrame() && !PLAYERSingleton.i.paused)
+    {
+      Debug.Log("pauseAction pressed, " + "Single pause state: " + !PLAYERSingleton.i.paused);
+      PLAYERSingleton.i.PauseToggle("paused");
+    }
+    else if (pauseAction.WasPressedThisFrame() && PLAYERSingleton.i.paused)
+    {
+      Debug.Log("pauseAction pressed, " + "Single pause state: " + !PLAYERSingleton.i.paused);
+      PLAYERSingleton.i.PauseToggle("unpaused");
     }
   }
 }

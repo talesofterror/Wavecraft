@@ -26,9 +26,14 @@ public class Enemy_DetectSurroundings : MonoBehaviour
 	}
 
 	void OnTriggerEnter (Collider collider) {
-    if (collider.gameObject == PLAYERSingleton.i.gameObject) {
-		  target = collider.gameObject;
-		  detection = true; 
+    if (PLAYERSingleton.i.areaTransition)
+    {
+      return;
+    }
+    if (collider.gameObject == PLAYERSingleton.i.gameObject)
+    {
+      target = collider.gameObject;
+      detection = true;
     }
 	}
 

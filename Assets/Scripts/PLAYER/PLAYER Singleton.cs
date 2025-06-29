@@ -3,13 +3,15 @@ using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Android;
+using UnityEngine.UIElements;
 
 [SelectionBase]
 public class PLAYERSingleton : MonoBehaviour
 {
 
   private static PLAYERSingleton _playerSingleton;
-  public static PLAYERSingleton i {get {return _playerSingleton;}}
+  public static PLAYERSingleton i { get { return _playerSingleton; } }
   [Header("Components")]
   public Rocket rocket;
   public PlayerStats playerStats;
@@ -17,28 +19,38 @@ public class PLAYERSingleton : MonoBehaviour
   public PlayerAttack playerAttack;
   public GuyRotate guyRotate;
   public Rigidbody rB;
-  
+
   [HideInInspector] Interactable worldCursorTarget;
   [HideInInspector] public InteractableState_WORLD focusState;
   [HideInInspector] public bool controlsActive = true;
   [HideInInspector] public bool attackEnabled = true;
-  [HideInInspector] public float interactionZ; 
-  
+  [HideInInspector] public float interactionZ;
+
   [Header("Materials")]
   public Material damageIndicatorMaterial;
   Material[] loadedMaterialsArray;
   Material[] originalMaterialsArray;
   Renderer[] _renderers;
+
   [Header("Taking Damage")]
   public float damageDisplayDuration = 1;
+  public bool ignoreDamage = false;
 
-  void Awake () {
+  [Header("State")]
+  public bool paused = false;
+  [HideInInspector] public bool areaTransition = false;
+
+  void Awake()
+  {
 
     loadedMaterialsArray = new Material[2];
 
-    if (_playerSingleton != null && _playerSingleton != this) {
+    if (_playerSingleton != null && _playerSingleton != this)
+    {
       Destroy(this.gameObject);
-    } else {
+    }
+    else
+    {
       _playerSingleton = this;
       DontDestroyOnLoad(this);
     }
@@ -58,31 +70,71 @@ public class PLAYERSingleton : MonoBehaviour
   {
   }
 
-  public void PauseToggle (string state) {
-    if (state == "paused") {
+  public void PauseToggle(string state)
+  {
+    if (state == "paused")
+    {
+      Debug.Log("**Game Paused**");
+      paused = true;
       controlsActive = false;
       attackEnabled = false;
       rocket.rigidBody.isKinematic = true;
-    } if (state == "unpaused") {
+      Time.timeScale = 0f;
+    }
+    if (state == "unpaused")
+    {
+      Debug.Log("**Game Unpaused**");
+      paused = false;
       controlsActive = true;
       attackEnabled = true;
       rocket.rigidBody.isKinematic = false;
+      Time.timeScale = 1.0f;
     }
   }
 
-  public void takeDamage(float damageAmount) {
-    StartCoroutine(displayDamage(damageDisplayDuration));
-    playerStats.health -= damageAmount;
-    UISingleton.i.HealthValue.text = playerStats.health.ToString();
+  public void takeDamage(float damageAmount, GameObject source = null)
+  {
+    if (ignoreDamage)
+    {
+      return;
+    }
+    else
+    {
+      if (source == null)
+      {
+        StartCoroutine(displayDamage(damageDisplayDuration));
+        playerStats.health -= damageAmount;
+      }
+      else
+      {
+        if (source.CompareTag("Enemy"))
+        {
+          StartCoroutine(displayDamage(damageDisplayDuration));
+          playerStats.health -= damageAmount;
+          nudgeDamage(source.transform.position, 10f);
+        }
+      }
+      UISingleton.i.HealthValue.text = playerStats.health.ToString();
+    }
   }
 
-  public void collectData () {
+  void nudgeDamage(Vector3 source, float force)
+  {
+    Debug.Log("nudgeDamage called");
+    rB.linearVelocity += UTILITY.getDirectionVector3(
+        source, transform.position
+        ) * force;
+  }
+
+  public void collectData()
+  {
     playerStats.data++;
     Debug.Log("Player data value: " + playerStats.data);
     UISingleton.i.DataValue.text = playerStats.data.ToString();
   }
 
-  IEnumerator displayDamage(float seconds) {
+  IEnumerator displayDamage(float seconds)
+  {
     for (int i = 0; i < _renderers.Length; i++)
     {
       _renderers[i].material = loadedMaterialsArray[0];
@@ -94,7 +146,7 @@ public class PLAYERSingleton : MonoBehaviour
     }
     yield break;
   }
-  
+
   private void LoadMaterials()
   {
     for (int i = 0; i < _renderers.Length; i++)
