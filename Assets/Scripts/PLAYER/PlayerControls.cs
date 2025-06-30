@@ -82,10 +82,13 @@ public class PlayerControls : MonoBehaviour
 
     if (sprintAction.IsPressed())
     {
-      sprinting = true;
-      _moveSpeed = sprintSpeed;
-      rB.linearDamping = sprintDamping;
-      // Debug.Log("Sprint action pressed");
+      if (!PLAYERSingleton.i.sprintDisabled)
+      {
+        sprinting = true;
+        _moveSpeed = sprintSpeed;
+        rB.linearDamping = sprintDamping;
+        // Debug.Log("Sprint action pressed");
+      } 
     }
     else
     {
@@ -100,7 +103,8 @@ public class PlayerControls : MonoBehaviour
     rB.AddForce(moveForce);
 
     Physics.gravity = gravity;
-    // Debug.Log("moveAction value: " + moveAction.ReadValue<Vector2>());
+    // Debug.Log("sprinting: " + sprinting);
+    
   }
 
   public void interactionListener()

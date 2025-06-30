@@ -36,6 +36,9 @@ public class PLAYERSingleton : MonoBehaviour
   public float damageDisplayDuration = 1;
   public bool ignoreDamage = false;
 
+  [Header("Movement")]
+  public bool sprintDisabled = false;
+
   [Header("State")]
   public bool paused = false;
   [HideInInspector] public bool areaTransition = false;

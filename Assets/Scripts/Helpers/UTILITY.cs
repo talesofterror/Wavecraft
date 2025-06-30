@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -35,14 +36,14 @@ public class UTILITY
     return direction;
   }
 
-  // public static GameObject[] getChildrenAsArray (params GameObject[] children)
-  // {
-  //   GameObject[] childArray = new GameObject[children.Length];
+  public static GameObject[] getChildrenAsArray (params GameObject[] children)
+  {
+    GameObject[] childArray = new GameObject[children.Length];
 
-  //   for (int i = 0; i < children.Length; i++) {
-  //     childArray[i] = 
-  //   }
+    for (int i = 0; i < children.Length; i++) {
+      childArray[i] = childArray[i];
+    }
 
-  //   return new GameObject[0];
-  // }
+    return childArray;
+  }
 }

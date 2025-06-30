@@ -105,7 +105,7 @@ public class EnemyWander : MonoBehaviour
     
   }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
   {
     for (int i = 0; i < waypointArray.Length; i++)
     {

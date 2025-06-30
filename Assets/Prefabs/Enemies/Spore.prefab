@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hP: 20
   baseHP: 0
-  aP: 100
+  aP: 20
   baseAP: 0
 --- !u!114 &2906322178842624983
 MonoBehaviour:
@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrinkFactor: 0.5
   dead: 0
+  disableColliderOnDeath: 0
   deathSequence: 0
 --- !u!114 &7009006488507270853
 MonoBehaviour:
@@ -453,7 +454,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8226365283950302114}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c151015a8873a42438929c23fc062240, type: 3}
   m_Name: 
@@ -473,7 +474,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8226365283950302114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9af84add597a742428b0f54a0e31ec91, type: 3}
   m_Name: 

@@ -7,12 +7,14 @@ public class ViewShiftv2 : MonoBehaviour
   public ViewComponent trigger1ViewComponent;
   ViewerObject trigger1ViewObject;
   Collider trigger1Collider;
+  public Transform trigger1Target;
   public GameObject trigger2;
   public ViewComponent trigger2ViewComponent;
   ViewerObject trigger2ViewObject;
   Collider trigger2Collider;
+  public Transform trigger2Target;
   [SerializeField] float nudgeForce = 10f;
-  float transitionSpeed = 1.5f;
+  public float transitionSpeed = 1.5f;
 
   public bool enableTransition = true;
   public bool editMode;
@@ -98,39 +100,57 @@ public class ViewShiftv2 : MonoBehaviour
       activeTrigger = ActiveTrigger.trigger2;
     }
 
+    StopCoroutine(flashColliders());
     StartCoroutine(flashColliders());
   }
 
   IEnumerator flashColliders()
   {
+    yield return new WaitForFixedUpdate();
     trigger1Collider.enabled = false;
     trigger2Collider.enabled = false;
     PLAYERSingleton.i.controlsActive = false;
     PLAYERSingleton.i.areaTransition = true;
     nudgePlayer();
-    yield return new WaitForSeconds(transitionSpeed);
-    PLAYERSingleton.i.rB.linearVelocity *= 0.5f;
+
+    yield return new WaitForSeconds(transitionSpeed/3);
+    PLAYERSingleton.i.controlsActive = true;
     trigger1Collider.enabled = true;
     trigger2Collider.enabled = true;
-    PLAYERSingleton.i.controlsActive = true;
+    yield return new WaitForSeconds(transitionSpeed);
+
     PLAYERSingleton.i.areaTransition = false;
   }
 
   void nudgePlayer()
   {
-    
+    PLAYERSingleton.i.rB.linearDamping = 2f;
+
+    Vector3 targetForce;
+    Vector3 targetDirection;
+
     if (activeTrigger == ActiveTrigger.trigger1)
     {
-      PLAYERSingleton.i.rB.linearVelocity += UTILITY.getDirectionVector3(
-        trigger1.transform.position, trigger2.transform.position
-        ) * nudgeForce;
+      targetDirection = UTILITY.getDirectionVector3(
+        PLAYERSingleton.i.transform.position, trigger1Target.transform.position
+        );
+    targetForce = new Vector3(targetDirection.x, targetDirection.y, 0) * nudgeForce;
+      // PLAYERSingleton.i.rB.AddForce(UTILITY.getDirectionVector3(
+      //   PLAYERSingleton.i.transform.position, trigger1Target.transform.position
+      //   ) * nudgeForce);
     }
     else
     {
-      PLAYERSingleton.i.rB.linearVelocity += UTILITY.getDirectionVector3(
-        trigger2.transform.position, trigger1.transform.position
-        ) * nudgeForce;
+      targetDirection = UTILITY.getDirectionVector3(
+        PLAYERSingleton.i.transform.position, trigger2Target.transform.position
+        );
+    targetForce = new Vector3(targetDirection.x, targetDirection.y, 0) * nudgeForce;
+      // PLAYERSingleton.i.rB.AddForce(UTILITY.getDirectionVector3(
+      //   PLAYERSingleton.i.transform.position, trigger2Target.transform.position
+      //   ) * nudgeForce);
     }
+
+    PLAYERSingleton.i.rB.AddRelativeForce(targetForce);
   }
 
 }

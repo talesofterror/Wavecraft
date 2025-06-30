@@ -23,6 +23,8 @@ public class EnemyDamage : MonoBehaviour
     Freeze,
 
   }
+
+  [SerializeField] float shrinkDuration = 5f;
   public DeathSequence deathSequence = new DeathSequence();
 
   void Awake()
@@ -149,7 +151,7 @@ public class EnemyDamage : MonoBehaviour
       if (shrinkLerpState > 1f)
       {
         shrinkState = ShrinkState.shrunk;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(shrinkDuration);
         shrinkLerpState = 0;
         shrinkState = ShrinkState.growing;
       }
