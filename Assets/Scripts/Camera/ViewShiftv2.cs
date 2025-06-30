@@ -67,7 +67,7 @@ public class ViewShiftv2 : MonoBehaviour
     }
   }
 
-  public void triggerViewTransition(string trigger)
+  public void triggerViewTransition(string trigger, Collider collider)
   {
     Debug.Log("trigger view transition called");
     Debug.Log("trigger = " + trigger);
@@ -100,18 +100,18 @@ public class ViewShiftv2 : MonoBehaviour
       activeTrigger = ActiveTrigger.trigger2;
     }
 
-    StopCoroutine(flashColliders());
-    StartCoroutine(flashColliders());
+    StopCoroutine(flashColliders(collider));
+    StartCoroutine(flashColliders(collider));
   }
 
-  IEnumerator flashColliders()
+  IEnumerator flashColliders( Collider collider)
   {
     yield return new WaitForFixedUpdate();
     trigger1Collider.enabled = false;
     trigger2Collider.enabled = false;
     PLAYERSingleton.i.controlsActive = false;
     PLAYERSingleton.i.areaTransition = true;
-    nudgePlayer();
+    nudgePlayer(collider);
 
     yield return new WaitForSeconds(transitionSpeed/3);
     PLAYERSingleton.i.controlsActive = true;
@@ -122,7 +122,7 @@ public class ViewShiftv2 : MonoBehaviour
     PLAYERSingleton.i.areaTransition = false;
   }
 
-  void nudgePlayer()
+  void nudgePlayer(Collider collider)
   {
     PLAYERSingleton.i.rB.linearDamping = 2f;
 

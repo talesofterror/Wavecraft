@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
   private MeshRenderer[] ammoRenderers;
   private Collider[] ammoColliders;
   private Rigidbody[] ammoRB;
+  private AmmoCollisions[] ammoCollisions;
   private int ammoIndex = 0;
   public GameObject projectile;
   public float projectileSpeed = 10;
@@ -25,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     ammoRenderers = new MeshRenderer[ammoPoolSize];
     ammoColliders = new Collider[ammoPoolSize];
     ammoRB = new Rigidbody[ammoPoolSize];
+    ammoCollisions = new AmmoCollisions[ammoPoolSize];
     pointerTransform = GameObject.FindGameObjectWithTag("Pointer").transform;
 
     for (int i = 0; i < ammoPoolSize; i++)
@@ -33,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
       ammoRenderers[i] = ammoPool[i].GetComponent<MeshRenderer>();
       ammoRB[i] = ammoPool[i].GetComponent<Rigidbody>();
       ammoColliders[i] = ammoPool[i].GetComponent<Collider>();
+      ammoCollisions[i] = ammoPool[i].GetComponent<AmmoCollisions>();
       ammoRenderers[i].enabled = false;
       ammoColliders[i].enabled = false;
       ammoPool[i].name = "SpikePellet " + i;
@@ -66,6 +69,7 @@ public class PlayerAttack : MonoBehaviour
     ammoRenderers[ammoIndex].enabled = true;
     ammoColliders[ammoIndex].enabled = true;
     ammoRB[ammoIndex].linearVelocity = projectileMovement;
+    ammoCollisions[ammoIndex].playerPositionWhenFired = PLAYERSingleton.i.transform.position;
     ammoIndex++;
   }
 

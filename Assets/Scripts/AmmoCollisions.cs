@@ -12,6 +12,8 @@ public class AmmoCollisions : MonoBehaviour
   MeshRenderer mrenderer;
   Collider mcollider;
 
+  public Vector3 playerPositionWhenFired;
+
   void Awake()
   {
     mrenderer = GetComponent<MeshRenderer>();

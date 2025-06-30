@@ -19,7 +19,7 @@ public class viewTransitionSensor : MonoBehaviour
   {
     if (collider.gameObject.CompareTag("GuyBase"))
     {
-      viewShiftScript.triggerViewTransition(transform.name);
+      viewShiftScript.triggerViewTransition(transform.name, collider);
     }
   }
 }

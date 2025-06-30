@@ -47,3 +47,11 @@ public class UTILITY
     return childArray;
   }
 }
+
+public enum Axis
+{
+  X,
+  X_Neg,
+  Y,
+  Y_Neg
+}
