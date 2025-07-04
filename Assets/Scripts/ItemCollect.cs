@@ -8,8 +8,8 @@ public class ItemCollect : MonoBehaviour
   Vector3 initialScale;
   Vector3 targetScaleVector;
 
-  [SerializeField] bool regeneration = false;
-  [SerializeField] float regenerationTimer = 0.5f;
+  public bool regeneration = false;
+  public float regenerationTimer = 0.5f;
   void Awake()
   {
     pSystem = GetComponent<ParticleSystem>() ? GetComponent<ParticleSystem>(): null;
@@ -77,7 +77,7 @@ public class ItemCollect : MonoBehaviour
 
   IEnumerator IERegen () {
     UTILITY.SetToggleRendererColider(this.gameObject);
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(regenerationTimer);
     UTILITY.SetToggleRendererColider(this.gameObject);
     StartCoroutine(ScaleUp());
   }

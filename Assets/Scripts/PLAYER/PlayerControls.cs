@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -21,9 +22,13 @@ public class PlayerControls : MonoBehaviour
   VirtualMouseInput virtualCursor;
 
   public float moveSpeed = 2f;
+  public float defaultLinearDamping = 2f;
+  public float defaultAngularDamping = 0f;
+
   public float sprintSpeed;
   public Vector3 gravity;
   [SerializeField] float sprintDamping;
+  [SerializeField] float sprintAngularDamping;
 
   void Start()
   {
@@ -34,6 +39,8 @@ public class PlayerControls : MonoBehaviour
     sprintAction = playerInput.actions.FindAction("Sprint");
     interactAction = playerInput.actions.FindAction("Interact");
     pauseAction = playerInput.actions.FindAction("Pause");
+
+    Physics.gravity = gravity;
 
     rB = PLAYERSingleton.i.rB;
     virtualCursor = CAMERASingleton.i.virtualMouse;
@@ -74,10 +81,7 @@ public class PlayerControls : MonoBehaviour
 
   private void Movement()
   {
-    rB.linearDamping = 2f;
-    rB.angularDamping = 0.0f;
     rB.freezeRotation = true;
-
     float _moveSpeed = moveSpeed;
 
     if (sprintAction.IsPressed())
@@ -87,12 +91,19 @@ public class PlayerControls : MonoBehaviour
         sprinting = true;
         _moveSpeed = sprintSpeed;
         rB.linearDamping = sprintDamping;
-        // Debug.Log("Sprint action pressed");
-      } 
+        rB.angularDamping = sprintAngularDamping;
+        // Vector3 sprintingCounterForce = rB.linearVelocity * -5f;
+        // Physics.gravity = gravity + sprintingCounterForce;
+        // Physics.gravity = gravity;
+      }
     }
     else
     {
+      _moveSpeed = moveSpeed;
       sprinting = false;
+      rB.linearDamping = defaultLinearDamping;
+      rB.angularDamping = defaultAngularDamping;
+      
     }
 
     Vector3 moveForce = new Vector3(
@@ -100,9 +111,9 @@ public class PlayerControls : MonoBehaviour
       moveAction.ReadValue<Vector2>().y * ((_moveSpeed * Time.deltaTime) * 100),
     0);
 
+    // Physics.gravity = gravity;
     rB.AddForce(moveForce);
 
-    Physics.gravity = gravity;
     // Debug.Log("sprinting: " + sprinting);
     
   }

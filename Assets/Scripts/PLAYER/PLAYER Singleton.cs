@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 [SelectionBase]
@@ -38,6 +39,8 @@ public class PLAYERSingleton : MonoBehaviour
 
   [Header("Movement")]
   public bool sprintDisabled = false;
+  public bool gravityOn = false;
+  public float gravityYForce = 10f;
 
   [Header("State")]
   public bool paused = false;
@@ -157,6 +160,14 @@ public class PLAYERSingleton : MonoBehaviour
       originalMaterialsArray[i] = _renderers[i].material;
     }
     loadedMaterialsArray[0] = damageIndicatorMaterial;
+  }
+
+  public void ToggleGravity (string state)
+  {
+    if (state == "on")
+    {
+      rB.useGravity = true;
+    }
   }
 }
 
