@@ -3,29 +3,33 @@ using UnityEditor;
 
 public class Enemy_DetectSurroundings : MonoBehaviour
 {
-	[SerializeField] GameObject targetGameObject;
+  [SerializeField] GameObject targetGameObject;
   GameObject player;
   [HideInInspector] public GameObject target;
 
 
-	public bool detection = false;
+  public bool detection = false;
 
-	
-	void Start()
-	{
-    if (targetGameObject) {
+
+  void Start()
+  {
+    if (targetGameObject)
+    {
       target = targetGameObject;
-    } else {
+    }
+    else
+    {
       target = PLAYERSingleton.i.gameObject;
     }
-	}
+  }
 
-	void Update()
-	{
-			
-	}
+  void Update()
+  {
 
-	void OnTriggerEnter (Collider collider) {
+  }
+
+  void OnTriggerEnter(Collider collider)
+  {
     if (PLAYERSingleton.i.areaTransition)
     {
       return;
@@ -35,18 +39,20 @@ public class Enemy_DetectSurroundings : MonoBehaviour
       target = collider.gameObject;
       detection = true;
     }
-	}
+  }
 
-  void OnTriggerExit (Collider collider) {
-		detection = false;
-	}
+  void OnTriggerExit(Collider collider)
+  {
+    detection = false;
+  }
 
   void OnDrawGizmos()
   {
+#if UnityEditor
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, gameObject.GetComponent<SphereCollider>().radius);
 		Handles.Label(transform.position, transform.name);
+#endif
   }
-
 }
 

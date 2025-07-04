@@ -1,6 +1,4 @@
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor;
 using UnityEngine;
 
 public class Enemy_Retractable : MonoBehaviour

@@ -1,7 +1,5 @@
 using System.Collections;
-using TreeEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class View : MonoBehaviour
 {

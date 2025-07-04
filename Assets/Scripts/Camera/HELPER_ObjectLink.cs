@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System;
-using UnityEngine.Rendering;
 
 public class HELPER_ObjectLinks : MonoBehaviour
 {
@@ -19,6 +17,7 @@ public class HELPER_ObjectLinks : MonoBehaviour
 
   void OnDrawGizmosSelected()
   {
+#if UNITY_EDITOR
     processBounds();
     for (int i = 0; i < boundsArray.Length; i++)
     {
@@ -32,6 +31,7 @@ public class HELPER_ObjectLinks : MonoBehaviour
       Gizmos.DrawLine(boundsArray[i].transform.position, boundsArray[i + 1].transform.position);
       Handles.Label(boundsArray[i].transform.position, boundsArray[i].name);
     }
+#endif
   }
 
   private void processBounds()

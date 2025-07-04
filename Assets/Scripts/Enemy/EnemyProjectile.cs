@@ -1,6 +1,4 @@
-using NUnit.Framework.Constraints;
 using Unity.Mathematics;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
 
 public class EnemyWander : MonoBehaviour
 {
@@ -44,7 +43,7 @@ public class EnemyWander : MonoBehaviour
     initPoint = waypointArray.Length % startPointOffset;
     // * new stuff 
     waypointSystem = new WaypointSystem(waypoints);
-    
+
     // print(gameObject.name + " Waypoint system array length: " + waypointSystem.waypointGroupArray.Length);
     // print(gameObject.name + " Waypoint system total group distance: " + waypointSystem.totalGroupDistance);
     // print(waypointArray[0].name + " Waypoint[0] distance from starting point: " + waypointSystem.waypointGroupArray[0].distanceFromStart);
@@ -53,7 +52,7 @@ public class EnemyWander : MonoBehaviour
     // print(gameObject.name + " distance Waypoint[2] to Waypoint[0]: " + Vector3.Distance(waypoints[2].position, waypoints[0].position));
   }
 
-  
+
 
   void Update()
   {
@@ -76,7 +75,7 @@ public class EnemyWander : MonoBehaviour
   }
 
   float lerpDriver = 0;
-  
+
   private IEnumerator MovementIE()
   {
 
@@ -97,16 +96,17 @@ public class EnemyWander : MonoBehaviour
       initPoint = 0;
     }
     int nextWaypoint = initPoint < wayPointVectorList.Count - 1 ? initPoint + 1 : 0;
-    currentLerpDistance = Vector3.Distance( wayPointVectorList[nextWaypoint], wayPointVectorList[initPoint]);
+    currentLerpDistance = Vector3.Distance(wayPointVectorList[nextWaypoint], wayPointVectorList[initPoint]);
     // print("current LErp Distance:" + currentLerpDistance);
     // print("Lep distance mod Vector :" + currentLerpDistance * (lerpSpeed * Time.deltaTime));
 
     return Vector3.Lerp(wayPointVectorList[initPoint], wayPointVectorList[nextWaypoint], lerpDriver);
-    
+
   }
 
-    void OnDrawGizmos()
+  void OnDrawGizmos()
   {
+#if UNITY_EDITOR
     for (int i = 0; i < waypointArray.Length; i++)
     {
       if (i == waypointArray.Length - 1)
@@ -119,7 +119,6 @@ public class EnemyWander : MonoBehaviour
       Gizmos.DrawLine(waypointArray[i].transform.position, waypointArray[i + 1].transform.position);
       Handles.Label(waypointArray[i].transform.position, waypointArray[i].name);
     }
-    
+#endif
   }
-
 }

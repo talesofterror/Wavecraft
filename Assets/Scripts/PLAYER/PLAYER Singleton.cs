@@ -1,11 +1,5 @@
-using System;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Rendering.Universal.ShaderGraph;
 using UnityEngine;
-using UnityEngine.Android;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 [SelectionBase]
 public class PLAYERSingleton : MonoBehaviour

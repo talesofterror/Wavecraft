@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEditor;
-using System;
-using UnityEngine.Rendering;
 
 public class AreaDefiner : MonoBehaviour
 {

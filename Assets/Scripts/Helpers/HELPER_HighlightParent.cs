@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,6 +24,7 @@ public class HELPER_HighlightParent : MonoBehaviour
 
   void OnDrawGizmosSelected()
   {
+#if UNITY_EDITOR
     switch (onSelectDo)
     {
       case Tool.LineChildToParent:
@@ -40,10 +40,11 @@ public class HELPER_HighlightParent : MonoBehaviour
 
         break;
     }
+#endif
   }
   void DrawLineArray(Vector3[] vectorArray)
   {
-    
+
   }
 }
 
